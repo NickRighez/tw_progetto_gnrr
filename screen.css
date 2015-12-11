@@ -1,0 +1,28 @@
+/*
+Da aggiungere/sistemare:
+-CSS secondari
+-Autori
+-short&fav icon
+-footer
+*/
+
+
+*{
+	font-family: Verdana, Helvetica, sans-serif;
+   /* font-size:0.9em;*/	
+}
+
+html,body{
+	margin : auto;
+	max-width : 1024px; /*PROVVISORIO*/
+}
+
+#header, #elenco, #corpo, #footer{
+	border : 1px solid;
+	padding : 1em; 
+}
+
+
+#footer /*p*/{
+	text-align : center;
+}
