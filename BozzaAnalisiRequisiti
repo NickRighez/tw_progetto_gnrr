@@ -4,36 +4,41 @@ Si vuole realizzare una applicazione web, associata a una base di dati, contenen
 di ride sharing. 
 Le entità principali sono il VIAGGIO e il PASSEGGERO ( inteso come persona fisica che ha partecipato, o parteciperà, ad un viaggio; 
 quindi conducente compreso ). Il viaggio, pubblicabile da un CONDUCENTE, è identificato univocamente da un ID numerico, inoltre riporta la
-data sia della partenza che dell arrivo, la distanza totale percorsa, marca e modello dell automobile utilizzata ( impostata
+data [sia] della partenza [che dell arrivo], la distanza totale percorsa(?), marca e modello dell automobile utilizzata ( impostata
 automaticamente al momento della pubblicazione del viaggio con l AUTOMOBILE in quel momento associata al CONDUCENTE che pubblica tale
 viaggio; non interessa ricordare tutte le informazioni dell auto utilizzata in un viaggio storico ), il prezzo, se è permesso fumare in
 auto, se è permesso trasportare animali, la disponibilità a parlare durante il viaggio, se si ascolta musica ( e in che modalita',
-attraverso una scala indicativa ), il tipo di viaggio (“urbano”, “regionale” o “nazionale”) il quale è determinato dall itinerario
+attraverso una scala indicativa ), il tipo di viaggio(?) (“urbano”, “regionale” o “nazionale”) il quale è determinato dall itinerario
 associato al viaggio, descritto attraverso LUOGHI_D_INCONTRO significativi : partenza, arrivo, e in caso di tipo ='nazionale' le eventuali
 tappe ( luoghi in cui ci si ferma durante il viaggio e in cui è possibile acquisire/lasciare passeggeri ); per ognuna delle tre+ è 
 riportata l ora di passaggio. Si distingue fra viaggi IN_CORSO, cioè viaggi non ancora avvenuti ma pubblicati, quindi prenotabili 
 (riportano il numero di posti ancora disponibili); e viaggi PASSATI.
-Un LUOGO_D_INCONTRO è un punto significativo del tragitto, da cui si parte, in cui si arriva o in cui ci si ferma. E' identificato
-univocamente dal CAP locale e dall indirizzo del punto d incontro, riporta il comune, la provincia e la regione. 
+
+Un LUOGO_D_INCONTRO (tappa) è un punto significativo del tragitto, da cui si parte, in cui si arriva o in cui ci si ferma. E' identificato
+univocamente dal CAP locale e dall indirizzo del punto d incontro, riporta il comune, la provincia e la regione (serve tutto?). 
 Un PASSEGGERO è l entità che partecipa, o potenzialmente parteciperà, ad un viaggio. E' identificato univocamente dal suo codice
 fiscale, comprende nome, cognome, data di nascita, sesso, citta di nascita e di residenza. 
 Un passeggero registrato nella piattaforma è un UTENTE, esso può prenotare un viaggio, ricevere/rilasciare feedback e scrivere/ricevere
 messaggi da altri utenti; è caratterizzato da username, password, e-mail, il numero totale di feedback ricevuti, e la media del suo
 punteggio ( relativo ai feedback ), compagnia/intrattenimento e puntualità; le ultime tre rappresentate attraverso una scala di misura.
+
 Un OSPITE è un passeggero privo di account che viene “invitato” da un utente al momento della prenotazione del viaggio, serve per poter
 permettere ad utenti che prenotano un viaggio di portare un conoscente che non necessariamente sia un utente di passaggioauto,  e di cui
 se ne vuole tenere traccia. Ogni utente può, per ogni prenotazione, invitare al più tre ospiti.
+
 Un utente dopo aver ricevuto almeno 5 feedback e' abilitato a registrare un automobile, ed e' in questo momento che egli diventa a tutti
 gli effetti un CONDUCENTE, acquisendo i parametri di qualita' della guida, pulizia e confort dell auto, nonchè la possibilità di 
 pubblicare un viaggio. Il conducente deve possedere una e una sola AUTOMOBILE registrata, la quale sara' la vettura utilizzata nel viaggio.
 Un AUTOMOBILE e' il mezzo associato ad un e uno solo conducente, che verra' utilizzato in caso di pubblicazione di un viaggio; e' 
 caratterizzata dall identificativo del conducente che la determina univocamente e si vuole riportare la marca, modello, tipologia,
 numero di posti, cilindrata, potenza e le dimensioni del bagaglio.
+
 Ogni utente che ha partecipato ad un viaggio e' obbligato, entro 7 giorni, a rilasciare un FEEDBACK per ogni altro passeggero
 partecipante allo stesso ( NOTA: scaduto il termine viene inserito un feedback di default ). Un FEEDBACK e' caratterizzato da un ID che
 lo identifica univocamente, da un eventuale commento e dai parametri, in una scala da 0 a 5, che rappresentano la qualita' del viaggio 
 con l utente che riceve il feedback: punteggio generale, compagnia e puntualita'; in caso il destinatario sia il conducente, anche il
 confort, pulizia e qualita' della guida. 
+
 Dev essere disponibilie una modalita' di messaggistica tra gli utenti, sia tipo privato fra un utente ed un altro, quindi non visibile
 da altri, sia di tipo pubblico, quest ultimi sono inviati da utenti e vengono associati ad un viaggio in corso per chiedere/fornire
 informazioni sullo stesso e quindi sono visibili a tutti; non interessa preservare lo storico dei messaggi pubblici in quanto semplici 
