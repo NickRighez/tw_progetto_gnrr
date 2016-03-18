@@ -1,0 +1,196 @@
+<?xml version="1.0" ?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+            xmlns="http://www.passaggioauto.org"
+            targetNamespace="http://www.passaggioauto.org">
+
+  <!--
+      valutazione dei vari aspetti dei viaggi e degli utenti. comprende il numero di valutazioni già effettuate
+      per poter mediare: media = sum/num, newmedia = (media * num + newelem)/(num++)
+  -->
+  <xsd:simpleType name="boolean">
+    <xsd:restriction base="xsd:integer">
+      <xsd:enumeration value="0"/>
+      <xsd:enumeration value="1"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:complexType name="valutazione">
+    <xsd:sequence>
+      <xsd:element name="media">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:decimal">
+            <xsd:minInclusive value="0"/>
+            <xsd:maxInclusive value="5"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+      <xsd:element name="num">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:integer">
+            <xsd:minInclusive value="0"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+    </xsd:sequence>
+  </xsd:complexType>
+
+  <xsd:simpleType name="sesso">
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="M" />
+      <xsd:enumeration value="F" />
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:complexType name="luogo">
+    <xsd:sequence>
+      <xsd:element name="via" type="xsd:string"/>
+      <xsd:element name="civico" type="xsd:integer" minOccurs="0"/>
+      <xsd:element name="citta" type="xsd:string"/>
+      <!-- va bene? -->
+    </xsd:sequence>
+  </xsd:complexType>
+
+  <!-- include un luogo e un orario
+       ???? tappe con orario opzionale?? no non credo
+  -->
+  <xsd:complexType name="incontro">
+    <xsd:sequence>
+      <xsd:element name="luogo" type="luogo"/>
+      <xsd:element name="giorno" type="xsd:date"/>
+      <xsd:element name="ora" type="xsd:time"/> <!-- vuole anche i secondi. cambiamo o facciamo fare tutto allo script???? -->
+    </xsd:sequence>
+  </xsd:complexType>
+
+  <xsd:complexType name="tappa">
+<xsd:sequence>
+      <xsd:element name="luogo" type="luogo"/>
+      <xsd:element name="giorno" type="xsd:date"/>
+      <xsd:element name="ora" type="xsd:time"/> <!-- vuole anche i secondi. cambiamo o facciamo fare tutto allo script???? -->
+        <xsd:element name="distanza" type="xsd:decimal"/>
+        <xsd:element name="tempo" type="xsd:decimal"/>
+      </xsd:sequence>
+  </xsd:complexType>
+
+  <xsd:complexType name="occupante">
+    <xsd:choice>
+      <xsd:element name="passeggero" type="mail"/>
+      <xsd:element name="empty">
+        <xsd:complexType/> <!-- tag vuoto -->
+      </xsd:element>
+    </xsd:choice>
+  </xsd:complexType>
+
+  <xsd:complexType name="automobile"> <!-- proprietà del conducente e non del viaggio -->
+    <xsd:sequence>
+      <xsd:element name="marca" type="xsd:string"/>
+      <xsd:element name="modello" type="xsd:string"/>
+    </xsd:sequence>
+  </xsd:complexType>
+
+  <xsd:complexType name="viaggio">
+    <xsd:sequence>
+      <!-- dati sui partecipanti -->
+    <xsd:choice minOccurs="4" maxOccurs="4">
+      <xsd:element name="passeggero" type="mail"/>
+      <xsd:element name="empty">
+        <xsd:complexType/> <!-- tag vuoto -->
+      </xsd:element>
+</xsd:choice>
+      <!-- dati sul viaggio -->
+      <xsd:element name="partenza" type="incontro"/>
+      <xsd:element name="arrivo" type="incontro"/>
+      <xsd:element name="tappa" type="tappa" minOccurs="0" maxOccurs="unbounded"/>
+      <xsd:element name="bagaglio">
+      	<xsd:simpleType>
+      		<xsd:restriction base="xsd:integer">
+      			<xsd:enumeration value="1"/>
+      			<xsd:enumeration value="2"/>
+      			<xsd:enumeration value="3"/>
+      		</xsd:restriction>
+      	</xsd:simpleType>
+      </xsd:element>
+      <!-- BACHECA -->
+      <xsd:element name="post" type="messaggio" minOccurs="0" maxOccurs="unbounded"/>
+    </xsd:sequence>
+     <xsd:attribute name="passato" type="boolean" fixed="0"/>
+  </xsd:complexType>
+
+  <xsd:simpleType name="mail">
+    <xsd:restriction base="xsd:string">
+      <xsd:pattern value="[^@]+@[^\.]+\..+"/> <!-- verificare l'espressione -->
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:complexType name="messaggio">
+    <xsd:sequence>
+      <xsd:element name="mittente" type="xsd:string"/> <!-- ID o integer??????? MAIL!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!-->
+      <xsd:element name="voto" minOccurs="0">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:integer">
+            <xsd:minInclusive value="0"/>
+            <xsd:maxInclusive value="5"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+      <xsd:element name="testo" type="xsd:string"/>
+    </xsd:sequence>
+  </xsd:complexType>
+
+  <xsd:complexType name="account">
+  	<xsd:sequence>
+    <xsd:element name="email" type="mail"/>
+    <xsd:element name="password" type="xsd:string"/> <!-- meglio l'hash della password. controllare funzioni crittografiche di perl -->
+    <!-- riferimento a passeggero / conducente              devo capire come si fa-->
+
+    <xsd:element name="nome" type="xsd:string"/>
+    <xsd:element name="cognome" type="xsd:string"/>
+    <xsd:element name="sex" type="sesso"/>
+    <xsd:element name="num_feed" type="xsd:integer" />
+    <xsd:element name="num_viaggi" type="xsd:integer" />
+    <xsd:element name="punteggio_simpatia" type="valutazione"/>
+    <xsd:element name="punteggio_puntualita" type="valutazione"/>
+    <!-- Dati propri dei conducenti -->
+    <xsd:sequence minOccurs="0">
+      <xsd:element name="punteggio_guida" type="valutazione"/>
+      <xsd:element name="punteggio_pulizia" type="valutazione"/>
+      <xsd:element name="auto" type="automobile"/>
+      <!-- dati sulle disponibilità del viaggiatore NO STORICO. se si vuole storico si sposta quanto segue in viaggio (doppia copia per default??) -->
+      <xsd:element name="fumatore" type="boolean"/>
+      <xsd:element name="animali" type="boolean"/>
+      <xsd:element name="parlare" type="boolean"/>
+      <xsd:element name="musica"> <!-- chiedere GIOVANNI per scala -->
+      	<xsd:simpleType>
+      		<xsd:restriction base="xsd:integer">
+      		 <xsd:minInclusive value="0"/> 
+      		 <xsd:maxInclusive value="5"/>
+      		</xsd:restriction>
+      		</xsd:simpleType>
+      	</xsd:element>
+    </xsd:sequence>
+
+    <xsd:element name="messaggio" type="messaggio" maxOccurs="unbounded"/>
+</xsd:sequence>
+  </xsd:complexType>
+
+  <xsd:element name="travelshare">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="utenti">
+          <xsd:complexType>
+            <xsd:sequence>
+              <xsd:element name="account" type="account" maxOccurs="unbounded"/>
+            </xsd:sequence>
+          </xsd:complexType>
+        </xsd:element>
+        <xsd:element name="viaggi">
+          <xsd:complexType>
+            <xsd:sequence>
+              <xsd:element name="viaggio" type="viaggio" maxOccurs="unbounded"/>
+            </xsd:sequence>
+          </xsd:complexType>
+        </xsd:element>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+
+</xsd:schema>
