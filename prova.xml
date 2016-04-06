@@ -5,7 +5,7 @@
 	<Conducente> 123456 </Conducente>
 
 <Itinerario>
-	<Tratta tipo="0">
+	<Partenza>
 		<Prezzo> 12 </Prezzo> 
 		<PostiDisp> 1 </PostiDisp>
 		<Data> 2016/02/04 </Data>
@@ -16,8 +16,8 @@
 			<Utente> Paolo </Utente>
 			<Utente> Luca </Utente>
 		</Prenotazione>	
-	</Tratta>
-	<Tratta tipo="4">
+	</Partenza>
+	<Arrivo>
 		<Prezzo> 13 </Prezzo>
 		<PostiDisp> 1 </PostiDisp>		
 		<Data> 2016/02/04 </Data>
@@ -28,7 +28,7 @@
 			<Utente> Paolo </Utente>
 			<Utente> Luca </Utente>
 		</Prenotazione>	
-	</Tratta>
+	</Arrivo>
 </Itinerario>		
 
 </Passaggio>
