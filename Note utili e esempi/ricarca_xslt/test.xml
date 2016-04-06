@@ -1,0 +1,38 @@
+<?xml-stylesheet type="text/xsl" href="style.xsl"?>
+<lista>
+	<libro>
+		<autore>Asimov</autore>
+		<titolo>Fondazione e Terra</titolo>
+		<anno>3293</anno>
+	</libro>
+	<libro>
+		<autore>Asimov</autore>
+		<titolo>Il ciclo delle fondazioni</titolo>
+		<anno>3111</anno>
+	</libro>
+	<libro>
+		<autore>Asimov</autore>
+		<titolo>Il libro di fisica</titolo>
+		<anno>1988</anno>
+	</libro>
+	<libro>
+		<autore>May</autore>
+		<titolo>La terra dai molti colori</titolo>
+		<anno>1999</anno>
+	</libro>
+	<libro>
+		<autore>Freud</autore>
+		<titolo>L'interpretazione dei sogni</titolo>
+		<anno>1899</anno>
+	</libro>
+	<libro>
+		<autore>King</autore>
+		<titolo>It</titolo>
+		<anno>1979</anno>
+	</libro>
+	<libro>
+		<autore>King</autore>
+		<titolo>Cell</titolo>
+		<anno>2006</anno>
+	</libro>
+</lista>
