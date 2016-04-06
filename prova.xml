@@ -1,0 +1,34 @@
+<Passaggio>
+	<PrezzoTOT>50</PrezzoTOT>
+	<PostiTOT> 3 </PostiTOT>
+	<Dettagli> ciao </Dettagli>
+	<Conducente> 123456 </Conducente>
+
+<Itinerario>
+	<Tratta tipo="0">
+		<Prezzo> 12 </Prezzo> 
+		<PostiDisp> 1 </PostiDisp>
+		<Data> 2016/02/04 </Data>
+		<Ora> 12:00 </Ora>
+		<Provincia> Padova </Provincia>
+		<Comune> Abano </Comune>
+		<Prenotazione>
+			<Utente> Paolo </Utente>
+			<Utente> Luca </Utente>
+		</Prenotazione>	
+	</Tratta>
+	<Tratta tipo="4">
+		<Prezzo> 13 </Prezzo>
+		<PostiDisp> 1 </PostiDisp>		
+		<Data> 2016/02/04 </Data>
+		<Ora> 12:25 </Ora>
+		<Provincia> Padova </Provincia>
+		<Comune> Este </Comune>
+		<Prenotazione>
+			<Utente> Paolo </Utente>
+			<Utente> Luca </Utente>
+		</Prenotazione>	
+	</Tratta>
+</Itinerario>		
+
+</Passaggio>
