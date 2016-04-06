@@ -1,0 +1,167 @@
+<?xml version="1.0" ?>
+
+  <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	    targetNamespace="http:\\www.dominio.com"
+	    xmlns="http:\\www.dominio.com" >
+  
+<!-- ************************************ TIPI PER UTENTE ********************* -->
+    
+    <xs:simpleType name="TSesso" >
+      <xs:restriction base="xs:string">
+	      <xs:enumeration value="M" />
+	      <xs:enumeration value="F" />
+      </xs:restriction>
+    </xs:simpleType>
+    
+    <xs:simpleType name="TAnnoNascita">
+      <xs:restriction base="xs:integer">
+	      <xs:length value="4" />
+      </xs:restriction>
+    </xs:simpleType>
+    
+    <xs:simpleType name="TTelefono" >
+     <xs:restriction base="xs:string">
+	      <xs:pattern value="[0-9]{3}-[0-9]{7}" />
+     </xs:restriction>
+    </xs:simpleType>
+	
+    <xs:simpleType name="TPassword" >
+      <xs:restriction base="xs:integer">
+	      <xs:length value="4" />
+      </xs:restriction>
+    </xs:simpleType>
+	
+    <xs:simpleType name="GradoValutazione">
+      <xs:restriction base="xs:integer">
+	      <xs:minInclusive value="0" />
+	      <xs:maxInclusive value="4" />
+      </xs:restriction>
+    </xs:simpleType>
+    
+    <xs:simpleType name="GradoPreferenze">
+      <xs:restriction base="xs:string">
+	      <xs:enumeration value="Mai" />
+	      <xs:enumeration value="Occasionalmente" />
+	      <xs:enumeration value="Sempre" />
+      </xs:restriction>
+    </xs:simpleType>
+    
+    <xs:complexType name="Preferenze">
+      <xs:sequence>
+      	<xs:element name="Chiacchere" type="GradoPreferenze" />
+      	<xs:element name="Musica" type="GradoPreferenze" />
+      	<xs:element name="Animali" type="GradoPreferenze" />
+      	<xs:element name="Fumatore" type="GradoPreferenze" />
+      </xs:sequence>
+    </xs:complexType>
+    
+    <xs:complexType name="Valutazione">
+      <xs:sequence>
+      	<xs:element name="PunteggioMedio" type="GradoValutazione" default="0" />
+      	<xs:element name="Compagnia" type="GradoValutazione" default="0" />
+      	<xs:element name="Puntualita" type="GradoValutazione" default="0" />
+      </xs:sequence>
+    </xs:complexType>
+    
+    <xs:complexType name="FullValutazione">
+      <xs:complexContent>
+      	<xs:extension base="Valutazione">
+      	  <xs:sequence>
+      	    <xs:element name="Pulizia" type="GradoValutazione" default="0" />
+      	    <xs:element name="Guida" type="GradoValutazione" default="0" />
+      	  </xs:sequence>
+      	</xs:extension>
+      </xs:complexContent>
+    </xs:complexType>	    
+	    
+    <xs:complexType name="TProfilo" >
+      <xs:sequence>
+      	<xs:element name="NumFeedbRicevuti" type="xs:integer" default="0" />	
+      	<xs:element name="NumPassaggiOff" type="xs:integer" default="0" />	
+      	<xs:element name="NumpassaggiPart" type="xs:integer" default="0" />
+      	<xs:choice>
+      	  <xs:sequence>
+      	    <xs:element name="Valutazione" type="FullValutazione" />
+      	    <xs:element name="Preferenze" type="Preferenze" />
+      	  </xs:sequence>
+      	  <xs:sequence>  
+      	    <xs:element name="Valutazione" type="FullValutazione" />
+      	  </xs:sequence>
+      	 </xs:choice>		
+      </xs:sequence>
+    </xs:complexType>
+<!-- ****************************************************  -->	
+    
+    <xs:element name="Utente" minOccurs="0" maxOccurs="unbounded"><!-- *********** INIZIO UTENTE ***************  -->
+      <xs:complexType>
+      	<xs:sequence>
+      	  <xs:element name="IDUtente" type="xs:ID" />
+      	  <xs:element name="Nome" type="xs:string" />	  
+      	  <xs:element name="Cognome" type="xs:string" />	  
+      	  <xs:element name="Sesso" type="TSesso" />	  
+      	  <xs:element name="AnnoNascita" type="TAnnoNascita" />	  
+      	  <xs:element name="Telefono" type="TTelefono" />	  
+      	  <xs:element name="Password" type="TPassword" />  	  
+      	  <xs:element name="Email" type="TEmail" />
+      	  <xs:element name="Profilo" type="TProfilo" />
+      	</xs:sequence>
+      </xs:complexType>
+    </xs:element><!-- **************** FINE UTENTE   ************** -->  
+    
+    
+<!-- *************************************** TIPI PER PASSAGGIO *********************************** -->   
+    <xs:complexType name="TPrenotazioni" >
+      <xs:sequence>
+      	<xs:element name="Utente" type="xs:IDREF" minOccurs="0" maxOccurs="unbounded" />
+      </xs:sequence>
+    </xs:complexType>
+    
+    <xs:complexType name="T_Tratta">
+      <xs:sequence>
+    	  <xs:element name="Prezzo" type="xs:integer" />
+    	  <xs:element name="PostiDisp" type="xs:integer" />
+    	  <xs:element name="Data" type="xs:date" />
+    	  <xs:element name="Ora" type="xs:time" />
+    	  <xs:element name="Provincia" type="xs:string" />
+    	  <xs:element name="Comune" type="xs:string" />
+    	  <xs:element name="Prenotazioni" type="TPrenotazioni" />
+      </xs:sequence>
+    </xs:complexType>    
+
+    <xs:complexType name="TItinerario">
+      <xs:sequence>		
+      	<xs:element name="Partenza" type="T_Tratta" />	
+      		
+      	<xs:choice minOccurs="0">
+      	  <xs:sequence>
+      	    <xs:element name="Tappa1" type="T_Tratta" />
+      	  </xs:sequence>		  		  
+      	  <xs:sequence>
+      	    <xs:element name="Tappa1" type="T_Tratta" />
+      	    <xs:element name="Tappa2" type="T_Tratta" />
+      	  </xs:sequence>		  
+      	  <xs:sequence>
+      	    <xs:element name="Tappa1" type="T_Tratta" />
+      	    <xs:element name="Tappa2" type="T_Tratta" />
+      	    <xs:element name="Tappa3" type="T_Tratta" />  
+      	  </xs:sequence>
+      	</xs:choice>
+      	
+      	<xs:element name="Arrivo" type="T_Tratta" />	      
+      </xs:sequence>
+    </xs:complexType>
+<!-- ************************************************************ -->
+    
+    <xs:element name="Passaggio" minOccurs="0" maxOccurs="unbounded"><!--  ********** INIZIO PASSAGGIO *********  -->
+      <xs:complexType>
+      	<xs:sequence>	  
+      	  <xs:element name="Conducente" type="xs:IDREF" />	  
+      	  <xs:element name="PrezzoTot" type="xs:integer" />	  
+      	  <xs:element name="PostiTot" type="xs:integer" />	  
+      	  <xs:element name="Dettagli" type="xs:string" />     
+      	  <xs:element name="Itinerario" type="TItinerario" />	  
+      	</xs:sequence>
+      </xs:complexType>
+    </xs:element><!--   **************** FINE PASSAGGIO **************   -->
+  
+  </xs:schema>
