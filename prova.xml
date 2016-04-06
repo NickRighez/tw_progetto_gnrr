@@ -13,8 +13,8 @@
 		<Provincia> Padova </Provincia>
 		<Comune> Abano </Comune>
 		<Prenotazione>
-			<Utente> Paolo </Utente>
-			<Utente> Luca </Utente>
+			<Utente> 124322 </Utente>
+			<Utente> 361191 </Utente>
 		</Prenotazione>	
 	</Partenza>
 	<Arrivo>
@@ -25,8 +25,8 @@
 		<Provincia> Padova </Provincia>
 		<Comune> Este </Comune>
 		<Prenotazione>
-			<Utente> Paolo </Utente>
-			<Utente> Luca </Utente>
+			<Utente> 124322 </Utente>
+			<Utente> 361191 </Utente>
 		</Prenotazione>	
 	</Arrivo>
 </Itinerario>		
