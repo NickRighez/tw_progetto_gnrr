@@ -1,8 +1,8 @@
 <?xml version="1.0" ?>
 
   <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
-	    targetNamespace="http:\\www.dominio.com"
-	    xmlns="http:\\www.dominio.com" >
+	    targetNamespace="http://www.dominio.com"
+	    xmlns="http://www.dominio.com" >
   
   <!-- MODELLO TENDE ALLA VENEZIANA -->
   	<xs:element name="TravelShare" type="TTravelShare" />
@@ -24,9 +24,9 @@
 
 	<xs:complexType name="TSetPassaggi" >
     	<xs:sequence>
-    		<xs:element name="Passaggio" minOccurs="0" maxOccurs="unbounded" type="TPassaggio" >
+    		<xs:element name="Passaggio" minOccurs="0" maxOccurs="unbounded" type="TPassaggio" />
     	</xs:sequence>
-    </complexType>
+    </xs:complexType>
 
     <xs:complexType name="TSetMessaggi" >
  		<xs:sequence>
@@ -46,14 +46,13 @@
     
     <xs:complexType name="TUtente" >
 	  <xs:sequence>
-	  	<xs:element name="IDUtente" type="xs:ID" />
+          <xs:element name="Email" type="TEmailID" />
 	  	<xs:element name="Nome" type="xs:string" />	  
 	  	<xs:element name="Cognome" type="xs:string" />	  
 	  	<xs:element name="Sesso" type="TSesso" />	  
 	  	<xs:element name="AnnoNascita" type="TAnnoNascita" />	  
 	  	<xs:element name="Telefono" type="TTelefono" />	  
-	  	<xs:element name="Password" type="TPassword" />  	  
-	  	<xs:element name="Email" type="TEmail" />
+	  	<xs:element name="Password" type="TPassword" />
 	  	<xs:element name="Profilo" type="TProfilo" />
 	  </xs:sequence>
     </xs:complexType>
@@ -64,6 +63,12 @@
 	<xs:enumeration value="F" />
       </xs:restriction>
     </xs:simpleType>
+
+	<xs:simpleType name="TEmailID">
+		<xs:restriction base="xs:ID">
+			<xs:pattern value="[^@]+@[^\.]+\..+"/> <!-- verificare l'espressione -->
+		</xs:restriction>
+	</xs:simpleType>
     
     <xs:simpleType name="TAnnoNascita">
       <xs:restriction base="xs:integer">
@@ -90,56 +95,56 @@
 		<xs:element name="NumpassaggiPart" type="xs:integer" default="0" />
 		<xs:choice>
 		  <xs:sequence>
-		    <xs:element name="Valutazione" type="FullValutazione" />
-		    <xs:element name="Preferenze" type="Preferenze" />
+		    <xs:element name="Valutazione" type="TFullValutazione" />
+		    <xs:element name="Preferenze" type="TPreferenze" />
 		  </xs:sequence>
 		  <xs:sequence>  
-		    <xs:element name="Valutazione" type="FullValutazione" />
+		    <xs:element name="Valutazione" type="TFullValutazione" />
 		  </xs:sequence>
 		</xs:choice>		
       </xs:sequence>
     </xs:complexType>
 
-    <xs:complexType name="Preferenze">
+    <xs:complexType name="TPreferenze">
       <xs:sequence>
-		<xs:element name="Chiacchere" type="GradoPreferenze" />
-		<xs:element name="Musica" type="GradoPreferenze" />
-		<xs:element name="Animali" type="GradoPreferenze" />
-		<xs:element name="Fumatore" type="GradoPreferenze" />
+		<xs:element name="Chiacchere" type="TGradoPreferenze" />
+		<xs:element name="Musica" type="TGradoPreferenze" />
+		<xs:element name="Animali" type="TGradoPreferenze" />
+		<xs:element name="Fumatore" type="TGradoPreferenze" />
       </xs:sequence>
     </xs:complexType>
     
-    <xs:complexType name="Valutazione">
+    <xs:complexType name="TValutazione">
       	<xs:sequence>
-			<xs:element name="PunteggioMedio" type="GradoValutazione" default="0" />
-			<xs:element name="Compagnia" type="GradoValutazione" default="0" />
-			<xs:element name="Puntualita" type="GradoValutazione" default="0" />
+			<xs:element name="PunteggioMedio" type="TGradoValutazione" default="0" />
+			<xs:element name="Compagnia" type="TGradoValutazione" default="0" />
+			<xs:element name="Puntualita" type="TGradoValutazione" default="0" />
       	</xs:sequence>
     </xs:complexType>
     
-    <xs:complexType name="FullValutazione">
+    <xs:complexType name="TFullValutazione">
       <xs:complexContent>
-		<xs:extension base="Valutazione">
+		<xs:extension base="TValutazione">
 		  	<xs:sequence>
-		    <xs:element name="Pulizia" type="GradoValutazione" default="0" />
-		    <xs:element name="Guida" type="GradoValutazione" default="0" />
+		    <xs:element name="Pulizia" type="TGradoValutazione" default="0" />
+		    <xs:element name="Guida" type="TGradoValutazione" default="0" />
 		</xs:sequence>
 		</xs:extension>
       </xs:complexContent>
     </xs:complexType>
 
-    <xs:simpleType name="GradoValutazione">
+    <xs:simpleType name="TGradoValutazione">
       <xs:restriction base="xs:integer">
 		<xs:minInclusive value="0" />
 		<xs:maxInclusive value="4" />
       </xs:restriction>
     </xs:simpleType>
     
-    <xs:simpleType name="GradoPreferenze">
-      <xs:restriction base="xs:string">
-		<xs:enumeration value="Mai" />
-		<xs:enumeration value="Occasionalmente" />
-		<xs:enumeration value="Sempre" />
+    <xs:simpleType name="TGradoPreferenze">
+      <xs:restriction base="xs:integer">
+		<xs:enumeration value="0" />
+		<xs:enumeration value="2" />
+		<xs:enumeration value="3" />
       </xs:restriction>
     </xs:simpleType>    
  <!-- ****************** FINE UTENTE   ************** -->  
@@ -147,7 +152,7 @@
     
 <!-- *************************************** INIZIO PASSAGGIO *************************************************************** -->   
     
-    <xs:complexType type="TPassaggio" >
+    <xs:complexType name="TPassaggio" >
 	  <xs:sequence>	  
 	  	<xs:element name="Conducente" type="xs:IDREF" />	  
 	  	<xs:element name="PrezzoTot" type="xs:integer" />	  
@@ -221,38 +226,44 @@
 
  <!--  ***************** INIZIO MESSAGGI 1vs1 ************************************************************************************************   -->
 
- 	<xs:complexType name="TConversazione ">
- 		<xs:attribute name="IDMitt" type="xs:IDREF" />
- 		<xs:attribute name="IDDest" type="xs:IDREF" />
+ 	<xs:complexType name="TConversazione">
  		<xs:sequence>
  			<xs:element name="Messaggio" type="TMessaggio" minOccurs="0" maxOccurs="unbounded" />
  		</xs:sequence>
+ 		<xs:attribute name="User1" type="xs:IDREF" />
+ 		<xs:attribute name="User2" type="xs:IDREF" />
  	</xs:complexType>
 
  	<xs:complexType name="TMessaggio" >
  		<xs:sequence>
- 			<xs:element name="Mittente" type="xs:IDREF" />
+ 			<xs:element name="Mittente" type="TUserEnum" />
  			<xs:element name="Data" type="xs:date" />
  			<xs:element name="Ora" type="xs:time" />
  			<xs:element name="Testo" type="xs:string" />
  		</xs:sequence>
  	</xs:complexType>
 
+	<xs:simpleType name="TUserEnum">
+		<xs:restriction base="xs:integer">
+			<xs:enumeration value="1" />
+			<xs:enumeration value="2" />
+		</xs:restriction>
+	</xs:simpleType>
 <!--   **************** FINE MESSAGGI 1vs1 **************   -->
 
 <!--   **************** INIZIO FEEDBACK  **************************************************** -->
 
 	<xs:complexType name="TFeedback" >
-		<xs:attribute name="IDMitt" type="xs:IDREF" />
- 		<xs:attribute name="IDDest" type="xs:IDREF" />
  		<xs:sequence>
  			<xs:element name="Passaggio" type="xs:IDREF" />
  			<xs:element name="Commento" type="xs:string" />
+ 			<xs:choice>
+  				<xs:element name="ValutazionePasseg" type="TValutazione" />
+ 				<xs:element name="ValutazioneConduc" type="TFullValutazione" />
+ 			</xs:choice>
  		</xs:sequence>
- 		<xs:choice>
-  			<xs:element name="ValutazionePasseg" type="Valutazione" />
- 			<xs:element name="ValutazioneConduc" type="FullValutazione" />
- 		</xs:choice>
+ 		<xs:attribute name="IDMitt" type="xs:IDREF" />
+ 		<xs:attribute name="IDDest" type="xs:IDREF" />
  	</xs:complexType>
 
 </xs:schema>
