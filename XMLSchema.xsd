@@ -59,8 +59,8 @@
 
     <xs:simpleType name="TSesso" >
       <xs:restriction base="xs:string">
-	<xs:enumeration value="M" />
-	<xs:enumeration value="F" />
+		<xs:enumeration value="M" />
+		<xs:enumeration value="F" />
       </xs:restriction>
     </xs:simpleType>
 
