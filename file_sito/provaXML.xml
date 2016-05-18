@@ -1,6 +1,6 @@
 <?xml version="1.0" ?>
 
-<ts:TravelShare xmlns:ts="http://www.mydomain.com"
+<ts:TravelShare xmlns:ts="http://www.dominio.com"
 		xmlns:xs="http://www.w3.org/2001/XMLSchema-instance"
 		xs:schemaLocation="http://www.dominio.com XMLSchema.xsd" 
 	 >
@@ -14,7 +14,7 @@
 		<Sesso>M</Sesso>
 		<AnnoNascita>1990</AnnoNascita>
 		<Telefono>049-5874120</Telefono>
-		<Password>xxxxxxxx</Password>		
+		<Password>333</Password>		
 		<Profilo>
 			<NumFeedbRicevuti>0</NumFeedbRicevuti>
 			<NumPassaggiOff>0</NumPassaggiOff>
@@ -42,7 +42,7 @@
 		<Sesso>M</Sesso>
 		<AnnoNascita>1990</AnnoNascita>
 		<Telefono>049-5874120</Telefono>
-		<Password>xxxxxxxx</Password>
+		<Password>333</Password>
 		<Profilo>
 			<NumFeedbRicevuti>0</NumFeedbRicevuti>
 			<NumPassaggiOff>0</NumPassaggiOff>
@@ -77,7 +77,7 @@
 				<Prenotazioni>
 				</Prenotazioni>
 			</Partenza>
-			<Tappa1>
+			<Tappa Numero="1">
 				<Prezzo>5</Prezzo>
 				<PostiDisp>3</PostiDisp>  <!-- il num di posti disponibili dev essere coerente con : PostiTot-count(Prenotazioni/Utente) -->
 				<Data>27-04-2016</Data>
@@ -87,7 +87,7 @@
 				<Prenotazioni>
 					<Utente>pincopal@gmail.com</Utente>
 				</Prenotazioni>
-			</Tappa1>
+			</Tappa>
 			<Arrivo>
 				<Prezzo>5</Prezzo>
 				<PostiDisp>4</PostiDisp>
@@ -122,7 +122,7 @@
 					<!-- nessuna prenotazione -->
 				</Prenotazioni>
 			</Partenza>
-			<Tappa1>
+			<Tappa Numero="1">
 				<Prezzo>5</Prezzo>
 				<PostiDisp>3</PostiDisp>  <!-- il num di posti disponibili dev essere coerente con : PostiTot-count(Prenotazioni/Utente) -->
 				<Data>27-04-2016</Data>
@@ -132,8 +132,8 @@
 				<Prenotazioni>
 					<Utente>pincopal@gmail.com</Utente>
 				</Prenotazioni>
-			</Tappa1>
-			<Tappa2>
+			</Tappa>
+			<Tappa Numero="2">
 				<Prezzo>5</Prezzo>
 				<PostiDisp>3</PostiDisp>  <!-- il num di posti disponibili dev essere coerente con : PostiTot-count(Prenotazioni/Utente) -->
 				<Data>27-04-2016</Data>
@@ -143,7 +143,7 @@
 				<Prenotazioni>
 					<Utente>pincopal@gmail.com</Utente>
 				</Prenotazioni>
-			</Tappa2>
+			</Tappa>
 			<Arrivo>
 				<Prezzo>5</Prezzo>
 				<PostiDisp>4</PostiDisp>
