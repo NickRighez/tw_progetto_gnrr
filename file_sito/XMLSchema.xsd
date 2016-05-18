@@ -2,7 +2,8 @@
 
   <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
 	    targetNamespace="http://www.dominio.com"
-	    xmlns="http://www.dominio.com" >
+	    xmlns="http://www.dominio.com"
+       >
   
   <!-- MODELLO TENDE ALLA VENEZIANA -->
   	<xs:element name="TravelShare" type="TTravelShare" />
@@ -92,7 +93,7 @@
       <xs:sequence>
 		<xs:element name="NumFeedbRicevuti" type="xs:integer" default="0" />	
 		<xs:element name="NumPassaggiOff" type="xs:integer" default="0" />	
-		<xs:element name="NumpassaggiPart" type="xs:integer" default="0" />
+		<xs:element name="NumPassaggiPart" type="xs:integer" default="0" />
 		<xs:element name="Valutazione" type="TFullValutazione" />
 		<xs:element name="Preferenze" type="TPreferenze" minOccurs="0" />	
       </xs:sequence>
@@ -163,8 +164,9 @@
 
     <xs:complexType name="TItinerario">
       <xs:sequence>		
-		<xs:element name="Partenza" type="T_Tratta" />	
-		
+		<xs:element name="Partenza" type="T_Tratta" />
+    <xs:element name="Tappa" type="T_Tratta" minOccurs="0" maxOccurs="3" />	
+	<!--	
 		<xs:choice minOccurs="0">
 	  		<xs:sequence>
 	    		<xs:element name="Tappa1" type="T_Tratta" />
@@ -179,21 +181,22 @@
 			    <xs:element name="Tappa3" type="T_Tratta" />  
 			</xs:sequence>
 		</xs:choice>
-	
+	-->
 		<xs:element name="Arrivo" type="T_Tratta" />	      
       </xs:sequence>
     </xs:complexType>
 
     <xs:complexType name="T_Tratta">
       <xs:sequence>
-	  <xs:element name="Prezzo" type="xs:integer" />
-	  <xs:element name="PostiDisp" type="xs:integer" />
-	  <xs:element name="Data" type="xs:date" />
-	  <xs:element name="Ora" type="xs:time" />
-	  <xs:element name="Provincia" type="xs:string" />
-	  <xs:element name="Comune" type="xs:string" />
-	  <xs:element name="Prenotazioni" type="TPrenotazioni" />
+	      <xs:element name="Prezzo" type="xs:integer" />
+	      <xs:element name="PostiDisp" type="xs:integer" />
+        <xs:element name="Data" type="xs:date" />
+        <xs:element name="Ora" type="xs:time" />
+        <xs:element name="Provincia" type="xs:string" />
+        <xs:element name="Comune" type="xs:string" />
+        <xs:element name="Prenotazioni" type="TPrenotazioni" /> 
       </xs:sequence>
+      <xs:attribute name="Numero" type="xs:integer" />
     </xs:complexType>    
 
     <xs:complexType name="TPrenotazioni" >
