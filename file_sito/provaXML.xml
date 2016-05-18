@@ -2,7 +2,7 @@
 
 <ts:TravelShare xmlns:ts="http://www.mydomain.com"
 		xmlns:xs="http://www.w3.org/2001/XMLSchema-instance"
-		xs:schemaLocation="http://www.mydomain.com prova.xsd" 
+		xs:schemaLocation="http://www.dominio.com XMLSchema.xsd" 
 	 >
 
 <!--  ***************************************************************   SET UTENTI   ************************** -->
@@ -18,7 +18,7 @@
 		<Profilo>
 			<NumFeedbRicevuti>0</NumFeedbRicevuti>
 			<NumPassaggiOff>0</NumPassaggiOff>
-			<NumPassaggiPart>0</NumPassaggiOff>
+			<NumPassaggiPart>0</NumPassaggiPart>
 			<Valutazione>
 				<PunteggioMedio>0</PunteggioMedio>
 				<Compagnia>0</Compagnia>
@@ -46,7 +46,7 @@
 		<Profilo>
 			<NumFeedbRicevuti>0</NumFeedbRicevuti>
 			<NumPassaggiOff>0</NumPassaggiOff>
-			<NumPassaggiPart>0</NumPassaggiOff>
+			<NumPassaggiPart>0</NumPassaggiPart>
 			<Valutazione>
 				<PunteggioMedio>0</PunteggioMedio>
 				<Compagnia>0</Compagnia>
