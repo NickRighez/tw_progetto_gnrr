@@ -1,0 +1,268 @@
+<?xml version="1.0" ?>
+
+<ts:TravelShare xmlns:ts="http://www.dominio.com"
+		xmlns:xs="http://www.w3.org/2001/XMLSchema-instance"
+		xs:schemaLocation="http://www.dominio.com XMLSchema.xsd" 
+	 >
+
+<!--  ***************************************************************   SET UTENTI   ************************** -->
+<SetUtenti>
+	<Utente>
+		<Email>carlorossi@gmail.com</Email>
+		<Nome>Carlo</Nome>
+		<Cognome>Rossi</Cognome>
+		<Sesso>M</Sesso>
+		<AnnoNascita>1990</AnnoNascita>
+		<Telefono>049-5874120</Telefono>
+		<Password>333</Password>		
+		<Profilo>
+			<NumFeedbRicevuti>0</NumFeedbRicevuti>
+			<NumPassaggiOff>0</NumPassaggiOff>
+			<NumPassaggiPart>0</NumPassaggiPart>
+			<Valutazione>
+				<PunteggioMedio>0</PunteggioMedio>
+				<Compagnia>0</Compagnia>
+				<Puntualita>0</Puntualita>
+				<Pulizia>0</Pulizia>
+				<Guida>0</Guida>
+			</Valutazione>
+			<Preferenze>
+				<Chiacchere>2</Chiacchere>
+				<Musica>2</Musica>
+				<Animali>2</Animali>
+				<Fumatore>2</Fumatore>
+			</Preferenze>
+		</Profilo>
+	</Utente>
+
+	<Utente>
+		<Email>pincopal@gmail.com</Email>
+		<Nome>Carlo</Nome>
+		<Cognome>Rossi</Cognome>
+		<Sesso>M</Sesso>
+		<AnnoNascita>1990</AnnoNascita>
+		<Telefono>049-5874120</Telefono>
+		<Password>333</Password>
+		<Profilo>
+			<NumFeedbRicevuti>0</NumFeedbRicevuti>
+			<NumPassaggiOff>0</NumPassaggiOff>
+			<NumPassaggiPart>0</NumPassaggiPart>
+			<Valutazione>
+				<PunteggioMedio>0</PunteggioMedio>
+				<Compagnia>0</Compagnia>
+				<Puntualita>0</Puntualita>
+				<Pulizia>0</Pulizia>
+				<Guida>0</Guida>
+			</Valutazione>
+		</Profilo>
+	</Utente>
+</SetUtenti>
+
+<!--  ***************************************************************   SET PASSAGGI   ************************** -->
+<SetPassaggi>
+	<Passaggio>
+		<IDViaggio>1111</IDViaggio>
+		<Conducente>carlorossi@gmail.com</Conducente>  <!-- l utente conducente deve avere definito le sue preferenze -->
+		<PrezzoTot>15</PrezzoTot>
+		<PostiTot>4</PostiTot>
+		<Dettagli>Max un bagaglio medio</Dettagli>
+		<Itinerario>
+			<Partenza>
+				<Prezzo>5</Prezzo>
+				<PostiDisp>4</PostiDisp>
+				<Data>27-04-2016</Data>
+				<Ora>12:00:00</Ora>
+				<Provincia>Padova</Provincia>
+				<Comune>Piove di sacco</Comune>
+				<Prenotazioni>
+				</Prenotazioni>
+			</Partenza>
+			<Tappa Numero="1">
+				<Prezzo>5</Prezzo>
+				<PostiDisp>3</PostiDisp>  <!-- il num di posti disponibili dev essere coerente con : PostiTot-count(Prenotazioni/Utente) -->
+				<Data>27-04-2016</Data>
+				<Ora>15:00:00</Ora>
+				<Provincia>Vicenza</Provincia>
+				<Comune>Vicenza</Comune>
+				<Prenotazioni>
+					<Utente>pincopal@gmail.com</Utente>
+				</Prenotazioni>
+			</Tappa>
+			<Arrivo>
+				<Prezzo>5</Prezzo>
+				<PostiDisp>4</PostiDisp>
+				<Data>27-04-2016</Data>
+				<Ora>17:00:00</Ora>
+				<Provincia>Padova</Provincia>
+				<Comune>Piove di sacco</Comune>
+				<Prenotazioni>
+				</Prenotazioni>
+			</Arrivo>
+		</Itinerario>
+		<Bacheca>
+			<!-- non ci sono messaggi per questa bacheca -->
+		</Bacheca>
+	</Passaggio>
+
+	<Passaggio>
+		<IDViaggio>2222</IDViaggio>
+		<Conducente>carlorossi@gmail.com</Conducente>  <!-- l utente conducente deve avere definito le sue preferenze -->
+		<PrezzoTot>15</PrezzoTot>
+		<PostiTot>4</PostiTot>
+		<Dettagli>Max un bagaglio medio</Dettagli>
+		<Itinerario>
+			<Partenza>
+				<Prezzo>5</Prezzo>
+				<PostiDisp>4</PostiDisp>
+				<Data>27-04-2016</Data>
+				<Ora>12:00:00</Ora>
+				<Provincia>Padova</Provincia>
+				<Comune>Piove di sacco</Comune>
+				<Prenotazioni>
+					<!-- nessuna prenotazione -->
+				</Prenotazioni>
+			</Partenza>
+			<Tappa Numero="1">
+				<Prezzo>5</Prezzo>
+				<PostiDisp>3</PostiDisp>  <!-- il num di posti disponibili dev essere coerente con : PostiTot-count(Prenotazioni/Utente) -->
+				<Data>27-04-2016</Data>
+				<Ora>15:00:00</Ora>
+				<Provincia>Vicenza</Provincia>
+				<Comune>Vicenza</Comune>
+				<Prenotazioni>
+					<Utente>pincopal@gmail.com</Utente>
+				</Prenotazioni>
+			</Tappa>
+			<Tappa Numero="2">
+				<Prezzo>5</Prezzo>
+				<PostiDisp>3</PostiDisp>  <!-- il num di posti disponibili dev essere coerente con : PostiTot-count(Prenotazioni/Utente) -->
+				<Data>27-04-2016</Data>
+				<Ora>16:00:00</Ora>
+				<Provincia>Padova</Provincia>
+				<Comune>Saonara</Comune>
+				<Prenotazioni>
+					<Utente>pincopal@gmail.com</Utente>
+				</Prenotazioni>
+			</Tappa>
+			<Arrivo>
+				<Prezzo>5</Prezzo>
+				<PostiDisp>4</PostiDisp>
+				<Data>27-04-2016</Data>
+				<Ora>17:00:00</Ora>
+				<Provincia>Padova</Provincia>
+				<Comune>Piove di sacco</Comune>
+				<Prenotazioni>
+				</Prenotazioni>
+			</Arrivo>
+		</Itinerario>
+		<Bacheca>
+			<MessaggioBacheca>
+				<Mittente>pincopal@gmail.com</Mittente>
+				<Data>26-04-2016</Data>
+				<Ora>17:00:00</Ora>
+				<Testo>Posso portare il cane?</Testo>
+				<Risposte>
+					<MessaggioBacheca>
+						<Mittente>carlorossi@gmail.com</Mittente>
+						<Data>26-04-2016</Data>
+						<Ora>17:05:00</Ora>
+						<Testo>Solo se è di piccola taglia</Testo>
+					</MessaggioBacheca>
+					<MessaggioBacheca>
+						<Mittente>carlorossi@gmail.com</Mittente>
+						<Data>26-04-2016</Data>
+						<Ora>17:06:00</Ora>  <!-- le risposte, e i messaggi in generale, devono essere ordinati secondo data/ora -->
+						<Testo>Visto l alto.......</Testo>
+					</MessaggioBacheca>
+				</Risposte>
+			</MessaggioBacheca>
+			<MessaggioBacheca>
+				<Mittente>pincopal@gmail.com</Mittente>
+				<Data>26-04-2016</Data>
+				<Ora>19:00:00</Ora>
+				<Testo>E' possibile partire dieci minuti dopo l orario indicato?</Testo>
+				<Risposte>
+					<MessaggioBacheca>
+						<Mittente>carlorossi@gmail.com</Mittente>
+						<Data>26-04-2016</Data>
+						<Ora>19:05:00</Ora>
+						<Testo>NO</Testo>
+						<Risposte>
+							<MessaggioBacheca>
+								<Mittente>pincopal@gmail.com</Mittente>
+								<Data>26-04-2016</Data>
+								<Ora>19:07:00</Ora>
+								<Testo>Grazie lo stesso</Testo>
+							</MessaggioBacheca>
+						</Risposte>
+					</MessaggioBacheca>
+				</Risposte>
+			</MessaggioBacheca>
+		</Bacheca>
+	</Passaggio>
+
+</SetPassaggi>
+
+<!--  ***************************************************************   SET MESSAGGI   ************************** -->
+<SetMessaggi>
+	<Conversazione User1="pincopal@gmail.com" User2="carlorossi@gmail.com" >
+		<Messaggio>
+			<Mittente>1</Mittente>
+			<Data>24-04-2016</Data>
+			<Ora>18:07:00</Ora>
+			<Testo> [.............] </Testo>
+		</Messaggio>
+		<Messaggio>
+			<Mittente>2</Mittente>
+			<Data>24-04-2016</Data>
+			<Ora>19:07:00</Ora>
+			<Testo> [.............] </Testo>
+		</Messaggio>
+		<Messaggio>
+			<Mittente>1</Mittente>
+			<Data>24-04-2016</Data>
+			<Ora>19:10:00</Ora>
+			<Testo> [.............] </Testo>
+		</Messaggio>
+		<Messaggio>
+			<Mittente>2</Mittente>
+			<Data>25-04-2016</Data>
+			<Ora>11:07:00</Ora>
+			<Testo> [.............] </Testo>
+		</Messaggio>
+	</Conversazione>
+</SetMessaggi>
+
+<!--  ***************************************************************   SET FEEDBACK   ************************** -->
+<SetFeedback>
+	<Feedback IDMitt="pincopal@gmail.com" IDDest="carlorossi@gmail.com">
+		<Passaggio>111</Passaggio>
+		<Commento>Viaggio tranquillo</Commento>
+		<ValutazioneConducente>
+			<PunteggioMedio>4</PunteggioMedio>
+			<Compagnia>3</Compagnia>
+			<Puntualita>2</Puntualita>
+			<Pulizia>4</Pulizia>
+			<Guida>3</Guida>
+		</ValutazioneConducente>
+	</Feedback>
+
+	<Feedback IDMitt="carlorossi@gmail.com" IDDest="pincopal@gmail.com">
+		<Passaggio>111</Passaggio>
+		<Commento>Viaggio tranquillo</Commento>
+		<ValutazionePasseg>
+			<PunteggioMedio>4</PunteggioMedio>
+			<Compagnia>3</Compagnia>
+			<Puntualita>2</Puntualita>
+		</ValutazionePasseg>
+	</Feedback>
+</SetFeedback>
+
+
+
+</ts:TravelShare>
+
+
+
+
+
