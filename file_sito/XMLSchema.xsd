@@ -72,7 +72,7 @@
     
     <xs:simpleType name="TAnnoNascita">
       <xs:restriction base="xs:integer">
-	<xs:length value="4" />
+			<xs:pattern value="[1-2][0-9][0-9][0-9]" />
       </xs:restriction>
     </xs:simpleType>
     
@@ -84,7 +84,7 @@
 	
     <xs:simpleType name="TPassword" >
       <xs:restriction base="xs:integer">
-	<xs:length value="4" />
+			<!-- pattern per pasword -->
       </xs:restriction>
     </xs:simpleType>
 	
@@ -93,15 +93,8 @@
 		<xs:element name="NumFeedbRicevuti" type="xs:integer" default="0" />	
 		<xs:element name="NumPassaggiOff" type="xs:integer" default="0" />	
 		<xs:element name="NumpassaggiPart" type="xs:integer" default="0" />
-		<xs:choice>
-		  <xs:sequence>
-		    <xs:element name="Valutazione" type="TFullValutazione" />
-		    <xs:element name="Preferenze" type="TPreferenze" />
-		  </xs:sequence>
-		  <xs:sequence>  
-		    <xs:element name="Valutazione" type="TFullValutazione" />
-		  </xs:sequence>
-		</xs:choice>		
+		<xs:element name="Valutazione" type="TFullValutazione" />
+		<xs:element name="Preferenze" type="TPreferenze" minOccurs="0" />	
       </xs:sequence>
     </xs:complexType>
 
@@ -154,6 +147,7 @@
     
     <xs:complexType name="TPassaggio" >
 	  <xs:sequence>	  
+	  	<xs:element name="IDViaggio" type="xs:ID" />
 	  	<xs:element name="Conducente" type="xs:IDREF" />	  
 	  	<xs:element name="PrezzoTot" type="xs:integer" />	  
 	  	<xs:element name="PostiTot" type="xs:integer" />	  
@@ -163,6 +157,9 @@
 	  </xs:sequence>
     </xs:complexType>
 
+    <!-- NOTA : Due elemnti globali( riferiti in TItinerario ), in quanto se nella choice di TItinerario si usassero <xs:element name="TappaX" type="T_Tratta" /> , si avrebbe un errore Cos-nonambig: Tappa1 and Tappa1 (Tappa2 and Tappa2) (or Elements From Their Substitution Group) Violate "Unique Particle Attribution"
+    <xs:element name="Tappa1" type="T_Tratta" />
+    <xs:element name="Tappa2" type="T_Tratta" /> -->
 
     <xs:complexType name="TItinerario">
       <xs:sequence>		
@@ -174,11 +171,11 @@
 	  		</xs:sequence>		  		  
 	  		<xs:sequence>
 			    <xs:element name="Tappa1" type="T_Tratta" />
-			    <xs:element name="Tappa2" type="T_Tratta" />
+          <xs:element name="Tappa2" type="T_Tratta" />
 			</xs:sequence>		  
 			<xs:sequence>
 			    <xs:element name="Tappa1" type="T_Tratta" />
-			    <xs:element name="Tappa2" type="T_Tratta" />
+          <xs:element name="Tappa2" type="T_Tratta" />
 			    <xs:element name="Tappa3" type="T_Tratta" />  
 			</xs:sequence>
 		</xs:choice>
