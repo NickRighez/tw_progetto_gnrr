@@ -1,0 +1,93 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="it" lang="it">
+ <head>
+  <title>Offri - Travel Share</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta name="title" content="..." /> 
+  <meta name="description" content="..." />
+  <meta name="keywords" content="offri, travel share, car pooling, passaggio, auto" />
+  <meta name="author" content="Giovanni Sanna, Nicolò Rigato, Riccardo Ardossi, Riccardo Saggese" />
+  <meta name="language" content="italian it" />
+  
+  <meta name="viewport" content="width=device-width" /> <!--valida-->
+  
+  <link href="screen.css" rel="stylesheet" type="text/css" media="screen" />
+  <link href="print.css" rel="stylesheet" type="text/css" media="print" />
+  
+  <link rel="icon" href="Immagini/TS_icon.png" type="image/x-icon" />
+  <link rel="shortcut icon" href="Immagini/TS_icon.png" type="image/x-icon" />
+ </head>
+ 
+ <body>
+	
+  <div id="header">
+   <a href="home.html" tabindex=""><img src="Immagini/banner.png" id="banner" alt="Banner Travel Share - Link diretto alla Home" /></a>
+   <a id="bottoneMenu" href="#menu" tabindex="">Men&ugrave;</a>
+  </div>
+	
+	
+  <div id="contenuto">
+  
+   <h1 class="testo">Offri un passaggio!</h1>
+	
+   <form id="OffertaForm" action="" method="get">
+   <fieldset>
+    <label for="partenza">Partenza</label>
+    <input type="text" id="partenza" name="partenza"></input><br class="acapo" />
+    <label for="arrivo">Arrivo</label>
+    <input type="text" id="arrivo" name="arrivo"></input><br class="acapo" />
+
+    <label for="tappa1">Tappa</label>
+    <input type="text" id="tappa1" name="tappa1"></input><br class="acapo" />
+    <label for="tappa2">Tappa</label>
+    <input type="text" id="tappa2" name="tappa2"></input><br class="acapo" />
+    <label for="tappa3">Tappa</label>
+    <input type="text" id="tappa3" name="tappa3"></input><br class="acapo" />
+   </fieldset>
+   
+   <fieldset>   
+    <label for="data">Data</label>
+    <input type="text" id="data" name="data" tabindex=""></input><br class="acapo" />
+    <label for="ora">Ora</label>
+    <input type="text" id="ora" name="ora"></input><br class="acapo" />
+   </fieldset>
+   
+   <fieldset>
+    <label for="prezzo">Prezzo</label>
+    <input type="text" id="prezzo" name="prezzo"></input><br class="acapo" />
+    <label for="posti">Posti</label>
+    <input type="text" id="posti" name="posti"></input><br class="acapo" />
+   
+    <!--<textarea rows="4" cols="50">ciao</textarea><br class="acapo" /> come si usa?-->
+   
+    <p class="testo">Bagagli
+    <select>
+    <option value="piccolo">Piccolo</option>
+    <option value="medio">Medio</option>
+    <option value="grande">Grande</option>
+    </select></p>
+   </fieldset>
+   
+   <div><input type="submit" value="Invia"></input></div>
+   
+  </form>
+
+  </div>
+	
+
+  <div id="menu">
+  <ul>
+   <li><a href="home.html" tabindex="">Cerca un passaggio</a></li> <!--&raquo; freccette utilizzabili per estetica-->
+   <li><a href="iscriviti.html" tabindex="">Iscriviti</a></li>
+   <li><a href="accedi.html" tabindex="">Accedi</a></li>
+   <li><a href="info.html" tabindex="">Informazioni su <span xml:lang="en" lang="en">Travel Share</span></a></li>
+  </ul>
+  </div>
+	
+  <div id="footer">
+   <a href="#header" tabindex="">Torna su</a>
+  </div>
+  
+  </body>
+</html>
