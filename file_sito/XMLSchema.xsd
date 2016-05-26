@@ -106,7 +106,7 @@ UTENTE: MANCA L'AUTO, LA DATA DI RILASCIO DELLA PATENTE E L'ANNOTAZIONE/DESCRIZI
 
     <xs:complexType name="TPreferenze">
       <xs:sequence>
-		<xs:element name="Chiacchere" type="TGradoPreferenze" />
+		<xs:element name="Chiacchiere" type="TGradoPreferenze" />
 		<xs:element name="Musica" type="TGradoPreferenze" />
 		<xs:element name="Animali" type="TGradoPreferenze" />
 		<xs:element name="Fumatore" type="TGradoPreferenze" />
