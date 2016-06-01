@@ -127,6 +127,13 @@ li{
 	float :right;
 }
 
+/**  NULLA  **/
+.right {
+	float: right;
+	position: relative;
+	top: -80px;
+}
+
 /**  FORM  **/
 
 /*NB: si può creare un placeholder con un immagine di sfondo dell'input*/
@@ -260,6 +267,11 @@ fieldset {
 
 
 @media screen and (min-width: 1024px) { /*test*/
+
+	.ultimoMessaggio {
+	display: inline;
+	}
+
 	#header{
 		height : 1.5cm;
 	}
