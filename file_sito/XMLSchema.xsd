@@ -2,7 +2,6 @@ UTENTE: MANCA L'AUTO, LA DATA DI RILASCIO DELLA PATENTE E L'ANNOTAZIONE/DESCRIZI
 
 
 
-
 <?xml version="1.0" ?>
 
   <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
@@ -142,8 +141,8 @@ UTENTE: MANCA L'AUTO, LA DATA DI RILASCIO DELLA PATENTE E L'ANNOTAZIONE/DESCRIZI
     <xs:simpleType name="TGradoPreferenze">
       <xs:restriction base="xs:integer">
 		<xs:enumeration value="0" />
+		<xs:enumeration value="1" />
 		<xs:enumeration value="2" />
-		<xs:enumeration value="3" />
       </xs:restriction>
     </xs:simpleType>    
  <!-- ****************** FINE UTENTE   ************** -->  
