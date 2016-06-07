@@ -217,7 +217,7 @@
 
 <!--  ***************************************************************   SET MESSAGGI   ************************** -->
 <SetMessaggi>
-	<Conversazione User1="pincopal@gmail.com" User2="carlorossi@gmail.com" >
+	<Conversazione IDMitt="pincopal@gmail.com" IDDest="carlorossi@gmail.com" >
 		<Messaggio>
 			<Mittente>1</Mittente>
 			<Data>24-04-2016</Data>
