@@ -1,6 +1,3 @@
-UTENTE: MANCA L'AUTO, LA DATA DI RILASCIO DELLA PATENTE E L'ANNOTAZIONE/DESCRIZIONE(?)
-
-
 
 <?xml version="1.0" ?>
 
@@ -88,13 +85,19 @@ UTENTE: MANCA L'AUTO, LA DATA DI RILASCIO DELLA PATENTE E L'ANNOTAZIONE/DESCRIZI
 	
     <xs:complexType name="TProfilo" >
       <xs:sequence>
+      		<xs:element name="DescrizionePers" type="xs:string" />
 		<xs:element name="NumFeedbRicevuti" type="xs:integer" default="0" />	
 		<xs:element name="NumPassaggiOff" type="xs:integer" default="0" />	
 		<xs:element name="NumPassaggiPart" type="xs:integer" default="0" />
-		<xs:element name="Auto" type="TAuto" minOccurs="0" />
 		<xs:element name="Valutazione" type="TFullValutazione" />
+		<xs:element name="Auto" type="TAuto" minOccurs="0" />
+		<xs:element name="Patente" type="TPatente" minOccurs="0" />
 		<xs:element name="Preferenze" type="TPreferenze" minOccurs="0" />	
       </xs:sequence>
+    </xs:complexType>
+    
+    <xs:complexType name="TPatente">
+    	<xs:attribute name="DataRilascio" type="xs:date"
     </xs:complexType>
     
     <xs:complexType name="TAuto">
