@@ -56,7 +56,6 @@ UTENTE: MANCA L'AUTO, LA DATA DI RILASCIO DELLA PATENTE E L'ANNOTAZIONE/DESCRIZI
 	  	<xs:element name="Cognome" type="xs:string" />	  
 	  	<xs:element name="Sesso" type="TSesso" />	  
 	  	<xs:element name="AnnoNascita" type="TAnnoNascita" />	  
-	  	<xs:element name="Telefono" type="TTelefono" />	  
 	  	<xs:element name="Password" type="TPassword" />
 	  	<xs:element name="Profilo" type="TProfilo" />
 	  </xs:sequence>
@@ -80,12 +79,6 @@ UTENTE: MANCA L'AUTO, LA DATA DI RILASCIO DELLA PATENTE E L'ANNOTAZIONE/DESCRIZI
 			<xs:pattern value="[1-2][0-9][0-9][0-9]" />
       </xs:restriction>
     </xs:simpleType>
-    
-    <xs:simpleType name="TTelefono" >
-     <xs:restriction base="xs:string">
-	<xs:pattern value="[0-9]{3}-[0-9]{7}" />
-      </xs:restriction>
-    </xs:simpleType>
 	
     <xs:simpleType name="TPassword" >
       <xs:restriction base="xs:integer">
@@ -98,9 +91,18 @@ UTENTE: MANCA L'AUTO, LA DATA DI RILASCIO DELLA PATENTE E L'ANNOTAZIONE/DESCRIZI
 		<xs:element name="NumFeedbRicevuti" type="xs:integer" default="0" />	
 		<xs:element name="NumPassaggiOff" type="xs:integer" default="0" />	
 		<xs:element name="NumPassaggiPart" type="xs:integer" default="0" />
+		<xs:element name="Auto" type="TAuto" minOccurs="0" />
 		<xs:element name="Valutazione" type="TFullValutazione" />
 		<xs:element name="Preferenze" type="TPreferenze" minOccurs="0" />	
       </xs:sequence>
+    </xs:complexType>
+    
+    <xs:complexType name="TAuto">
+    	<xs:sequence>
+    		<xs:element name="Marca" type="xs:string" />
+    		<xs:element name="Modello" type="xs:string" />
+    		<xs:element name="Tipologia" type="xs:string />"
+    	</xs:sequence>
     </xs:complexType>
 
     <xs:complexType name="TPreferenze">
