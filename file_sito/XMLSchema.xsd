@@ -167,31 +167,11 @@
 	  </xs:sequence>
     </xs:complexType>
 
-    <!-- NOTA : Due elemnti globali( riferiti in TItinerario ), in quanto se nella choice di TItinerario si usassero <xs:element name="TappaX" type="T_Tratta" /> , si avrebbe un errore Cos-nonambig: Tappa1 and Tappa1 (Tappa2 and Tappa2) (or Elements From Their Substitution Group) Violate "Unique Particle Attribution"
-    <xs:element name="Tappa1" type="T_Tratta" />
-    <xs:element name="Tappa2" type="T_Tratta" /> -->
-
     <xs:complexType name="TItinerario">
       <xs:sequence>		
-		<xs:element name="Partenza" type="T_Tratta" />
-    <xs:element name="Tappa" type="T_Tratta" minOccurs="0" maxOccurs="3" />	
-	<!--	
-		<xs:choice minOccurs="0">
-	  		<xs:sequence>
-	    		<xs:element name="Tappa1" type="T_Tratta" />
-	  		</xs:sequence>		  		  
-	  		<xs:sequence>
-			    <xs:element name="Tappa1" type="T_Tratta" />
-          <xs:element name="Tappa2" type="T_Tratta" />
-			</xs:sequence>		  
-			<xs:sequence>
-			    <xs:element name="Tappa1" type="T_Tratta" />
-          <xs:element name="Tappa2" type="T_Tratta" />
-			    <xs:element name="Tappa3" type="T_Tratta" />  
-			</xs:sequence>
-		</xs:choice>
-	-->
-		<xs:element name="Arrivo" type="T_Tratta" />	      
+	<xs:element name="Partenza" type="T_Tratta" />
+    	<xs:element name="Tappa" type="T_Tratta" minOccurs="0" maxOccurs="3" />	
+	<xs:element name="Arrivo" type="T_Tratta" />	      
       </xs:sequence>
     </xs:complexType>
 
@@ -224,9 +204,9 @@
     	<xs:sequence>
     		<xs:element name="Mittente" type="xs:IDREF" />
     		<xs:element name="Data" type="xs:date" />
- 			<xs:element name="Ora" type="xs:time" />
- 			<xs:element name="Testo" type="xs:string" />
- 			<xs:element name="Risposte" type="TBacheca" minOccurs="0" />
+ 		<xs:element name="Ora" type="xs:time" />
+ 		<xs:element name="Testo" type="xs:string" />
+ 		<xs:element name="Risposte" type="TBacheca" minOccurs="0" />
  		</xs:sequence>
  	</xs:complexType>
     	
