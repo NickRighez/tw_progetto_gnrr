@@ -219,8 +219,8 @@
  		<xs:sequence>
  			<xs:element name="Messaggio" type="TMessaggio" minOccurs="0" maxOccurs="unbounded" />
  		</xs:sequence>
- 		<xs:attribute name="User1" type="xs:IDREF" />
- 		<xs:attribute name="User2" type="xs:IDREF" />
+ 		<xs:attribute name="IDMitt" type="xs:IDREF" />
+ 		<xs:attribute name="IDDest" type="xs:IDREF" />
  	</xs:complexType>
 
  	<xs:complexType name="TMessaggio" >
