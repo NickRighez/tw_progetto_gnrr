@@ -13,9 +13,9 @@
 		<Cognome>Rossi</Cognome>
 		<Sesso>M</Sesso>
 		<AnnoNascita>1990</AnnoNascita>
-		<Telefono>049-5874120</Telefono>
 		<Password>333</Password>		
 		<Profilo>
+			<DescrizionePers> descrizione personale dell utente carlo rossi </DescrizionePers>
 			<NumFeedbRicevuti>0</NumFeedbRicevuti>
 			<NumPassaggiOff>0</NumPassaggiOff>
 			<NumPassaggiPart>0</NumPassaggiPart>
@@ -26,6 +26,12 @@
 				<Pulizia>0</Pulizia>
 				<Guida>0</Guida>
 			</Valutazione>
+			<Auto>
+				<Marca>fiat</Marca>
+				<Modello>punto</Modello>
+				<Tipologia>city car</Tipologia>
+			</Auto>
+			<Patente DataRilascio="10-09-2000" />
 			<Preferenze>
 				<Chiacchiere>2</Chiacchiere>
 				<Musica>2</Musica>
@@ -37,13 +43,13 @@
 
 	<Utente>
 		<Email>pincopal@gmail.com</Email>
-		<Nome>Carlo</Nome>
-		<Cognome>Rossi</Cognome>
+		<Nome>Mario</Nome>
+		<Cognome>Bianchi</Cognome>
 		<Sesso>M</Sesso>
 		<AnnoNascita>1990</AnnoNascita>
-		<Telefono>049-5874120</Telefono>
 		<Password>333</Password>
 		<Profilo>
+			<DescrizionePers> descrizione personale dell utnte mario bianchi</DescrizionePers>
 			<NumFeedbRicevuti>0</NumFeedbRicevuti>
 			<NumPassaggiOff>0</NumPassaggiOff>
 			<NumPassaggiPart>0</NumPassaggiPart>
@@ -54,6 +60,12 @@
 				<Pulizia>0</Pulizia>
 				<Guida>0</Guida>
 			</Valutazione>
+			<Auto>
+				<Marca>range rover</Marca>
+				<Modello>sport</Modello>
+				<Tipologia>suv</Tipologia>
+			</Auto>
+			<Patente DataRilascio="23-03-2003" />
 		</Profilo>
 	</Utente>
 </SetUtenti>
@@ -67,7 +79,7 @@
 		<PostiTot>4</PostiTot>
 		<Dettagli>Max un bagaglio medio</Dettagli>
 		<Itinerario>
-			<Partenza>
+			<Partenza Numero="0">
 				<Prezzo>5</Prezzo>
 				<PostiDisp>4</PostiDisp>
 				<Data>27-04-2016</Data>
@@ -88,7 +100,7 @@
 					<Utente>pincopal@gmail.com</Utente>
 				</Prenotazioni>
 			</Tappa>
-			<Arrivo>
+			<Arrivo Numero="4">
 				<Prezzo>5</Prezzo>
 				<PostiDisp>4</PostiDisp>
 				<Data>27-04-2016</Data>
@@ -111,7 +123,7 @@
 		<PostiTot>4</PostiTot>
 		<Dettagli>Max un bagaglio medio</Dettagli>
 		<Itinerario>
-			<Partenza>
+			<Partenza Numero="0">
 				<Prezzo>5</Prezzo>
 				<PostiDisp>4</PostiDisp>
 				<Data>27-04-2016</Data>
@@ -144,7 +156,7 @@
 					<Utente>pincopal@gmail.com</Utente>
 				</Prenotazioni>
 			</Tappa>
-			<Arrivo>
+			<Arrivo Numero="4">
 				<Prezzo>5</Prezzo>
 				<PostiDisp>4</PostiDisp>
 				<Data>27-04-2016</Data>
