@@ -97,14 +97,14 @@
     </xs:complexType>
     
     <xs:complexType name="TPatente">
-    	<xs:attribute name="DataRilascio" type="xs:date"
+    	<xs:attribute name="DataRilascio" type="xs:date" />
     </xs:complexType>
     
     <xs:complexType name="TAuto">
     	<xs:sequence>
     		<xs:element name="Marca" type="xs:string" />
     		<xs:element name="Modello" type="xs:string" />
-    		<xs:element name="Tipologia" type="xs:string />"
+    		<xs:element name="Tipologia" type="xs:string" />
     	</xs:sequence>
     </xs:complexType>
 
