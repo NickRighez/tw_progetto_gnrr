@@ -66,15 +66,15 @@
 	<xsl:template match="*/MessaggioBacheca">
 		<div class="mess">
   		<p> Mittente :	<xsl:call-template name="conducente">
-  	    					      <xsl:with-param name="cond"><xsl:value-of select="Mittente"/></xsl:with-param>
-  	    				      </xsl:call-template>  </p>
-  	  <p>Data/Ora : <xsl:value-of select="Data"/> - <xsl:value-of select="Ora"/> </p>
-  	  <p>Testo : <xsl:value-of select="Testo"/> </p>
-  	  <xsl:if test="count(Risposte)!=0">
-  	    	<div class="risp">
-  	    		<h3>Risposte</h3>
-  	    		<xsl:apply-templates select="*/MessaggioBacheca"/>
-  	    	</div>
+  	    				<xsl:with-param name="cond"><xsl:value-of select="Mittente"/></xsl:with-param>
+  	    			</xsl:call-template>  </p>
+  	  	<p>Data/Ora : <xsl:value-of select="Data"/> - <xsl:value-of select="Ora"/> </p>
+  	  	<p>Testo : <xsl:value-of select="Testo"/> </p>
+  	  	<xsl:if test="count(Risposte)!=0">
+  	    		<div class="risp">
+  	    			<h3>Risposte</h3>
+  	    			<xsl:apply-templates select="*/MessaggioBacheca"/>
+  	    		</div>
   		</xsl:if>
 	  </div>
 	</xsl:template>
