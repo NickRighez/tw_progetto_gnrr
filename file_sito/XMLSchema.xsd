@@ -21,24 +21,24 @@
       <xs:sequence>   
         <xs:element name="Utente" minOccurs="0" maxOccurs="unbounded" type="TUtente" />
       </xs:sequence>
-    </xs:complexType>
+  </xs:complexType>
 
   <xs:complexType name="TSetPassaggi" >
       <xs:sequence>
         <xs:element name="Passaggio" minOccurs="0" maxOccurs="unbounded" type="TPassaggio" />
       </xs:sequence>
-  </xs:complexType>
+    </xs:complexType>
 
     <xs:complexType name="TSetMessaggi" >
-    	<xs:sequence>
-      		<xs:element name="Conversazione" type="TConversazione" minOccurs="0" maxOccurs="unbounded" />
-    	</xs:sequence>
+    <xs:sequence>
+      <xs:element name="Conversazione" type="TConversazione" minOccurs="0" maxOccurs="unbounded" />
+    </xs:sequence>
   </xs:complexType>
 
   <xs:complexType name="TSetFeedback" >
-  	<xs:sequence>
-      		<xs:element name="Feedback" type="TFeedback" minOccurs="0" maxOccurs="unbounded" />
-    	</xs:sequence>
+    <xs:sequence>
+      <xs:element name="Feedback" type="TFeedback" minOccurs="0" maxOccurs="unbounded" />
+    </xs:sequence>
   </xs:complexType>
 
 
@@ -219,25 +219,19 @@
     <xs:sequence>
       <xs:element name="Messaggio" type="TMessaggio" minOccurs="0" maxOccurs="unbounded" />
     </xs:sequence>
-    <xs:attribute name="IDMitt" type="xs:IDREF" />
-    <xs:attribute name="IDDest" type="xs:IDREF" />
+    <xs:attribute name="IDUte1" type="xs:IDREF" />
+    <xs:attribute name="IDUte2" type="xs:IDREF" />
   </xs:complexType>
 
   <xs:complexType name="TMessaggio" >
     <xs:sequence>
-      <xs:element name="Mittente" type="TUserEnum" />
+      <xs:element name="Mittente" type="xs:IDREF" />
       <xs:element name="Data" type="xs:date" />
       <xs:element name="Ora" type="xs:time" />
       <xs:element name="Testo" type="xs:string" />
     </xs:sequence>
   </xs:complexType>
 
-  <xs:simpleType name="TUserEnum">
-    <xs:restriction base="xs:integer">
-      <xs:enumeration value="1" />
-      <xs:enumeration value="2" />
-    </xs:restriction>
-  </xs:simpleType>
 <!--   **************** FINE MESSAGGI 1vs1 **************   -->
 
 <!--   **************** INIZIO FEEDBACK  **************************************************** -->
@@ -248,7 +242,7 @@
       <xs:element name="Commento" type="xs:string" />
       <xs:choice>
           <xs:element name="ValutazionePasseg" type="TValutazione" />
-          <xs:element name="ValutazioneConduc" type="TFullValutazione" />
+        <xs:element name="ValutazioneConduc" type="TFullValutazione" />
       </xs:choice>
     </xs:sequence>
     <xs:attribute name="IDMitt" type="xs:IDREF" />
@@ -256,4 +250,3 @@
   </xs:complexType>
 
 </xs:schema>
-
