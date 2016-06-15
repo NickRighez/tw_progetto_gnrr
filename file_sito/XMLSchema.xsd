@@ -9,6 +9,7 @@
     <xs:element name="TravelShare" type="TTravelShare" />
 
     <xs:complexType name="TTravelShare" >
+      <xs:attribute name="numeroUtenti" type="xs:integer" default="0" />
       <xs:sequence>
         <xs:element name="SetUtenti" type="TSetUtenti" />
         <xs:element name="SetPassaggi" type="TSetPassaggi" />
