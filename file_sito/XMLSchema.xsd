@@ -25,6 +25,7 @@
   </xs:complexType>
 
   <xs:complexType name="TSetPassaggi" >
+    <xs:attribute name="numeroViaggi" type="xs:integer" default="0" />
       <xs:sequence>
         <xs:element name="Passaggio" minOccurs="0" maxOccurs="unbounded" type="TPassaggio" />
       </xs:sequence>
