@@ -9,13 +9,13 @@
     <xs:element name="TravelShare" type="TTravelShare" />
 
     <xs:complexType name="TTravelShare" >
-      <xs:attribute name="numeroUtenti" type="xs:integer" default="0" />
       <xs:sequence>
         <xs:element name="SetUtenti" type="TSetUtenti" />
         <xs:element name="SetPassaggi" type="TSetPassaggi" />
         <xs:element name="SetMessaggi" type="TSetMessaggi" />
         <xs:element name="SetFeedback" type="TSetFeedback" />
       </xs:sequence>
+	<xs:attribute name="numeroUtenti" type="xs:integer" default="0" />
     </xs:complexType>
 
     <xs:complexType name="TSetUtenti" >
@@ -25,10 +25,10 @@
   </xs:complexType>
 
   <xs:complexType name="TSetPassaggi" >
-    <xs:attribute name="numeroViaggi" type="xs:integer" default="0" />
       <xs:sequence>
         <xs:element name="Passaggio" minOccurs="0" maxOccurs="unbounded" type="TPassaggio" />
       </xs:sequence>
+    <xs:attribute name="numeroViaggi" type="xs:integer" default="0" />
     </xs:complexType>
 
     <xs:complexType name="TSetMessaggi" >
@@ -247,8 +247,8 @@
         <xs:element name="ValutazioneConduc" type="TFullValutazione" />
       </xs:choice>
     </xs:sequence>
-    <xs:attribute name="IDMitt" type="xs:IDREF" />
-    <xs:attribute name="IDDest" type="xs:IDREF" />
+    <xs:attribute name="IDUte1" type="xs:IDREF" />
+    <xs:attribute name="IDUte2" type="xs:IDREF" />
   </xs:complexType>
 
 </xs:schema>

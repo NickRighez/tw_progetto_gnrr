@@ -219,27 +219,27 @@
 
 <!--  ***************************************************************   SET MESSAGGI   ************************** -->
 <SetMessaggi>
-	<Conversazione IDMitt="u2" IDDest="u1" >
+	<Conversazione IDUte1="u2" IDUte2="u1" >
 		<Messaggio>
-			<Mittente>1</Mittente>
+			<Mittente>u2</Mittente>
 			<Data>2016-04-24</Data>
 			<Ora>18:07:00</Ora>
 			<Testo> [.............] </Testo>
 		</Messaggio>
 		<Messaggio>
-			<Mittente>2</Mittente>
+			<Mittente>u1</Mittente>
 			<Data>2016-04-24</Data>
 			<Ora>19:07:00</Ora>
 			<Testo> [.............] </Testo>
 		</Messaggio>
 		<Messaggio>
-			<Mittente>1</Mittente>
+			<Mittente>u2</Mittente>
 			<Data>2016-04-24</Data>
 			<Ora>19:10:00</Ora>
 			<Testo> [.............] </Testo>
 		</Messaggio>
 		<Messaggio>
-			<Mittente>2</Mittente>
+			<Mittente>u1</Mittente>
 			<Data>2016-04-24</Data>
 			<Ora>11:07:00</Ora>
 			<Testo> [.............] </Testo>
@@ -249,7 +249,7 @@
 
 <!--  ***************************************************************   SET FEEDBACK   ************************** -->
 <SetFeedback>
-	<Feedback IDMitt="u2" IDDest="u1">
+	<Feedback IDUte1="u2" IDUte2="u1">
 		<Passaggio>v1</Passaggio>
 		<Commento>Viaggio tranquillo</Commento>
 		<ValutazioneConduc>
@@ -261,7 +261,7 @@
 		</ValutazioneConduc>
 	</Feedback>
 
-	<Feedback IDMitt="u1" IDDest="u2">
+	<Feedback IDUte1="u1" IDUte2="u2">
 		<Passaggio>v1</Passaggio>
 		<Commento>Viaggio tranquillo</Commento>
 		<ValutazionePasseg>
