@@ -4,25 +4,22 @@ use strict;
 use warnings;
 use CGI::Carp 'fatalsToBrowser';
 
-#use lib '/etc/perl:/usr/local/lib/perl/5.18.2:/usr/local/share/perl/5.18.2:/usr/lib/perl5:/usr/share/perl5:/usr/lib/perl/5.18:/usr/share/perl/5.18:/usr/local/lib/site_perl:';
-use libreria::research;
+use libreria::data_registration;
+#use libreria::research;
 
-#print "Content-type: text/html\n\n";
-#print "<html><head> <title>Ciao mondo!!!!</title></head><body>";
+print "Content-type: text/html\n\n";
+my %array = ('Email' => 'ciccio@tesoro.it','Nome' => 'Denis','Cognome' => 'Righez','Sesso'=> 'M','AnnoNascita'=> '1991','Telefono'=>'04980557333','Password'=>'dadadada');
 
-#print "<h1>Fucking awesome!!!!!!!!!!!!!!!!</h1>";
+data_registration::inserisci_nuovo_utente(\%array);
+print "done!!!\n";
 
+sub caesar {
+    my ($message, $key, $decode) = @_;
+    $key = 26 - $key if $decode;
+    $message =~ s/([A-Z])/chr(((ord(uc $1) - 65 + $key) % 26) + 65)/geir;
+}
 
-#research::test_function();
-print "Content-type: text/html\r\n\r\n";
-
-
-
-
-my @params = ("anno &gt; 2000", "autore = 'King'");
-my $out = research::query_users(@params);
-#generic_xslt_query('libreria/style.xsl',@params);
-#$out=~ s/<?xml version="1.0" encoding="UTF-8" standalone="yes"?>/ /;
-
-print  $out;
-#print "</body></html>";
+print caesar("ciao bello",12,0);
+print "\n";
+print caesar(caesar("ciao bello",12,0),12,1);
+print "\n";

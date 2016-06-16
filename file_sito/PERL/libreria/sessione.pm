@@ -2,21 +2,24 @@
 # Pacchetto di gestione della sessione
 ###################################################
 
-package sessioneMIA;
+package sessione;
 
 use strict;
 use warnings;
 use CGI::Session;
+use CGI;
+use research;
 
-sub login(){
+sub login{
     my ($username, $passwd) = @_;
     my $session = new CGI::Session();
+# verifica di non essere gia connesso!!!!
     $session->param(-nome, $username);
     $session->param(-pass, $passwd);
 }
 
 
-sub logout(){
+sub logout{
     my $session = CGI::Session->load() or die $!;
     my $SID = $session->id();
     $session->close();
@@ -24,12 +27,14 @@ sub logout(){
     $session->flush();
 }
 
-sub get_username()
-{
+sub get_username{
     my $session = CGI::Session->load() or die $!;
     if($session->is_expired || $session->is_empty)
     {
-        return undef;
+        #return undef;
+        $cgi = new CGI;
+        print $cgi->header('Redirect: /');
+        #PATH NON PORTABILE !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     }
     else
     {
@@ -37,6 +42,9 @@ sub get_username()
         return $utente;
     }
 }
+
+# NOTIFICHE
+
 
 
 #NOTE:

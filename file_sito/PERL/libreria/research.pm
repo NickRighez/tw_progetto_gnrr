@@ -10,6 +10,7 @@ use XML::LibXML;
 use XML::LibXSLT;
 use Template;
 
+
 use strict;
 use warnings;
 use diagnostics;
@@ -17,13 +18,14 @@ use diagnostics;
 #per il MIO server
 use lib '/usr/share/perl5';
 
-sub test_function{
-    print "hello world";
-}
 
 #############################################
 ## Ricerche tramite XSLT
 #############################################
+
+# our === package variable, my === current scope variable
+our $xml_file = 'libreria/travelshare_data_file.xml';
+
 
 #parametri: nome file xml
 
@@ -39,7 +41,7 @@ sub generic_xslt_query
     my $parametri = join('',@lista_parentesi);
     ###
     my $style_file = $foglio_trasformazione;
-    my $xml_file = 'libreria/travelshare_data_file.xml';
+
     my $xml_parser = XML::LibXML->new( );
     my $xslt_parser = XML::LibXSLT->new( );
     my $template_parser = Template->new();
@@ -75,7 +77,7 @@ sub query_viaggi
 sub query_messaggi
 {
     my @lista = @_;
-    return generic_xslt_query('xlibreria/slt_files/messaggi.xsl',@lista);
+    return generic_xslt_query('libreria/slt_files/messaggi.xsl',@lista);
 }
 
 sub query_passaggi
@@ -103,6 +105,27 @@ sub query_passaggi
 #    }
 #}
 #
+
+sub generic_xpath_query
+{
+    my $parser = XML::LibXML->new(  );
+    my $xml_doc = $parser->parse_file($xml_file);
+
+}
+
+
+sub query_usernamepw
+{
+    my ($username, $password) = @_;
+    my @userlist = $XML_DOC->getElementsByTagName('Utente');
+    #foreach my $utente (@userlist){
+	#my ( $nome, $passwd );
+	#$nome = $utente->find
+}
+
+
+
+
 
 
 1;

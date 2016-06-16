@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module type="WEB_MODULE" version="4">
+  <component name="NewModuleRootManager">
+    <content url="file://$MODULE_DIR$" />
+    <orderEntry type="inheritedJdk" />
+    <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="file:///etc/perl" />
+        </CLASSES>
+        <SOURCES>
+          <root url="file:///etc/perl" />
+        </SOURCES>
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="file:///usr/lib/perl5" />
+        </CLASSES>
+        <SOURCES>
+          <root url="file:///usr/lib/perl5" />
+        </SOURCES>
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="file:///usr/share/perl5" />
+        </CLASSES>
+        <SOURCES>
+          <root url="file:///usr/share/perl5" />
+        </SOURCES>
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="file:///usr/lib/perl/5.18" />
+        </CLASSES>
+        <SOURCES>
+          <root url="file:///usr/lib/perl/5.18" />
+        </SOURCES>
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="file:///usr/share/perl/5.18" />
+        </CLASSES>
+        <SOURCES>
+          <root url="file:///usr/share/perl/5.18" />
+        </SOURCES>
+      </library>
+    </orderEntry>
+  </component>
+</module>
