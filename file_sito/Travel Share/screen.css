@@ -243,7 +243,14 @@ fieldset {
 									l'unica differenza è che se non funzia si vedrà spigoloso*/
 }
 
+#prezzo {
 
+	padding : 2%;
+
+	width: 40%;
+	position: absolute;
+	top:-180px;
+}
 
 
 /**  RISULTATI  **/
@@ -267,6 +274,20 @@ fieldset {
 
 
 @media screen and (min-width: 1024px) { /*test*/
+
+	#back{
+		position: absolute;
+		top: 120px;
+	}
+
+	#prezzo {
+		border : 1px solid;
+		padding : 2%;
+		border-radius : 15px;
+		width: 40%;
+		position: absolute;
+		top:-180px;
+	}
 
 	.ultimoMessaggio {
 	display: inline;
