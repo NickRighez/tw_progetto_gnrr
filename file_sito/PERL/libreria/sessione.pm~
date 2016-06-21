@@ -13,7 +13,6 @@ use research;
 sub login{
     my ($username, $passwd) = @_;
     my $session = new CGI::Session();
-# verifica di non essere gia connesso!!!!
     $session->param(-nome, $username);
     $session->param(-pass, $passwd);
 }
@@ -42,8 +41,6 @@ sub get_username{
         return $utente;
     }
 }
-
-# NOTIFICHE
 
 
 #NOTE:

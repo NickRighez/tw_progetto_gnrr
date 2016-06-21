@@ -6,7 +6,7 @@
 	<xsl:template match="/">
 		<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="it" lang="it" >
 			<head>
-				<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+				<meta http-equiv="content-type" content="text/html; charset=utf-8" />
 				<title>Info Utente</title>
 				<meta name="title" content="RICERCA XSLT" />
 	  			<style type="text/css" media="all">
@@ -29,7 +29,7 @@
 	  			</style>
 	    	</head>
 	    	<body>
-	    		<xsl:for-each select="ts:TravelShare/SetUtenti/Utente[IDUte='u1']" >  <!--  FILTRO PERL -->
+	    		<xsl:for-each select="ts:TravelShare/SetUtenti/Utente[IDUte='[% UTENTE %]']" >  <!--  FILTRO PERL -->
 	    			<div id="contenuto">
 	    				<div class="info">
 	    					

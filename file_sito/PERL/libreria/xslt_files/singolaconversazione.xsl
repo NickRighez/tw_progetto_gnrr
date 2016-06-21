@@ -7,7 +7,7 @@
 	<xsl:template match="/">
 		<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="it" lang="it" >
 			<head>
-				<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+				<meta http-equiv="content-type" content="text/html; charset=utf-8" />
 				<title>Singola Conversazione </title>
 				<meta name="title" content="VISUALIZZAZIONE SINGOLA CONVERSAZIONE" />
 	  			<style type="text/css" media="all">
@@ -32,16 +32,32 @@
 
 			          }
 
+
 	  			</style>
 	    	</head>
 	    	<body>
-		    	<xsl:for-each select="ts:TravelShare/SetMessaggi/Conversazione[@IDUte1='u2' and @IDUte2='u1']/Messaggio"> <!-- FILTRI PERL 'u1' 'u2' -->
-		    		<div class="mess">
-		    			<p>Mittente : <xsl:call-template name="mittente">
-		    							        <xsl:with-param name="mitt"><xsl:value-of select="Mittente"/></xsl:with-param>
-		    						        </xsl:call-template> <span><xsl:value-of select="Data"/></span><span><xsl:value-of select="Ora"/></span></p>
-		    			<p class="mess"><xsl:value-of select="Testo"/></p>
-		    		</div>
+		    	<xsl:for-each select="ts:TravelShare/SetMessaggi/Conversazione[@IDUte1='[% USER1 %]' and @IDUte2='[% USER2 %]']/Messaggio"> <!-- FILTRI PERL 'u1' 'u2' -->
+					<xsl:variable name="myself" > [% MYSELF %] </xsl:variable>
+					<xsl:choose>
+						<xsl:when test=" Mittente =$myself  ">
+							<div class="inviati" style="color: red">
+								<p>Mittente : <xsl:call-template name="mittente">
+									<xsl:with-param name="mitt"><xsl:value-of select="Mittente"/></xsl:with-param>
+								</xsl:call-template> <span><xsl:value-of select="Data"/></span><span><xsl:value-of select="Ora"/></span></p>
+								<p class="mess"><xsl:value-of select="Testo"/></p>
+							</div>
+						</xsl:when>
+						<xsl:otherwise>
+							<div class="ricevuti" style="color: blue">
+								<p>Mittente : <xsl:call-template name="mittente">
+									<xsl:with-param name="mitt"><xsl:value-of select="Mittente"/></xsl:with-param>
+								</xsl:call-template> <span><xsl:value-of select="Data"/></span><span><xsl:value-of select="Ora"/></span></p>
+								<p class="mess"><xsl:value-of select="Testo"/></p>
+							</div>
+						</xsl:otherwise>
+					</xsl:choose>
+
+
 	    		</xsl:for-each> 
 	    	</body>
 	    </html>

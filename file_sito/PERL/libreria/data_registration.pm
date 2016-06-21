@@ -32,7 +32,7 @@ sub verifica_presenza {
     my $doc = shift @_;
     #my $q = "$xpath/[$keyname=$keyvalue]";
     my $q = join('',$xpath,'[',join ('=',$keyname,join('',"'",$keyvalue,"'")),']');
-    print "$q\n";
+    #print "$q\n";
     my @nodes = $doc->findnodes($q);
     my $numNodes = @nodes;
    return $numNodes;
@@ -50,10 +50,10 @@ sub serializzazione_apertura{
     #####
     my $doc = $parser->parse_string($xml_string)
         or die("errore nel caricamento del documento dal parser");
-    return {
+    return (
         'doc' => $doc,
         'filehandle' => $fileHandle
-    };
+    );
 }
 
 # argomenti: filehandle, doc
@@ -99,7 +99,7 @@ sub serializzazione_inserimento {
     }
     # end writing
     serializzazione_chiusura($fileHandle,$doc);
-    return ris;
+    return $ris;
 }
 
 
@@ -109,15 +109,17 @@ sub serializzazione_inserimento {
 # ID è valore numerico dei caratteri dell'email
 
 sub inserisci_nuovo_utente {
-    my %array_argom = shift @_;
+    my $array_argom_ref = shift @_;
+    my %array_argom = %$array_argom_ref;
     # calcolo chiave
-    my $emailinchars = '';
-    for $char ( split //, $array_argom{'Email'} ) {
-        print ord($char);
-    }
+#    my $emailinchars = 'a';
+#    for my $char ( split //, $array_argom{'Email'} ) {
+#        print ord($char);
+#        $emailinchars = join('',$emailinchars,ord($char));
+#    }
     ############à PROBLEMA SINTESI CHIAVE
 
-    $array_argom{'IDUte'} = $emailinchars;
+    #$array_argom{'IDUte'} = $emailinchars;
     my @parametri   = (
         'IDUte',
         'Email',       'Nome',     'Cognome', 'Sesso',
@@ -127,6 +129,11 @@ sub inserisci_nuovo_utente {
     foreach my $element (@parametri) {
         my $new_chunck = "<$element>$array_argom{$element}</$element>";
         $output = join( "\n", $output, $new_chunck );
+        ######################################################################
+         if(($array_argom{$element} eq '')){
+             die "$element vuoto";
+         }
+        #######################################################################
     }
     my $ultima_parte = "<Profilo>
     <NumFeedbRicevuti>0</NumFeedbRicevuti>
@@ -151,26 +158,37 @@ sub inserisci_nuovo_utente {
 
     my %componenti = ("inizio" => "<Utente>\n" , "fine" => join '', $ultima_parte, "</Utente>\n" );
     my $fragm = $parser->parse_balanced_chunk($output);
-
 #comincia a contare da 1 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-
    # if( !serializzazione_inserimento( $fragm, "//Utente", "Email", $array_argom{"Email"}))
-    if( !serializzazione_inserimento( $fragm, "//Utente", "Email", $array_argom{"Email"}))
-    {
-        print "Valore già presente\n";
-    }
+ return serializzazione_inserimento( $fragm, "//Utente", "IDUte", $array_argom{"IDUte"});
+
 }
 
 sub inserisci_nuovo_viaggio   { }
-sub inserisci_nuovo_messaggio { }
+sub inserisci_nuovo_messaggio_singolo { }
+sub inserisci_nuovo_messaggio_bacheca { }
 
 sub modifica_utente { }
 
 #sub modifica_utente{}
 sub modifica_messaggio { }
 
-sub elimina_utente    { }
-sub elimina_viaggio   { }
-sub elimina_messaggio { }
+sub elimina_utente    {
+    my $id = shift @_;
+    my %aux = serializzazione_apertura();
+    my $doc = $aux{'doc'};
+    my $fileHandle = $aux{'filehandle'};
+    # do stuff
+
+    ######
+    serializzazione_chiusura($fileHandle,$doc);
+    return;
+}
+
+sub elimina_viaggio   {
+}
+
+sub elimina_messaggio { # serve xpath un po' complesso
+}
 
 1;

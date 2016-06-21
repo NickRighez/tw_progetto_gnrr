@@ -7,7 +7,7 @@
 		
 		<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="it" lang="it" >
 			<head>
-				<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+				<meta http-equiv="content-type" content="text/html; charset=utf-8" />
 				<title>Info Utente</title>
 				<meta name="title" content="RICERCA XSLT" />
 	  			<style type="text/css" media="all">
@@ -29,11 +29,11 @@
 	    	<body>
 	    		<h1>Messaggi</h1> 
 	    		
-	    		<xsl:for-each select="ts:TravelShare/SetMessaggi/Conversazione[@IDUte1='u1' or @IDUte2='u1']"> <!-- FILTRI PERL 'u1' -->
+	    		<xsl:for-each select="ts:TravelShare/SetMessaggi/Conversazione[@IDUte1='[% UTENTE %]' or @IDUte2='[% UTENTE %]']"> <!-- FILTRI PERL '[% UTENTE %]' -->
 					<div class="conversazione">
 						<a href="singolaConversazione.html" title="Nuovo messaggio" class="">
 							<xsl:choose>
-	    						<xsl:when test="/ts:TravelShare/SetMessaggi/Conversazione[@IDUte1='u1']"> <!-- FILTRO PERL 'u1' -->
+	    						<xsl:when test="/ts:TravelShare/SetMessaggi/Conversazione[@IDUte1='[% UTENTE %]']"> <!-- mostra 1 come mittente quando io sono 2 e viceversa -->
 	    							<xsl:call-template name="utente">
 										<xsl:with-param name="idute"><xsl:value-of select="/ts:TravelShare/SetMessaggi/Conversazione/@IDUte2"/></xsl:with-param>
 									</xsl:call-template>
