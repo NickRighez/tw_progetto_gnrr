@@ -36,7 +36,7 @@
 	  			</style>
 	    	</head>
 	    	<body>
-		    	<xsl:for-each select="ts:TravelShare/SetMessaggi/Conversazione[@IDUte1='[% USER1 %]' and @IDUte2='[% USER2 %]']/Messaggio"> <!-- FILTRI PERL 'u1' 'u2' -->
+		    	<xsl:for-each select="ts:TravelShare/SetMessaggi/Conversazione[@User1='[% USER1 %]' and @User2='[% USER2 %]']/Messaggio"> <!-- FILTRI PERL 'u1' 'u2' -->
 					<xsl:variable name="myself" > [% MYSELF %] </xsl:variable>
 					<xsl:choose>
 						<xsl:when test=" Mittente =$myself  ">
@@ -65,8 +65,8 @@
 
 	<xsl:template name="mittente" >
 		<xsl:param name="mitt"/>
-		<span><xsl:value-of select="/ts:TravelShare/SetUtenti/Utente[IDUte=$mitt]/Nome"/></span>
-	   <span><xsl:value-of select="/ts:TravelShare/SetUtenti/Utente[IDUte=$mitt]/Cognome"/></span>
+		<span><xsl:value-of select="/ts:TravelShare/SetUtenti/Utente[Username=$mitt]/Nome"/></span>
+	   <span><xsl:value-of select="/ts:TravelShare/SetUtenti/Utente[Username=$mitt]/Cognome"/></span>
 	</xsl:template>
 
 	

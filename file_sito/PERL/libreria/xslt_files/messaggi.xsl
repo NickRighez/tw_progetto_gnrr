@@ -29,18 +29,18 @@
 	    	<body>
 	    		<h1>Messaggi</h1> 
 	    		
-	    		<xsl:for-each select="ts:TravelShare/SetMessaggi/Conversazione[@IDUte1='[% UTENTE %]' or @IDUte2='[% UTENTE %]']"> <!-- FILTRI PERL '[% UTENTE %]' -->
+	    		<xsl:for-each select="ts:TravelShare/SetMessaggi/Conversazione[@User1='[% UTENTE %]' or @User2='[% UTENTE %]']"> <!-- FILTRI PERL '[% UTENTE %]' -->
 					<div class="conversazione">
 						<a href="singolaConversazione.html" title="Nuovo messaggio" class="">
 							<xsl:choose>
-	    						<xsl:when test="/ts:TravelShare/SetMessaggi/Conversazione[@IDUte1='[% UTENTE %]']"> <!-- mostra 1 come mittente quando io sono 2 e viceversa -->
+	    						<xsl:when test="/ts:TravelShare/SetMessaggi/Conversazione[@User1='[% UTENTE %]']"> <!-- mostra 1 come mittente quando io sono 2 e viceversa -->
 	    							<xsl:call-template name="utente">
-										<xsl:with-param name="idute"><xsl:value-of select="/ts:TravelShare/SetMessaggi/Conversazione/@IDUte2"/></xsl:with-param>
+										<xsl:with-param name="user"><xsl:value-of select="/ts:TravelShare/SetMessaggi/Conversazione/@User2"/></xsl:with-param>
 									</xsl:call-template>
 	    						</xsl:when>
 	    						<xsl:otherwise>
 	    							<xsl:call-template name="utente">
-										<xsl:with-param name="idute"><xsl:value-of select="/ts:TravelShare/SetMessaggi/Conversazione/@IDUte1"/></xsl:with-param>
+										<xsl:with-param name="user"><xsl:value-of select="/ts:TravelShare/SetMessaggi/Conversazione/@User1"/></xsl:with-param>
 									</xsl:call-template>
 	    						</xsl:otherwise>
 	    					</xsl:choose>							
@@ -55,9 +55,9 @@
 	</xsl:template>
 
 	<xsl:template name="utente">
-		<xsl:param name="idute" />
-		<p><span class="nome"><xsl:value-of select="/ts:TravelShare/SetUtenti/Utente[IDUte=$idute]/Nome"/></span>
-		    <span class="cognome"><xsl:value-of select="/ts:TravelShare/SetUtenti/Utente[IDUte=$idute]/Cognome"/></span>
+		<xsl:param name="user" />
+		<p><span class="nome"><xsl:value-of select="/ts:TravelShare/SetUtenti/Utente[Username=$user]/Nome"/></span>
+		    <span class="cognome"><xsl:value-of select="/ts:TravelShare/SetUtenti/Utente[Username=$user]/Cognome"/></span>
 		</p>
 	</xsl:template>
 </xsl:stylesheet>

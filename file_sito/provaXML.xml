@@ -8,7 +8,7 @@
 <!--  ***************************************************************   SET UTENTI   ************************** -->
 <SetUtenti>
 	<Utente>
-		<IDUte>u1</IDUte>
+		<Username>u1</Username>
 		<Email>carlorossi@gmail.com</Email>
 		<Nome>Carlo</Nome>
 		<Cognome>Rossi</Cognome>
@@ -43,7 +43,7 @@
 	</Utente>
 
 	<Utente>
-		<IDUte>u2</IDUte>
+		<Username>u2</Username>
 		<Email>pincopal@gmail.com</Email>
 		<Nome>Mario</Nome>
 		<Cognome>Bianchi</Cognome>
@@ -219,7 +219,7 @@
 
 <!--  ***************************************************************   SET MESSAGGI   ************************** -->
 <SetMessaggi>
-	<Conversazione IDUte1="u2" IDUte2="u1" >
+	<Conversazione User1="u2" User2="u1" >
 		<Messaggio>
 			<Mittente>u2</Mittente>
 			<Data>2016-04-24</Data>
@@ -249,7 +249,7 @@
 
 <!--  ***************************************************************   SET FEEDBACK   ************************** -->
 <SetFeedback>
-	<Feedback IDUte1="u2" IDUte2="u1">
+	<Feedback IDMitt="u2" IDDest="u1">
 		<Passaggio>v1</Passaggio>
 		<Commento>Viaggio tranquillo</Commento>
 		<ValutazioneConduc>
@@ -261,7 +261,7 @@
 		</ValutazioneConduc>
 	</Feedback>
 
-	<Feedback IDUte1="u1" IDUte2="u2">
+	<Feedback IDMitt="u1" IDDest="u2">
 		<Passaggio>v1</Passaggio>
 		<Commento>Viaggio tranquillo</Commento>
 		<ValutazionePasseg>

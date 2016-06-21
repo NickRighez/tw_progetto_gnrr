@@ -3,7 +3,7 @@
   <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
       targetNamespace="http://www.dominio.com"
       xmlns="http://www.dominio.com"
-       >
+       > 
   
   <!-- MODELLO TENDE ALLA VENEZIANA -->
     <xs:element name="TravelShare" type="TTravelShare" />
@@ -49,7 +49,7 @@
     
     <xs:complexType name="TUtente" >
       <xs:sequence>
-        <xs:element name="IDUte" type="xs:ID" />
+        <xs:element name="Username" type="xs:ID" />
         <xs:element name="Email" type="TEmail" />
         <xs:element name="Nome" type="xs:string" />   
         <xs:element name="Cognome" type="xs:string" />    
@@ -221,8 +221,8 @@
     <xs:sequence>
       <xs:element name="Messaggio" type="TMessaggio" minOccurs="0" maxOccurs="unbounded" />
     </xs:sequence>
-    <xs:attribute name="IDUte1" type="xs:IDREF" />
-    <xs:attribute name="IDUte2" type="xs:IDREF" />
+    <xs:attribute name="User1" type="xs:IDREF" />
+    <xs:attribute name="User2" type="xs:IDREF" />
   </xs:complexType>
 
   <xs:complexType name="TMessaggio" >
@@ -247,8 +247,8 @@
         <xs:element name="ValutazioneConduc" type="TFullValutazione" />
       </xs:choice>
     </xs:sequence>
-    <xs:attribute name="IDUte1" type="xs:IDREF" />
-    <xs:attribute name="IDUte2" type="xs:IDREF" />
+    <xs:attribute name="IDMitt" type="xs:IDREF" />
+    <xs:attribute name="IDDest" type="xs:IDREF" />
   </xs:complexType>
 
 </xs:schema>

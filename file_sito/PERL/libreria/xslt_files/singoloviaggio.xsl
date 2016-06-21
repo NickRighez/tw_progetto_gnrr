@@ -34,7 +34,7 @@
 	  			</style>
 	    	</head>
 	    	<body>
-	    		<xsl:for-each select="ts:TravelShare/SetPassaggi/Passaggio[IDViaggio='[% VIAGGIO %]']" > <!-- 2 FILTRI PERL -->
+	    		<xsl:for-each select="ts:TravelShare/SetPassaggi/Passaggio[IDViaggio='[% VIAGGIO %]']" > 
 	    			<div class="pas">
 	    				<h3>Informazioni generali : </h3>
 	    				
@@ -46,13 +46,13 @@
 	    				<p>Posti disponibili ??? </p>  <!-- da sistemare -->
 	    				<p>Dettagli : <xsl:value-of select="Dettagli"/> </p>
 	    				<h3>Partenza : </h3>
-	    				<p>Luogo : <xsl:value-of select="Itinerario/*[@Numero=[% NUM_PARTENZA%]]/Comune"/>(<xsl:value-of select="Itinerario/*[@Numero=[% NUM_PARTENZA%]]/Provincia"/>) </p>
-	    				<p>Data/Ora : <xsl:value-of select="Itinerario/*[@Numero=[% NUM_PARTENZA%]]/Data"/> - <xsl:value-of select="Itinerario/*[@Numero=[% NUM_PARTENZA%]]/Ora"/> </p>
-	    				<p>Posti disponibili : <xsl:value-of select="Itinerario/*[@Numero=[% NUM_PARTENZA%]]/PostiDisp"/> </p>
+	    				<p>Luogo : <xsl:value-of select="Itinerario/*[@Numero=[% NUM_PARTENZA %]]/Comune"/>(<xsl:value-of select="Itinerario/*[@Numero=[% NUM_PARTENZA%]]/Provincia"/>) </p>
+	    				<p>Data/Ora : <xsl:value-of select="Itinerario/*[@Numero=[% NUM_PARTENZA %]]/Data"/> - <xsl:value-of select="Itinerario/*[@Numero=[% NUM_PARTENZA %]]/Ora"/> </p>
+	    				<p>Posti disponibili : <xsl:value-of select="Itinerario/*[@Numero=[% NUM_PARTENZA %]]/PostiDisp"/> </p>
 	    				<h3>Arrivo : </h3>
-	    				<p>Luogo : <xsl:value-of select="Itinerario/*[@Numero=[% NUM_ARRIVO%]]/Comune"/>(<xsl:value-of select="Itinerario/*[@Numero=[% NUM_ARRIVO%]]/Provincia"/>) </p>
-	    				<p>Data/Ora : <xsl:value-of select="Itinerario/*[@Numero=[% NUM_ARRIVO%]]/Data"/> - <xsl:value-of select="Itinerario/*[@Numero=[% NUM_ARRIVO%]]/Ora"/> </p>
-	    				<p>Posti disponibili : <xsl:value-of select="Itinerario/*[@Numero=[% NUM_ARRIVO%]]/PostiDisp"/> </p>
+	    				<p>Luogo : <xsl:value-of select="Itinerario/*[@Numero=[% NUM_ARRIVO %]]/Comune"/>(<xsl:value-of select="Itinerario/*[@Numero=[% NUM_ARRIVO%]]/Provincia"/>) </p>
+	    				<p>Data/Ora : <xsl:value-of select="Itinerario/*[@Numero=[% NUM_ARRIVO %]]/Data"/> - <xsl:value-of select="Itinerario/*[@Numero=[% NUM_ARRIVO %]]/Ora"/> </p>
+	    				<p>Posti disponibili : <xsl:value-of select="Itinerario/*[@Numero=[% NUM_ARRIVO %]]/PostiDisp"/> </p>
 	    				<div class="bacheca">
 	    					<h3>Bacheca Messaggi</h3>
 	    					<xsl:apply-templates select="*/MessaggioBacheca" />
@@ -81,8 +81,8 @@
 
 	<xsl:template name="conducente" >
 		<xsl:param name="cond"/>
-		<span><xsl:value-of select="/ts:TravelShare/SetUtenti/Utente[IDUte=$cond]/Nome"/></span>
-	  <span><xsl:value-of select="/ts:TravelShare/SetUtenti/Utente[IDUte=$cond]/Cognome"/></span>
+		<span><xsl:value-of select="/ts:TravelShare/SetUtenti/Utente[Username=$cond]/Nome"/></span>
+	  <span><xsl:value-of select="/ts:TravelShare/SetUtenti/Utente[Username=$cond]/Cognome"/></span>
 	</xsl:template>
 
 	

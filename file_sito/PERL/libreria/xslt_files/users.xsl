@@ -29,7 +29,7 @@
 	  			</style>
 	    	</head>
 	    	<body>
-	    		<xsl:for-each select="ts:TravelShare/SetUtenti/Utente[IDUte='[% UTENTE %]']" >  <!--  FILTRO PERL -->
+	    		<xsl:for-each select="ts:TravelShare/SetUtenti/Utente[Username='[% UTENTE %]']" >  <!--  FILTRO PERL -->
 	    			<div id="contenuto">
 	    				<div class="info">
 	    					
