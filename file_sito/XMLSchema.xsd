@@ -57,6 +57,7 @@
         <xs:element name="AnnoNascita" type="TAnnoNascita" />   
         <xs:element name="Password" type="xs:string" />
         <xs:element name="Profilo" type="TProfilo" />
+        <xs:element name="Notifiche" type="TNotifiche" />
       </xs:sequence>
     </xs:complexType>
 
@@ -108,6 +109,40 @@
         <xs:element name="Modello" type="xs:string" />
         <xs:element name="Tipologia" type="xs:string" />
       </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="TNotifiche" >
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="NuovoMessaggio" type="TNuovoMessaggio" />
+        <xs:element name="NuovoMessaggioBacheca" type="TNuovoMessaggioBacheca" />
+        <xs:element name="FeedDaRilasciare" type="TFeedDaRilasciare" />
+        <xs:element name="RichiestaPrenotaz" type="TRichiestaPrenotaz" />
+        <xs:element name="AccettazionePrenotaz" type="TAccettazionePrenotaz" />
+      </xs:choice>
+    </xs:complexType>
+
+    <xs:complexType name="TNuovoMessaggio" >
+      <xs:attribute name="Mittente" type="xs:IDREF" />
+      <xs:attribute name="" type="" />
+    </xs:complexType>
+
+    <xs:complexType name="TNuovoMessaggioBacheca" >
+      <xs:attribute name="Mittente" type="xs:IDREF" />
+      <xs:attribute name="Passaggio" type="xs:IDREF" />
+    </xs:complexType>
+
+    <xs:complexType name="TFeedDaRilasciare" >
+      <xs:attribute name="Destinatario" type="xs:IDREF" />
+      <xs:attribute name="Passaggio" type="xs:IDREF" />
+    </xs:complexType>
+
+    <xs:complexType name="TRichiestaPrenotaz" >
+      <xs:attribute name="Mittente" type="xs:IDREF" />
+      <xs:attribute name="Passaggio" type="xs:IDREF" />
+    </xs:complexType>
+
+    <xs:complexType name="TAccettazionePrenotaz" >
+      <xs:attribute name="Passaggio" type="xs:IDREF" />
     </xs:complexType>
 
     <xs:complexType name="TPreferenze">
@@ -179,7 +214,7 @@
 
     <xs:complexType name="T_Tratta">
       <xs:sequence>
-        <xs:element name="Prezzo" type="xs:integer" />
+        <!--<xs:element name="Prezzo" type="xs:integer" />    ############ MODIFICA ############ -->
         <xs:element name="PostiDisp" type="xs:integer" />
         <xs:element name="Data" type="xs:date" />
         <xs:element name="Ora" type="xs:time" />
@@ -203,6 +238,7 @@
     </xs:complexType>
 
     <xs:complexType name="TMessaggioBacheca">
+      <xs:attribute name="Identificativo" type="xs:string" />
       <xs:sequence>
         <xs:element name="Mittente" type="xs:IDREF" />
         <xs:element name="Data" type="xs:date" />
@@ -226,6 +262,7 @@
   </xs:complexType>
 
   <xs:complexType name="TMessaggio" >
+    <xs:attribute name="Letto" type="TMessLetto" />
     <xs:sequence>
       <xs:element name="Mittente" type="xs:IDREF" />
       <xs:element name="Data" type="xs:date" />
@@ -233,6 +270,13 @@
       <xs:element name="Testo" type="xs:string" />
     </xs:sequence>
   </xs:complexType>
+
+  <xs:simpleType name="TMessLetto">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="si"/>
+      <xs:enumeration value="no" />
+    </xs:restriction>
+  </xs:simpleType>
 
 <!--   **************** FINE MESSAGGI 1vs1 **************   -->
 
@@ -244,7 +288,7 @@
       <xs:element name="Commento" type="xs:string" />
       <xs:choice>
           <xs:element name="ValutazionePasseg" type="TValutazione" />
-        <xs:element name="ValutazioneConduc" type="TFullValutazione" />
+          <xs:element name="ValutazioneConduc" type="TFullValutazione" />
       </xs:choice>
     </xs:sequence>
     <xs:attribute name="IDMitt" type="xs:IDREF" />
