@@ -40,6 +40,8 @@
 				<Fumatore>2</Fumatore>
 			</Preferenze>
 		</Profilo>
+		<Notifiche>
+		</Notifiche>
 	</Utente>
 
 	<Utente>
@@ -69,6 +71,8 @@
 			</Auto>
 			<Patente DataRilascio="2016-04-24" />
 		</Profilo>
+		<Notifiche>
+		</Notifiche>
 	</Utente>
 </SetUtenti>
 
@@ -82,7 +86,6 @@
 		<Dettagli>Max un bagaglio medio</Dettagli>
 		<Itinerario>
 			<Partenza Numero="0">
-				<Prezzo>5</Prezzo>
 				<PostiDisp>4</PostiDisp>
 				<Data>2016-04-24</Data>
 				<Ora>12:00:00</Ora>
@@ -91,9 +94,7 @@
 				<Prenotazioni>
 				</Prenotazioni>
 			</Partenza>
-			<Tappa Numero="1">
-				<Prezzo>5</Prezzo>
-				<PostiDisp>3</PostiDisp>  <!-- il num di posti disponibili dev essere coerente con : PostiTot-count(Prenotazioni/Utente) -->
+			<Tappa Numero="1">				<PostiDisp>3</PostiDisp>  <!-- il num di posti disponibili dev essere coerente con : PostiTot-count(Prenotazioni/Utente) -->
 				<Data>2016-04-24</Data>
 				<Ora>15:00:00</Ora>
 				<Provincia>Vicenza</Provincia>
@@ -103,7 +104,6 @@
 				</Prenotazioni>
 			</Tappa>
 			<Arrivo Numero="4">
-				<Prezzo>5</Prezzo>
 				<PostiDisp>4</PostiDisp>
 				<Data>2016-04-24</Data>
 				<Ora>17:00:00</Ora>
@@ -126,7 +126,6 @@
 		<Dettagli>Max un bagaglio medio</Dettagli>
 		<Itinerario>
 			<Partenza Numero="0">
-				<Prezzo>5</Prezzo>
 				<PostiDisp>4</PostiDisp>
 				<Data>2016-04-24</Data>
 				<Ora>12:00:00</Ora>
@@ -137,7 +136,6 @@
 				</Prenotazioni>
 			</Partenza>
 			<Tappa Numero="1">
-				<Prezzo>5</Prezzo>
 				<PostiDisp>3</PostiDisp>  <!-- il num di posti disponibili dev essere coerente con : PostiTot-count(Prenotazioni/Utente) -->
 				<Data>2016-04-24</Data>
 				<Ora>15:00:00</Ora>
@@ -148,7 +146,6 @@
 				</Prenotazioni>
 			</Tappa>
 			<Tappa Numero="2">
-				<Prezzo>5</Prezzo>
 				<PostiDisp>3</PostiDisp>  <!-- il num di posti disponibili dev essere coerente con : PostiTot-count(Prenotazioni/Utente) -->
 				<Data>2016-04-24</Data>
 				<Ora>16:00:00</Ora>
@@ -159,7 +156,6 @@
 				</Prenotazioni>
 			</Tappa>
 			<Arrivo Numero="4">
-				<Prezzo>5</Prezzo>
 				<PostiDisp>4</PostiDisp>
 				<Data>2016-04-24</Data>
 				<Ora>17:00:00</Ora>
@@ -170,19 +166,19 @@
 			</Arrivo>
 		</Itinerario>
 		<Bacheca>
-			<MessaggioBacheca>
+			<MessaggioBacheca Identificativo="_0">
 				<Mittente>u2</Mittente>
 				<Data>2016-04-24</Data>
 				<Ora>17:00:00</Ora>
 				<Testo>Posso portare il cane?</Testo>
 				<Risposte>
-					<MessaggioBacheca>
+					<MessaggioBacheca Identificativo="_00">
 						<Mittente>u1</Mittente>
 						<Data>2016-04-24</Data>
 						<Ora>17:05:00</Ora>
 						<Testo>Solo se è di piccola taglia</Testo>
 					</MessaggioBacheca>
-					<MessaggioBacheca>
+					<MessaggioBacheca Identificativo="_01">
 						<Mittente>u1</Mittente>
 						<Data>2016-04-24</Data>
 						<Ora>17:06:00</Ora>  <!-- le risposte, e i messaggi in generale, devono essere ordinati secondo data/ora -->
@@ -190,19 +186,19 @@
 					</MessaggioBacheca>
 				</Risposte>
 			</MessaggioBacheca>
-			<MessaggioBacheca>
+			<MessaggioBacheca Identificativo="_1">
 				<Mittente>u2</Mittente>
 				<Data>2016-04-24</Data>
 				<Ora>19:00:00</Ora>
 				<Testo>E' possibile partire dieci minuti dopo l orario indicato?</Testo>
 				<Risposte>
-					<MessaggioBacheca>
+					<MessaggioBacheca Identificativo="_10">
 						<Mittente>u1</Mittente>
 						<Data>2016-04-24</Data>
 						<Ora>19:05:00</Ora>
 						<Testo>NO</Testo>
 						<Risposte>
-							<MessaggioBacheca>
+							<MessaggioBacheca Identificativo="_100">
 								<Mittente>u2</Mittente>
 								<Data>2016-04-24</Data>
 								<Ora>19:07:00</Ora>
@@ -220,25 +216,25 @@
 <!--  ***************************************************************   SET MESSAGGI   ************************** -->
 <SetMessaggi>
 	<Conversazione User1="u2" User2="u1" >
-		<Messaggio>
+		<Messaggio Letto="si">
 			<Mittente>u2</Mittente>
 			<Data>2016-04-24</Data>
 			<Ora>18:07:00</Ora>
 			<Testo> [.............] </Testo>
 		</Messaggio>
-		<Messaggio>
+		<Messaggio Letto="si">
 			<Mittente>u1</Mittente>
 			<Data>2016-04-24</Data>
 			<Ora>19:07:00</Ora>
 			<Testo> [.............] </Testo>
 		</Messaggio>
-		<Messaggio>
+		<Messaggio Letto="si">
 			<Mittente>u2</Mittente>
 			<Data>2016-04-24</Data>
 			<Ora>19:10:00</Ora>
 			<Testo> [.............] </Testo>
 		</Messaggio>
-		<Messaggio>
+		<Messaggio Letto="si">
 			<Mittente>u1</Mittente>
 			<Data>2016-04-24</Data>
 			<Ora>11:07:00</Ora>
