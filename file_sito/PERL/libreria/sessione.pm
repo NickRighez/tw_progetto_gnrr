@@ -10,16 +10,30 @@ use CGI::Session;
 use CGI;
 use research;
 
-sub login{
-    my ($username, $passwd) = @_;
-    my $session = new CGI::Session();
+out $home = "";###############################################################################################################
+
+sub login {
+    my $username = shift @_;
+    $passwd = shift @_;
+    my $session = CGI::Session->load() or die $!;
+    if($session->is_expired || $session->is_empty){
+      $session = new CGI::Session();
+    }
 # verifica di non essere gia connesso!!!!
-    $session->param(-nome, $username);
-    $session->param(-pass, $passwd);
+    $res = research::query_usernamepw($username,$passwd);
+    if($res){
+      $session->param(-nome, $username);
+      $session->param(-pass, $passwd);
+      return 1;
+    }
+    else{
+      $session->close();
+      return 0;
+    }
 }
 
 
-sub logout{
+sub logout {
     my $session = CGI::Session->load() or die $!;
     my $SID = $session->id();
     $session->close();
@@ -27,26 +41,43 @@ sub logout{
     $session->flush();
 }
 
-sub get_username{
+sub get_username {
     my $session = CGI::Session->load() or die $!;
-    if($session->is_expired || $session->is_empty)
-    {
+    if($session->is_expired || $session->is_empty){
         #return undef;
         $cgi = new CGI;
-        print $cgi->header('Redirect: /');
+        print $cgi->redirect($home);
         #PATH NON PORTABILE !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     }
-    else
-    {
+    else{
         my $utente = $session->param('nome');
         return $utente;
     }
 }
 
-# NOTIFICHE
+sub setVar {
+  my $k = shift @_;
+  my $v = shift @_;
+  my $session = CGI::Session->load() or die $!;
+  $session->param($k,$v);
+  return 0;
+}
+
+sub getVar {
+  my $k = shift @_;
+  my $session = CGI::Session->load() or die $!;
+  my $v = $session->param($k);
+  $session->clear($k);
+  return $v;
+}
+
+sub getUsername {
+  return $session->param($username);
+}
 
 
-#NOTE:
+
+# NOTE:
 # la variabile @_ contiene i parametri della funzione
 # la variabile $! contiene l'ultimo codice di errore generato
 

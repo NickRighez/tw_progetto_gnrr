@@ -65,8 +65,7 @@ sub query_users
 {
     my $lista = shift @_;
     # controllo che ci siano tutti i filtri necessari. else die
-    if(! exists $lista->{"UTENTE"})
-    {
+    if(! exists $lista->{"UTENTE"}){
         die "Non esiste la chiave UTENTE nella query users\n";
     }
 
@@ -131,17 +130,21 @@ sub query_conversazione
 
 
 
-sub generic_xpath_query
-{
-    my $parser = XML::LibXML->new(  );
-    my $xml_doc = $parser->parse_file($xml_file);
+#sub generic_xpath_query
+#{
+#    my $parser = XML::LibXML->new(  );
+#    my $xml_doc = $parser->parse_file($xml_file);
 
-}
+#}
 
 
 sub query_usernamepw
 {
-    my ($username, $password) = @_;
+    my $username = shift @_;
+    my $password = shift @_;
+    my $xml_parser = XML::LibXML->new( );
+    my $XML_DOC = $xml_parser->parse_file( $xml_file );
+    my $XML_DOC =
    # my @userlist = $XML_DOC->getElementsByTagName('Utente');
     #foreach my $utente (@userlist){
 	#my ( $nome, $passwd );

@@ -27,7 +27,7 @@ our $parser = XML::LibXML->new();
 
 # Nota sull'eliminazione. riferimenti a utenti cancellati??????<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 
-sub serializzazione_apertura{
+sub serializzazione_apertura {
     open( my $fileHandle, "+<:encoding(UTF-8)", $xml_file )
         or die("Errore nell'apertura del file in lettura");
     my $flock = flock $fileHandle, LOCK_EX;
@@ -46,7 +46,7 @@ sub serializzazione_apertura{
 }
 
 # argomenti: filehandle, doc
-sub serializzazione_chiusura{
+sub serializzazione_chiusura {
     my $fileHandle = shift @_;
     my $doc = shift @_;
     # abbellimento codice
@@ -67,7 +67,7 @@ sub serializzazione_chiusura{
 # argomenti: frammento xml da inserire, xpath.
 sub serializzazione_inserimento {          ####################  MODIFICA ######################
     my $fragm = shift @_;
-    my $xpath_presenza = shift @_; 
+    my $xpath_presenza = shift @_;
     my $xpath_padre = shift @_;
     my $ris;
     #inizializzazione
@@ -115,7 +115,7 @@ sub inserisci_nuovo_utente {
     }
 
     # ATTENZIONE : tenere aggiornata $ultima_parte secondo lo Schema ##################################
-    my $ultima_parte = "<Profilo>   
+    my $ultima_parte = "<Profilo>
     <NumFeedbRicevuti>0</NumFeedbRicevuti>
 	<NumPassaggiOff>0</NumPassaggiOff>
     <NumPassaggiPart>0</NumPassaggiPart>
@@ -125,10 +125,10 @@ sub inserisci_nuovo_utente {
 	<Puntualita>0</Puntualita>
     <Pulizia>0</Pulizia>
 	<Guida>0</Guida>
-    </Valutazione> 
+    </Valutazione>
     </Profilo>
     <Notifiche>
-    </Notifiche>"; 
+    </Notifiche>";
     $output = join( "\n", $output, $ultima_parte );
     $output = join( "\n", $output, "</Utente>\n" );
 
@@ -154,7 +154,7 @@ sub inserisci_nuovo_viaggio   {
       $idv = substr($idv,1);
       if($idv > $max) {
             $max = $idv;
-      } 
+      }
     }
     $max = $max+1;
     my $idv = "v".$max;
@@ -164,12 +164,12 @@ sub inserisci_nuovo_viaggio   {
     # ESTRAZIONE USERNAME CONDUCENTE DA SESSIONE ###################################
     my $output="<Passaggio>
           <IDViaggio>$idv</IDViaggio>
-          <Conducente>u1</Conducente>   
+          <Conducente>u1</Conducente>
           <PrezzoTot>15</PrezzoTot>
           <PostiTot>4</PostiTot>
           <Dettagli>Max un bagaglio medio</Dettagli>
           <Itinerario> \n";
-     ###################################################################   
+     ###################################################################
 
     my %array_argom = %$array_argom_ref; #  hash di riferimenti a hash CHIAVI : Partenza, Arrivo, Tappa1, Tappa2, Tappa3
     ### CREAZIONE PARTENZA #############################################
@@ -235,17 +235,17 @@ sub inserisci_prenotazione {
                                 <Utente>$array_argom{'Username'}</Utente>
                              </Prenotazioni>";
                 $prenot = $parser->parse_balanced_chunk($output);
-                $parent->appendChild($prenot);  
+                $parent->appendChild($prenot);
             }
         }
-    }    
+    }
     serializzazione_chiusura($fileHandle,$doc);
 
 }
 
-sub inserisci_nuovo_messaggio_singolo { 
-    my $array_argom_ref = shift @_;  # DEVE CONTENERE CHIAVI : Mittente, Destinatario, Data, Ora, Testo 
-    my %array_argom = %$array_argom_ref; 
+sub inserisci_nuovo_messaggio_singolo {
+    my $array_argom_ref = shift @_;  # DEVE CONTENERE CHIAVI : Mittente, Destinatario, Data, Ora, Testo
+    my %array_argom = %$array_argom_ref;
     my %aux = serializzazione_apertura();
     my $doc = $aux{'doc'};
     my $fileHandle = $aux{'filehandle'};
@@ -254,7 +254,7 @@ sub inserisci_nuovo_messaggio_singolo {
     my @conv = $root->findnodes("SetMessaggi/Conversazione[\@User1=\"$array_argom{'Mittente'}\" and \@User2=\"$array_argom{'Destinatario'}\"] | SetMessaggi/Conversazione[\@User1=\"$array_argom{'Destinatario'}\" and \@User2=\"$array_argom{'Mittente'}\"]");
     my $numNodes = @conv;
     if($numNodes == 0) {
-        $output = $output."<Conversazione User1=\"$array_argom{'Mittente'}\" User2=\"$array_argom{'Destinatario'}\"> 
+        $output = $output."<Conversazione User1=\"$array_argom{'Mittente'}\" User2=\"$array_argom{'Destinatario'}\">
                                 <Messaggio Letto=\"no\">
                                     <Mittente>$array_argom{'Mittente'}</Mittente>
                                     <Data>$array_argom{'Data'}</Data>
@@ -290,16 +290,16 @@ sub inserisci_nuovo_messaggio_singolo {
                 );
             inserisci_notifica("NuovoMessaggio",\%attr,$array_argom{'Destinatario'});
             return 1;
-        } 
+        }
         else {
             return 0;
-        } 
+        }
     }
     # INVIO NOTIFICA A DESTINATARIO
 }
 sub inserisci_nuovo_messaggio_bacheca {
     my $idv = shift @_; # id del viaggio
-    my $array_argom_ref = shift @_; # DEVE CONTENERE CHIAVI : Mittente, Data, Ora, Testo  ( il messaggio da inserire ) 
+    my $array_argom_ref = shift @_; # DEVE CONTENERE CHIAVI : Mittente, Data, Ora, Testo  ( il messaggio da inserire )
     my %array_argom = %$array_argom_ref;
     my $array_risp_ref = shift @_; # DEVE CONTENERE CHIAVI : Mittente, Data, Ora, Testo ( del messaggio di cui è risposta )
     if($array_risp_ref != undef) { # => il messaggio è una risposta di un messaggio in bacheca di $idv
@@ -313,15 +313,15 @@ sub inserisci_nuovo_messaggio_bacheca {
                         </Risposte>
                     </MessaggioBacheca>";
     my $fragm = $parser->parse_balanced_chunk($output);
-    return serializzazione_inserimento($fragm,"//x","//Passaggio[IDViaggio=\'$idv\']/Bacheca/MessaggioBacheca[Mittente=\'$array_risp{'Mittente'}\' and Data=\'$array_risp{'Data'}\' and Ora=\'$array_risp{'Ora'}\' and Testo=\'$array_risp{'Testo'}\']/Risposte");   
+    return serializzazione_inserimento($fragm,"//x","//Passaggio[IDViaggio=\'$idv\']/Bacheca/MessaggioBacheca[Mittente=\'$array_risp{'Mittente'}\' and Data=\'$array_risp{'Data'}\' and Ora=\'$array_risp{'Ora'}\' and Testo=\'$array_risp{'Testo'}\']/Risposte");
     }
     else { # => nuovo messaggio della bacheca
         print "undefined";
     }
  }
 
-sub inserisci_notifica{
-    my $tag = shift @_; # tag = NuovoMessaggio, NuovoMessaggioBacheca, FeedDaRilasciare, RichiestaPrenotaz, AccettazionePrenotaz 
+sub inserisci_notifica {
+    my $tag = shift @_; # tag = NuovoMessaggio, NuovoMessaggioBacheca, FeedDaRilasciare, RichiestaPrenotaz, AccettazionePrenotaz
     my $attr = shift @_; # hash di attributi con chiavi = Utente, Viaggio, Mittente
     my $user_destinat = shift @_;
     my %attributi = %$attr;
@@ -336,15 +336,15 @@ sub inserisci_notifica{
 
 sub inserisci_feedback {
     my $array_argom_ref = shift @_;
-    # CHIAVI : IDMitt, IDDest, Passaggio, Commento, PunteggioMedio, Compagnia, Puntualita. Nel 
+    # CHIAVI : IDMitt, IDDest, Passaggio, Commento, PunteggioMedio, Compagnia, Puntualita. Nel
     #             caso il destinatario sia il conducente del viaggio, anche le chiavi Pulizia e Guida
     my %array_argom = %$array_argom_ref;
     my $output = "<Feedback IDMitt=\"$array_argom{'IDMitt'}\" IDDest=\"$array_argom{'IDDest'}\">
                               <Passaggio>$array_argom{'Passaggio'}</Passaggio>
-                              <Commento>$array_argom{'Commento'}</Commento> \n";   
+                              <Commento>$array_argom{'Commento'}</Commento> \n";
 
     if(utility::verifica_presenza("//Passaggio[IDViaggio=\"$array_argom{'Passaggio'}\" and Conducente=\"$array_argom{'IDDest'}\"]")) {
-        
+
         $output = $output."   <ValutazioneConduc>
                                 <PunteggioMedio>$array_argom{'PunteggioMedio'}</PunteggioMedio>
                                 <Compagnia>$array_argom{'Compagnia'}</Compagnia>
@@ -386,7 +386,7 @@ sub inserisci_info_auto {
     else {
         my $sibling_node = $doc->findnodes("//Utente[Username=\"$array_argom{'Username'}\"]/Profilo/Valutazione")->get_node(1);
         my $parent = $doc->findnodes("//Utente[Username=\"$array_argom{'Username'}\"]/Profilo")->get_node(1);
-        $parent->insertAfter($fragm,$sibling_node);        
+        $parent->insertAfter($fragm,$sibling_node);
     }
     serializzazione_chiusura($fileHandle,$doc);
     return 1;
@@ -400,7 +400,7 @@ sub inserisci_info_patente {
     my $doc = $aux{'doc'};
     my $root = $doc->documentElement;
     my $fileHandle = $aux{'filehandle'};
-    my $fragm = $parser->parse_balanced_chunk($output); 
+    my $fragm = $parser->parse_balanced_chunk($output);
     if(utility::verifica_presenza("//Utente[Username=\"$array_argom{'Username'}\"]/Profilo/Patente",$doc)) {
         #elimina_info_auto($array_argom{'Username'},$doc);
         my $pat = $doc->findnodes("//Utente[Username=\"$array_argom{'Username'}\"]/Profilo/Patente")->get_node(1);
@@ -415,7 +415,7 @@ sub inserisci_info_patente {
             $sibling_node= $doc->findnodes("//Utente[Username=\"$array_argom{'Username'}\"]/Profilo/Valutazione")->get_node(1);
         }
         my $parent = $doc->findnodes("//Utente[Username=\"$array_argom{'Username'}\"]/Profilo")->get_node(1);
-        $parent->insertAfter($fragm,$sibling_node);        
+        $parent->insertAfter($fragm,$sibling_node);
     }
     serializzazione_chiusura($fileHandle,$doc);
     return 1;
@@ -447,7 +447,7 @@ sub inserisci_preferenze {
     my $doc = $aux{'doc'};
     my $root = $doc->documentElement;
     my $fileHandle = $aux{'filehandle'};
-    my $fragm = $parser->parse_balanced_chunk($output); 
+    my $fragm = $parser->parse_balanced_chunk($output);
     if(utility::verifica_presenza("//Utente[Username=\"$array_argom{'Username'}\"]/Profilo/Preferenze",$doc)) {
         #elimina_info_auto($array_argom{'Username'},$doc);
         my $pref = $doc->findnodes("//Utente[Username=\"$array_argom{'Username'}\"]/Profilo/Preferenze")->get_node(1);
@@ -455,7 +455,7 @@ sub inserisci_preferenze {
     }
     else {
         my $parent = $doc->findnodes("//Utente[Username=\"$array_argom{'Username'}\"]/Profilo")->get_node(1);
-        $parent->insertAfter($fragm,undef);        
+        $parent->insertAfter($fragm,undef);
     }
     serializzazione_chiusura($fileHandle,$doc);
     return 1;
