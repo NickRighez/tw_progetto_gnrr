@@ -10,69 +10,73 @@ use CGI::Session;
 use CGI;
 use research;
 
-out $home = "";###############################################################################################################
-
-sub login {
-    my $username = shift @_;
-    $passwd = shift @_;
-    my $session = CGI::Session->load() or die $!;
-    if($session->is_expired || $session->is_empty){
-      $session = new CGI::Session();
-    }
-# verifica di non essere gia connesso!!!!
-    $res = research::query_usernamepw($username,$passwd);
-    if($res){
-      $session->param(-nome, $username);
-      $session->param(-pass, $passwd);
-      return 1;
-    }
-    else{
-      $session->close();
-      return 0;
-    }
-}
-
-
-sub logout {
+sub distruzione {
     my $session = CGI::Session->load() or die $!;
     my $SID = $session->id();
     $session->close();
     $session->delete();
     $session->flush();
+    return 0;
 }
 
-sub get_username {
-    my $session = CGI::Session->load() or die $!;
-    if($session->is_expired || $session->is_empty){
-        #return undef;
-        $cgi = new CGI;
-        print $cgi->redirect($home);
-        #PATH NON PORTABILE !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-    }
-    else{
-        my $utente = $session->param('nome');
-        return $utente;
-    }
+sub createSess {
+  my $cgi = new CGI;
+  my $sid = $cgi->cookie("CGISESSID") || undef;
+  my $session = new CGI::Session("driver:File", $sid, {Directory=>"/tmp"});
+  if(defined $sid){
+    return $session->header();
+  }
+  else{
+    return $cgi->header();
+  }
+
 }
+
 
 sub setVar {
   my $k = shift @_;
   my $v = shift @_;
-  my $session = CGI::Session->load() or die $!;
+  my $cgi = new CGI;
+  my $session = my $s = CGI::Session->load() or die CGI::Session->errstr();
+  if($session->is_expired || $session->is_empty){
+    return undef;
+  }
   $session->param($k,$v);
-  return 0;
+  return 1;
 }
 
 sub getVar {
   my $k = shift @_;
-  my $session = CGI::Session->load() or die $!;
+  my $session = my $s = CGI::Session->load() or die CGI::Session->errstr();
+  if($session->is_expired || $session->is_empty){
+    return undef;
+  }
   my $v = $session->param($k);
+  return -1 unless defined $v;
   $session->clear($k);
   return $v;
 }
 
-sub getUsername {
-  return $session->param($username);
+sub login {
+  my $uname = shift @_;
+  my $upass = shift @_;
+  my $res = research::query_usernamepw($uname,$upass);
+  if($res){
+    #do
+  }
+  else{
+    # dont 
+  }
+}
+
+sub get_username {
+  my $session = my $s = CGI::Session->load() or die CGI::Session->errstr();
+  if($session->is_expired || $session->is_empty){
+    return undef;
+  }
+  my $v = $session->param("username");
+  return -1 unless defined $v;
+  return $v;
 }
 
 

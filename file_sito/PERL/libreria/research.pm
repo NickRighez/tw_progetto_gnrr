@@ -144,14 +144,15 @@ sub query_usernamepw
     my $password = shift @_;
     my $xml_parser = XML::LibXML->new( );
     my $XML_DOC = $xml_parser->parse_file( $xml_file );
-    my $XML_DOC =
-   # my @userlist = $XML_DOC->getElementsByTagName('Utente');
+    #my @userlist = $XML_DOC->getElementsByTagName('Utente');
     #foreach my $utente (@userlist){
 	#my ( $nome, $passwd );
 	#$nome = $utente->find
+  my $path = "/ts:TravelShare/SetUtenti/Utente[Username='$username' and Password='$password']";
+  my @nodes = $XML_DOC->findnodes($path);
+  #print "$path\n";
+  return scalar @nodes;
 }
-
-
 
 
 
