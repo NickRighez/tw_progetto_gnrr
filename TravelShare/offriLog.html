@@ -1,0 +1,113 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="it" lang="it">
+ <head>
+  <title>Offri - Travel Share</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta name="title" content="..." /> 
+  <meta name="description" content="..." />
+  <meta name="keywords" content="offri, travel share, car pooling, passaggio, auto" />
+  <meta name="author" content="Giovanni Sanna, Nicolò Rigato, Riccardo Ardossi, Riccardo Saggese" />
+  <meta name="language" content="italian it" />
+  
+  <meta name="viewport" content="width=device-width" /> 
+  
+  <link href="screen.css" rel="stylesheet" type="text/css" media="screen" />
+  <link href="print.css" rel="stylesheet" type="text/css" media="print" />
+  
+  <link rel="icon" href="Immagini/TS_icon.png" type="image/x-icon" />
+  <link rel="shortcut icon" href="Immagini/TS_icon.png" type="image/x-icon" />
+ </head>
+ 
+ <body>
+	
+  <div id="header">
+   <a href="homeLog.html" tabindex=""><img src="Immagini/banner.png" id="banner" alt="Banner Travel Share - Link diretto alla Home" /></a>
+   <a id="bottoneMenu" href="#menu" tabindex="">Men&ugrave;</a>
+  </div>
+  
+  <div id="utente">
+   <p>Ciao Utente con nome molto lungo</p>
+   <p><a href="notifiche.html">Notifiche (0)</a>  <a href="logout.cgi?operation=logout" tabindex="">Logout</a></p>
+  </div>
+	
+  <div id="contenuto">
+  
+   <h1>Offri un passaggio!</h1>
+	
+   <form id="FormOfferta" action="" method="get">
+   <fieldset legend="">
+    <label for="partenza">Partenza</label>
+    <input type="text" id="partenza" name="partenza" tabindex="" value=""></input><br class="acapo" />
+	<p class="errore">ERRORE</p>
+    <label for="arrivo">Arrivo</label>
+    <input type="text" id="arrivo" name="arrivo" tabindex="" value=""></input><br class="acapo" />
+	<p class="errore">ERRORE</p>
+
+    <label for="tappa1">Tappa (facoltativa)</label>
+    <input type="text" id="tappa1" name="tappa1" tabindex="" value=""></input><br class="acapo" />
+	<p class="errore">ERRORE</p>
+    <label for="tappa2">Tappa (facoltativa)</label>
+    <input type="text" id="tappa2" name="tappa2" tabindex="" value=""></input><br class="acapo" />
+	<p class="errore">ERRORE</p>
+    <label for="tappa3">Tappa (facoltativa)</label>
+    <input type="text" id="tappa3" name="tappa3" tabindex="" value=""></input><br class="acapo" />
+	<p class="errore">ERRORE</p>
+   </fieldset>
+   
+   <fieldset legend="">   
+    <label for="data">Data</label>
+    <input type="text" id="data" name="data" tabindex="" value=""></input><br class="acapo" />
+	<p class="errore">ERRORE</p>
+    <label for="oraP">Ora partenza</label>
+    <input type="text" id="oraP" name="oraP" tabindex="" value=""></input><br class="acapo" />
+	<p class="errore">ERRORE</p>
+	<label for="oraA">Ora arrivo</label>
+    <input type="text" id="oraA" name="oraA" tabindex="" value=""></input><br class="acapo" />
+	<p class="errore">ERRORE</p>
+   </fieldset>
+   
+   <fieldset legend="">
+    <label for="prezzo">Prezzo</label>
+    <input type="text" id="prezzo" name="prezzo" tabindex="" value=""></input><br class="acapo" />
+	<p class="errore">ERRORE</p>
+    <label for="posti">Posti</label>
+    <input type="text" id="posti" name="posti" tabindex="" value=""></input><br class="acapo" />
+	<p class="errore">ERRORE</p>
+   
+    <label for="descrizioneViaggio">Note sul viaggio (facoltativa)</label> 
+    <textarea id="descrizioneViaggio" name="descrizioneViaggio" tabindex="" rows="" cols=""></textarea><br class="acapo" />
+	<p class="errore">ERRORE</p>
+   
+    <p>Bagagli
+    <select name="bagagli" tabindex="">
+    <option value="piccolo">Piccolo</option>
+    <option value="medio">Medio</option>
+    <option value="grande">Grande</option>
+    </select></p>
+	<p class="errore">ERRORE</p>
+   </fieldset>
+   
+   <div><input type="submit" value="Invia" tabindex=""></input></div>
+   
+  </form>
+
+  </div>
+  
+  <div id="menu">
+  <ul>
+   <li><a href="homeLog.html" tabindex="">Cerca un passaggio <span class="frecceMenu">&raquo;</span></a></li>  
+   <li><a href="profiloPubblicoLog.html" tabindex="">Gestisci il profilo <span class="frecceMenu">&raquo;</span></a></li>
+   <li><a href="viaggi.html" tabindex="">Viaggi<span class="frecceMenu">&raquo;</span></a></li>
+   <li><a href="messaggi.html" tabindex="">Messaggi <span class="frecceMenu">&raquo;</span></a></li>
+   <li><a href="infoLog.html" tabindex="">Informazioni su <span xml:lang="en" lang="en">Travel Share</span> <span class="frecceMenu">&raquo;</span></a></li>
+  </ul>
+  </div>
+	
+  <div id="footer">
+   <a href="logout.cgi?operation=logout" tabindex="">Logout</a>
+   <a href="#header" tabindex="">Torna su</a>
+  </div>
+  
+  </body>
+</html>

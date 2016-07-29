@@ -1,0 +1,29 @@
+Manca/modificare:
+-la pagina delle notifiche
+-informazioni da rifare
+-Gestisci profilo ha le preferenze poco chiare nella selezione
+-pagina messaggi -> colore dei msg nuovi
+-viaggi -> problemi con città lunghe
+
+
+Da unificare:
+frecceMenu - float right
+destra - float right
+ora - float right
+
+
+Il contenuto ha un padding di 5%, ma il margin del fieldset è -2% (+ 4% di padding).
+Ho fatto questa scelta per dare a tutti gli elemementi del contenuto un margin di 5% dal bordo dello schermo, indipendentemente dal tipo di oggetto,
+mentre il -2% del fieldset serve per "dimezzare" il margin tra bordo dello schermo e contenuto del fieldset/contenitore (che risulta comunque più spostato all'interno a causa del padding). 
+Potrei togliere il padding e mettere il margin agli h1 + altri oggetti fuori dal fieldset/contenitore.
+Pagine senza contenitore: conversazioni, messaggi, informazioni (per ora), profilo pubblico (per ora), risultati, viaggi, dettagli (per ora).
+
+
+Possibilità:
+
+1) padding contenuto + (margin al negativo + padding nel contenitore)
+
+2) padding contenuto a zero + (3% margin al positivo + padding nel contenitore) + margin h1 + margin a tutti gli elementi senza contenitore
+
+
+La 1 può sembrare più strana, ma in questo modo richiede solo una modifica di due clausole nel caso si voglia modificare qualcosa; nella 2 vanno modificate tutte le clausole degli oggetti.
