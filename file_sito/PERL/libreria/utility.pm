@@ -22,65 +22,50 @@ sub verifica_presenza {
     return $numNodes;
 }
 
-
-sub crea_itinerario {
-    my $tag = shift @_; # tag = Partenza, Arrivo, Tappa1, Tappa2, Tappa3 (stringa)
-    my $node;
-    switch($tag) {
-        case "Partenza" { $node="<Partenza Numero=\"0\"> \n"; }
-        case "Tappa1" { $node="<Tappa Numero=\"1\"> \n"; }
-        case "Tappa2" { $node="<Tappa Numero=\"2\"> \n"; }
-        case "Tappa3" { $node="<Tappa Numero=\"3\"> \n"; }
-        case "Arrivo" { $node="<Arrivo Numero=\"4\"> \n"; }
-        else { die("Tag Errato"); }
-    }
-    my %tappa= (
-                PostiDisp => $q->param("postiDisp"),    
-                Data => $q->param("data$tag"),
-                Ora => $q->param("ora$tag"),
-                Provincia => $q->param("prov$tag"),
-                Comune => $q->param("com$tag")
-                );
-    if(ControlloTappa(\%tappa)==1) {
-        my @parametri=('PostiDisp', 'Data', 'Ora', 'Provincia', 'Comune');
-        foreach my $elemento (@parametri) {
-            my $new = "<$elemento>$tappa{$elemento}</$elemento> \n";
-            $node = $node.$new;
+# Funzione che verifica la presenza degli input necessari a memorizzare una Tappa (Luogo, Data e Ora), 
+#   e restituisce il corrispondente hash con le informazionni da memorizzare
+sub check_presenza_param_tappa {
+    my $tag= shift @_; # $tag = 'Partenza', 'Tappa1', 'Tappa2', 'Tappa3', 'Arrivo'
+    # Luogo, Data e Ora di Partenza e Arrivo sono obbligatori -> !($tag=~"/Tappa/")
+    if(!($tag=~"/Tappa/") or $q->param('luogo'.$tag) ne '' or $q->param('data'.$tag) ne '' or $q->param('ora'.$tag) ne '') {
+        if($q->param('luogo'.$tag) eq '') {
+            die("Luogo $tag mancante");
         }
-        if($tag eq "Tappa1" | $tag eq "Tappa2" | $tag eq "Tappa3" ) { 
-            $node = $node."</Tappa>"; 
+        if($q->param('data'.$tag) eq '') {
+            die("Data $tag mancante");
         }
-        else { $node = $node."</$tag> \n"; }
-        return $node;
+        if($q->param('ora'.$tag) eq '') {
+            die("Ora di ritrovo $tag mancante");
+        }
     }
-    else {
-        return 0;
-    }
+    my %hash_tappa= ();
+    $hash_tappa{Luogo}=$q->param('luogo'.$tag);
+    $hash_tappa{Data}=$q->param('data'.$tag);
+    $hash_tappa{Ora}=$q->param('ora'.$tag).":00";
+    $hash_tappa{PostiDisp}=$q->param('postiDisp');
+    return %hash_tappa;
 }
 
+# Crea il codice XML della tappa specificata dall hash $t 
 sub CreaTappa {
-    my $tag = shift @_;
-    my $num_t = shift @_;
-    my $t = shift @_;
+    my $tag = shift @_; # valori: Partenza, Tappa, Arrivo
+    my $num_t = shift @_; # Numero della tappa
+    my $t = shift @_; # hash con le informazioni della tappa (PostiDisp, Data, Ora, Luogo)
     my $node="<$tag Numero=\"$num_t\"> \n";
-    my %tappa = %$t;
-    if(ControlloTappa(\%tappa)==1) {  ############          CONTROLLO TAPPA DEV ESSERE GIA STATO FATTO 
-        my @parametri=('PostiDisp', 'Data', 'Ora', 'Provincia', 'Comune');
-        foreach my $elemento (@parametri) {
-            my $new = "<$elemento>$tappa{$elemento}</$elemento> \n";
-            $node = $node.$new;
-        }                        
-        $node = $node."</$tag> \n"; 
-    }
+    my %tappa = %$t; 
+    my @parametri=('PostiDisp', 'Data', 'Ora', 'Luogo');
+    foreach my $elemento (@parametri) {
+        my $new = "<$elemento>$tappa{$elemento}</$elemento> \n";
+        $node = $node.$new;
+    }                        
+    $node = $node."<Prenotazioni></Prenotazioni>\n</$tag> \n";     
 }
 
-sub ControlloTappa {
+sub controllo_tappa {
     my $t = shift @_;
     my %tappa=%$t;
-    if($tappa{'Provincia'} =~ m/^[A-Z][a-z]+(\s[a-z]+[à|ò|ì]*)*$/ &&
-    $tappa{'Comune'} =~ m/^[A-Z][a-z]+(\s[a-z]+[à|ò|ì]*)*$/ &&
-    $tappa{'Data'} =~ m/^[2][0-1][0-9][0-9]-[0-1][0-9]-[0-3][0-9]$/ &&  # controllo che il viaggio avvenga entro un anno
-    $tappa{'Ora'} =~ m/^[0-1][0-9]:[0-5][0-9]|[2][0-3]:[0-5][0-9]$/) {
+    if($tappa{'Data'} =~ m/^[2][0-1][0-9][0-9]-[0-1][0-9]-[0-3][0-9]$/ &&  # controllo che il viaggio avvenga entro un anno
+        $tappa{'Ora'} =~ m/^[0-1][0-9]:[0-5][0-9]:00|[2][0-3]:[0-5][0-9]:00$/) {
         return 1;
     }
     else {
