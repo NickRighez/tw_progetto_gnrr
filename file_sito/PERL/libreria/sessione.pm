@@ -10,43 +10,78 @@ use CGI::Session;
 use CGI;
 use research;
 
-sub login{
-    my ($username, $passwd) = @_;
-    my $session = new CGI::Session();
-# verifica di non essere gia connesso!!!!
-    $session->param(-nome, $username);
-    $session->param(-pass, $passwd);
-}
-
-
-sub logout{
+sub distruzione {
     my $session = CGI::Session->load() or die $!;
     my $SID = $session->id();
     $session->close();
     $session->delete();
     $session->flush();
+    return 0;
 }
 
-sub get_username{
-    my $session = CGI::Session->load() or die $!;
-    if($session->is_expired || $session->is_empty)
-    {
-        #return undef;
-        $cgi = new CGI;
-        print $cgi->header('Redirect: /');
-        #PATH NON PORTABILE !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-    }
-    else
-    {
-        my $utente = $session->param('nome');
-        return $utente;
-    }
+sub createSess {
+  my $cgi = new CGI;
+  my $sid = $cgi->cookie("CGISESSID") || undef;
+  my $session = new CGI::Session("driver:File", $sid, {Directory=>"/tmp"});
+  if(defined $sid){
+    return $session->header();
+  }
+  else{
+    return $cgi->header();
+  }
+
 }
 
-# NOTIFICHE
+
+sub setVar {
+  my $k = shift @_;
+  my $v = shift @_;
+  my $cgi = new CGI;
+  my $session = my $s = CGI::Session->load() or die CGI::Session->errstr();
+  if($session->is_expired || $session->is_empty){
+    return undef;
+  }
+  $session->param($k,$v);
+  return 1;
+}
+
+sub getVar {
+  my $k = shift @_;
+  my $session = my $s = CGI::Session->load() or die CGI::Session->errstr();
+  if($session->is_expired || $session->is_empty){
+    return undef;
+  }
+  my $v = $session->param($k);
+  return -1 unless defined $v;
+  $session->clear($k);
+  return $v;
+}
+
+sub login {
+  my $uname = shift @_;
+  my $upass = shift @_;
+  my $res = research::query_usernamepw($uname,$upass);
+  if($res){
+    #do
+  }
+  else{
+    # dont 
+  }
+}
+
+sub get_username {
+  my $session = my $s = CGI::Session->load() or die CGI::Session->errstr();
+  if($session->is_expired || $session->is_empty){
+    return undef;
+  }
+  my $v = $session->param("username");
+  return -1 unless defined $v;
+  return $v;
+}
 
 
-#NOTE:
+
+# NOTE:
 # la variabile @_ contiene i parametri della funzione
 # la variabile $! contiene l'ultimo codice di errore generato
 
