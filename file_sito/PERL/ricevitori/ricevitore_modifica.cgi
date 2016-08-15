@@ -1,18 +1,26 @@
 #! /usr/bin/perl -w
-print "Content-type: text/html\n\n";
+#print "Content-type: text/html\n\n";
 
 use strict;
 use warnings;
 use diagnostics;
 use CGI;
+use CGI::Session;
 use CGI::Carp qw(fatalsToBrowser);
 use lib "../libreria";
 use data_registration;
 
 my $q=CGI->new;
 
+my $session=new CGI::Session;
+$session->load();
+if(!defined($session->param('username'))) {
+  die("not logged");
+}
+my $username = $session->param('username');
+
 my %Modifica=( 
-	Username => $q->param('Utente'), # username dell utente che modifica il profilo
+	Username => $session->param('username'), # username dell utente che modifica il profilo
 	Sesso => $q->param('sesso')
 	);
 
@@ -44,7 +52,6 @@ if($q->param('anno') ne 'Anno') {
 	}
 	my ($sec,$min,$hour,$mday,$mon,$year,$wday,$yday,$isdst) = localtime();
 	$year=$year+1900-18;
-	print $year,$q->param('anno');
 	if(($q->param('anno'))>$year) {
 		die("Possono registrarsi solo utenti maggiorenni");
 	}
@@ -56,26 +63,27 @@ if($q->param('descrizioneForm') ne '') {
 	$Modifica{DescrizionePers}=$q->param('descrizioneForm');
 }
 
-print $q->param('annoPatente')."<br>".$q->param('auto')."<br>".$q->param('chiacchiere')."<br>".$q->param('musica')."<br>".$q->param('animali')."<br>".$q->param('fumatori')."<br>";
 
-if($q->param('annoPatente') ne '' or $q->param('auto') ne '' or $q->param('chiacchiere') ne '' or $q->param('musica') ne '' or $q->param('animali') ne '' or $q->param('fumatori') ne '') {
-	if($q->param('annoPatente') eq '' or $q->param('auto') eq '' or $q->param('chiacchiere') eq '' or $q->param('musica') eq '' or $q->param('animali') eq '' or $q->param('fumatori') eq '') {
-		die("Le informazioni necessarie per offrire un passaggio devono essere tutte presenti, o nessuna");
+	if($q->param('annoPatente') ne '' or $q->param('auto') ne '' or $q->param('chiacchiere') ne '' or $q->param('musica') ne '' or $q->param('animali') ne '' or $q->param('fumatori') ne '') {
+		if($q->param('annoPatente') eq '' or $q->param('auto') eq '' or $q->param('chiacchiere') eq '' or $q->param('musica') eq '' or $q->param('animali') eq '' or $q->param('fumatori') eq '') {
+			die("Le informazioni necessarie per offrire un passaggio devono essere tutte presenti, o nessuna");
+		}
+		if(!($q->param('annoPatente')=~m/^[1-2][0-9][0-9][0-9]$/)) {
+			die("Anno di rilascio della patente non valido, inserire l anno in formato 'aaaa'");
+		}
+		if(!($q->param('auto')=~m/^[a-z0-9A-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.-]+$/)) {
+			die("auto non valida, inserire solo lettere o numeri");
+		}
+		$Modifica{Patente}=$q->param('annoPatente');
+		$Modifica{Auto}=$q->param('auto');
+		$Modifica{Chiacchere}=$q->param('chiacchiere');
+		$Modifica{Musica}=$q->param('musica');
+		$Modifica{Animali}=$q->param('animali');
+		$Modifica{Fumatore}=$q->param('fumatori');
 	}
-	if(!($q->param('annoPatente')=~m/^[1-2][0-9][0-9][0-9]$/)) {
-		die("Anno di rilascio della patente non valido, inserire l anno in formato 'aaaa'");
-	}
-	if(!($q->param('auto')=~m/^[a-z0-9A-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.-]+$/)) {
-		die("auto non valida, inserire solo lettere o numeri");
-	}
-	$Modifica{Patente}=$q->param('annoPatente');
-	$Modifica{Auto}=$q->param('auto');
-	$Modifica{Chiacchere}=$q->param('chiacchiere');
-	$Modifica{Musica}=$q->param('musica');
-	$Modifica{Animali}=$q->param('animali');
-	$Modifica{Fumatore}=$q->param('fumatori');
+
+if(data_registration::inserisci_modifica_profilo(\%Modifica)) {
+	print $q->redirect("http://localhost/cgi-bin/tw_progetto_gnrr/file_sito/PERL/assemblatori/assemblatore_profilo.cgi?utente=$username");
 }
-
-print data_registration::inserisci_modifica_profilo(\%Modifica);
 
 

@@ -8,7 +8,13 @@ use CGI;
 use CGI::Carp qw(fatalsToBrowser);
 use lib "../libreria";
 use data_registration;
+use CGI::Session;
 
+my $session=new CGI::Session;
+$session->load();
+if(!defined($session->param('username'))) {
+  die("not logged");
+}
 my $q=CGI->new;
 
 my ($sec,$min,$hour,$mday,$mon,$year,$wday,$yday,$isdst) = localtime();
@@ -23,8 +29,8 @@ my $d = $year."-".$mon."-".$mday;
 my $o = $hour.":".$min.":".$sec;
 
 my %Messaggio=(
-	Mittente => $q->param('Mittente'),
-	Destinatario => $q->param('Destinatario'),
+	Mittente => $session->param('username'),
+	Destinatario => $session->param('ute'),
 	Data => $d,
 	Ora => $o,
 	Testo => $q->param('messaggio')

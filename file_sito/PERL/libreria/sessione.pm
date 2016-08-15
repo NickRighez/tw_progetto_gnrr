@@ -1,3 +1,4 @@
+
 ###################################################
 # Pacchetto di gestione della sessione
 ###################################################
@@ -22,9 +23,9 @@ sub distruzione {
 sub createSess {
   my $cgi = new CGI;
   my $sid = $cgi->cookie("CGISESSID") || undef;
-  my $session = new CGI::Session("driver:File", $sid, {Directory=>"/tmp"});
+  my $session = new CGI::Session("driver:File", $sid, {Directory=>"/var/www/html"});
   if(defined $sid){
-    return $session->header();
+    return $session->id();
   }
   else{
     return $cgi->header();
@@ -37,7 +38,7 @@ sub setVar {
   my $k = shift @_;
   my $v = shift @_;
   my $cgi = new CGI;
-  my $session = my $s = CGI::Session->load() or die CGI::Session->errstr();
+  my $session = CGI::Session->load() or die CGI::Session->errstr();
   if($session->is_expired || $session->is_empty){
     return undef;
   }
@@ -47,13 +48,15 @@ sub setVar {
 
 sub getVar {
   my $k = shift @_;
-  my $session = my $s = CGI::Session->load() or die CGI::Session->errstr();
+  my $session = CGI::Session->load() or die CGI::Session->errstr();
   if($session->is_expired || $session->is_empty){
-    return undef;
+    return "vvv";
   }
   my $v = $session->param($k);
-  return -1 unless defined $v;
-  $session->clear($k);
+  if(!defined($v)) {
+    return -1;
+  }
+  #$session->clear($k);
   return $v;
 }
 

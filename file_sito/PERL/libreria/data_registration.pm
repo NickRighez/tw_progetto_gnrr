@@ -205,18 +205,20 @@ sub inserisci_prenotazione {
     my $fileHandle = $aux{'filehandle'};
     for(my $i=$array_argom{'NumTappaPartenza'}; $i<=$array_argom{'NumTappaArrivo'}; $i++) {
         my $xpath_tappa="//Passaggio[IDViaggio=\"$array_argom{'IDViaggio'}\"]/Itinerario/*[\@Numero=\"$i\"]";
-        #if(utility::verifica_presenza($xpath_tappa,$doc)) {
+        my @nodes = $doc->findnodes("//Passaggio[IDViaggio=\"$array_argom{'IDViaggio'}\"]/Itinerario/*[\@Numero=\"$i\"]");
+        if(@nodes != 0) {
             my $pd = $doc->findvalue($xpath_tappa."/PostiDisp");
             my $new_pd = $pd - 1;
             my $new_node = "<PostiDisp>$new_pd</PostiDisp>";
             $new_node = $parser->parse_balanced_chunk($new_node);
+            print $xpath_tappa;
             my $old_node = $doc->findnodes($xpath_tappa."/PostiDisp")->get_node(1);
             $old_node->replaceNode($new_node);
             my $prenot = "";
             my $parent = $doc->findnodes($xpath_tappa."/Prenotazioni")->get_node(1);
             $prenot = $parser->parse_balanced_chunk("<Utente>$array_argom{'Username'}</Utente>");
             $parent->appendChild($prenot);
-         #   }
+           }
         }    
     serializzazione_chiusura($fileHandle,$doc);
 }
@@ -538,7 +540,6 @@ sub inserisci_modifica_profilo {
 
     if(defined($array_argom{'Sesso'})) {
         my $old_sesso=$doc->findnodes("//Utente[Username=\"$array_argom{'Username'}\"]/Sesso")->get_node(1);
-        print("//Utente[Username=\"$array_argom{'Username'}\"]/Sesso");
         $old_sesso->replaceNode($parser->parse_balanced_chunk("<Sesso>$array_argom{'Sesso'}</Sesso>"));
     }
 
@@ -556,7 +557,7 @@ sub inserisci_modifica_profilo {
         my @old_desc=$doc->findnodes("//Utente[Username=\"$array_argom{'Username'}\"]/DescrizionePers");
         my $n = @old_desc;
         if($n != 0) {
-            my $des = @old_desc->get_node(1);
+            my $des = $old_desc[0]->findnodes(".")->get_node(1);
                 $des->replaceNode($parser->parse_balanced_chunk("<DescrizionePers>$array_argom{'DescrizionePers'}</DescrizionePers>"));           
         }
         else {

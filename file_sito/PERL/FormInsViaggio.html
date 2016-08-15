@@ -1,0 +1,86 @@
+<html>
+	<head>
+	</head>
+	<body>
+		<form action="http://localhost/cgi-bin/tw_progetto_gnrr/file_sito/PERL/ricevitori/ricevitore_passaggio.cgi" method="POST">
+			<fieldset>
+				<legend>Inserisci Passaggio :</legend>
+				<label for="prezzo">Prezzo:</label>
+				<input type="text" id="prezzo" name="prezzo" /><br/>
+				<label for="dettagli">Dettagli:</label>
+				<input type="text" id="dettagli" name="dettagli" /><br/>
+				<label for="postiDisp">Posti disponibili</label>
+				<select name="postiDisp" id="postiDisp">
+					<option value="1" />1</option>
+					<option value="2" />2</option>
+					<option value="3" />3</option>
+					<option value="4" />4</option>
+					<option value="5" />5</option>
+					<option value="6" />6</option>
+					<option value="7" />7</option>
+					<option value="8" />8</option>
+				</select>
+				<fieldset>
+					<legend>Partenza</legend>
+					<label for="comPartenza">Comune di partenza:</label>
+					<input type="text" id="comPartenza" name="comPartenza" /><br/>
+					<label for="provPartenza">Provincia</label>
+					<input type="text" id="provPartenza" name="provPartenza" /><br/>
+					<label for="dataPartenza">Data (aaaa-mm-gg):</label>
+					<input type="text" id="dataPartenza" name="dataPartenza" /><br/>
+					<label for="oraPartenza">Ora (hh:mm) :</label>
+					<input type="text" id="oraPartenza" name="oraPartenza" /><br/>
+				</fieldset>
+				<fieldset>
+					<legend>Tappa 1 (facoltativa) </legend>
+					<input type="checkbox" name="AbilitaT1" id="AbilitaT1" value="Abilita tappa 1" />
+					<label for="comTappa1">Comune di partenza:</label>
+					<input type="text" id="comTappa1" name="comTappa1" /><br/>
+					<label for="provTappa1">Provincia</label>
+					<input type="text" id="provTappa1" name="provTappa1" /><br/>
+					<label for="dataTappa1">Data (aaaa-mm-gg):</label>
+					<input type="text" id="dataTappa1" name="dataTappa1" /><br/>
+					<label for="oraTappa1">Ora (hh:mm) :</label>
+					<input type="text" id="oraTappa1" name="oraTappa1" /><br/>
+				</fieldset>
+				<fieldset>
+					<legend>Tappa2 (facoltativa) </legend>
+					<input type="checkbox" name="AbilitaT2" id="AbilitaT2" value="Abilita tappa 2" />
+					<label for="comTappa2">Comune di partenza:</label>
+					<input type="text" id="comTappa2" name="comTappa2" /><br/>
+					<label for="provTappa2">Provincia</label>
+					<input type="text" id="provTappa2" name="provTappa2" /><br/>
+					<label for="dataTappa2">Data (aaaa-mm-gg):</label>
+					<input type="text" id="dataTappa2" name="dataTappa2" /><br/>
+					<label for="oraTappa2">Ora (hh:mm) :</label>
+					<input type="text" id="oraTappa2" name="oraTappa2" /><br/>
+				</fieldset>
+				<fieldset>
+					<legend>Tappa3 (facoltativa) </legend>
+					<label for="AbilitaT3">Abilita tappa 3</label>
+					<input type="checkbox" name="AbilitaT3" id="Abilita tappa 3" /> </br>
+					<label for="comTappa3">Comune di partenza:</label>
+					<input type="text" id="comTappa3" name="comTappa3" /><br/>
+					<label for="provTappa3">Provincia</label>
+					<input type="text" id="provTappa3" name="provTappa3" /><br/>
+					<label for="dataTappa3">Data (aaaa-mm-gg):</label>
+					<input type="text" id="dataTappa3" name="dataTappa3" /><br/>
+					<label for="oraTappa3">Ora (hh:mm) :</label>
+					<input type="text" id="oraTappa3" name="oraTappa3" /><br/>
+				</fieldset> 
+				<fieldset>
+					<legend>Arrivo</legend>
+					<label for="comArrivo">Comune di arrivo:</label>
+					<input type="text" id="comArrivo" name="comArrivo" /><br/>
+					<label for="provArrivo">Provincia</label>
+					<input type="text" id="provArrivo" name="provArrivo" /><br/>
+					<label for="dataArrivo">Data (aaaa-mm-gg):</label>
+					<input type="text" id="dataArrivo" name="dataArrivo" /><br/>
+					<label for="oraArrivo">Ora (hh:mm) :</label>
+					<input type="text" id="oraArrivo" name="oraArrivo" /><br/>
+				</fieldset>
+				<button type="submit">Inserisci</button>
+			</fieldset>
+		</form>
+	</body>
+</html>

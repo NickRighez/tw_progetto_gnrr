@@ -5,85 +5,95 @@
 
 		    			
 	<xsl:template match="/">
-		<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="it" lang="it" >
-			<head>
-				<meta http-equiv="content-type" content="text/html; charset=utf-8" />
-				<title>Info Singolo Passaggio </title>
-				<meta name="title" content="VISUALIZZAZIONE VIAGGIO XSLT" />
-	  			<style type="text/css" media="all">
-	  				.lab {
-	            		color:red;
-			          }
-			          div {
-			            border:2px solid black;
-			            margin: 2px;
-			          }
-			          p {
-			            margin: 4px;
-			          }
-			          div.pas {
-			          	border:2px solid red;
-			          }
-			          div.risp {
-			          	border:2px solid green;
-			          }
-			          div.mess {
-			          	border:2px solid blue;
-			          }
-
-	  			</style>
-	    	</head>
-	    	<body>
 	    		<xsl:for-each select="ts:TravelShare/SetPassaggi/Passaggio[IDViaggio='[% VIAGGIO %]']" > 
-	    			<div class="pas">
-	    				<h3>Informazioni generali : </h3>
-	    				
-	    				<p>Conducente : <xsl:call-template name="conducente">
-	    									<xsl:with-param name="cond"><xsl:value-of select="Conducente"/></xsl:with-param>
-	    								</xsl:call-template> 
-	    				</p>	    					
-	    				<p>Prezzo : <xsl:value-of select="PrezzoTot"/> Euro </p>
-	    				<p>Posti disponibili ??? </p>  <!-- da sistemare -->
-	    				<p>Dettagli : <xsl:value-of select="Dettagli"/> </p>
-	    				<h3>Partenza : </h3>
-	    				<p>Luogo : <xsl:value-of select="Itinerario/*[@Numero=[% NUM_PARTENZA %]]/Comune"/>(<xsl:value-of select="Itinerario/*[@Numero=[% NUM_PARTENZA%]]/Provincia"/>) </p>
-	    				<p>Data/Ora : <xsl:value-of select="Itinerario/*[@Numero=[% NUM_PARTENZA %]]/Data"/> - <xsl:value-of select="Itinerario/*[@Numero=[% NUM_PARTENZA %]]/Ora"/> </p>
-	    				<p>Posti disponibili : <xsl:value-of select="Itinerario/*[@Numero=[% NUM_PARTENZA %]]/PostiDisp"/> </p>
-	    				<h3>Arrivo : </h3>
-	    				<p>Luogo : <xsl:value-of select="Itinerario/*[@Numero=[% NUM_ARRIVO %]]/Comune"/>(<xsl:value-of select="Itinerario/*[@Numero=[% NUM_ARRIVO%]]/Provincia"/>) </p>
-	    				<p>Data/Ora : <xsl:value-of select="Itinerario/*[@Numero=[% NUM_ARRIVO %]]/Data"/> - <xsl:value-of select="Itinerario/*[@Numero=[% NUM_ARRIVO %]]/Ora"/> </p>
-	    				<p>Posti disponibili : <xsl:value-of select="Itinerario/*[@Numero=[% NUM_ARRIVO %]]/PostiDisp"/> </p>
-	    				<div class="bacheca">
-	    					<h3>Bacheca Messaggi</h3>
-	    					<xsl:apply-templates select="*/MessaggioBacheca" />
+	    			
+	    				<h1><xsl:value-of select="Itinerario/*[@Numero=[% NUM_PARTENZA %]]/Luogo"/> - <xsl:value-of select="Itinerario/*[@Numero=[% NUM_ARRIVO %]]/Luogo"/></h1>
+	    				<a class="linkSottoH" href="viaggi.html">Torna ai risultati</a>
+
+	    				<div class="contenitore">
+	    					<p>Partenza : <xsl:value-of select="Itinerario/*[@Numero=[% NUM_PARTENZA %]]/Luogo"/> </p>
+	    					<xsl:for-each select="Itinerario/*">
+	   						<xsl:if test="@Numero&gt;[% NUM_PARTENZA %] and @Numero&lt;[% NUM_ARRIVO %]">
+	    							<p>Tappa: <xsl:value-of select="Luogo" /> - <xsl:value-of select="@Numero"/></p> <!-- VA' INSERITA L ORA DI RITROVO PER  LE TAPPE -->
+	    						</xsl:if>
+	    					</xsl:for-each>
+	    					<p>Arrivo: <xsl:value-of select="Itinerario/*[@Numero=[% NUM_ARRIVO %]]/Luogo"/> </p>
+	    					<p>Data : <xsl:value-of select="Itinerario/*[@Numero=[% NUM_PARTENZA %]]/Data"/> </p>
+	    					<p>Ora partenza: <xsl:value-of select="Itinerario/*[@Numero=[% NUM_PARTENZA %]]/Ora"/> </p>
+	    					<p>Ora arrivo: <xsl:value-of select="Itinerario/*[@Numero=[% NUM_ARRIVO %]]/Ora"/> </p>
+	    					<p>Prezzo: [% PREZZO %] </p>
+	    					<p>Posti: [% POSTI %] </p>
+	    					<p>Descrizione del viaggio</p>
+	    					<div class="descrizione">
+	    						<xsl:choose>
+	    							<xsl:when test="count(Dettagli)>0">
+	    								<p><xsl:value-of select="Dettagli"/></p>
+	    							</xsl:when>
+	    							<xsl:otherwise>
+	    								<p>Il conducente non ha inserito una descrizione</p>
+	    							</xsl:otherwise>
+	    						</xsl:choose>
+	    					</div>
 	    				</div>
-	    			</div>
+	    				<div class="contenitore">
+							<xsl:call-template name="utente">
+	    									<xsl:with-param name="ute"><xsl:value-of select="Conducente"/></xsl:with-param>
+	    								</xsl:call-template> 
+	    					    			
+	    				</div>
 	    		</xsl:for-each>
-	    	</body>
-	    </html>
 	</xsl:template>
 
-	<xsl:template match="*/MessaggioBacheca">
-		<div class="mess">
-  		<p> Mittente :	<xsl:call-template name="conducente">
-  	    				<xsl:with-param name="cond"><xsl:value-of select="Mittente"/></xsl:with-param>
-  	    			</xsl:call-template>  </p>
-  	  	<p>Data/Ora : <xsl:value-of select="Data"/> - <xsl:value-of select="Ora"/> </p>
-  	  	<p>Testo : <xsl:value-of select="Testo"/> </p>
-  	  	<xsl:if test="count(Risposte)!=0">
-  	    		<div class="risp">
-  	    			<h3>Risposte</h3>
-  	    			<xsl:apply-templates select="*/MessaggioBacheca"/>
-  	    		</div>
-  		</xsl:if>
-	  </div>
-	</xsl:template>
-
-	<xsl:template name="conducente" >
-		<xsl:param name="cond"/>
-		<span><xsl:value-of select="/ts:TravelShare/SetUtenti/Utente[Username=$cond]/Nome"/></span>
-	  <span><xsl:value-of select="/ts:TravelShare/SetUtenti/Utente[Username=$cond]/Cognome"/></span>
-	</xsl:template>
+	<xsl:template name="utente" >
+		<xsl:param name="ute"/>
+		<p>Conducente: <a href="http://localhost/cgi-bin/tw_progetto_gnrr/file_sito/PERL/assemblatori/assemblatore_profilo.cgi?utente=[% CONDUCENTE %]"> <xsl:value-of select="/ts:TravelShare/SetUtenti/Utente[Username=$ute]/Nome"/>
+	     <xsl:value-of select="/ts:TravelShare/SetUtenti/Utente[Username=$ute]/Cognome"/></a></p>
+	     <p>Anno di nascita: <xsl:value-of select="/ts:TravelShare/SetUtenti/Utente[Username=$ute]/AnnoNascita" /></p>
+	     <p>Auto: <xsl:value-of select="/ts:TravelShare/SetUtenti/Utente[Username=$ute]/Profilo/Auto"/></p>
+	     <p>Anno di rilascio della patente: <xsl:value-of select="/ts:TravelShare/SetUtenti/Utente[Username=$ute]/Profilo/Patente"/></p>
+	     <p>Punteggio medio: <xsl:value-of select="/ts:TravelShare/SetUtenti/Utente[Username=$ute]/Profilo/Valutazione/PunteggioMedio"/></p>
+	     <p>Preferenze:</p>
+	     <div class="preferenzeGroup">
+	     	<xsl:choose>
+	     		<xsl:when test="/ts:TravelShare/SetUtenti/Utente[Username=$ute]/Profilo/Preferenze/Chiacchiere=0">
+	     			<img src="Immagini/BLA0.png" class="preferenze4Img" alt="" title=""></img>
+	     		</xsl:when>
+	     		<xsl:when test="/ts:TravelShare/SetUtenti/Utente[Username=$ute]/Profilo/Preferenze/Chiacchiere=1">
+	     			<img src="Immagini/BLA1.png" class="preferenze4Img" alt="" title=""></img>
+	     		</xsl:when>
+	     		<xsl:otherwise>
+	     			<img src="Immagini/BLA2.png" class="preferenze4Img" alt="" title=""></img>
+	     		</xsl:otherwise>
+	     	</xsl:choose>
+	     	<xsl:choose>
+	     		<xsl:when test="/ts:TravelShare/SetUtenti/Utente[Username=$ute]/Profilo/Preferenze/Musica=0">
+	     			<img src="Immagini/musica0.png" class="preferenze4Img" alt="" title=""></img>
+	     		</xsl:when>
+	     		<xsl:when test="/ts:TravelShare/SetUtenti/Utente[Username=$ute]/Profilo/Preferenze/Musica=1">
+	     			<img src="Immagini/musica1.png" class="preferenze4Img" alt="" title=""></img>
+	     		</xsl:when>
+	     		<xsl:otherwise>
+	     			<img src="Immagini/musica2.png" class="preferenze4Img" alt="" title=""></img>
+	     		</xsl:otherwise>
+	     	</xsl:choose>
+	     	<xsl:choose>
+	     		<xsl:when test="/ts:TravelShare/SetUtenti/Utente[Username=$ute]/Profilo/Preferenze/Animali=0">
+	     			<img src="Immagini/animali0.png" class="preferenze4Img" alt="" title=""></img>
+	     		</xsl:when>
+	     		<xsl:otherwise>
+	     			<img src="Immagini/animali1.png" class="preferenze4Img" alt="" title=""></img>
+	     		</xsl:otherwise>
+	     	</xsl:choose>
+	     	<xsl:choose>
+	     		<xsl:when test="/ts:TravelShare/SetUtenti/Utente[Username=$ute]/Profilo/Preferenze/Fumatore=0">
+	     			<img src="Immagini/fumo0.png" class="preferenze4Img" alt="" title=""></img>
+	     		</xsl:when>
+	     		<xsl:otherwise>
+	     			<img src="Immagini/fumo1.png" class="preferenze4Img" alt="" title=""></img>
+	     		</xsl:otherwise>
+	     	</xsl:choose>
+	     </div>
+	</xsl:template> 
 
 	
 </xsl:stylesheet>

@@ -30,7 +30,7 @@
     	<body>
     		<xsl:for-each select="ts:TravelShare/SetPassaggi/Passaggio">
         <xsl:for-each select="Itinerario/*" >    <!-- select="Itinerario" non produce nessun risultato  -->
-           <xsl:if test="Provincia = &apos;ProvinciaPartenza&apos; and PostiDisp>0" > <!-- FILTRO PERL -->
+           <xsl:if test="Provincia = '[% PARTENZA %]' and PostiDisp>0" > <!-- FILTRO PERL -->
               <xsl:variable name="ProvPart"> <xsl:value-of select="Provincia" /> </xsl:variable>
               <xsl:variable name="ComPart">  <xsl:value-of select="Comune" /> </xsl:variable>
               <xsl:variable name="Data">  <xsl:value-of select="Data" /> </xsl:variable>

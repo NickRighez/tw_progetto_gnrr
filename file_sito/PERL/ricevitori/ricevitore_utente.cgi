@@ -11,7 +11,6 @@ use lib "../libreria";
 use data_registration;
 use utility;
 my $q = CGI->new;
-print "Content-type: text/html\n\n";
 
 #  ******  TESTARE CHE IL METODO DELLA FORM SIA 'POST' *************  #
 # ******** (per la ricerca il metodo è get) ******** #
@@ -40,7 +39,7 @@ if ($q->request_method eq 'POST') {
 		die("Anno di nascita non valida, inserire l anno in formato 'aaaa'");
 	}
 	my ($sec,$min,$hour,$mday,$mon,$year,$wday,$yday,$isdst) = localtime();
-	if(($q->param('anno'))<($year+1900-18)) {
+	if(($q->param('anno'))>($year+1900-18)) {
 		die("Possono registrarsi solo utenti maggiorenni");
 	}
 
@@ -62,7 +61,9 @@ if ($q->request_method eq 'POST') {
 		$ute{'DescrizionePers'}=$q->param('descr_pers');
 	}
 
-	print "X-> ".data_registration::inserisci_nuovo_utente(\%ute);
+	if(data_registration::inserisci_nuovo_utente(\%ute)) {
+		print $q->redirect("http://localhost/accedi.html");
+	}
 
 }
 

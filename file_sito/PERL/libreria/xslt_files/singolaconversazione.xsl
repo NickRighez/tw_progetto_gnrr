@@ -1,73 +1,34 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
 <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:ts="http://www.dominio.com">
-	<xsl:output method='html' version='1.0' encoding='UTF-8' indent='yes' doctype-system="http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd" doctype-public="-//W3C//DTD XHTML 1.0 Strict//EN" />
+	<!--<xsl:output method='html' version='1.0' encoding='UTF-8' indent='yes' doctype-system="http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd" doctype-public="-//W3C//DTD XHTML 1.0 Strict//EN" /> -->
 
 		    		
 	<xsl:template match="/">
-		<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="it" lang="it" >
-			<head>
-				<meta http-equiv="content-type" content="text/html; charset=utf-8" />
-				<title>Singola Conversazione </title>
-				<meta name="title" content="VISUALIZZAZIONE SINGOLA CONVERSAZIONE" />
-	  			<style type="text/css" media="all">
-	  				.lab {
-	            		color:red;
-			          }
-			          div {
-			            border:2px solid black;
-			            margin: 2px;
-			          }
-			          p {
-			            margin: 4px;
-			          }
-			          p.mess {
-			          	border:2px solid green;
-			          }
-			          div.mess {
-			          	border:2px solid blue;
-			          }
-			          span {
-			          	margin-right: 10px;
+		
+	
+  
 
-			          }
-
-
-	  			</style>
-	    	</head>
-	    	<body>
-		    	<xsl:for-each select="ts:TravelShare/SetMessaggi/Conversazione[@User1='[% USER1 %]' and @User2='[% USER2 %]']/Messaggio"> <!-- FILTRI PERL 'u1' 'u2' -->
-					<xsl:variable name="myself" > [% MYSELF %] </xsl:variable>
+		    	<xsl:for-each select="ts:TravelShare/SetMessaggi/Conversazione[@User1='[% UTENTE %]' and @User2='[% MYSELF %]']/Messaggio | ts:TravelShare/SetMessaggi/Conversazione[@User1='[% MYSELF %]' and @User2='[% UTENTE %]']/Messaggio"> <!-- FILTRI PERL 'u1' 'u2' -->
 					<xsl:choose>
-						<xsl:when test=" Mittente =$myself  ">
-							<div class="inviati" style="color: red">
-								<p>Mittente : <xsl:call-template name="mittente">
-									<xsl:with-param name="mitt"><xsl:value-of select="Mittente"/></xsl:with-param>
-								</xsl:call-template> <span><xsl:value-of select="Data"/></span><span><xsl:value-of select="Ora"/></span></p>
-								<p class="mess"><xsl:value-of select="Testo"/></p>
+						<xsl:when test=" Mittente ='[% MYSELF %]'  ">
+							<div class="inviati" >
+								<p class="intestazioneMsg"><xsl:value-of select="Data"/> - <xsl:value-of select="Ora"/></p>
+								<p><xsl:value-of select="Testo"/></p>
 							</div>
 						</xsl:when>
 						<xsl:otherwise>
-							<div class="ricevuti" style="color: blue">
-								<p>Mittente : <xsl:call-template name="mittente">
-									<xsl:with-param name="mitt"><xsl:value-of select="Mittente"/></xsl:with-param>
-								</xsl:call-template> <span><xsl:value-of select="Data"/></span><span><xsl:value-of select="Ora"/></span></p>
-								<p class="mess"><xsl:value-of select="Testo"/></p>
+							<div class="ricevuti" >  <!-- DIVISIONE FRA LETTI E NON LETTI -->
+								<xsl:if test="@Letto = 'no'">
+									<p>NUOVO MESSAGGIO</p>
+								</xsl:if>
+								<p class="intestazioneMsg"><xsl:value-of select="Data"/> - <xsl:value-of select="Ora"/></p>
+								<p><xsl:value-of select="Testo"/></p>
 							</div>
 						</xsl:otherwise>
 					</xsl:choose>
 
 
 	    		</xsl:for-each> 
-	    	</body>
-	    </html>
-	</xsl:template>
-
-	<xsl:template name="mittente" >
-		<xsl:param name="mitt"/>
-		<span><xsl:value-of select="/ts:TravelShare/SetUtenti/Utente[Username=$mitt]/Nome"/></span>
-	   <span><xsl:value-of select="/ts:TravelShare/SetUtenti/Utente[Username=$mitt]/Cognome"/></span>
-	</xsl:template>
-
-	
+	    		</xsl:template>	
 </xsl:stylesheet>

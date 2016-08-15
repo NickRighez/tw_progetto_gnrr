@@ -74,4 +74,23 @@ sub controllo_tappa {
 }
 
 
+sub calcola_posti_disponibili {
+    my $part= shift @_;
+    my $arr = shift @_;
+    my $id_p = shift @_;
+    my $doc= shift @_;
+    my $min = $doc->findnodes("//SetPassaggi/Passaggio[IDViaggio='$id_p']/Itinerario/*[\@Numero=$part]/PostiDisp")->get_node(1)->textContent();
+    for(my $i=$part+1;$i<$arr;$i++) {
+        my @nodes = $doc->findnodes("//SetPassaggi/Passaggio[IDViaggio='$id_p']/Itinerario/*[\@Numero=$i]");
+        if(@nodes != 0) {
+            my $pd = $doc->findnodes("//SetPassaggi/Passaggio[IDViaggio='$id_p']/Itinerario/*[\@Numero=$i]/PostiDisp")->get_node(1)->textContent();
+            if($pd < $min) {
+            $min=$pd;
+            }
+        }      
+    }
+    return $min;
+}
+
+
 1;
