@@ -20,68 +20,90 @@ sub distruzione {
     return 0;
 }
 
-sub createSess {
-  my $cgi = new CGI;
-  my $sid = $cgi->cookie("CGISESSID") || undef;
-  my $session = new CGI::Session("driver:File", $sid, {Directory=>"/var/www/html"});
-  if(defined $sid){
-    return $session->id();
-  }
-  else{
-    return $cgi->header();
-  }
 
-}
-
-
-sub setVar {
-  my $k = shift @_;
-  my $v = shift @_;
-  my $cgi = new CGI;
+sub creaSessione {
+  my $q=CGI->new();
   my $session = CGI::Session->load() or die CGI::Session->errstr();
   if($session->is_expired || $session->is_empty){
-    return undef;
-  }
-  $session->param($k,$v);
-  return 1;
-}
-
-sub getVar {
-  my $k = shift @_;
-  my $session = CGI::Session->load() or die CGI::Session->errstr();
-  if($session->is_expired || $session->is_empty){
-    return "vvv";
-  }
-  my $v = $session->param($k);
-  if(!defined($v)) {
-    return -1;
-  }
-  #$session->clear($k);
-  return $v;
-}
-
-sub login {
-  my $uname = shift @_;
-  my $upass = shift @_;
-  my $res = research::query_usernamepw($uname,$upass);
-  if($res){
-    #do
+    $session = new CGI::Session(undef,$q, {Directory=>"/tmp"});
+    print $session->header();
   }
   else{
-    # dont 
+    print $q->header();
   }
+  return $session;
 }
 
-sub get_username {
-  my $session = my $s = CGI::Session->load() or die CGI::Session->errstr();
-  if($session->is_expired || $session->is_empty){
-    return undef;
-  }
-  my $v = $session->param("username");
-  return -1 unless defined $v;
-  return $v;
-}
 
+
+
+
+
+
+#
+#sub createSess {
+#  my $cgi = new CGI;
+#  my $sid = $cgi->cookie("CGISESSID") || undef;
+#  my $session = new CGI::Session("driver:File", $sid, {Directory=>"/var/www/html"});
+#  if(defined $sid){
+#    my $cookie = $cgi->cookie(CGISESSID => $session->id);
+#    return $cgi->header( -cookie=>$cookie );
+#  }
+#  else{
+#    return $cgi->header();
+#  }
+#
+#}
+#
+#
+#sub setVar {
+#  my $k = shift @_;
+#  my $v = shift @_;
+#  my $cgi = new CGI;
+#  my $session = CGI::Session->load() or die CGI::Session->errstr();
+#  if($session->is_expired || $session->is_empty){
+#    return undef;
+#  }
+#  $session->param($k,$v);
+#  return 1;
+#}
+#
+#sub getVar {
+#  my $k = shift @_;
+#  my $session = CGI::Session->load() or die CGI::Session->errstr();
+#  if($session->is_expired || $session->is_empty){
+#    return "vvv";
+#  }
+#  my $v = $session->param($k);
+#  if(!defined($v)) {
+#    return -1;
+#  }
+#  #$session->clear($k);
+#  return $v;
+#}
+#
+#sub login {
+#  my $uname = shift @_;
+#  my $upass = shift @_;
+#  my $res = research::query_usernamepw($uname,$upass);
+#  if($res){
+#    #do
+#  }
+#  else{
+#    # dont
+#  }
+#}
+#
+#sub get_username {
+#  my $session = my $s = CGI::Session->load() or die CGI::Session->errstr();
+#  if($session->is_expired || $session->is_empty){
+#    return undef;
+#  }
+#  my $v = $session->param("username");
+#  return -1 unless defined $v;
+#  return $v;
+#}
+#
 
 
 # NOTE:

@@ -4,130 +4,144 @@
  <head>
   <title>Gestisci il profilo - Travel Share</title>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-  <meta name="title" content="..." /> 
+  <meta name="title" content="..." />
   <meta name="description" content="..." />
   <meta name="keywords" content="profilo, travel share, car pooling, passaggio, auto" />
   <meta name="author" content="Giovanni Sanna, Nicolò Rigato, Riccardo Ardossi, Riccardo Saggese" />
   <meta name="language" content="italian it" />
-  
-  <meta name="viewport" content="width=device-width" /> 
-  
+  <style>
+  input[type=radio] + label>img {
+  border: 1px dashed #444;/*
+  width: 150px;
+  height: 150px;*/
+  transition: 500ms all;
+}
+
+input[type=radio]:checked + label>img {
+  transform:
+    rotateZ(-10deg)
+    rotateX(10deg);
+}
+</style>
+  <meta name="viewport" content="width=device-width" />
+
   <link href="screen.css" rel="stylesheet" type="text/css" media="screen" />
   <link href="print.css" rel="stylesheet" type="text/css" media="print" />
-  
+
   <link rel="icon" href="Immagini/TS_icon.png" type="image/x-icon" />
   <link rel="shortcut icon" href="Immagini/TS_icon.png" type="image/x-icon" />
  </head>
- 
+
  <body>
-	
+
   <div id="header">
    <a href="homeLog.html" tabindex=""><img src="Immagini/banner.png" id="banner" alt="Banner Travel Share - Link diretto alla Home" /></a>
    <a id="bottoneMenu" href="#menu" tabindex="">Men&ugrave;</a>
   </div>
-  
+
   <div id="utente">
    <p>Ciao Utente con nome molto lungo</p>
    <p><a href="notifiche.html">Notifiche (0)</a>  <a href="logout.cgi?operation=logout" tabindex="">Logout</a></p>
   </div>
-	
+
   <div id="contenuto">
-	<h1>Modifica il profilo</h1> 
+	<h1>Modifica il profilo</h1>
 	<form id="FormProfilo" action="" method="">
 	<fieldset legend="">
 	<label for="nome">Nome:</label>
     <input type="text" id="nome" name="nome" value="Nome" tabindex=""></input><br class="acapo" />
-	
+
 	<label for="cognome">Cognome:</label>
     <input type="text" id="cognome" name="cognome" value="Cognome" tabindex=""></input><br class="acapo" />
-  
+
 	<label for="email"><span xml:lang="en" lang="en">Email:</span></label>
     <input type="text" id="email" name="email" value="Email" tabindex=""></input><br class="acapo" />
-	
+
 	<!--<p>lo mettimo?</p>
     <label for="vecchiaPassword">Vecchia <span xml:lang="en" lang="en">Password:</span></label>
     <input type="password" id="vecchiaPassword" name="vecchiaPassword" tabindex=""></input><br class="acapo" />
     <label for="nuovaPassword">Nuova <span xml:lang="en" lang="en">Password:</span></label>
     <input type="password" id="nuovaPassword" name="nuovaPassword" tabindex=""></input><br class="acapo" />-->
-   
+
     <p>Sesso:
 	<input type="radio" name="sesso" id="maschio" value="maschio" checked="checked"></input><label class="radiolabel" for="maschio">Maschio</label>
-    <input type="radio" name="sesso" id="femmina" value="femmina"></input><label class="radiolabel" for="femmina">Femmina</label><br class="acapo" /> 
-    </p> 
-	
+    <input type="radio" name="sesso" id="femmina" value="femmina"></input><label class="radiolabel" for="femmina">Femmina</label><br class="acapo" />
+    </p>
+
     <label for="anno">Anno di nascita:</label>
     <input type="text" id="anno" name="anno" value="Anno" tabindex=""></input><br class="acapo" />
-  
+
 	<label for="descrizioneForm">Descrizione:</label>
 	<textarea id="descrizioneForm" rows="" cols="" name="descrizioneForm"> value="" </textarea>
-	
+
 	<label for="annoPatente">Anno di rilascio della patente:</label>
     <input type="text" id="annoPatente" name="annoPatente" value="" tabindex=""></input><br class="acapo" />
-    
+
 	<label for="auto">Auto:</label>
     <input type="text" id="auto" name="auto" value="" tabindex=""></input><br class="acapo" />
-    
+
 	<div id="preferenze">
 	<h2>Preferenze</h2>
-  
+
 	<p>Chiacchiere:</p>
 	<div class="preferenzeGroup">
-	<label for="chiacchiere0"><img class="preferenzeImg" src="Immagini/BLA0.png" alt="Silenzioso"></img></label>
 	<input type="radio" name="chiacchiere" id="chiacchiere0" value="0"></input>
-	<label for="chiacchiere1"><img class="preferenzeImg" src="Immagini/BLA1.png" alt="Poche chiacchiere"></img></label>
+  <label for="chiacchiere0"><img class="preferenzeImg" src="Immagini/BLA0.png" alt="Silenzioso"></img></label>
 	<input type="radio" name="chiacchiere" id="chiacchiere1" value="1" ></input>
-	<label for="chiacchiere2"><img class="preferenzeImg" src="Immagini/BLA2.png" alt="Chiacchierone"></img></label>
+  <label for="chiacchiere1"><img class="preferenzeImg" src="Immagini/BLA1.png" alt="Poche chiacchiere"></img></label>
 	<input type="radio" name="chiacchiere" id="chiacchiere2" value="2"></input>
+  <label for="chiacchiere2"><img class="preferenzeImg" src="Immagini/BLA2.png" alt="Chiacchierone"></img></label>
 	</div>
-	
+
 	<p>Musica:</p>
 	<div class="preferenzeGroup">
-	<label for="musica0"><img class="preferenzeImg" src="Immagini/musica0.png" alt=""></img></label>
+
 	<input type="radio" name="musica" id="musica0" value="0"></input>
-	<label for="musica1"><img class="preferenzeImg" src="Immagini/musica1.png" alt=""></img></label>
+  <label for="musica0"><img class="preferenzeImg" src="Immagini/musica0.png" alt=""></img></label>
 	<input type="radio" name="musica" id="musica1" value="1" ></input>
-	<label for="musica2"><img class="preferenzeImg" src="Immagini/musica2.png" alt=""></img></label>
+  <label for="musica1"><img class="preferenzeImg" src="Immagini/musica1.png" alt=""></img></label>
 	<input type="radio" name="musica" id="musica2" value="2"></input>
+  <label for="musica2"><img class="preferenzeImg" src="Immagini/musica2.png" alt=""></img></label>
 	</div>
-	
+
 	<p>Animali:</p>
 	<div class="preferenzeGroup">
-	<label for="animali0"><img class="preferenzeImg" src="Immagini/animali0.png" alt=""></img></label>
 	<input type="radio" name="animali" id="animali0" value="0"></input>
-	<label for="animali1"><img class="preferenzeImg" src="Immagini/animali1.png" alt=""></img></label>
+  <label for="animali0"><img class="preferenzeImg" src="Immagini/animali0.png" alt=""></img></label>
 	<input type="radio" name="animali" id="animali1" value="1" ></input>
+  <label for="animali1"><img class="preferenzeImg" src="Immagini/animali1.png" alt=""></img></label>
 	</div>
-	
+
 	<p>Fumatori:</p>
 	<div class="preferenzeGroup">
-	<label for="fumatori0"><img class="preferenzeImg" src="Immagini/fumo0.png" alt=""></img></label>
 	<input type="radio" name="fumatori" id="fumatori0" value="0"></input>
-	<label for="fumatori1"><img class="preferenzeImg" src="Immagini/fumo1.png" alt=""></img></label>
+  <label for="fumatori0"><img class="preferenzeImg" src="Immagini/fumo0.png" alt=""></img></label>
 	<input type="radio" name="fumatori" id="fumatori1" value="1" ></input>
+  <label for="fumatori1"><img class="preferenzeImg" src="Immagini/fumo1.png" alt=""></img></label>
 	</div>
-	
+
 	</div>
-	
+
 	<input type="submit" value="Invia" tabindex=""></input>
 	</fieldset>
 	</form>
-	
+
   </div>
- 
+
   <div id="menu">
   <ul>
    <li><a href="homeLog.html" tabindex="">Cerca un passaggio <span class="frecceMenu">&raquo;</span></a></li>
-   <li><a href="offriLog.html" tabindex="">Offri un passaggio <span class="frecceMenu">&raquo;</span></a></li>  
+   <li><a href="offriLog.html" tabindex="">Offri un passaggio <span class="frecceMenu">&raquo;</span></a></li>
    <li><a href="viaggi.html" tabindex="">Viaggi<span class="frecceMenu">&raquo;</span></a></li>
    <li><a href="messaggi.html" tabindex="">Messaggi <span class="frecceMenu">&raquo;</span></a></li>
    <li><a href="infoLog.html" tabindex="">Informazioni su <span xml:lang="en" lang="en">Travel Share</span> <span class="frecceMenu">&raquo;</span></a></li>
   </ul>
   </div>
-	
+
   <div id="footer">
    <a href="logout.cgi?operation=logout" tabindex="">Logout</a>
    <a href="#header" tabindex="">Torna su</a>
   </div>
-  
+
   </body>
 </html>
