@@ -1,0 +1,44 @@
+\documentclass{article}
+
+\usepackage[latin1]{inputenc}
+\usepackage{tikz}
+\usetikzlibrary{shapes,arrows,positioning}
+\begin{document}
+\pagestyle{empty}
+
+
+
+
+
+\tikzstyle{resource} = [rectangle, draw, fill=red!20, 
+    text width=4.5em, text badly centered, node distance=3cm, inner
+    sep=0pt, minimum height=3em]
+\tikzstyle{block} = [rectangle, draw, fill=blue!20, 
+    text min-width=5em, text centered, rounded corners, minimum height=4em]
+\tikzstyle{line} = [draw, -latex']
+\tikzstyle{cloud} = [draw, ellipse,fill=green!20, node distance=3cm,
+    minimum height=2em]
+    
+
+\begin{tikzpicture}[node distance = 2cm, auto]
+    % Place nodes
+    \node [block] (ass) {ASSEMBLATORE};
+    \node [block, below of=ass] (rec) {RICEVITORE};
+    \node [resource, right of=rec] (xml) {XML FILE};
+    \node [resource, right of=xml] (html) {HTML PAGE};
+
+    \node [cloud, right of=ass] (xslt) {XSLT processor};
+%    \node [block] (init) {HTML};
+   
+    % Draw edges
+    \path [line] (init) -- (rec);
+
+\end{tikzpicture}
+
+
+
+
+
+
+
+\end{document}

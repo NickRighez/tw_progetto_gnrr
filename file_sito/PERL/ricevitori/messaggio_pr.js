@@ -1,0 +1,1 @@
+// pagina di visualizzazione di messaggio
