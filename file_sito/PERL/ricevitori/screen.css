@@ -1,0 +1,684 @@
+/** CSS RESET **/
+
+html, body, div, span, h1, h2, h3, h4, h5, h6, p, a, em, img,
+small, strike, strong, tt, var, b, u, i, center,
+dl, dt, dd, ol, ul, li, fieldset, form, label, legend {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+
+/*	padding/margin : TOP RIGHT BOTTOM LEFT;  */
+
+/* bordi tondi e ombre da documentare */
+/*
+NB: i radiobutton sono considerati un elemento unico dal tab, con navigazione tra le singole voci con le frecce
+*/
+
+/*stampa..da mobile?????*/
+
+
+html, body{
+	background-color : /*#b1cdcd;/*#92b9b9;*/#b3b3b3; /*test*/
+	/*background-image : url("Immagini/");*/
+	font-size : 100%;
+	margin : 0 auto;
+	font-family: Verdana, Helvetica, sans-serif;
+	max-width : 100%;
+}
+a:link{
+	color : #0088cc/*#00b8e6/*#0086b3*/;
+}
+a:visited{
+	/* colore standard */
+}
+
+
+h1 {
+	/*display: block;*//* se non lo tolgo il margin non funziona*/
+	font-size: 1.5em;
+	margin : 3% 2% 3% 2%;/*
+	margin-bottom : 3%;
+	margin-top : 3%;
+	/*font-weight: bold;*/
+}
+
+.linkSottoH{
+	display : block;
+	margin : -1% 0% 2% 4%;
+	font-size : 0.9em;
+}
+
+h2{
+	font-size : 1.25em;
+	margin : 2% 2% 2% 2%;
+	/*margin-bottom : 2%;
+	margin-top: 2%;*/
+}
+
+h3{
+	font-size : 1.1em;
+	margin : 2% 2% 2% 2%;/*
+	margin-bottom : 2%;
+	margin-top : 2%;*/
+}
+
+.destra{
+	float : right;
+}
+
+
+/**  HEADER  **/
+
+#header{
+	background-color : white;
+	height : 40px; /*altezza responsive?*/
+	/*margin-bottom : 1*/
+	border-bottom : 1px solid #666666;
+	box-shadow: 0px 1px 10px 0px #888888;
+	padding : 1%;
+}
+
+#banner{
+	height : 100%;
+}
+
+#bottoneMenu{ /* ha problemi in modalità landscape e schermi grandi*/
+	display : block;
+	border : 1px solid #666666;
+	float : right;
+	padding : 1.9%;
+	margin : 1%;
+	text-align : center;
+	text-decoration : none;
+	border-radius : 10px;
+	box-shadow: 0px 2px 5px 0px #888888;
+	color : #0088cc; /* Stesso colore dei link, ma non cambia colore dopo averlo cliccato*/
+}
+
+/**  BARRA UTENTE  **/
+
+#utente{
+	text-align : center;
+	background-color : white;
+	border : 1px solid #666666;
+	border-top : 0px;
+	padding : 2.5%;
+}
+#utente p{
+	display : inline; /* non va a capo ad ogni p */
+	padding-right : 5%;
+	white-space: nowrap; /*non c'è il supporto totale*/ /* non divide i link se il nome utente è lungo */
+}
+#utente a{
+	padding-left : 3.5%;
+	padding-right : 3.5%;
+}
+
+/***  CORPO  ***/
+
+#contenuto{
+	margin-bottom : 1%;
+	padding : 0% 3% 5% 3%;
+}
+
+.contenitore{
+	background-color : /*#92b9b9;/*#b1cdcd;*/#cccccc;/**/
+	border-radius : 4px;
+	border : 1px solid #666666;
+	padding : 4%;
+	margin-bottom : 1%;
+}
+
+.contenitore h2, .contenitore h3{
+	margin : 2% 0% 2% 0%;
+}
+
+/***  FOOTER  ***/
+
+#footer{
+	background-color : white;
+	text-align : center;
+	padding : 3%;
+	padding-bottom : 5%;
+}
+#footer a{
+	padding-left: 4%;
+	padding-right : 4%;
+}
+
+/***  LISTA MENU'  ***/
+
+#menu ul{
+	list-style : none;
+	margin : 0;
+	padding : 0;
+}
+
+li{
+	/*background-color : white;
+	/*width : 100%;*/
+	/*border : 1px solid #666666; /* provvisorio */
+	/*margin-bottom : 0.9cm;
+	margin-top : 0.9cm;*/
+}
+
+#menuLista li a{
+	display : block;
+	border : 1px solid #666666;
+	background-color : white;
+	padding : 0.4cm 5%;
+	text-decoration : none;
+	margin-top : 1px;
+}
+
+.frecceMenu{
+	float : right;
+}
+
+#menuLista a{
+	color : black;
+}
+
+
+
+/***  FORM  ***/
+
+/*NB: si può creare un placeholder con un immagine di sfondo dell'input*/
+
+input{
+	font-size : 100%; /* per modificare la grandezza del testo nelle form*/
+}
+
+input[type=text], input[type=password]{
+	height : 1cm;
+	width : 96%;
+	padding : 0; /* NB: il padding modifica la grandezza del riquadro*/
+	padding-left : 2%;
+	padding-right : 2%;
+	margin-bottom : 3%; /*in alternativa si può mettere il margin al label*/
+	margin-top : 1%;
+	border : 1px solid #666666;
+}
+
+input[type=text]:focus {
+    /*background-color: ;
+	border : ;*/
+}
+
+input[type=radio]{
+	margin-top: 4%;
+	margin-bottom : 4%;
+	margin-left : 2%;
+}
+
+select{
+	width : 100%;
+	height : 1cm;
+	margin-top : 2%;
+	margin-bottom : 5%;
+}
+
+input[type=submit]{
+	width: 60%;
+	height : 1cm;
+	/*padding : 1%;*/
+	cursor: pointer;
+	margin-top : 2%;
+	margin-bottom : 1%;
+	margin-left : 20%;
+	
+}
+
+textarea{
+	width : 96%;
+	padding: 1% 2% 1% 2%;
+	height : 1cm; /*al momento è più grande degli altri perchè c'è il padding */
+	margin-top : 2%;
+	margin-bottom : 2%;
+	border : 1px solid #666666;
+	font-size : 1em; /* test */
+	font-family : Verdana, Helvetica, sans-serif;
+}
+
+fieldset { 
+    /*display: block;
+    margin-left: 2px;
+    margin-right: 2px;
+    padding-top: 0.35em;
+    padding-bottom: 0.625em;
+    padding-left: 0.75em;
+    padding-right: 0.75em;*/ /*	valori std */
+	
+	/*margin : 0;
+	padding : 0;
+    border: none ;/*2px groove*/
+	
+	background-color : #cccccc;
+	border-radius : 4px;
+	border : 1px solid #666666;
+	padding : 4%;
+	/*margin-left : -2%;
+	margin-right : -2%;*/
+	margin-bottom : 1%;
+}
+
+fieldset>h2{
+	margin : 0% 0% 2% 0%;
+}
+
+.errore{
+	color : red;
+	margin-bottom : 5%;
+	font-size : 0.9em;
+}
+
+legend { /******** TEST *******/
+    display: none;
+	padding : 1%;
+    border: 1px solid #666666;
+	background-color : white;
+}
+
+/***  Pagina MESSAGGI  ***/
+
+.conversazione{
+	border : 1px solid #666666;
+	margin-bottom : 2px;
+	background-color : white;
+	border-radius : 10px;
+	padding : 0 0.5cm;
+}
+
+.conversazione a{
+	display : block; 
+	padding : 0.5cm 0;
+	text-decoration : none;
+	color : black;
+}
+
+.nuova{ /*doppia classe o due distinte*/
+	background-color : #3399ff/*#66cfff*/;
+}
+/*
+.nuova a{
+	color : white; /*per avere il testo bianco
+}*/
+
+.ultimoMessaggio { /* solo per desktop e tablet */
+	display : none;
+}
+
+/***  SINGOLA CONVERSAZIONE  ***/
+
+.ricevuti, .inviati{
+	border : 1px solid #666666;
+	padding : 3.5%;
+	margin-bottom : 2%;
+	background-color : white;
+}
+
+.ricevuti{
+	margin-right : 15%;
+	border-radius : 10px 10px 10px 10px; /*in altro sx, in alto dx, in basso dx, in basso sx*/
+}
+
+.inviati{
+	margin-left : 15%;
+	border-radius : 10px 10px 10px 10px;
+}
+
+.intestazioneMsg{
+	text-align : right;
+	margin-bottom : 3%;
+	font-size : 0.8em;
+}
+
+.mittenteMsg{
+	float : left;
+}
+
+/***  INSERIMENTO FEEDBACK  ***/
+
+.votiGroup{
+	width: 100%;
+	text-align: center;
+}
+.votiGroup label {
+	margin-right : 4%;
+	margin-left : 1%;
+}
+#preferenze h2{
+	margin : 0% 0% 2% 0%;
+}
+
+
+/***  PROFILO PUBBLICO  ***/
+
+.descrizione{  /*usato anche nel viaggio per ora; mettere class?*/
+	border : 1px solid #666666;
+	padding : 3% 5% 3% 5%;
+	background-color : white;
+	margin-bottom : 2%;
+	margin-top : 2%;
+	border-radius : 15px; /* border radius non è totalmente compatibile, ma dovrebbe andare bene lo stesso; 
+									l'unica differenza è che se non funzia si vedrà spigoloso*/
+}
+
+.commentoUtente{
+	border : 1px solid #666666;
+	padding : 3%;
+	border-radius : 15px;
+	background-color : white;
+	margin-bottom : 1%;
+}
+
+/**  RISULTATI  **/
+
+.risultato{
+	border : 1px solid #666666;
+	border-radius : 15px;
+	background-color : white;
+	margin-bottom : 1%;
+	padding-bottom : 0.4cm;
+}
+
+.risultato a{
+	display : block; 
+	padding : 0.5cm 0.5cm 0.4cm 0.5cm;
+	text-decoration : none;
+	color : black;
+}
+
+.partenza{
+	color : #006600;
+}
+
+.arrivo{
+	color : #e60000;
+}
+
+.risultato p{
+	padding : 0.5% 0.5cm 0.5% 0.5cm;
+}
+
+.infoGuidatore{
+	display : none;
+}
+
+
+/*** MODIFICA PROFILO ***/
+
+.radioNascosto{
+	display : none; /* diventa display none con js*/
+}
+
+#preferenze input[type=radio]{
+	margin : 0;
+}
+.preferenzeImg{ /* per set di 2-3 immagini */
+	height : 50px;
+	border : 1px solid;
+	
+}
+.marginRadioNascosto{
+	margin : 3% 5% 2% 5%; /* versione con radio nascosti */
+}
+.marginRadioVisibile{
+	margin : 3% 4% 2% 1%; /* versione con radio visibili */
+}
+
+input[type=radio]:checked + label>img { /* provvisorio */
+  transform:scale(1.2,1.2);
+}
+
+.preferenzeGroup{
+	width: 100%;
+	text-align: center;
+}
+
+/*** Elenco VIAGGI ***/
+
+.viaggio{
+	border : 1px solid #666666;
+	border-radius : 15px;
+	background-color : white;
+	margin-bottom : 1%;
+}
+
+.data{
+	font-size : 0.8em;
+	float : right;
+}
+
+.viaggio a{
+	display : block; 
+	padding : 0.5cm 0.4cm 0.5cm 0.4cm;
+	text-decoration : none;
+	color : black;
+}
+
+.viaggio p{
+	padding : 0.5% 0.4cm 0.5% 0.4cm;
+}
+
+/*** SINGOLO VIAGGIO ***/
+
+.preferenze4Img{  /* usato su più pagine per set di 4 immagini */
+	border : 1px solid;
+	height : 50px;
+	margin : 2%;
+}
+
+/*** CONFERMA REGISTRAZIONE ***/
+
+.bottone{
+	display : block;
+	border : 1px solid #666666;
+	text-align : center;
+	padding : 3%;
+	text-decoration : none;
+	border-radius : 15px;
+	box-shadow: 0px 2px 5px 0px #888888;
+	background-color : #f2f2f2;
+}
+.si{
+	margin : 6% 5% 0% 5%;
+	/*margin-left : 5%;
+	margin-right : 5%;
+	margin-top : 6%;*/
+}
+.no{
+	margin : 4% 15% 1% 15%;
+	/*margin-left : 15%;
+	margin-right : 15%;
+	margin-top : 4%;*/
+}
+
+/*** NOTIFICHE ***/
+
+.notifica{
+	border : 1px solid #666666;
+	border-radius : 15px;
+	background-color : white;
+	padding : 3%;
+	margin-bottom : 1%;
+}
+
+@media screen and (min-width: 425px) {
+	#bottoneMenu{
+		margin : 0%;
+	}
+	.preferenze4Img{  /* usato su più pagine per set di 4 immagini */
+		margin : 3% 4% 2% 4%;
+	}
+	.votiGroup label {
+		margin-right : 7.5%;
+	}
+	
+}
+
+@media screen and (min-width: 600px) {
+	#bottoneMenu{
+		padding : 1.5%;
+	}
+}
+
+@media screen and (min-width: 768px) {
+	
+	#bottoneMenu{
+		padding : 1.2%;
+		border-radius : 12px;
+	}	
+	#utente{
+		padding : 2%;
+	}
+	#menuLista li a{
+		padding : 0.5cm 5%; /* cambia l'altezza */
+	}
+	.bottone{
+		padding : 2.5%;
+	}
+	.si{
+		margin : 6% 10% 0% 10%;
+	}
+	.no{
+		margin : 4% 20% 1% 20%;
+	}
+	.contenitore{
+		padding : 3% 4%; /* diminuito il padding verticale */
+	}
+	fieldset{
+		padding : 3% 4%; /* diminuito il padding verticale */
+	}
+	.preferenze4Img{  /* usato su più pagine per set di 4 immagini */
+		height : 50px;
+		margin : 2% 7% 1% 7%;
+	}
+	.votiGroup label {
+		margin-right : 10%;
+	}
+/*	.votiGroup input[type=radio]{
+		margin-left : 3%;
+	}*/
+	.conversazione{
+		padding-bottom : 0.5cm;
+	}
+	.ultimoMessaggio { /* solo per desktop e tablet*/
+		display : initial;
+	}
+	input[type=radio]{
+		margin-top: 3%; 
+	}
+	.descrizione{
+		padding : 3% 5% 3% 5%;
+		margin : 2% 3%; /* vogliamo che rientri un po'? */
+	}	
+	.infoGuidatore{
+		display : initial;
+	}
+	.intestazioneMsg{
+		font-size : 0.9em;
+	}
+	.data{
+		font-size : 0.9em;
+	}
+}
+
+@media screen and (min-width: 1024px) {
+	#header{
+		height : 40px;
+		padding : 5px;
+	}
+	#bottoneMenu{
+		display : none;
+	}
+	
+	/**  BARRA UTENTE  **/
+	
+	html{
+		max-width : 1024px;
+		border : 1px solid black;
+		border-top : 0px;
+		border-bottom : 0px;
+		background-color : grey;
+	}
+	
+	#contenuto{
+		padding : 0% 5% 5% 5%;
+	}
+	.contenitore{
+		padding : 5%;
+		padding-bottom : 4%;
+	}
+	fieldset {
+		padding : 5%;
+		padding-bottom : 4%;
+	}
+	
+	#utente{/* problema del relative: occupa spazio nella posizione originale; ignoriamo? */
+		position : relative; /* così rimane in una posizione decente e semi fissa dal 1024 in su */
+		top : -35px;
+		left : 420px;
+		padding : 0;
+		width : 600px;
+		border : 0;
+		margin-bottom : 0;
+	}
+	#utente a{
+		padding-left : 3%;
+		padding-right : 3%;
+	}
+	
+	h1{
+		margin-top : 65px;
+		margin-bottom : 1.1%;
+	}
+	
+	/**  LISTA MENU'  **/
+	
+	#menu{
+		position : absolute;
+		top : 51px;
+		width : 1024px;
+	}
+	ul#menuLista{
+		list-style: none;
+		margin:0;
+		padding:0;
+		text-align:center;
+	}
+	#menuLista li {
+		display:inline;
+	}
+	#menuLista li a {
+		display:inline-block;
+		padding:13px;
+		text-decoration: none;
+	}
+	#menuLista li a:hover{
+		background-color: #00ace6;
+	}
+	.frecceMenu{
+		display : none;
+	}
+	
+	#footer{
+		border-top : 1px solid #666666;
+		padding : 3%;
+	}
+	
+	.bottone{
+		padding : 1.5%;
+	}
+	.si{
+		margin : 6% 20% 0% 20%;
+	}
+	.no{
+		margin : 4% 30% 1% 30%;
+	}
+	
+}

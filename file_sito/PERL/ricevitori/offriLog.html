@@ -1,0 +1,129 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="it" lang="it">
+ <head>
+  <title>Offri - Travel Share</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta name="title" content="..." />
+  <meta name="description" content="..." />
+  <meta name="keywords" content="offri, travel share, car pooling, passaggio, auto" />
+  <meta name="author" content="Giovanni Sanna, Nicolò Rigato, Riccardo Ardossi, Riccardo Saggese" />
+  <meta name="language" content="italian it" />
+
+  <meta name="viewport" content="width=device-width" />
+
+  <link href="screen.css" rel="stylesheet" type="text/css" media="screen" />
+  <link href="print.css" rel="stylesheet" type="text/css" media="print" />
+
+
+<script src="http://code.jquery.com/jquery-1.8.2.js"></script>
+<script src="http://code.jquery.com/ui/1.9.1/jquery-ui.js"></script>
+<link rel="stylesheet" href="http://code.jquery.com/ui/1.9.2/themes/base/jquery-ui.css" />
+
+
+  <script type="text/javascript">
+  <!--
+	$(function() {
+		//$.datepicker.setDefaults($.datepicker.regional['it']);
+		$("#data").datepicker({ dateFormat: 'dd-mm-yy', minDate: 0, maxDate: +30 });
+    $("#oraP").timeEntry();
+	});
+
+
+  -->
+	</script>
+
+  <link rel="icon" href="Immagini/TS_icon.png" type="image/x-icon" />
+  <link rel="shortcut icon" href="Immagini/TS_icon.png" type="image/x-icon" />
+ </head>
+
+ <body>
+
+  <div id="header">
+   <a href="homeLog.html" tabindex="1"><img src="Immagini/banner.png" id="banner" alt="Banner Travel Share - Link diretto alla Home" /></a>
+   <a id="bottoneMenu" href="#menu">Men&ugrave;</a>
+  </div>
+
+  <div id="utente">
+   <p>Ciao WWWWWWWWWWWWWWW</p>
+   <p><a href="notifiche.html" tabindex="2">Notifiche (0)</a>  <a href="logout.cgi?operation=logout" tabindex="3">Logout</a></p>
+  </div>
+
+  <div id="contenuto">
+
+   <h1>Offri un passaggio!</h1>
+
+    <form action="" method="get">
+   <fieldset><legend>Partenza e tappe</legend>
+    <label for="partenza">Partenza</label>
+    <input type="text" id="partenza" name="partenza" tabindex="6" value="[%partenza%]"></input><br />
+	<p id="partenza_err" class="errore">[%partenza_err%]</p>
+    <label for="arrivo">Arrivo</label>
+    <input type="text" id="arrivo" name="arrivo" tabindex="7" value="[%arrivo%]"></input><br />
+	<p id="arrivo_err" class="errore">[%arrivo_err%]</p>
+
+    <label for="tappa1">Tappa (facoltativa)</label>
+    <input type="text" id="tappa1" name="tappa1" tabindex="8" value="[%tappa1%]"></input><br />
+	<p id="tappa1_err" class="errore">[%tappa1_err%]</p>
+    <label for="tappa2">Tappa (facoltativa)</label>
+    <input type="text" id="tappa2" name="tappa2" tabindex="9" value="[%tappa2%]"></input><br />
+	<p id="tappa2_err" class="errore">[%tappa2_err%]</p>
+    <label for="tappa3">Tappa (facoltativa)</label>
+    <input type="text" id="tappa3" name="tappa3" tabindex="10" value="[%tappa3%]"></input><br />
+	<p id="tappa3_err" class="errore">[%tappa3_err%]</p>
+   </fieldset>
+
+   <fieldset><legend>Data e ora</legend>
+    <label for="data">Data</label>
+    <input type="text" id="data" name="data" tabindex="11" value="[%data%]"></input><br />
+	<p id="data_err" class="errore">[%data_err%]</p>
+    <label for="oraP">Ora partenza</label>
+    <input type="text" id="oraP" name="oraP" tabindex="12" value="[%oraP%]"></input><br />
+	<p id="oraP_err" class="errore">[%oraP_err%]</p>
+	<label for="oraA">Ora arrivo</label>
+    <input type="text" id="oraA" name="oraA" tabindex="13" value="[%oraA%]"></input><br />
+	<p id="oraA_err" class="errore">[%oraA_err%]</p>
+   </fieldset>
+
+   <fieldset><legend>Informazioni aggiuntive sul viaggio</legend>
+    <label for="prezzo">Prezzo</label>
+    <input type="text" id="prezzo" name="prezzo" tabindex="14" value="[%prezzo%]"></input><br />
+	<p id="prezzo_err" class="errore">[%prezzo_err%]</p>
+    <label for="posti">Posti</label>
+    <input type="text" id="posti" name="posti" tabindex="15" value="[%posti%]"></input><br />
+	<p id="posti_err" class="errore">[%posti_err%]</p>
+
+    <label for="descrizioneViaggio">Note sul viaggio (facoltativa)</label>
+    <textarea id="descrizioneViaggio" name="descrizioneViaggio" tabindex="16" rows="0" cols="0">[%descrizioneViaggio%]</textarea><br />
+
+    <label for="bagagli">Bagagli
+    <select id="bagagli" name="bagagli" tabindex="17">
+    <option value="piccolo">Piccolo</option>
+    <option value="medio">Medio</option>
+    <option value="grande">Grande</option>
+    </select></label>
+   </fieldset>
+
+   <div><input type="submit" value="Invia" tabindex="18"></input></div>
+
+  </form>
+
+  </div>
+
+  <div id="menu">
+  <ul id="menuLista">
+   <li><a href="homeLog.html" tabindex="4">Cerca un passaggio <span class="frecceMenu">&raquo;</span></a></li>
+   <li><a href="profiloPubblicoLog.html" tabindex="5">Gestisci il profilo <span class="frecceMenu">&raquo;</span></a></li>
+   <li><a href="viaggi.html" tabindex="6">Viaggi<span class="frecceMenu">&raquo;</span></a></li>
+   <li><a href="messaggi.html" tabindex="7">Messaggi <span class="frecceMenu">&raquo;</span></a></li>
+   <li><a href="infoLog.html" tabindex="8">Informazioni su <span xml:lang="en" lang="en">Travel Share</span> <span class="frecceMenu">&raquo;</span></a></li>
+  </ul>
+  </div>
+
+  <div id="footer">
+   <a href="logout.cgi?operation=logout" tabindex="22">Logout</a>
+   <a href="#header" tabindex="23">Torna su</a>
+  </div>
+
+  </body>
+</html>

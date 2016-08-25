@@ -1,43 +1,68 @@
-\documentclass{article}
+\documentclass[10 pt,a4paper, openany]{article}
+%titlepage
+\usepackage[italian]{babel}
+\usepackage[T1]{fontenc}
+\usepackage[utf8x]{inputenc}
+\usepackage{amsfonts}
+\usepackage{multicol}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{framed}
+\usepackage{extarrows}
+\usepackage{cancel}
+%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{listings}
+\lstset{numbers=left}
+%\usepackage{incgraph,tikz}
+\usepackage{pdfpages}
+%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{vmargin}
 
-\usepackage[latin1]{inputenc}
-\usepackage{tikz}
-\usetikzlibrary{shapes,arrows,positioning}
+\setpapersize{A4}
+\setmarginsrb{25mm}{15mm}{20mm}{15mm}{0mm}{10mm}{0mm}{10mm}
+%%% SPIEGAZIONE
+%\setmarginsrb{<leftmargin>}{<topmargin>}%
+%             {<rightmargin>}{<bottommargin>}%
+%             {<headheight>}{<headsep>}%
+%             {<footheight>}{<footskip>}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%\usepackage{tikz}
+%\usetikzlibrary{trees}
+%\usepackage{forest}
+%\usepackage{newfloat}
+%\DeclareFloatingEnvironment[fileext=lod]{diagram}
+%\usepackage{wrapfig}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%\author{Nicol\'{o} Rigato - 1006492}
+\title{Relazione del progetto\\di\\Tecnologie Web}
+\date{}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 \begin{document}
-\pagestyle{empty}
 
-
-
-
-
-\tikzstyle{resource} = [rectangle, draw, fill=red!20, 
-    text width=4.5em, text badly centered, node distance=3cm, inner
-    sep=0pt, minimum height=3em]
-\tikzstyle{block} = [rectangle, draw, fill=blue!20, 
-    text min-width=5em, text centered, rounded corners, minimum height=4em]
-\tikzstyle{line} = [draw, -latex']
-\tikzstyle{cloud} = [draw, ellipse,fill=green!20, node distance=3cm,
-    minimum height=2em]
+\maketitle
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%!!!!!!!!!!!!!!!!!!!!!!!
+\begin{center}
+  \begin{tabular}{r l}
+    Studente: & Nicolò Rigato \\
+    Matricola: & 1006492 \\ \\\\\\
+  \end{tabular}
+  \\
+  \begin{tabular}{c}
+    \emph{Note di compilazione} \\
     
+  \end{tabular}
+\end{center}
 
-\begin{tikzpicture}[node distance = 2cm, auto]
-    % Place nodes
-    \node [block] (ass) {ASSEMBLATORE};
-    \node [block, below of=ass] (rec) {RICEVITORE};
-    \node [resource, right of=rec] (xml) {XML FILE};
-    \node [resource, right of=xml] (html) {HTML PAGE};
-
-    \node [cloud, right of=ass] (xslt) {XSLT processor};
-%    \node [block] (init) {HTML};
-   
-    % Draw edges
-    \path [line] (init) -- (rec);
-
-\end{tikzpicture}
-
-
-
-
+\begin{abstract}
+TravelShare
+\end{abstract}
 
 
 

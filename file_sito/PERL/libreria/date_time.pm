@@ -5,6 +5,18 @@ use strict;
 use warnings;
 use Time::Local;
 
+sub valida_data {
+  my $day = shift @_;
+  my $month = shift @_;
+  my $year = shift @_;
+  if(eval{ timelocal(0,0,0,$day, $month-1, $year); 1;}){
+    return 1;
+  }
+  else{
+    return 0;
+  }
+}
+
 sub calcola_tappe {
   #data partenza
   my $din  = shift @_;
@@ -23,14 +35,9 @@ sub calcola_tappe {
   #numero di tappe
   my $n = shift @_;
   #########################################
-  #my $dateObjin = DateTime->new(year => $yin, month => $min, day => $din,
-  #                              hour => $hourin, minute => $minutein);
-  #my $epoch_in = $dateObjin->epoch;
-  #my $dateObjfi = DateTime->new(year => $yfi, month => $mfi, day => $dfi,
-  #                              hour => $hourfi, mfiute => $mfiutefi);
-  #my $epoch_fi = $dateObjfi->epoch;
-  my $epoch_in = timelocal(0, $minutein, $hourin, $din, $min, $yin);
-  my $epoch_fi = timelocal(0, $minutefi, $hourfi, $dfi, $mfi, $yfi);
+
+  my $epoch_in = timelocal(0, $minutein, $hourin, $din, $min -1, $yin);
+  my $epoch_fi = timelocal(0, $minutefi, $hourfi, $dfi, $mfi -1, $yfi);
   my $aux = ($epoch_fi - $epoch_in)/($n * 60);
   my $intervallo = ($epoch_fi - $epoch_in)/$n;
   my @ans;
