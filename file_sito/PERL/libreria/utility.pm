@@ -92,7 +92,19 @@ sub calcola_posti_disponibili {
     return $min;
 }
 
-
+sub calcola_prezzo {
+    my $part= shift @_;
+    my $arr = shift @_;
+    my $id_p = shift @_;
+    my $doc= shift @_;
+    my @tappe_tot = $doc->findnodes("//SetPassaggi/Passaggio[IDViaggio='$id_p']/Itinerario/*")->get_node(1)->textContent();
+    my @tappe_viaggio = $doc->findnodes("//SetPassaggi/Passaggio[IDViaggio='$id_p']/Itinerario/*")->get_node(1)->textContent();
+    my $prezzo_tot = $doc->findnodes("//SetPassaggi/Passaggio[IDViaggio='$id_p']/PrezzoTot");
+    my $num_tappe_tot = @tappe_tot;
+    my $num_tappe_viaggio = @tappe_viaggio;    
+    
+    return ($prezzo_tot/$num_tappe_tot)*$num_tappe_viaggio;
+}
 
 
 1;
