@@ -17,6 +17,31 @@ sub valida_data {
   }
 }
 
+sub confronto_dataora {
+  #data precedente
+  my $din  = shift @_;
+  my $min  = shift @_;
+  my $yin  = shift @_;
+  #
+  my $hourin  = shift @_;
+  my $minutein = shift @_;
+  #data sucessiva
+  my $dfi  = shift @_;
+  my $mfi  = shift @_;
+  my $yfi  = shift @_;
+  #
+  my $hourfi  = shift @_;
+  my $minutefi = shift @_;
+  my $epoch_in = timelocal(0, $minutein, $hourin, $din, $min, $yin);
+  my $epoch_fi = timelocal(0, $minutefi, $hourfi, $dfi, $mfi, $yfi);
+  if($epoch_fi<$epoch_in) {
+    return 0;
+  }
+  else {
+    return 1;
+  }
+}
+
 sub calcola_tappe {
   #data partenza
   my $din  = shift @_;
@@ -45,6 +70,7 @@ sub calcola_tappe {
     my $date_aux = $epoch_in + ($intervallo*$i);
     #push @ans, scalar localtime($date_aux);
     my ($sec, $min, $hour, $day,$month,$year) = (localtime($date_aux))[0,1,2,3,4,5];
+    $month = $month + 1;
     if(length($sec)==1){
       $sec = join '', '0', $sec;
     }

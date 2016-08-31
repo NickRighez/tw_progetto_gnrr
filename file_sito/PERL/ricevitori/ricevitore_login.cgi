@@ -9,27 +9,37 @@ use CGI::Session qw/-ip-match/;
 use CGI::Carp qw(fatalsToBrowser);  
 use lib "../libreria";
 use data_registration;
+use lib "libreria";
+use sessione;
 
  my $cgi = new CGI;
- my %aux = data_registration::serializzazione_apertura();
-my $doc = $aux{'doc'};
-my $filehandle = $aux{'filehandle'};
+ my @s = sessione::creaSessione();  
+ my $session = $s[0];
+my $doc = data_registration::get_xml_doc();;
 my $username=$cgi->param('username');
 my $psw=$cgi->param('password');
 my @ute = $doc->findnodes("//SetUtenti/Utente[Username='$username' and Password='$psw']");
 my $n = @ute;
 if($n == 0) {
-	data_registration::serializzazione_chiusura($filehandle,$doc);
-	die("username/password non corretti");
+	my %problems = (
+		ERR_LOGIN => "username/password non corretti"
+		);
+	my %old_input = (
+		USERNAME => $username,
+		PASSWORD => $psw
+		);
+	$session->param('problems',\%problems);
+	$session->param('old_input',\%old_input);
+	#print $cgi->redirect('http://localhost/cgi-bin/tw_progetto_gnrr/file_sito/PERL/accedi.cgi');
+	print $session->header(-location => "http://localhost/cgi-bin/tw_progetto_gnrr/file_sito/PERL/assemblatori/assemblatore_login.cgi");
 }
 else {
  #my $sid = $cgi->cookie("CGISESSID") || undef;
-my $session    = new CGI::Session; #load CGI::Session(undef, $sid, {Directory=>'/tmp'});	
-#print "Content-type: text/html\n\n";                      
-$session->save_param($cgi);
+	
+$session->param('username',$username);
 $session->param('loggedin','yes');
 $session->expires("+1h");
 $session->flush();
-print $session->header(-location => "http://localhost/cgi-bin/tw_progetto_gnrr/file_sito/PERL/home.cgi");
+print $session->header(-location => "http://localhost/cgi-bin/tw_progetto_gnrr/file_sito/PERL/assemblatori/assemblatore_home.cgi");
  #print $cgi->redirect('http://localhost/cgi-bin/tw_progetto_gnrr/file_sito/PERL/home.cgi');
 }

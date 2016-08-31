@@ -14,7 +14,6 @@ use sessione;
 
  my @s = sessione::creaSessione();  
  my $session = $s[0]; 
-
 my $q=CGI->new;
 
 if(!defined($session->param('username'))) {
@@ -24,40 +23,20 @@ if(!defined($session->param('username'))) {
   $session->param('problems',\%problems);
   print $session->header(-location => "http://localhost/cgi-bin/tw_progetto_gnrr/file_sito/PERL/accedi.cgi");
 }
-
 print "Content-type: text/html\n\n";
 my $username=$session->param('username');
-my $contenuto;
+
+data_registration::aggiorna_feedback_da_rilasciare();
 
 my $doc=data_registration::get_xml_doc();
-my @conv=$doc->findnodes("//SetMessaggi/Conversazione[\@User1='$username' or \@User2='$username']");
-if(@conv == 0) {
-  $contenuto = "<p>Non ci sono conversazioni con altri utenti </p>";
-}
-else {
-  my %Messaggi = ( UTENTE => $username );
-  $contenuto = research::query_messaggi(\%Messaggi);
-}
+my $contenuto = research::query_viaggi_utente($username, $doc);
 
-my $file = "TravelShare/messaggi.html";
+my $file = "TravelShare/viaggi.html";
 my %hash_keys = (
   USERNAME => $username,
   CONTENUTO => $contenuto
 );  
-if(defined($session->param('problems'))) {
-      my $prob = $session->param('problems');
-      my %prob_hash = %$prob;
-      while( my( $key, $value ) = each %prob_hash ){
-        $hash_keys{$key}="$value";
-    }
-  }
-
-
 my $template_parser = Template->new;
 my $foglio = '';
 $template_parser->process($file,\%hash_keys,\$foglio);
 print $foglio;
-
-if(defined($session->param('problems'))) {
-  $session->clear(['problems']);
-}

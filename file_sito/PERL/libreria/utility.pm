@@ -79,7 +79,7 @@ sub calcola_posti_disponibili {
     my $arr = shift @_;
     my $id_p = shift @_;
     my $doc= shift @_;
-    my $min = $doc->findnodes("//SetPassaggi/Passaggio[IDViaggio='$id_p']/Itinerario/*[\@Numero=$part]/PostiDisp")->get_node(1)->textContent();
+    my $min = $doc->findnodes("//SetPassaggi/Passaggio[IDViaggio='$id_p']/Itinerario/*[\@Numero='$part']/PostiDisp")->get_node(1)->textContent();
     for(my $i=$part+1;$i<$arr;$i++) {
         my @nodes = $doc->findnodes("//SetPassaggi/Passaggio[IDViaggio='$id_p']/Itinerario/*[\@Numero=$i]");
         if(@nodes != 0) {
@@ -91,6 +91,8 @@ sub calcola_posti_disponibili {
     }
     return $min;
 }
+
+
 
 
 1;

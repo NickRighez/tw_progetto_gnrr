@@ -3,6 +3,32 @@
 <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:ts="http://www.dominio.com">
 <xsl:output method='html' version='1.0' encoding='UTF-8' indent='yes' doctype-system="http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd" doctype-public="-//W3C//DTD XHTML 1.0 Strict//EN" />
 
+<xsl:variable name="num_tappe_tot">
+	<xsl:value-of select="count(ts:TravelShare/SetPassaggi/Passaggio[IDViaggio='[% VIAGGIO %]']/Itinerario/*)" />
+</xsl:variable>
+
+<xsl:variable name="num_tappe_corrente">
+	<xsl:value-of select="count(ts:TravelShare/SetPassaggi/Passaggio[IDViaggio='[% VIAGGIO %]']/Itinerario/*[@Numero&gt;=[% NUM_PARTENZA %] and @Numero&lt;=[% NUM_ARRIVO %]])" />
+</xsl:variable>
+
+<xsl:variable name="prezzoTot">
+	<xsl:value-of select="ts:TravelShare/SetPassaggi/Passaggio[IDViaggio='[% VIAGGIO %]']/PrezzoTot" />
+</xsl:variable>
+
+<xsl:variable name="prezzo">
+	<xsl:value-of select="$prezzoTot div $num_tappe_tot * $num_tappe_corrente" />
+</xsl:variable>
+
+<xsl:variable name="minPostiDisp">
+	<xsl:for-each select="ts:TravelShare/SetPassaggi/Passaggio[IDViaggio='[% VIAGGIO %]']/Itinerario/*/PostiDisp" >
+		<xsl:sort data-type="number" />
+		<xsl:if test="position()=1">
+			<xsl:value-of select="."/>
+		</xsl:if>
+	</xsl:for-each>
+</xsl:variable>
+
+
 		    			
 	<xsl:template match="/">
 	    		<xsl:for-each select="ts:TravelShare/SetPassaggi/Passaggio[IDViaggio='[% VIAGGIO %]']" > 
@@ -21,8 +47,8 @@
 	    					<p>Data : <xsl:value-of select="Itinerario/*[@Numero=[% NUM_PARTENZA %]]/Data"/> </p>
 	    					<p>Ora partenza: <xsl:value-of select="Itinerario/*[@Numero=[% NUM_PARTENZA %]]/Ora"/> </p>
 	    					<p>Ora arrivo: <xsl:value-of select="Itinerario/*[@Numero=[% NUM_ARRIVO %]]/Ora"/> </p>
-	    					<p>Prezzo: [% PREZZO %] </p>
-	    					<p>Posti: [% POSTI %] </p>
+	    					<p>Prezzo: <xsl:value-of select="$prezzo" /> </p>
+	    					<p>Posti: <xsl:value-of select="$minPostiDisp" /> </p>
 	    					<p>Descrizione del viaggio</p>
 	    					<div class="descrizione">
 	    						<xsl:choose>
@@ -46,8 +72,15 @@
 
 	<xsl:template name="utente" >
 		<xsl:param name="ute"/>
-		<p>Conducente: <a href="http://localhost/cgi-bin/tw_progetto_gnrr/file_sito/PERL/assemblatori/assemblatore_profilo.cgi?utente=[% CONDUCENTE %]"> <xsl:value-of select="/ts:TravelShare/SetUtenti/Utente[Username=$ute]/Nome"/>
-	     <xsl:value-of select="/ts:TravelShare/SetUtenti/Utente[Username=$ute]/Cognome"/></a></p>
+		<p>Conducente: 
+			<a>
+		    		<xsl:attribute name="href">http://localhost/cgi-bin/tw_progetto_gnrr/file_sito/PERL/assemblatori/assemblatore_profilo.cgi?utente=<xsl:value-of select="$ute" /></xsl:attribute>
+			    	<xsl:attribute name="title"></xsl:attribute>
+			    	<xsl:attribute name="class"></xsl:attribute>
+			    	<xsl:value-of select="$ute" />
+			</a>
+
+		</p>
 	     <p>Anno di nascita: <xsl:value-of select="/ts:TravelShare/SetUtenti/Utente[Username=$ute]/AnnoNascita" /></p>
 	     <p>Auto: <xsl:value-of select="/ts:TravelShare/SetUtenti/Utente[Username=$ute]/Profilo/Auto"/></p>
 	     <p>Anno di rilascio della patente: <xsl:value-of select="/ts:TravelShare/SetUtenti/Utente[Username=$ute]/Profilo/Patente"/></p>

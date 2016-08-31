@@ -25,11 +25,72 @@
 							</div>
 						</xsl:otherwise>
 					</xsl:choose>
-				</xsl:for-each>
+				</xsl:for-each>	
 				<xsl:if test="@User1='[% UTENTE %]' or @User2='[% UTENTE %]'">
-					<textarea rows="" cols="" name="messaggio"></textarea>
-					<div><input type="submit" value="Invia"></input></div>
+							<form action="http://localhost/cgi-bin/tw_progetto_gnrr/file_sito/PERL/ricevitori/ricevitore_messaggio_pubblico.cgi" method="POST">
+							<input>
+										<xsl:attribute name="type">hidden</xsl:attribute>
+										<xsl:attribute name="name">passaggio</xsl:attribute>
+										<xsl:attribute name="value">[% VIAGGIO %]</xsl:attribute>
+							</input>
+							<xsl:choose>
+								<xsl:when test="../../Conducente='[% UTENTE %]' and @User1='[% UTENTE %]'">
+									<input>
+										<xsl:attribute name="type">hidden</xsl:attribute>
+										<xsl:attribute name="name">mittente</xsl:attribute>
+										<xsl:attribute name="value">[% UTENTE %]</xsl:attribute>
+									</input>
+									<input>
+										<xsl:attribute name="type">hidden</xsl:attribute>
+										<xsl:attribute name="name">destinatario</xsl:attribute>
+										<xsl:attribute name="value"><xsl:value-of select="../@User2"/></xsl:attribute>
+									</input>
+								</xsl:when>
+								<xsl:when test="../../Conducente='[% UTENTE %]' and @User2='[% UTENTE %]'">
+									<input>
+										<xsl:attribute name="type">hidden</xsl:attribute>
+										<xsl:attribute name="name">mittente</xsl:attribute>
+										<xsl:attribute name="value">[% UTENTE %]</xsl:attribute>
+									</input> 
+									<input>
+										<xsl:attribute name="type">hidden</xsl:attribute>
+										<xsl:attribute name="name">destinatario</xsl:attribute>
+										<xsl:attribute name="value"><xsl:value-of select="../@User1"/></xsl:attribute>
+									</input>
+								</xsl:when>
+								<xsl:otherwise>
+									<input>
+										<xsl:attribute name="type">hidden</xsl:attribute>
+										<xsl:attribute name="name">mittente</xsl:attribute>
+										<xsl:attribute name="value">[% UTENTE %]</xsl:attribute>
+									</input>
+									<input>
+										<xsl:attribute name="type">hidden</xsl:attribute>
+										<xsl:attribute name="name">destinatario</xsl:attribute>
+										<xsl:attribute name="value"><xsl:value-of select="../../Conducente"/></xsl:attribute>
+									</input>
+								</xsl:otherwise>
+							</xsl:choose>
+							<input>
+										<xsl:attribute name="type">hidden</xsl:attribute>
+										<xsl:attribute name="name">passaggio</xsl:attribute>
+										<xsl:attribute name="value">[% VIAGGIO %]</xsl:attribute>
+							</input> 
+							<input>
+										<xsl:attribute name="type">hidden</xsl:attribute>
+										<xsl:attribute name="name">partenza</xsl:attribute>
+										<xsl:attribute name="value">[% NUM_PARTENZA %]</xsl:attribute>
+									</input>
+							<input>
+										<xsl:attribute name="type">hidden</xsl:attribute>
+										<xsl:attribute name="name">arrivo</xsl:attribute>
+										<xsl:attribute name="value">[% NUM_ARRIVO %]</xsl:attribute>
+									</input>		
+								<textarea rows="" cols="" name="messaggio"></textarea>
+								<div><input type="submit" value="Invia"></input></div>
+							</form>
 				</xsl:if>
+						
 			</div>
 		</xsl:for-each>
 	</xsl:template>

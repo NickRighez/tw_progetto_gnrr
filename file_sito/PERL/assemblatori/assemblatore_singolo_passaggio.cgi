@@ -1,127 +1,109 @@
 #! /usr/bin/perl -w
-print "Content-type: text/html\n\n";
-
+#print "Content-type: text/html\n\n\n";
 use strict;
 use warnings;
 use diagnostics;
 use CGI;
-use CGI::Session;
 use CGI::Carp qw(fatalsToBrowser);
 use lib "../libreria";
 use research;
+use data_registration;
+use CGI::Session;
+use lib "../libreria";    
+use sessione;
+
+my @s = sessione::creaSessione();  
+my $session = $s[0];
 
 my $q=CGI->new;
-my $session=new CGI::Session;
-$session->load();
-
-print("<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Strict//EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd\">  \n
-
-<html xmlns=\"http://www.w3.org/1999/xhtml\" xml:lang=\"it\" lang=\"it\"> \n
- <head> \n
-  <title>Dettagli del viaggio - Travel Share</title> \n
-  <meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\"/> \n
-  <meta name=\"title\" content=\"...\" />  \n
-  <meta name=\"description\" content=\"...\" /> \n
-  <meta name=\"keywords\" content=\"messaggi, travel share, car pooling, passaggio, auto\" /> \n
-  <meta name=\"author\" content=\"Giovanni Sanna, Nicolò Rigato, Riccardo Ardossi, Riccardo Sagges\" /> \n
-  <meta name=\"language\" content=\"italian it\" /> \n
-  
-  <meta name=\"viewport\" content=\"width=device-width\" />  \n
-  
-  <link href=\"/screen.css\" rel=\"stylesheet\" type=\"text/css\" media=\"screen\" /> \n
-  <link href=\"print.css\" rel=\"stylesheet\" type=\"text/css\" media=\"print\" /> \n
-  
-  <link rel=\"icon\" href=\"Immagini/TS_icon.png\" type=\"image/x-icon\" /> \n
-  <link rel=\"shortcut icon\" href=\"Immagini/TS_icon.png\" type=\"image/x-icon\" /> \n
- </head>
- 
- <body> \n
-	
-  <div id=\"header\"> \n
-   <a href=\"homeLog.html\" tabindex=\"\"><img src=\"Immagini/banner.png\" id=\"banner\" alt=\"Banner Travel Share - Link diretto alla Home\" /></a>
-   <a id=\"bottoneMenu\" href=\"#menu\" tabindex=\"\">Men&ugrave;</a> \n
-  </div> \n
-  ");
-
-
-  
-if(defined($session->param('loggedin'))) {
-  my $username = $session->param('username');
-  print("<div id=\"utente\"> \n
-   <p>Ciao my $username </p>
-   <p><a href=\"notifiche.html\">Notifiche (0)</a>  <a href=\"logout.cgi?operation=logout\" tabindex=\"\">Logout</a></p>
-  </div>
-  ");
+my $contenuto = "";
+my $doc = data_registration::get_xml_doc();
+my %hash_keys;
+if(defined($session->param('problems'))) {
+      my $prob = $session->param('problems');
+      my %prob_hash = %$prob;
+      while( my( $key, $value ) = each %prob_hash ){
+        $hash_keys{$key}="$value";
+    }
 }
-print("<div id=\"contenuto\">");
-
-
-
-
-
+my $pass = $q->param('passaggio'), ; 
+my $part =$q->param('part');
+my $arr = $q->param('arr');
 my %Pass=(
-	VIAGGIO => $q->param('passaggio'),   
-	NUM_PARTENZA =>$q->param('part'),
-	NUM_ARRIVO => $q->param('arr'),
-	PREZZO => $q->param('prezzo'),
-	POSTI => $q->param('posti'),
-	CONDUCENTE => $q->param('cond')
+	VIAGGIO => $pass,   
+	NUM_PARTENZA =>$part,
+	NUM_ARRIVO => $arr,
+	#PREZZO => $q->param('prezzo'),
+	#POSTI => $q->param('posti'),
+	#CONDUCENTE => $q->param('cond')
 	);
-  
-print research::query_viaggio(\%Pass);
-
-if(defined($session->param('loggedin'))) {
-  my $username = $session->param('username');
-  my $pass = $q->param('passaggio'), ; 
-  my $part =$q->param('part');
-  my $arr = $q->param('arr');
-
-  print "<a href=\"http://localhost/cgi-bin/tw_progetto_gnrr/file_sito/PERL/ricevitori/ricevitore_prenotazione.cgi?passaggio=$pass&part=$part&arr=$arr\" >Prenota</a>";
-
-  my %Bacheca =(
+my %Bacheca =(
     VIAGGIO => $q->param('passaggio'),
-    UTENTE => $username
+    NUM_PARTENZA =>$q->param('part'),
+    NUM_ARRIVO => $q->param('arr'),
+    #PREZZO => $q->param('prezzo'),
+    #POSTI => $q->param('posti'),
+    #CONDUCENTE => $q->param('cond')
     );
 
-    print("<h2>Bacheca dei messaggi</h2>  \n
-     <a class=\"linkSottoH\" href=\"#NuovaConversazione\">Scrivi un messaggio</a> \n
-     <div class=\"contenitore\"> \n
-      ");
-    print research::query_bacheca_viaggio(\%Bacheca);
+$contenuto = research::query_viaggio(\%Pass);
 
-    print("
+
+if(defined($session->param('loggedin'))) {
+  my $username = $session->param('username');
+  my $conducente = $doc->findnodes("//SetPassaggi/Passaggio[IDViaggio='$pass']/Conducente");
+  $Bacheca{UTENTE} = $username;
+  if($conducente ne $username) {
+    $session->param('Passaggio',\%Pass);
+    $contenuto = $contenuto."\n 
+    <a href=\"http://localhost/cgi-bin/tw_progetto_gnrr/file_sito/PERL/ricevitori/ricevitore_richiesta_prenotazione.cgi?passaggio=$pass&partenza=$part&arrivo=$arr\" >Prenota</a>"."\n";
+  }
+  $contenuto = $contenuto."\n 
+    <h2>Bacheca dei messaggi</h2>  \n
+      <div class=\"contenitore\">
+      \n".research::query_bacheca_viaggio(\%Bacheca)."\n";
+  if($conducente ne $username) {
+    $contenuto = $contenuto."  
       <div class=\"contenitore\" id=\"NuovaConversazione\"> \n
-       
+       <form action=\"http://localhost/cgi-bin/tw_progetto_gnrr/file_sito/PERL/ricevitori/ricevitore_messaggio_pubblico.cgi\" method=\"POST\" >
         <p>Inizia una nuova conversazione con il proprietario del viaggio!</p><br /> \n
-       
+        <input type=\"hidden\" name=\"mittente\" value=\"$username\"></input>
+        <input type=\"hidden\" name=\"destinatario\" value=\"".$q->param('cond')."\"></input>
+        <input type=\"hidden\" name=\"passaggio\" value=\"".$q->param('passaggio')."\"></input>
+        <input type=\"hidden\" name=\"partenza\" value=\"".$q->param('part')."\"></input>
+        <input type=\"hidden\" name=\"arrivo\" value=\"".$q->param('arr')."\"></input>
+        <input type=\"hidden\" name=\"prezzo\" value=\"".$q->param('prezzo')."\"></input>
+        <input type=\"hidden\" name=\"posti\" value=\"".$q->param('posti')."\"></input>
+        <input type=\"hidden\" name=\"conducente\" value=\"".$q->param('cond')."\"></input>
         <textarea rows=\"\" cols=\"\" name=\"messaggio\"></textarea> \n
         
-        <div><input type=\"submit\" value=\"Invia\"></input></div> \n
-      
-      </div> \n ");
-    }
+        <div><input type=\"submit\" value=\"Invia\"></input></div> \n";
+  }    
 
+  $contenuto = $contenuto."</div> \n ";
+  my $file = "TravelShare/singoloViaggioLog.html";
+  $hash_keys{USERNAME} = $username;
+  $hash_keys{CONTENUTO} = $contenuto;  
+  my $template_parser = Template->new;
+  my $foglio = '';
+  $template_parser->process($file,\%hash_keys,\$foglio);
+  print $foglio;
+}
+else {
+  $Bacheca{UTENTE} = "";
+  $contenuto = $contenuto."\n 
+    <h2>Bacheca dei messaggi</h2>  \n
+     <div class=\"contenitore\">
+      \n".research::query_bacheca_viaggio(\%Bacheca)."\n";
 
- print("  
-  </div> \n
+  my $file = "TravelShare/singoloViaggio.html";
+  $hash_keys{CONTENUTO} = $contenuto;  
+  my $template_parser = Template->new;
+  my $foglio = '';
+  $template_parser->process($file,\%hash_keys,\$foglio);
+  print $foglio;
+}
 
-	<div id=\"menu\"> \n
-  <ul> \n
-   <li><a href=\"homeLog.html\" tabindex=\"\">Cerca un passaggio <span class=\"frecceMenu\">&raquo;</span></a></li> \n
-   <li><a href=\"offriLog.html\" tabindex=\"\">Offri un passaggio <span class=\"frecceMenu\">&raquo;</span></a></li>   \n
-   <li><a href=\"profiloPubblicoLog.html\" tabindex=\"\">Gestisci il profilo <span class=\"frecceMenu\">&raquo;</span></a></li> \n
-   <li><a href=\"viaggi.html\" tabindex=\"\">Viaggi<span class=\"frecceMenu\">&raquo;</span></a></li> \n
-   <li><a href=\"infoLog.html\" tabindex=\"\">Informazioni su <span xml:lang=\"en\" lang=\"en\">Travel Share</span> <span class=\"frecceMenu\">&raquo;</span></a></li>
-  </ul> \n
-  </div> \n
-	
-  <div id=\"footer\">  \n
-   <a href=\"logout.cgi?operation=logout\" tabindex=\"\">Logout</a> \n
-   <a href=\"#header\" tabindex=\"\">Torna su</a> \n
-  </div> \n
-  
-  </body> \n
-</html>");
-
-
- 
+if(defined($session->param('problems'))) {
+  $session->clear(['problems']);
+  } 

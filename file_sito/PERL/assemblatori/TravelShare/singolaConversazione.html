@@ -1,0 +1,65 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="it" lang="it">
+ <head>
+  <title>Conversazione - Travel Share</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta name="title" content="..." /> 
+  <meta name="description" content="..." />
+  <meta name="keywords" content="conversazione, travel share, car pooling, passaggio, auto" />
+  <meta name="author" content="Giovanni Sanna, Nicolò Rigato, Riccardo Ardossi, Riccardo Saggese" />
+  <meta name="language" content="italian it" />
+  
+  <meta name="viewport" content="width=device-width" /> 
+  
+  <link href="/screen.css" rel="stylesheet" type="text/css" media="screen" />
+  <link href="print.css" rel="stylesheet" type="text/css" media="print" />
+  
+  <link rel="icon" href="Immagini/TS_icon.png" type="image/x-icon" />
+  <link rel="shortcut icon" href="Immagini/TS_icon.png" type="image/x-icon" />
+ </head>
+ 
+ <body>
+	
+  <div id="header">
+   <a href="homeLog.html" tabindex="1"><img src="Immagini/banner.png" id="banner" alt="Banner Travel Share - Link diretto alla Home" /></a>
+   <a id="bottoneMenu" href="#menu">Men&ugrave;</a>
+  </div>
+  
+  <div id="utente">
+   <p>Ciao [% USERNAME %]</p>
+   <p><a href="notifiche.html" tabindex="2">Notifiche (0)</a>  <a href="logout.cgi?operation=logout" tabindex="3">Logout</a></p>
+  </div>
+	
+  <div id="contenuto">
+
+	<h1>Conversazione con <a href="profiloPubblicoLog.html" tabindex="10">[% conversatore %]</a></h1>
+	
+		[% CONTENUTO %]
+   
+   <form action="http://localhost/cgi-bin/tw_progetto_gnrr/file_sito/PERL/ricevitori/ricevitore_messaggio_privato.cgi" method="POST" >
+    <input type="hidden" name="destinatario" value="[% destinatario_mess_p %]"></input>
+		<textarea rows="0" cols="0" name="messaggio" tabindex="11" title="Inserisci un messaggio"></textarea>
+		
+		<div><input type="submit" value="Invia" tabindex="12"></input></div>
+   
+  </div>
+ 
+  <div id="menu">
+  <ul id="menuLista">
+   <li><a href="homeLog.html" tabindex="4">Cerca un passaggio <span class="frecceMenu">&raquo;</span></a></li>
+   <li><a href="offriLog.html" tabindex="5">Offri un passaggio <span class="frecceMenu">&raquo;</span></a></li>
+   <li><a href="profiloPubblicoLog.html" tabindex="6">Gestisci il profilo <span class="frecceMenu">&raquo;</span></a></li>
+   <li><a href="viaggi.html" tabindex="7">Viaggi<span class="frecceMenu">&raquo;</span></a></li>
+   <li><a href="messaggi.html" tabindex="8">Messaggi <span class="frecceMenu">&raquo;</span></a></li>
+   <li><a href="infoLog.html" tabindex="9">Informazioni su <span xml:lang="en" lang="en">Travel Share</span> <span class="frecceMenu">&raquo;</span></a></li>
+  </ul>
+  </div>
+	
+  <div id="footer">
+   <a href="logout.cgi?operation=logout" tabindex="13">Logout</a>
+   <a href="#header" tabindex="14">Torna su</a>
+  </div>
+  
+  </body>
+</html>

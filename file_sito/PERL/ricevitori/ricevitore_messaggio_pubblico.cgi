@@ -1,37 +1,43 @@
 #! /usr/bin/perl -w
-print "Content-type: text/html\n\n";
+#print "Content-type: text/html\n\n";
 
 use strict;
 use warnings;
 use diagnostics;
 use CGI;
+use CGI::Session;
 use CGI::Carp qw(fatalsToBrowser);
 use lib "../libreria";
 use data_registration;
+use lib "../libreria";
+use sessione;
+use HTML::Entities;
+my $q=new CGI;
 
-my $q=CGI->new;
+ my @s = sessione::creaSessione();  
+ my $session = $s[0]; 
+ 
+if(!defined($session->param('username'))) {
+  my %problems=(
+     not_logged => "Utente non loggato, pagina inaccessibile"
+     );
+  $session->param('problems',\%problems);
+  print $session->header(-location => "http://localhost/cgi-bin/tw_progetto_gnrr/file_sito/PERL/assemblatori/assemblatore_login.cgi");
+} 
 
-my $mitt = $q->param('Mittente');
-my $dest = $q->param('Destinatario');
-my $pas = $q->param('Passaggio');
-my %aux=data_registration::serializzazione_apertura();
-my $doc=$aux{'doc'};
-my $filehandle=$aux{'filehandle'};
+my $mitt = $session->param('username');
+my $dest=$q->param('destinatario');
+my $pas = $q->param('passaggio');
+my $part = $q->param('partenza');
+my $arr = $q->param('arrivo');
+
+if(!($q->request_method eq 'POST')) {
+	# rimandare alla home con errore
+}
+
+my $doc=data_registration::get_xml_doc();
 
 # se si deve confrontare una stringa proveniente da un nodo, è NECESSARIO TextContent
-my $conduc=$doc->findnodes("//SetPassaggi/Passaggio[IDViaggio=\"$pas\"]/Conducente")->get_node(1)->textContent();
-if($q->param('Mittente') eq $conduc) {
-	my @conver = $doc->findnodes("//SetPassaggi/Passaggio[IDViaggio=\"$pas\"]/Bacheca/ConversazioneBacheca[\@User1=\"$dest\" and \@User2=\"$mitt\"]");
-	my $num_conv = @conver;
-	if($num_conv eq 0) {
-		die("Il conducente non può avviare una conversazione per un suo passaggio");
-	}
-}
-elsif ($q->param('Destinatario') ne $conduc) {
-	die("Una conversazione bacheca deve avvenire fra il conducente e un altro utente");
-}
-data_registration::serializzazione_chiusura($filehandle,$doc);
-
 
 my ($sec,$min,$hour,$mday,$mon,$year,$wday,$yday,$isdst) = localtime();
 $year=$year+1900;
@@ -44,13 +50,18 @@ if (length($sec)  == 1) {$sec = "0$sec";}
 my $d = $year."-".$mon."-".$mday;
 my $o = $hour.":".$min.":".$sec;
 
+my $mess = $q->param('messaggio');
+$mess =encode_entities($mess,'>');
+$mess = encode_entities($mess, '<');
 my %Messaggio=(	
-	Mittente => $q->param('Mittente'),
-	Destinatario => $q->param('Destinatario'),
+	Mittente => $mitt,
+	Destinatario => $dest,
 	Data => $d,
 	Ora => $o,
-	Testo => $q->param('messaggio')
+	Testo => $mess
 );
 
 #  CHECK INPUT Testo PER CODE INJECTION
-print data_registration::inserisci_nuovo_messaggio_bacheca($q->param('Passaggio'),\%Messaggio);
+if(data_registration::inserisci_nuovo_messaggio_bacheca($pas,\%Messaggio)) {
+	print $q->redirect("http://localhost/cgi-bin/tw_progetto_gnrr/file_sito/PERL/assemblatori/assemblatore_singolo_passaggio.cgi?passaggio=$pas&part=$part&arr=$arr");
+}
