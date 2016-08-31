@@ -2,8 +2,16 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="fef897e5-c145-4072-ae4c-90f11426161a" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/tw_progetto_gnrr.iml" afterPath="$PROJECT_DIR$/.idea/tw_progetto_gnrr.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/file_sito/PERL/ricevitori/convers_singola.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/file_sito/PERL/ricevitori/feedback.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/file_sito/PERL/ricevitori/login.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/file_sito/PERL/ricevitori/messaggio_pr.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/file_sito/PERL/ricevitori/messaggio_pu.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/file_sito/PERL/ricevitori/modifica.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/file_sito/PERL/ricevitori/passaggio.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/file_sito/PERL/ricevitori/prenotazione.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/file_sito/PERL/ricevitori/utente.js" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/file_sito/PERL/ricevitori/offriLog.html" afterPath="$PROJECT_DIR$/file_sito/PERL/ricevitori/offriLog.html" />
     </list>
     <ignored path="tw_progetto_gnrr.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -23,7 +31,7 @@
     <favorites_list name="tw_progetto_gnrr" />
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300" />
+    <leaf />
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -33,6 +41,7 @@
       <list>
         <option value="$PROJECT_DIR$/file_sito/PERL/libreria/data_registration.pm" />
         <option value="$PROJECT_DIR$/file_sito/PERL/libreria/sessione.pm" />
+        <option value="$PROJECT_DIR$/file_sito/PERL/ricevitori/offriLog.html" />
       </list>
     </option>
   </component>
@@ -73,6 +82,8 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scratches" />
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -147,8 +158,6 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scope" />
-      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -273,9 +282,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="e#737#738#0#Perl5" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -283,7 +289,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="176" column="0" selection-start-line="176" selection-start-column="0" selection-end-line="176" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -291,9 +296,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="e#737#738#0#Perl5" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -301,7 +303,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="95" column="2" selection-start-line="95" selection-start-column="2" selection-end-line="95" selection-end-column="2" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -309,9 +310,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="17" column="0" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
-          <folding>
-            <element signature="e#737#738#0#Perl5" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -319,7 +317,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="86" column="0" selection-start-line="86" selection-start-column="0" selection-end-line="86" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -341,9 +338,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.30927834">
           <caret line="22" column="0" selection-start-line="22" selection-start-column="0" selection-end-line="22" selection-end-column="0" />
-          <folding>
-            <element signature="e#737#738#0#Perl5" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -351,6 +345,13 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.69072163">
           <caret line="176" column="0" selection-start-line="176" selection-start-column="0" selection-end-line="176" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/file_sito/PERL/ricevitori/offriLog.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.25655645">
+          <caret line="15" column="74" selection-start-line="15" selection-start-column="74" selection-end-line="15" selection-end-column="74" />
           <folding />
         </state>
       </provider>

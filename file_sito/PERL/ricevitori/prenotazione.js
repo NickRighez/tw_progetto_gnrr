@@ -1,2 +1,0 @@
-// Pagina di prenotazione
-

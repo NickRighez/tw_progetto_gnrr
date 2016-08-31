@@ -195,7 +195,7 @@
   <!--  ***************************************************************   SET MESSAGGI   ************************** -->
   <SetMessaggi>
     <Conversazione User1="u2" User2="u1">
-      <Messaggio Letto="si">
+      <Messaggio Letto="no">
         <Mittente>u2</Mittente>
         <Data>2016-04-24</Data>
         <Ora>18:07:00</Ora>
@@ -207,7 +207,31 @@
         <Ora>19:07:00</Ora>
         <Testo> [.............] </Testo>
       </Messaggio>
-      <Messaggio Letto="si">
+      <Messaggio Letto="no">
+        <Mittente>u2</Mittente>
+        <Data>2016-04-24</Data>
+        <Ora>19:10:00</Ora>
+        <Testo> [.............] </Testo>
+      </Messaggio>
+      <Messaggio Letto="no">
+        <Mittente>u2</Mittente>
+        <Data>2016-04-24</Data>
+        <Ora>19:10:00</Ora>
+        <Testo> [.............] </Testo>
+      </Messaggio>
+      <Messaggio Letto="no">
+        <Mittente>u2</Mittente>
+        <Data>2016-04-24</Data>
+        <Ora>19:10:00</Ora>
+        <Testo> [.............] </Testo>
+      </Messaggio>
+      <Messaggio Letto="no">
+        <Mittente>u2</Mittente>
+        <Data>2016-04-24</Data>
+        <Ora>19:10:00</Ora>
+        <Testo> [.............] </Testo>
+      </Messaggio>
+      <Messaggio Letto="no">
         <Mittente>u2</Mittente>
         <Data>2016-04-24</Data>
         <Ora>19:10:00</Ora>

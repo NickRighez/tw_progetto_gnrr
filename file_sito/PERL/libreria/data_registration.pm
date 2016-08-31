@@ -14,15 +14,16 @@ package data_registration;
 use strict;
 use warnings;
 use diagnostics;
-use utility;
-use Switch;
+#use utility;
+
 use XML::LibXML;
 use XML::Tidy;
 use Template;
 
 use Fcntl qw( :flock );
 
-our $xml_file = '/var/www/html/cgi-bin/tw_progetto_gnrr/file_sito/provaXML.xml';
+our $xml_file = '/home/nick/Documenti/progetto_tw/tw_progetto_gnrr/file_sito/provaXML.xml';
+#'/var/www/html/cgi-bin/tw_progetto_gnrr/file_sito/provaXML.xml';
 
 our $parser = XML::LibXML->new();
 
@@ -66,9 +67,9 @@ sub serializzazione_chiusura{
 }
 
 # argomenti: frammento xml da inserire, xpath.
-sub serializzazione_inserimento {          
+sub serializzazione_inserimento {
     my $fragm = shift @_;
-    my $xpath_presenza = shift @_; 
+    my $xpath_presenza = shift @_;
     my $xpath_padre = shift @_;
     my $ris;
     #inizializzazione
@@ -107,11 +108,11 @@ sub inserisci_nuovo_utente {
             my $new_chunck = "<$element>$array_argom{$element}</$element>";
             $output = join( "\n", $output, $new_chunck );
          # eliminato il controllo per elemento vuoto
-        }       
+        }
     }
 
     # ATTENZIONE : tenere aggiornata $ultima_parte secondo lo Schema ##################################
-    my $ultima_parte = "<Profilo>   
+    my $ultima_parte = "<Profilo>
     <NumFeedbRicevuti>0</NumFeedbRicevuti>
 	<NumPassaggiOff>0</NumPassaggiOff>
     <NumPassaggiPart>0</NumPassaggiPart>
@@ -121,10 +122,10 @@ sub inserisci_nuovo_utente {
 	<Puntualita>0</Puntualita>
     <Pulizia>0</Pulizia>
 	<Guida>0</Guida>
-    </Valutazione> 
+    </Valutazione>
     </Profilo>
     <Notifiche>
-    </Notifiche>"; 
+    </Notifiche>";
     $output = join( "\n", $output, $ultima_parte );
     $output = join( "\n", $output, "</Utente>\n" );
     my $fragm = $parser->parse_balanced_chunk($output); # or die ****************************************
@@ -148,7 +149,7 @@ sub inserisci_nuovo_viaggio   {
       $idv = substr($idv,1);
       if($idv > $max) {
             $max = $idv;
-      } 
+      }
     }
     $max = $max+1;
     my $idv = "v".$max;
@@ -158,31 +159,31 @@ sub inserisci_nuovo_viaggio   {
     # ESTRAZIONE USERNAME CONDUCENTE DA SESSIONE ###################################
     my $output="<Passaggio>
           <IDViaggio>$idv</IDViaggio>
-          <Conducente>u1</Conducente>   
+          <Conducente>u1</Conducente>
           <PrezzoTot>$array_argom{'PrezzoTot'}</PrezzoTot>
           <PostiTot>$array_argom{'PostiDisp'}</PostiTot>\n";
     if(defined($array_argom{'Dettagli'})) {
         $output=$output."<Dettagli>$array_argom{'Dettagli'}</Dettagli>\n";
     }
     $output=$output."<Itinerario> \n";
-     ###################################################################   
-    
+     ###################################################################
+
     ### CREAZIONE PARTENZA #############################################
     my $p = utility::CreaTappa("Partenza",0,$array_argom{'Partenza'});
     $output = $output.$p;
-   
+
     ### CREAZIONE TAPPA 1 #############################################
     if(defined($array_argom{'Tappa1'})) {
         my $t1 = utility::CreaTappa("Tappa",1,$array_argom{'Tappa1'});
         $output = $output.$t1;
     }
-   
+
     ### CREAZIONE TAPPA 2 #############################################
     if(defined($array_argom{'Tappa2'})) {
         my $t2 = utility::CreaTappa("Tappa",2,$array_argom{'Tappa2'});
         $output = $output.$t2;
     }
-   
+
     ### CREAZIONE TAPPA3 #############################################
     if(defined($array_argom{'Tappa3'})) {
         my $t3 = utility::CreaTappa("Tappa",3,$array_argom{'Tappa3'});
@@ -219,13 +220,13 @@ sub inserisci_prenotazione {
             $prenot = $parser->parse_balanced_chunk("<Utente>$array_argom{'Username'}</Utente>");
             $parent->appendChild($prenot);
            }
-        }    
+        }
     serializzazione_chiusura($fileHandle,$doc);
 }
 
-sub inserisci_nuovo_messaggio_singolo { 
-    my $array_argom_ref = shift @_;  # DEVE CONTENERE CHIAVI : Mittente, Destinatario, Data, Ora, Testo 
-    my %array_argom = %$array_argom_ref; 
+sub inserisci_nuovo_messaggio_singolo {
+    my $array_argom_ref = shift @_;  # DEVE CONTENERE CHIAVI : Mittente, Destinatario, Data, Ora, Testo
+    my %array_argom = %$array_argom_ref;
     my %aux = serializzazione_apertura();
     my $doc = $aux{'doc'};
     my $fileHandle = $aux{'filehandle'};
@@ -234,7 +235,7 @@ sub inserisci_nuovo_messaggio_singolo {
     my @conv = $root->findnodes("SetMessaggi/Conversazione[\@User1=\"$array_argom{'Mittente'}\" and \@User2=\"$array_argom{'Destinatario'}\"] | SetMessaggi/Conversazione[\@User1=\"$array_argom{'Destinatario'}\" and \@User2=\"$array_argom{'Mittente'}\"]");
     my $numNodes = @conv;
     if($numNodes == 0) {
-        $output = $output."<Conversazione User1=\"$array_argom{'Mittente'}\" User2=\"$array_argom{'Destinatario'}\"> 
+        $output = $output."<Conversazione User1=\"$array_argom{'Mittente'}\" User2=\"$array_argom{'Destinatario'}\">
                                 <Messaggio Letto=\"no\">
                                     <Mittente>$array_argom{'Mittente'}</Mittente>
                                     <Data>$array_argom{'Data'}</Data>
@@ -270,19 +271,19 @@ sub inserisci_nuovo_messaggio_singolo {
                 );
             inserisci_notifica("NuovoMessaggio",\%attr,$array_argom{'Destinatario'});
             return 1;
-        } 
+        }
         else {
             return 0;
-        } 
+        }
     }
     # INVIO NOTIFICA A DESTINATARIO
 }
 
 # da valutare a chi inviare una notifica dopo l inserimento di un messaggio in bacheca
-# un 
+# un
 sub inserisci_nuovo_messaggio_bacheca {
     my $idv = shift @_; # id del viaggio
-    my $array_argom_ref = shift @_; # DEVE CONTENERE CHIAVI : Mittente, Destinatario, Data, Ora, Testo  ( il messaggio da inserire ) 
+    my $array_argom_ref = shift @_; # DEVE CONTENERE CHIAVI : Mittente, Destinatario, Data, Ora, Testo  ( il messaggio da inserire )
     my %array_argom = %$array_argom_ref;
     my %aux = serializzazione_apertura();
     my $doc = $aux{'doc'};
@@ -291,8 +292,8 @@ sub inserisci_nuovo_messaggio_bacheca {
     my $output;
     my $conducente= $root->findnodes("//SetPassaggi/Passaggio[IDViaggio=\"$idv\"]/Conducente")->get_node(1)->textContent();
     # caso 1: il conducente(Mittente) risponde un messaggio, quindi deve esistere una conversazione con l utente $array_argom{'Destinatario'}
-    if($array_argom{'Mittente'} eq $conducente) { 
-        my @conv = $root->findnodes("//SetPassaggi/Passaggio[IDViaggio=\"$idv\"]/Bacheca/ConversazioneBacheca[\@User1=\"$array_argom{'Destinatario'}\" and \@User2=\"$conducente\"]");  
+    if($array_argom{'Mittente'} eq $conducente) {
+        my @conv = $root->findnodes("//SetPassaggi/Passaggio[IDViaggio=\"$idv\"]/Bacheca/ConversazioneBacheca[\@User1=\"$array_argom{'Destinatario'}\" and \@User2=\"$conducente\"]");
         $output = $output."<Messaggio>
                                     <Mittente>$array_argom{'Mittente'}</Mittente>
                                     <Data>$array_argom{'Data'}</Data>
@@ -308,18 +309,18 @@ sub inserisci_nuovo_messaggio_bacheca {
                 );
             inserisci_notifica("NuovoMessaggioBacheca",\%attr,$array_argom{'Destinatario'});
             return 1;
-        } 
+        }
         else {
             return 0;
-        } 
+        }
     }
      # caso 2 : il mittente è un utente (diverso dal conducente del viaggio in cui si vuole inserire un messaggio)
     else {
-        my @conv = $root->findnodes("//SetPassaggi/Passaggio[IDViaggio=\"$idv\"]/Bacheca/ConversazioneBacheca[\@User1=\"$array_argom{'Mittente'}\" and \@User2=\"$conducente\"]");  
+        my @conv = $root->findnodes("//SetPassaggi/Passaggio[IDViaggio=\"$idv\"]/Bacheca/ConversazioneBacheca[\@User1=\"$array_argom{'Mittente'}\" and \@User2=\"$conducente\"]");
         my $numNodes = @conv;
-        # se non esiste una conversazione tra i due utenti, crea la nuova conversazione 
+        # se non esiste una conversazione tra i due utenti, crea la nuova conversazione
         if($numNodes == 0) {
-            $output = $output."<ConversazioneBacheca User1=\"$array_argom{'Mittente'}\" User2=\"$conducente\"> 
+            $output = $output."<ConversazioneBacheca User1=\"$array_argom{'Mittente'}\" User2=\"$conducente\">
                                     <Messaggio>
                                         <Mittente>$array_argom{'Mittente'}</Mittente>
                                         <Data>$array_argom{'Data'}</Data>
@@ -358,17 +359,17 @@ sub inserisci_nuovo_messaggio_bacheca {
                     );
                 inserisci_notifica("NuovoMessaggioBacheca",\%attr,$conducente);
                 return 1;
-            } 
+            }
             else {
                 return 0;
-            } 
+            }
         }
     }
-    
+
  }
 
 sub inserisci_notifica{
-    my $tag = shift @_; # tag = NuovoMessaggio, NuovoMessaggioBacheca, FeedDaRilasciare, RichiestaPrenotaz, AccettazionePrenotaz 
+    my $tag = shift @_; # tag = NuovoMessaggio, NuovoMessaggioBacheca, FeedDaRilasciare, RichiestaPrenotaz, AccettazionePrenotaz
     my $attr = shift @_; # hash di attributi con chiavi = Destinatario, Passaggio, Mittente
     my $user_destinat = shift @_;
     my %attributi = %$attr;
@@ -385,17 +386,17 @@ sub inserisci_notifica{
 
 sub inserisci_feedback {
     my $array_argom_ref = shift @_;
-    # CHIAVI : IDMitt, IDDest, Passaggio, Commento, PunteggioMedio, Compagnia, Puntualita. Nel 
+    # CHIAVI : IDMitt, IDDest, Passaggio, Commento, PunteggioMedio, Compagnia, Puntualita. Nel
     #             caso il destinatario sia il conducente del viaggio, anche le chiavi Pulizia e Guida
     my %array_argom = %$array_argom_ref;
     my $output = "<Feedback IDMitt=\"$array_argom{'IDMitt'}\" IDDest=\"$array_argom{'IDDest'}\">
                               <Passaggio>$array_argom{'Passaggio'}</Passaggio>
-                              <Commento>$array_argom{'Commento'}</Commento> \n";   
+                              <Commento>$array_argom{'Commento'}</Commento> \n";
     my %aux=serializzazione_apertura();
     my $doc = $aux{'doc'};
     my $fileHandle = $aux{'filehandle'};
     if(utility::verifica_presenza("//Passaggio[IDViaggio=\"$array_argom{'Passaggio'}\" and Conducente=\"$array_argom{'IDDest'}\"]",$doc)) {
-        
+
         $output = $output."   <ValutazioneConduc>
                                 <PunteggioMedio>$array_argom{'PunteggioMedio'}</PunteggioMedio>
                                 <Compagnia>$array_argom{'Compagnia'}</Compagnia>
@@ -433,7 +434,7 @@ sub inserisci_info_auto {
     else {
         my $sibling_node = $doc->findnodes("//Utente[Username=\"$array_argom{'Username'}\"]/Profilo/Valutazione")->get_node(1);
         my $parent = $doc->findnodes("//Utente[Username=\"$array_argom{'Username'}\"]/Profilo")->get_node(1);
-        $parent->insertAfter($fragm,$sibling_node);        
+        $parent->insertAfter($fragm,$sibling_node);
     }
     serializzazione_chiusura($fileHandle,$doc);
     return 1;
@@ -446,7 +447,7 @@ sub inserisci_info_patente {
     my %aux = serializzazione_apertura();
     my $doc = $aux{'doc'};
     my $fileHandle = $aux{'filehandle'};
-    my $fragm = $parser->parse_balanced_chunk($output); 
+    my $fragm = $parser->parse_balanced_chunk($output);
     if(utility::verifica_presenza("//Utente[Username=\"$array_argom{'Username'}\"]/Profilo/Patente",$doc)) {
         #elimina_info_auto($array_argom{'Username'},$doc);
         my $pat = $doc->findnodes("//Utente[Username=\"$array_argom{'Username'}\"]/Profilo/Patente")->get_node(1);
@@ -461,7 +462,7 @@ sub inserisci_info_patente {
             $sibling_node= $doc->findnodes("//Utente[Username=\"$array_argom{'Username'}\"]/Profilo/Valutazione")->get_node(1);
         }
         my $parent = $doc->findnodes("//Utente[Username=\"$array_argom{'Username'}\"]/Profilo")->get_node(1);
-        $parent->insertAfter($fragm,$sibling_node);        
+        $parent->insertAfter($fragm,$sibling_node);
     }
     serializzazione_chiusura($fileHandle,$doc);
     return 1;
@@ -482,13 +483,13 @@ sub elimina_info_auto {
 
 sub elimina_notifica {
     my $user = shift @_;
-    my $tag = shift @_;  # tag = NuovoMessaggio, NuovoMessaggioBacheca, FeedDaRilasciare, RichiestaPrenotaz, AccettazionePrenotaz 
+    my $tag = shift @_;  # tag = NuovoMessaggio, NuovoMessaggioBacheca, FeedDaRilasciare, RichiestaPrenotaz, AccettazionePrenotaz
     my $attr = shift @_;  # stringa di attributi che identificano la notifica da eliminare
     my %aux = serializzazione_apertura();
     my $doc = $aux{'doc'};
     my $fileHandle = $aux{'filehandle'};
     my $padre = $doc->findnodes("//Utente[Username=\"$user\"]/Notifiche")->get_node(1);
-    $padre->removeChild($doc->findnodes("//Utente[Username=\"$user\"]/Notifiche/".$tag."[$attr]")->get_node(1)); 
+    $padre->removeChild($doc->findnodes("//Utente[Username=\"$user\"]/Notifiche/".$tag."[$attr]")->get_node(1));
     serializzazione_chiusura($fileHandle,$doc);
     return 1;
 }
@@ -506,7 +507,7 @@ sub inserisci_preferenze {
     my $doc = $aux{'doc'};
     my $root = $doc->documentElement;
     my $fileHandle = $aux{'filehandle'};
-    my $fragm = $parser->parse_balanced_chunk($output); 
+    my $fragm = $parser->parse_balanced_chunk($output);
     if(utility::verifica_presenza("//Utente[Username=\"$array_argom{'Username'}\"]/Profilo/Preferenze",$doc)) {
         #elimina_info_auto($array_argom{'Username'},$doc);
         my $pref = $doc->findnodes("//Utente[Username=\"$array_argom{'Username'}\"]/Profilo/Preferenze")->get_node(1);
@@ -514,14 +515,14 @@ sub inserisci_preferenze {
     }
     else {
         my $parent = $doc->findnodes("//Utente[Username=\"$array_argom{'Username'}\"]/Profilo")->get_node(1);
-        $parent->insertAfter($fragm,undef);        
+        $parent->insertAfter($fragm,undef);
     }
     serializzazione_chiusura($fileHandle,$doc);
     return 1;
 }
 
 
-sub inserisci_modifica_profilo { 
+sub inserisci_modifica_profilo {
     my $array_argom_ref = shift @_; # CHIAVI : Username(del profilo da modificare), Nome, Cognome, Sesso, Email, AnnoNascita, Descrizione, Patente, Auto, Chiacchere, Animali, Musica, Fumatore
     my %array_argom = %$array_argom_ref;
     my %aux = serializzazione_apertura();
@@ -558,12 +559,12 @@ sub inserisci_modifica_profilo {
         my $n = @old_desc;
         if($n != 0) {
             my $des = $old_desc[0]->findnodes(".")->get_node(1);
-                $des->replaceNode($parser->parse_balanced_chunk("<DescrizionePers>$array_argom{'DescrizionePers'}</DescrizionePers>"));           
+                $des->replaceNode($parser->parse_balanced_chunk("<DescrizionePers>$array_argom{'DescrizionePers'}</DescrizionePers>"));
         }
         else {
             my $sibling_node = $doc->findnodes("//Utente[Username=\"$array_argom{'Username'}\"]/Cognome")->get_node(1);
             my $parent = $doc->findnodes("//Utente[Username=\"$array_argom{'Username'}\"]")->get_node(1);
-            $parent->insertAfter($parser->parse_balanced_chunk("<DescrizionePers>$array_argom{'DescrizionePers'}</DescrizionePers>",$sibling_node));        
+            $parent->insertAfter($parser->parse_balanced_chunk("<DescrizionePers>$array_argom{'DescrizionePers'}</DescrizionePers>",$sibling_node));
         }
     }
 
@@ -590,7 +591,7 @@ sub inserisci_modifica_profilo {
                 $parent->insertAfter($parser->parse_balanced_chunk("<Auto>$array_argom{'Auto'}</Auto>"),$sibling_node);
                 $sibling_node = $doc->findnodes("//Utente[Username=\"$array_argom{'Username'}\"]/Profilo/Auto")->get_node(1);
                 $parent->insertAfter($parser->parse_balanced_chunk("<Patente>$array_argom{'Patente'}</Patente>"),$sibling_node);
-                $sibling_node = $doc->findnodes("//Utente[Username=\"$array_argom{'Username'}\"]/Profilo/Patente")->get_node(1); 
+                $sibling_node = $doc->findnodes("//Utente[Username=\"$array_argom{'Username'}\"]/Profilo/Patente")->get_node(1);
             my $new_pref="<Preferenze>
                         <Chiacchere>$array_argom{'Chiacchere'}</Chiacchere>
                         <Musica>$array_argom{'Musica'}</Musica>
@@ -598,11 +599,11 @@ sub inserisci_modifica_profilo {
                         <Fumatore>$array_argom{'Fumatore'}</Fumatore>
                     </Preferenze>";
                 $parent->insertAfter($parser->parse_balanced_chunk($new_pref),$sibling_node);
-       
+
         }
     }
 
-    
+
     serializzazione_chiusura($fileHandle,$doc);
     return 1;
 

@@ -19,15 +19,45 @@
 <script src="http://code.jquery.com/jquery-1.8.2.js"></script>
 <script src="http://code.jquery.com/ui/1.9.1/jquery-ui.js"></script>
 <link rel="stylesheet" href="http://code.jquery.com/ui/1.9.2/themes/base/jquery-ui.css" />
-
+<script src="utente.js"></script>
 
   <script type="text/javascript">
   <!--
 	$(function() {
 		//$.datepicker.setDefaults($.datepicker.regional['it']);
-		$("#data").datepicker({ dateFormat: 'dd-mm-yy', minDate: 0, maxDate: +30 });
-    $("#oraP").timeEntry();
+		$("#data").datepicker({ dateFormat: 'dd-mm-yy', minDate: 0/*, maxDate: +30 */});
+    //$("#oraP").timeEntry();
 	});
+
+function compilazione_tappe(id){
+console.log("eseguo compilazione tappe per   " + id);	
+  if(id=="tappa2"){
+    if(document.getElementById("tappa1").value ==""){
+    document.getElementById("tappa2_err").value = "Per poter inserire questa tappa, inserire prima le precedenti.";
+        console.log("1");
+  }
+  else {
+        document.getElementById("tappa2_err").value = "";
+        console.log("2");
+  }
+  }
+  else if (id=="tappa3") {
+    if(document.getElementById("tappa1").value ==""){
+        console.log("3");
+    document.getElementById("tappa3_err").value = "Per poter inserire questa tappa, inserire prima le precedenti.";
+  }
+  else if(document.getElementById("tappa2").value ==""){
+        console.log("4");
+  document.getElementById("tappa3_err").value = "Per poter inserire questa tappa, inserire prima le precedenti.";
+}
+  else {
+        console.log("5");
+        document.getElementById("tappa3_err").value = "";
+  }
+  }
+    return true;
+}
+
 
 
   -->
@@ -56,20 +86,20 @@
     <form action="" method="get">
    <fieldset><legend>Partenza e tappe</legend>
     <label for="partenza">Partenza</label>
-    <input type="text" id="partenza" name="partenza" tabindex="6" value="[%partenza%]"></input><br />
+    <input type="text" id="partenza" name="partenza" tabindex="6"  value="[%partenza%]"></input><br />
 	<p id="partenza_err" class="errore">[%partenza_err%]</p>
     <label for="arrivo">Arrivo</label>
     <input type="text" id="arrivo" name="arrivo" tabindex="7" value="[%arrivo%]"></input><br />
 	<p id="arrivo_err" class="errore">[%arrivo_err%]</p>
 
     <label for="tappa1">Tappa (facoltativa)</label>
-    <input type="text" id="tappa1" name="tappa1" tabindex="8" value="[%tappa1%]"></input><br />
+    <input type="text" id="tappa1" name="tappa1" tabindex="8" onchange="compilazione_tappe(tappa1)" value=""></input><br />
 	<p id="tappa1_err" class="errore">[%tappa1_err%]</p>
     <label for="tappa2">Tappa (facoltativa)</label>
-    <input type="text" id="tappa2" name="tappa2" tabindex="9" value="[%tappa2%]"></input><br />
+    <input type="text" id="tappa2" name="tappa2" tabindex="9" onchange="compilazione_tappe(tappa2)"  value=""></input><br />
 	<p id="tappa2_err" class="errore">[%tappa2_err%]</p>
     <label for="tappa3">Tappa (facoltativa)</label>
-    <input type="text" id="tappa3" name="tappa3" tabindex="10" value="[%tappa3%]"></input><br />
+    <input type="text" id="tappa3" name="tappa3" tabindex="10" onchange="compilazione_tappe(tappa3)"  value=""></input><br />
 	<p id="tappa3_err" class="errore">[%tappa3_err%]</p>
    </fieldset>
 
@@ -87,7 +117,7 @@
 
    <fieldset><legend>Informazioni aggiuntive sul viaggio</legend>
     <label for="prezzo">Prezzo</label>
-    <input type="text" id="prezzo" name="prezzo" tabindex="14" value="[%prezzo%]"></input><br />
+    <input type="text" id="prezzo" name="prezzo"  tabindex="14" value="[%prezzo%]"></input><br />
 	<p id="prezzo_err" class="errore">[%prezzo_err%]</p>
     <label for="posti">Posti</label>
     <input type="text" id="posti" name="posti" tabindex="15" value="[%posti%]"></input><br />
@@ -104,7 +134,7 @@
     </select></label>
    </fieldset>
 
-   <div><input type="submit" value="Invia" tabindex="18"></input></div>
+   <div><input type="submit" id="submitbutton" value="Invia" tabindex="18"></input></div>
 
   </form>
 
