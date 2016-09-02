@@ -1,0 +1,271 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ts:TravelShare xmlns:ts="http://www.dominio.com" xmlns:xs="http://www.w3.org/2001/XMLSchema-instance" xs:schemaLocation="http://www.dominio.com XMLSchema.xsd">
+  <!--  ***************************************************************   SET UTENTI   ************************** -->
+  <SetUtenti>
+    <Utente>
+      <Username>u1</Username>
+      <Email>sannagiovanni9@hhh.it</Email>
+      <Nome>gio</Nome>
+      <Cognome>sanna</Cognome>
+      <Sesso>femmina</Sesso>
+      <AnnoNascita>1966</AnnoNascita>
+      <Password>333</Password>
+      <Profilo>
+        <NumFeedbRicevuti>0</NumFeedbRicevuti>
+        <NumPassaggiOff>0</NumPassaggiOff>
+        <NumPassaggiPart>0</NumPassaggiPart>
+        <Valutazione>
+          <PunteggioMedio>0</PunteggioMedio>
+          <Compagnia>0</Compagnia>
+          <Puntualita>0</Puntualita>
+          <Pulizia>0</Pulizia>
+          <Guida>0</Guida>
+        </Valutazione>
+        <Auto>dbbbb</Auto>
+        <Patente>1966</Patente>
+        <Preferenze>
+          <Chiacchiere>2</Chiacchiere>
+          <Musica>2</Musica>
+          <Animali>1</Animali>
+          <Fumatore>0</Fumatore>
+        </Preferenze>
+      </Profilo>
+      <Notifiche>
+      </Notifiche>
+    </Utente>
+    <Utente>
+      <Username>u2</Username>
+      <Email>pincopal@gmail.com</Email>
+      <Nome>Mario</Nome>
+      <Cognome>Bianchi</Cognome>
+      <Sesso>M</Sesso>
+      <AnnoNascita>1990</AnnoNascita>
+      <Password>333</Password>
+      <Profilo>
+        <NumFeedbRicevuti>0</NumFeedbRicevuti>
+        <NumPassaggiOff>0</NumPassaggiOff>
+        <NumPassaggiPart>0</NumPassaggiPart>
+        <Valutazione>
+          <PunteggioMedio>0</PunteggioMedio>
+          <Compagnia>0</Compagnia>
+          <Puntualita>0</Puntualita>
+          <Pulizia>0</Pulizia>
+          <Guida>0</Guida>
+        </Valutazione>
+      </Profilo>
+      <Notifiche>
+      </Notifiche>
+    </Utente>
+  </SetUtenti>
+  <!--  ***************************************************************   SET PASSAGGI   ************************** -->
+  <SetPassaggi>
+    <Passaggio>
+      <IDViaggio>v1</IDViaggio>
+      <Conducente>u1</Conducente>
+      <!-- l utente conducente deve avere definito le sue preferenze -->
+      <PrezzoTot>15</PrezzoTot>
+      <PostiTot>4</PostiTot>
+      <Dettagli>Max un bagaglio medio</Dettagli>
+      <Itinerario>
+        <Partenza Numero="0">
+          <PostiDisp>4</PostiDisp>
+          <Data>2016-04-24</Data>
+          <Ora>12:00:00</Ora>
+          <Luogo>Padova Piove di sacco</Luogo>
+          <Prenotazioni>
+
+				</Prenotazioni>
+        </Partenza>
+        <Tappa Numero="1">
+          <PostiDisp>3</PostiDisp>
+          <!-- il num di posti disponibili dev essere coerente con : PostiTot-count(Prenotazioni/Utente) -->
+          <Data>2016-04-24</Data>
+          <Ora>15:00:00</Ora>
+          <Luogo>Vicenza</Luogo>
+          <Prenotazioni>
+            <Utente>u2</Utente>
+          </Prenotazioni>
+        </Tappa>
+        <Arrivo Numero="4">
+          <PostiDisp>4</PostiDisp>
+          <Data>2016-04-24</Data>
+          <Ora>17:00:00</Ora>
+          <Luogo>Padova</Luogo>
+          <Prenotazioni>
+				</Prenotazioni>
+        </Arrivo>
+      </Itinerario>
+      <Bacheca>
+        <!-- non ci sono messaggi per questa bacheca -->
+        <ConversazioneBacheca User1="u2" User2="u1">
+          <Messaggio>
+            <Mittente>u2</Mittente>
+            <Data>2016-08-08</Data>
+            <Ora>11:33:06</Ora>
+            <Testo>ciaociao</Testo>
+          </Messaggio>
+          <Messaggio>
+            <Mittente>u1</Mittente>
+            <Data>2016-08-08</Data>
+            <Ora>11:33:40</Ora>
+            <Testo>ciaociao</Testo>
+          </Messaggio>
+        </ConversazioneBacheca>
+      </Bacheca>
+    </Passaggio>
+    <Passaggio>
+      <IDViaggio>v2</IDViaggio>
+      <Conducente>u1</Conducente>
+      <!-- l utente conducente deve avere definito le sue preferenze -->
+      <PrezzoTot>15</PrezzoTot>
+      <PostiTot>4</PostiTot>
+      <Dettagli>Max un bagaglio medio</Dettagli>
+      <Itinerario>
+        <Partenza Numero="0">
+          <PostiDisp>4</PostiDisp>
+          <Data>2016-04-24</Data>
+          <Ora>12:00:00</Ora>
+          <Luogo>Padova</Luogo>
+          <Prenotazioni>
+            <!-- nessuna prenotazione -->
+          </Prenotazioni>
+        </Partenza>
+        <Tappa Numero="1">
+          <PostiDisp>3</PostiDisp>
+          <!-- il num di posti disponibili dev essere coerente con : PostiTot-count(Prenotazioni/Utente) -->
+          <Data>2016-04-24</Data>
+          <Ora>15:00:00</Ora>
+          <Luogo>Vicenza</Luogo>
+          <Prenotazioni>
+            <Utente>u2</Utente>
+          </Prenotazioni>
+        </Tappa>
+        <Tappa Numero="2">
+          <PostiDisp>3</PostiDisp>
+          <!-- il num di posti disponibili dev essere coerente con : PostiTot-count(Prenotazioni/Utente) -->
+          <Data>2016-04-24</Data>
+          <Ora>16:00:00</Ora>
+          <Luogo>Padova</Luogo>
+          <Prenotazioni>
+            <Utente>u2</Utente>
+          </Prenotazioni>
+        </Tappa>
+        <Arrivo Numero="4">
+          <PostiDisp>4</PostiDisp>
+          <Data>2016-04-24</Data>
+          <Ora>17:00:00</Ora>
+          <Luogo>Padova</Luogo>
+          <Prenotazioni>
+				</Prenotazioni>
+        </Arrivo>
+      </Itinerario>
+      <Bacheca>
+        <!-- il "destinatario" della conversazione è sempre il conducente del viaggio, identificato da User2  -->
+        <!-- il mittente è sempre user 1 -->
+        <!-- il conducente non può inserire un messaggio bacheca che non sia risposta a una conversazione esistente -->
+        <ConversazioneBacheca User1="u2" User2="u1">
+          <Messaggio>
+            <Mittente>u2</Mittente>
+            <Data>1999-11-11</Data>
+            <Ora>12:00:00</Ora>
+            <Testo> soma text </Testo>
+          </Messaggio>
+          <Messaggio>
+            <Mittente>u1</Mittente>
+            <Data>1999-11-11</Data>
+            <Ora>12:00:00</Ora>
+            <Testo> soma text inviato da conducente</Testo>
+          </Messaggio>
+          <Messaggio>
+            <Mittente>u2</Mittente>
+            <Data>1999-11-11</Data>
+            <Ora>12:00:00</Ora>
+            <Testo> soma text </Testo>
+          </Messaggio>
+          <Messaggio>
+            <Mittente>u1</Mittente>
+            <Data>1999-11-11</Data>
+            <Ora>12:00:00</Ora>
+            <Testo> soma text inviato da conducente</Testo>
+          </Messaggio>
+        </ConversazioneBacheca>
+      </Bacheca>
+    </Passaggio>
+  </SetPassaggi>
+  <!--  ***************************************************************   SET MESSAGGI   ************************** -->
+  <SetMessaggi>
+    <Conversazione User1="u2" User2="u1">
+      <Messaggio Letto="no">
+        <Mittente>u2</Mittente>
+        <Data>2016-04-24</Data>
+        <Ora>18:07:00</Ora>
+        <Testo> [.............] </Testo>
+      </Messaggio>
+      <Messaggio Letto="si">
+        <Mittente>u1</Mittente>
+        <Data>2016-04-24</Data>
+        <Ora>19:07:00</Ora>
+        <Testo> [.............] </Testo>
+      </Messaggio>
+      <Messaggio Letto="no">
+        <Mittente>u2</Mittente>
+        <Data>2016-04-24</Data>
+        <Ora>19:10:00</Ora>
+        <Testo> [.............] </Testo>
+      </Messaggio>
+      <Messaggio Letto="no">
+        <Mittente>u2</Mittente>
+        <Data>2016-04-24</Data>
+        <Ora>19:10:00</Ora>
+        <Testo> [.............] </Testo>
+      </Messaggio>
+      <Messaggio Letto="no">
+        <Mittente>u2</Mittente>
+        <Data>2016-04-24</Data>
+        <Ora>19:10:00</Ora>
+        <Testo> [.............] </Testo>
+      </Messaggio>
+      <Messaggio Letto="no">
+        <Mittente>u2</Mittente>
+        <Data>2016-04-24</Data>
+        <Ora>19:10:00</Ora>
+        <Testo> [.............] </Testo>
+      </Messaggio>
+      <Messaggio Letto="no">
+        <Mittente>u2</Mittente>
+        <Data>2016-04-24</Data>
+        <Ora>19:10:00</Ora>
+        <Testo> [.............] </Testo>
+      </Messaggio>
+      <Messaggio Letto="si">
+        <Mittente>u1</Mittente>
+        <Data>2016-04-24</Data>
+        <Ora>11:07:00</Ora>
+        <Testo> [.............] </Testo>
+      </Messaggio>
+    </Conversazione>
+  </SetMessaggi>
+  <!--  ***************************************************************   SET FEEDBACK   ************************** -->
+  <SetFeedback>
+    <Feedback IDMitt="u1" IDDest="u2">
+      <Passaggio>v1</Passaggio>
+      <Commento>Viaggio tranquillo</Commento>
+      <ValutazionePasseg>
+        <PunteggioMedio>4</PunteggioMedio>
+        <Compagnia>3</Compagnia>
+        <Puntualita>2</Puntualita>
+      </ValutazionePasseg>
+    </Feedback>
+    <Feedback IDMitt="u2" IDDest="u1">
+      <Passaggio>v1</Passaggio>
+      <Commento>Commento facoltativo</Commento>
+      <ValutazioneConduc>
+        <PunteggioMedio>3</PunteggioMedio>
+        <Compagnia>3</Compagnia>
+        <Puntualita>3</Puntualita>
+        <Pulizia>3</Pulizia>
+        <Guida>3</Guida>
+      </ValutazioneConduc>
+    </Feedback>
+  </SetFeedback>
+</ts:TravelShare>

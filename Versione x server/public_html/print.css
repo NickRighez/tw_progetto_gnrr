@@ -1,0 +1,17 @@
+/* CSS di stampa */
+
+/*
+Da usare in:
+-pagina dei risultati di una ricerca
+-pagina delle info
+*/
+
+#footer{
+	display : none;
+}
+
+/* Aiuti per lo screenreader*/
+
+.aiuti{
+	display : none;
+}

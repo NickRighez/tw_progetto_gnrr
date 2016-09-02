@@ -1,0 +1,13 @@
+#!usr/bin/sh
+
+
+
+for FILE1 in `ls | grep .html` ; do
+perl -pi.bak -e 's/[%username%]/[%USERNAME%]/g' $FILE1
+perl -pi.bak -e 's/login__err/LOGIN_ERR/g' $FILE1
+perl -pi.bak -e 's/NOT_LOGGED/LOGIN_ERR/g' $FILE1
+
+done
+
+
+

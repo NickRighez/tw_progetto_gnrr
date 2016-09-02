@@ -1,0 +1,177 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="it" lang="it">
+ <head>
+  <title>Risultati ricerca - Travel Share</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta name="title" content="..." />
+  <meta name="description" content="..." />
+  <meta name="keywords" content=", travel share, car pooling, passaggio, auto" />
+  <meta name="author" content="Giovanni Sanna, Nicolò Rigato, Riccardo Ardossi, Riccardo Saggese" />
+  <meta name="language" content="italian it" />
+
+  <meta name="viewport" content="width=device-width" />
+
+  <link href="../screen.css" rel="stylesheet" type="text/css" media="screen" />
+  <link href="../print.css" rel="stylesheet" type="text/css" media="print" />
+
+  <link rel="icon" href="Immagini/TS_icon.png" type="image/x-icon" />
+  <link rel="shortcut icon" href="Immagini/TS_icon.png" type="image/x-icon" />
+
+
+  <script src="http://code.jquery.com/jquery-1.8.2.js"></script>
+  <script src="http://code.jquery.com/ui/1.9.1/jquery-ui.js"></script>
+  <link rel="stylesheet" href="http://code.jquery.com/ui/1.9.2/themes/base/jquery-ui.css" />
+  <script type="application/javascript" src="../javascript/travelshare.js" ></script>
+
+ </head>
+
+ <body onload="caricamento_risultati()">
+
+  <div id="header">
+   <a href="home.cgi" tabindex=""><img src="Immagini/banner.png" id="banner" alt="Banner Travel Share - Link diretto alla Home" /></a>
+   <a id="bottoneMenu" href="#menu" tabindex="">Men&ugrave;</a>
+  </div>
+
+  [% IF LOGGEDIN=='yes' %]
+
+  <div id="utente">
+
+   <p>Ciao [% NOME_UTENTE %]</p>
+
+   <p><a href="notifiche.cgi" tabindex="2">Notifiche (0)</a>  <a href="ricevitore_logout.cgi" tabindex="3">Logout</a></p>
+
+  </div>
+
+ [% END %]
+  <div id="contenuto">
+
+	<h1>10 risultati trovati</h1>
+	<h2>Partenza &#8594; Arrivo</h2>
+	<h3>gg/mm/aaaa</h3>
+
+	<div class="risultato">
+	 <a href="singoloViaggioLog.html">
+     <span class="tratta" >
+     <span class="partenza">Llanfairpwllgwyngyl lgogerychwyrndrobwllll antysiliogogogoch </span> &#8594; <span class="arrivo">Llanfairpwllgwyngyllgogerychwyrndrobwllllantysiliogogogoch</span>
+   </span>
+      <span class="pulsante_goto"> Vai &gt; </span>
+    </a>
+<div class="spacer"></div>
+
+	 <p>Ora: 12:37</p>
+
+	 <p>Posti: 3<span class="destra">10&euro; <!--&#8364;--></span></p>
+
+	 <hr />
+
+	 <>Guidpo L <span class="destra">33 anni</span></p>
+
+	 <p>Voto medio: 5/5</p>
+
+	 <div class="infoGuidatore">
+	 <p>Auto: Lamborghini</p>
+
+	 <p>Preferenze:</p>
+	 <div class="preferenzeGroup">
+	 <img src="Immagini/BLA2.png" class="preferenze4Img" alt="" title=""></img>
+	 <img src="Immagini/musica1.png" class="preferenze4Img" alt="" title=""></img>
+	 <img src="Immagini/animali0.png" class="preferenze4Img" alt="" title=""></img>
+	 <img src="Immagini/fumo0.png" class="preferenze4Img" alt="" title=""></img>
+	 </div>
+
+	 </div>
+
+	</div>
+	<div class="risultato">
+	 <a href="singoloViaggioLog.html"><span class="partenza">Partenza</span> &#8594; <span class="arrivo">Arrivo</span></a>
+
+	 <p>Ora: 12:37 [tappa]</p>
+
+	 <p>Posti: 3<span class="destra">10&euro; <!--&#8364;--></span></p>
+
+	 <hr />
+
+	 <p>Vercingetorige L <span class="destra">25 anni</span></p>
+
+	 <p>Voto medio: 5/5</p>
+
+	 <div class="infoGuidatore">
+	 <p>Auto: Lamborghini</p>
+
+	 <p>Preferenze:</p>
+	 <div class="preferenzeGroup">
+	 <img src="Immagini/BLA2.png" class="preferenze4Img" alt="" title=""></img>
+	 <img src="Immagini/musica1.png" class="preferenze4Img" alt="" title=""></img>
+	 <img src="Immagini/animali0.png" class="preferenze4Img" alt="" title=""></img>
+	 <img src="Immagini/fumo0.png" class="preferenze4Img" alt="" title=""></img>
+	 </div>
+
+	 </div>
+
+	 </div>
+
+  </div>
+
+  [% IF LOGGEDIN=='no' %]
+
+  <div id="menu">
+
+  <ul id="menuLista">
+
+   <li><a href="offerta_passaggio.cgi" tabindex="2">Offri un passaggio <span class="frecceMenu">&raquo;</span></a></li>
+
+   <li><a href="iscrizione.cgi" tabindex="3">Iscriviti <span class="frecceMenu">&raquo;</span></a></li>
+
+   <li><a href="login.cgi" tabindex="4">Accedi <span class="frecceMenu">&raquo;</span></a></li>
+
+   <li><a href="informazioni.cgi" tabindex="5">Informazioni su <span xml:lang="en" lang="en">Travel Share</span> <span class="frecceMenu">&raquo;</span></a></li>
+
+  </ul>
+
+  </div>
+
+[% ELSE %]
+
+  <div id="menu">
+
+  <ul id="menuLista">
+
+   <li><a href="offerta_passaggio.cgi" tabindex="4">Offri un passaggio <span class="frecceMenu">&raquo;</span></a></li>
+
+   <li><a href="profilo.cgi?utente=[%NOME_UTENTE%]" tabindex="5">Gestisci il profilo <span class="frecceMenu">&raquo;</span></a></li>
+
+   <li><a href="viaggi.cgi" tabindex="6">Viaggi<span class="frecceMenu">&raquo;</span></a></li>
+
+   <li><a href="conversazioni.cgi" tabindex="7">Messaggi <span class="frecceMenu">&raquo;</span></a></li>
+
+   <li><a href="informazioni.cgi" tabindex="8">Informazioni su <span xml:lang="en" lang="en">Travel Share</span> <span class="frecceMenu">&raquo;</span></a></li>
+
+  </ul>
+
+  </div>
+
+[% END %]
+
+
+
+  <div id="footer">
+
+  [% IF LOGGEDIN=='yes' %]
+
+   <a href="ricevitore_logout.cgi" tabindex="13">Logout</a>
+
+   <a href="#header" tabindex="14">Torna su</a>
+
+ [% ELSE %]
+
+  <a href="#header" tabindex="13">Torna su</a>
+
+ [% END %]
+
+   
+
+  </div>
+
+  </body>
+</html>
