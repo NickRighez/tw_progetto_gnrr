@@ -1,0 +1,23 @@
+
+-- TIPI DI NOTIFICHE --
+
+1) Messaggio privato = "Nuovo messaggio da $ute_mittente"; link alla singola_conversazione
+
+2) Feedback da rilasciare = "Devi recensire il passaggio $passaggio"; link alla pagina viaggi_recensire;
+
+3) Richiesta Prenotazione = <form action=\"http://localhost/cgi-bin/tw_progetto_gnrr/file_sito/PERL/ricevitori/ricevitore_esito_prenotazione.cgi\" method=\"post\" >
+                              <fieldset>
+                                  <legend>Richiesta prenotazione da $richiedente per il passaggio $passaggio</legend>
+                                  <label for=\"accetta\">Accetta</label>
+                                  <input type=\"radio\" name=\"esito\" id=\"accetta\" value=\"Accettata\" />
+                                  <label for=\"rifiuta\">Rifiuta</label>
+                                  <input type=\"radio\" name=\"esito\" id=\"rifiuta\" value=\"Rifiutata\" />
+                                  <input type=\"hidden\" name=\"richiedente\" value=\"$richiedente\" />
+                                  <input type=\"hidden\" name=\"passaggio\" value=\"$passaggio\" />
+                                  <input type=\"hidden\" name=\"partenza\" value=\"$partenza\" />
+                                  <input type=\"hidden\" name=\"arrivo\" value=\"$arrivo\" />
+                                  <input type=\"submit\" value=\"invia\" />
+                              </fieldset>
+                          </form>
+                          
+4) Esito Prenotazione = "La tua prenotazione per il passaggio $passaggio è stata $esito"
