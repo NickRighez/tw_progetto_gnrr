@@ -23,40 +23,40 @@
 									     <div class="preferenzeGroup">
 									     	<xsl:choose>
 									     		<xsl:when test="/ts:TravelShare/SetUtenti/Utente[Username='[% UTENTE %]']/Profilo/Preferenze/Chiacchiere=0">
-									     			<img src="Immagini/BLA0.png" class="preferenze4Img" alt="" title=""></img>
+									     			<img src="../Immagini/BLA0.png" class="preferenze4Img" alt="" title=""></img>
 									     		</xsl:when>
 									     		<xsl:when test="/ts:TravelShare/SetUtenti/Utente[Username='[% UTENTE %]']/Profilo/Preferenze/Chiacchiere=1">
-									     			<img src="Immagini/BLA1.png" class="preferenze4Img" alt="" title=""></img>
+									     			<img src="../Immagini/BLA1.png" class="preferenze4Img" alt="" title=""></img>
 									     		</xsl:when>
 									     		<xsl:otherwise>
-									     			<img src="Immagini/BLA2.png" class="preferenze4Img" alt="" title=""></img>
+									     			<img src="../Immagini/BLA2.png" class="preferenze4Img" alt="" title=""></img>
 									     		</xsl:otherwise>
 									     	</xsl:choose>
 									     	<xsl:choose>
 									     		<xsl:when test="/ts:TravelShare/SetUtenti/Utente[Username='[% UTENTE %]']/Profilo/Preferenze/Musica=0">
-									     			<img src="Immagini/musica0.png" class="preferenze4Img" alt="" title=""></img>
+									     			<img src="../Immagini/musica0.png" class="preferenze4Img" alt="" title=""></img>
 									     		</xsl:when>
 									     		<xsl:when test="/ts:TravelShare/SetUtenti/Utente[Username='[% UTENTE %]']/Profilo/Preferenze/Musica=1">
-									     			<img src="Immagini/musica1.png" class="preferenze4Img" alt="" title=""></img>
+									     			<img src="../Immagini/musica1.png" class="preferenze4Img" alt="" title=""></img>
 									     		</xsl:when>
 									     		<xsl:otherwise>
-									     			<img src="Immagini/musica2.png" class="preferenze4Img" alt="" title=""></img>
+									     			<img src="../Immagini/musica2.png" class="preferenze4Img" alt="" title=""></img>
 									     		</xsl:otherwise>
 									     	</xsl:choose>
 									     	<xsl:choose>
 									     		<xsl:when test="/ts:TravelShare/SetUtenti/Utente[Username='[% UTENTE %]']/Profilo/Preferenze/Animali=0">
-									     			<img src="Immagini/animali0.png" class="preferenze4Img" alt="" title=""></img>
+									     			<img src="../Immagini/animali0.png" class="preferenze4Img" alt="" title=""></img>
 									     		</xsl:when>
 									     		<xsl:otherwise>
-									     			<img src="Immagini/animali1.png" class="preferenze4Img" alt="" title=""></img>
+									     			<img src="../Immagini/animali1.png" class="preferenze4Img" alt="" title=""></img>
 									     		</xsl:otherwise>
 									     	</xsl:choose>
 									     	<xsl:choose>
 									     		<xsl:when test="/ts:TravelShare/SetUtenti/Utente[Username='[% UTENTE %]']/Profilo/Preferenze/Fumatore=0">
-									     			<img src="Immagini/fumo0.png" class="preferenze4Img" alt="" title=""></img>
+									     			<img src="../Immagini/fumo0.png" class="preferenze4Img" alt="" title=""></img>
 									     		</xsl:when>
 									     		<xsl:otherwise>
-									     			<img src="Immagini/fumo1.png" class="preferenze4Img" alt="" title=""></img>
+									     			<img src="../Immagini/fumo1.png" class="preferenze4Img" alt="" title=""></img>
 									     		</xsl:otherwise>
 									     	</xsl:choose>
 									     </div>
@@ -68,7 +68,7 @@
 		    					<p>Passaggi offerti : <xsl:value-of select="Profilo/NumPassaggiOff"/> </p>
 		    					<p>Passaggi partecipati : <xsl:value-of select="Profilo/NumPassaggiPart"/> </p>
 
-		    					<p>Punteggio medio : <xsl:value-of select="Profilo/valutazione/Punteggiomedio"/> su <xsl:value-of select="Profilo/NumFeedbRicevuti"/> feedback ricevuti</p>
+		    					<p>Punteggio medio : <xsl:value-of select="Profilo/Valutazione/PunteggioMedio"/> su <xsl:value-of select="Profilo/NumFeedbRicevuti"/> feedback ricevuti</p>
 		    					<p>Compagnia : <xsl:value-of select="Profilo/Valutazione/Compagnia"/> </p>
 		    					<p>Puntualità : <xsl:value-of select="Profilo/Valutazione/Puntualita"/> </p>
 		    					<p>Pulizia : <xsl:value-of select="Profilo/Valutazione/Pulizia"/> </p>

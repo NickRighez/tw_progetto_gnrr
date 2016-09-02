@@ -23,7 +23,7 @@ my %old_input;
   $problems{PARTENZA_ERR} = 'Luogo di partenza mancante';
   $problems{empty} = 'no';
 }
-elsif (!($q->param('partenza')=~m/^[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.-]+$/)) {
+elsif (!($q->param('partenza')=~m/^[\p{L}\ \,\.\'\-]*$/)) {
   $problems{PARTENZA_ERR} = 'Luogo di partenza non valido';
   $problems{empty} = 'no';
 }
@@ -35,7 +35,7 @@ if($q->param('arrivo') eq '') {
   $problems{ARRIVO_ERR} = 'Luogo di partenza mancante';
   $problems{empty} = 'no';
 }
-elsif (!($q->param('arrivo')=~m/^[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.-]+$/)) {
+elsif (!($q->param('arrivo')=~m/^[\p{L}\ \,\.\'\-]*$/)) {
   $problems{ARRIVO_ERR} = 'Luogo di arrivo non valido';
   $problems{empty} = 'no';
 }

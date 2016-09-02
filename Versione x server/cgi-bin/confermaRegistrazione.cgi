@@ -25,8 +25,8 @@ if(!defined($session->param('username'))) {
   	print $session->header(-location => "login.cgi");
  }	 
 else {
-my $cont = research::query_notifiche_utente($username, $doc);
-	$username = $session->param('username');
+	my $username = $session->param('username');
+  my $cont = research::query_notifiche_utente($username, $doc);
 	my $file = "../data/HTML_TEMPLATE/confermaRegistrazione.html";
   	my %hash_keys = (
 		NOME_UTENTE => $username,

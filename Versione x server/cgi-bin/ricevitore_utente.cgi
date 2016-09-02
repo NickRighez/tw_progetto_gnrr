@@ -34,7 +34,7 @@ if ($q->request_method eq 'POST') {
 		$problems{empty} = "no";
 	}
 	else {
-		$old_input{USERNAME} = $q->param('Username');
+		$old_input{USERNAME} = $q->param('username');
 	} 
 
 	if($q->param('email') eq "") {
@@ -63,7 +63,7 @@ if ($q->request_method eq 'POST') {
 		$problems{NOME_ERR} = "Nome utente mancante";
 		$problems{empty} = "no";
 	}
-	elsif(!($q->param('nome')=~m/^[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð'\'']+$/)) {
+	elsif(!($q->param('nome')=~m/^[\p{L}\ \,\.\'\-]*$/)) {
 		$problems{NOME_ERR}="nome utente non valido, inserire solo lettere, di cui, al più la prima lettera può essere mauiscola";
 		$problems{empty}="no";
 	}
@@ -75,7 +75,7 @@ if ($q->request_method eq 'POST') {
 		$problems{COGNOME_ERR} = "Cognome utente mancante";
 		$problems{empty} = "no";
 	}
-	elsif(!($q->param('cognome')=~m/^[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð]+$/)) {
+	elsif(!($q->param('cognome')=~m/^[\p{L}\ \,\.\'\-]*$/)) {
 		$problems{COGNOME_ERR}="cognome utente non valido, inserire solo lettere, di cui, al più la prima lettera può essere mauiscola";
 		$problems{empty}="no";
 	}
@@ -109,7 +109,7 @@ if ($q->request_method eq 'POST') {
 		$problems{PASSWORD_ERR} = "Password mancante";
 		$problems{empty}="no";
 	}
-	elsif (length($q->param('password'))<8 or length($q->param('password')>16)){
+	elsif (length($q->param('password'))<8 or length($q->param('password'))>16){
 		$problems{PASSWORD_ERR} = "La password dev essere compresa fra 8 e 16 caratteri";
 		$problems{empty}="no";
 	}		
@@ -122,8 +122,7 @@ if ($q->request_method eq 'POST') {
 			$problems{empty}="no";
 	}
 
-	
-
+	#$nome= encode("utf-8",decode("iso-8859-2",$nome));
 	my %ute = (
 			Username => $q->param('username'),
 	        Email => $q->param('email'),       
@@ -138,9 +137,10 @@ if ($q->request_method eq 'POST') {
 	#	$ute{'DescrizionePers'}=$q->param('descr_pers');
 	#}
 	if($problems{'empty'} eq 'yes') {
-		if(data_registration::inserisci_nuovo_utente(\%ute)) {
-			print $session->header(-location => "login.cgi");
-		}
+		  data_registration::inserisci_nuovo_utente(\%ute);
+		  $session->param('nuova_regis',\%ute);
+		  print $session->header(-location => "ricevitore_login.cgi");
+		
 	}
 	else {
 		$session->param('problems', \%problems);

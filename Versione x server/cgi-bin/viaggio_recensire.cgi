@@ -35,8 +35,9 @@ else {
 	my $num = @destinatari;
 	#print $num," ","//SetUtenti/Utente[Username='$username']/Notifiche/FeedDaRilasciare[\@Passaggio='$passaggio']/\@Destinatario";
 	my $ind = 1;
-	print "<h1>Inserisci i feedback dei tuoi compagni di viaggio</h1>
+	$contenuto = $contenuto. "<h1>Inserisci i feedback dei tuoi compagni di viaggioooooooooooooo</h1>
 		<form action=\"ricevitore_feedback.cgi\" method=\"post\">";
+		$contenuto = $contenuto. "<input type=\"hidden\" name=\"passaggio\" value=\"$passaggio\"></input>";
 	for(my $i=0; $i<$num; $i++){
 		my $dest = $destinatari[$i]->textContent;
 		my $nome = $doc->findnodes("//SetUtenti/Utente[Username='$dest']/Nome")->get_node(1)->textContent;

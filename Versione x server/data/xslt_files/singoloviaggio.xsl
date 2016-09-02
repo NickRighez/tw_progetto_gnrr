@@ -89,40 +89,40 @@
 	     <div class="preferenzeGroup">
 	     	<xsl:choose>
 	     		<xsl:when test="/ts:TravelShare/SetUtenti/Utente[Username=$ute]/Profilo/Preferenze/Chiacchiere=0">
-	     			<img src="Immagini/BLA0.png" class="preferenze4Img" alt="Non chiacchiero" title="Non chiacchiero"></img>
+	     			<img src="../Immagini/BLA0.png" class="preferenze4Img" alt="Non chiacchiero" title="Non chiacchiero"></img>
 	     		</xsl:when>
 	     		<xsl:when test="/ts:TravelShare/SetUtenti/Utente[Username=$ute]/Profilo/Preferenze/Chiacchiere=1">
-	     			<img src="Immagini/BLA1.png" class="preferenze4Img" alt="chiacchero poco" title="chiacchiero pcco"></img>
+	     			<img src="../Immagini/BLA1.png" class="preferenze4Img" alt="chiacchero poco" title="chiacchiero pcco"></img>
 	     		</xsl:when>
 	     		<xsl:otherwise>
-	     			<img src="Immagini/BLA2.png" class="preferenze4Img" alt="chiacchiero molto" title="chiacchiero molto"></img>
+	     			<img src="../Immagini/BLA2.png" class="preferenze4Img" alt="chiacchiero molto" title="chiacchiero molto"></img>
 	     		</xsl:otherwise>
 	     	</xsl:choose>
 	     	<xsl:choose>
 	     		<xsl:when test="/ts:TravelShare/SetUtenti/Utente[Username=$ute]/Profilo/Preferenze/Musica=0">
-	     			<img src="Immagini/musica0.png" class="preferenze4Img" alt="No musica" title="No musica"></img>
+	     			<img src="../Immagini/musica0.png" class="preferenze4Img" alt="No musica" title="No musica"></img>
 	     		</xsl:when>
 	     		<xsl:when test="/ts:TravelShare/SetUtenti/Utente[Username=$ute]/Profilo/Preferenze/Musica=1">
-	     			<img src="Immagini/musica1.png" class="preferenze4Img" alt="Poca musica" title="Poca musica"></img>
+	     			<img src="../Immagini/musica1.png" class="preferenze4Img" alt="Poca musica" title="Poca musica"></img>
 	     		</xsl:when>
 	     		<xsl:otherwise>
-	     			<img src="Immagini/musica2.png" class="preferenze4Img" alt="Molta musica" title="Molta musica"></img>
+	     			<img src="../Immagini/musica2.png" class="preferenze4Img" alt="Molta musica" title="Molta musica"></img>
 	     		</xsl:otherwise>
 	     	</xsl:choose>
 	     	<xsl:choose>
 	     		<xsl:when test="/ts:TravelShare/SetUtenti/Utente[Username=$ute]/Profilo/Preferenze/Animali=0">
-	     			<img src="Immagini/animali0.png" class="preferenze4Img" alt="No animali" title="No animali"></img>
+	     			<img src="../Immagini/animali0.png" class="preferenze4Img" alt="No animali" title="No animali"></img>
 	     		</xsl:when>
 	     		<xsl:otherwise>
-	     			<img src="Immagini/animali1.png" class="preferenze4Img" alt="Si animali" title="Si animali"></img>
+	     			<img src="../Immagini/animali1.png" class="preferenze4Img" alt="Si animali" title="Si animali"></img>
 	     		</xsl:otherwise>
 	     	</xsl:choose>
 	     	<xsl:choose>
 	     		<xsl:when test="/ts:TravelShare/SetUtenti/Utente[Username=$ute]/Profilo/Preferenze/Fumatore=0">
-	     			<img src="Immagini/fumo0.png" class="preferenze4Img" alt="No fumatori" title="No fumatori"></img>
+	     			<img src="../Immagini/fumo0.png" class="preferenze4Img" alt="No fumatori" title="No fumatori"></img>
 	     		</xsl:when>
 	     		<xsl:otherwise>
-	     			<img src="Immagini/fumo1.png" class="preferenze4Img" alt="Si fumatori" title="Si fumatori"></img>
+	     			<img src="../Immagini/fumo1.png" class="preferenze4Img" alt="Si fumatori" title="Si fumatori"></img>
 	     		</xsl:otherwise>
 	     	</xsl:choose>
 	     </div>

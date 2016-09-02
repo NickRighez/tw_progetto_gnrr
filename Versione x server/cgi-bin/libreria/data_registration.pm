@@ -19,10 +19,11 @@ use diagnostics;
 use libreria::utility;
 #use Switch;
 use XML::LibXML;
-use XML::Tidy;my ($sec,$min,$hour,$mday, $mon, $year ,$wday,$yday,$isdst) = localtime();
-$year = $year + 1900;
+use XML::Tidy;
 use Template;
 use libreria::date_time;
+
+use utf8;
 
 use Fcntl qw( :flock );
 
@@ -109,6 +110,9 @@ sub serializzazione_inserimento {
 sub inserisci_nuovo_utente {
     my $array_argom_ref = shift @_;
     my %array_argom = %$array_argom_ref;   # tutorialspoint/perl/perl_references
+    foreach my $el (%array_argom){
+        utf8::encode($el);
+    }
     my @parametri   = (
         'Username',
         'Email',       'Nome',     'Cognome', 'DescrizionePers', 'Sesso',
@@ -239,6 +243,9 @@ sub inserisci_prenotazione {
 sub inserisci_nuovo_messaggio_singolo { 
     my $array_argom_ref = shift @_;  # DEVE CONTENERE CHIAVI : Mittente, Destinatario, Data, Ora, Testo 
     my %array_argom = %$array_argom_ref; 
+    foreach my $el (%array_argom){
+        utf8::encode($el);
+    }
     my %aux = serializzazione_apertura();
     my $doc = $aux{'doc'};
     my $fileHandle = $aux{'filehandle'};
@@ -297,6 +304,9 @@ sub inserisci_nuovo_messaggio_bacheca {
     my $idv = shift @_; # id del viaggio
     my $array_argom_ref = shift @_; # DEVE CONTENERE CHIAVI : Mittente, Destinatario, Data, Ora, Testo  ( il messaggio da inserire ) 
     my %array_argom = %$array_argom_ref;
+    foreach my $el (%array_argom){
+        utf8::encode($el);
+    }
     my %aux = serializzazione_apertura();
     my $doc = $aux{'doc'};
     my $fileHandle = $aux{'filehandle'};
@@ -410,12 +420,16 @@ sub inserisci_feedback {
     # CHIAVI : IDMitt, IDDest, Passaggio, Commento, PunteggioMedio, Compagnia, Puntualita. Nel 
     #             caso il destinatario sia il conducente del viaggio, anche le chiavi Pulizia e Guida
     my %array_argom = %$array_argom_ref;
+    foreach my $el (%array_argom){
+        utf8::encode($el);
+    }
     my $output = "<Feedback IDMitt=\"$array_argom{'IDMitt'}\" IDDest=\"$array_argom{'IDDest'}\">
                               <Passaggio>$array_argom{'Passaggio'}</Passaggio>
                               <Commento>$array_argom{'Commento'}</Commento> \n";   
     my %aux=serializzazione_apertura();
     my $doc = $aux{'doc'};
     my $fileHandle = $aux{'filehandle'};
+    print "//Passaggio[IDViaggio=\"$array_argom{'Passaggio'}\" and Conducente=\"$array_argom{'IDDest'}\"]","ccc<br>";
     if(utility::verifica_presenza("//Passaggio[IDViaggio=\"$array_argom{'Passaggio'}\" and Conducente=\"$array_argom{'IDDest'}\"]",$doc)) {
         
         $output = $output."   <ValutazioneConduc>
@@ -442,6 +456,9 @@ sub inserisci_feedback {
 sub inserisci_info_auto {
     my $array_argom_ref = shift @_; # CHIAVI : Username, Auto
     my %array_argom = %$array_argom_ref;
+    foreach my $el (%array_argom){
+        utf8::encode($el);
+    }
     my $output = "<Auto>$array_argom{'Auto'}</Auto> \n";
     my %aux = serializzazione_apertura();
     my $doc = $aux{'doc'};
@@ -464,6 +481,9 @@ sub inserisci_info_auto {
 sub inserisci_info_patente {
     my $array_argom_ref = shift @_; # CHIAVI :  Username, Patente
     my %array_argom = %$array_argom_ref;
+    foreach my $el (%array_argom){
+        utf8::encode($el);
+    }
     my $output = "<Patente>$array_argom{'Patente'}<Patente/> \n";
     my %aux = serializzazione_apertura();
     my $doc = $aux{'doc'};
@@ -547,6 +567,9 @@ sub inserisci_preferenze {
 sub inserisci_modifica_profilo { 
     my $array_argom_ref = shift @_; # CHIAVI : Username(del profilo da modificare), Nome, Cognome, Sesso, Email, AnnoNascita, Descrizione, Patente, Auto, Chiacchere, Animali, Musica, Fumatore
     my %array_argom = %$array_argom_ref;
+    foreach my $el (%array_argom){
+        utf8::encode($el);
+    }
     my %aux = serializzazione_apertura();
     my $doc = $aux{'doc'};
     my $fileHandle = $aux{'filehandle'};

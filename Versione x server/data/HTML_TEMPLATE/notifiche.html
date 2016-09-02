@@ -15,8 +15,8 @@
   <link href="../screen.css" rel="stylesheet" type="text/css" media="screen" />
   <link href="../print.css" rel="stylesheet" type="text/css" media="print" />
 
-  <link rel="icon" href="Immagini/TS_icon.png" type="image/x-icon" />
-  <link rel="shortcut icon" href="Immagini/TS_icon.png" type="image/x-icon" />
+  <link rel="icon" href="../Immagini/TS_icon.png" type="image/x-icon" />
+  <link rel="shortcut icon" href="../Immagini/TS_icon.png" type="image/x-icon" />
   <script src="javascript/jquery-ui-1.12.0/jquery-ui.js"></script>
 
   <link rel="stylesheet" href="javascript/jquery-ui-1.12.0/jquery-ui.css" />
@@ -27,7 +27,7 @@
  <body>
 
   <div id="header">
-   <a href="home.cgi" tabindex=""><img src="Immagini/banner.png" id="banner" alt="Banner Travel Share - Link diretto alla Home" /></a>
+   <a href="home.cgi" tabindex=""><img src="../Immagini/banner.png" id="banner" alt="Banner Travel Share - Link diretto alla Home" /></a>
    <a id="bottoneMenu" href="#menu" tabindex="">Men&ugrave;</a>
   </div>
 
@@ -37,19 +37,8 @@
   </div>
 
   <div id="contenuto">
-
-	<h1>Notifiche</h1>
-
-	<div class="notifica">
-	<p>Hai un nuovo messaggio</p>  <a href="conversazioni.cgi">Vai ai messaggi</a> <!--link interno al p o esterno?-->
-	</div>
-	<div class="notifica">
-	<p>Hai una nuova richiesta di prenotazione</p>  <a href="BOH.html">Vai alle richieste</a>
-	</div>
-	<div class="notifica">
-	<p>Hai un nuovo messaggio sulla bacheca di un viaggio</p>  <a href="BOH.html">Vai al viaggio</a>
-	</div>
-  </div>
+    [% CONTENUTO %]
+</div>
 
   <div id="menu">
   <ul id="menuLista">

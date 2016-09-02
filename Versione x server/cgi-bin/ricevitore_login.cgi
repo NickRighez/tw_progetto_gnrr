@@ -1,4 +1,5 @@
 #!/usr/bin/perl
+#print "Content-type: text/html\n\n";
 
 use strict;
 use warnings;
@@ -18,6 +19,15 @@ use libreria::sessione;
 
 if(defined($session->param('loggedin'))) {
   print $session->header(-location => "home.cgi");
+}
+elsif (defined($session->param('nuova_regis'))) {
+	my $aux = $session->param('nuova_regis');
+	my %ute = %$aux;
+	$session->param('username',$ute{'Username'});
+	$session->param('loggedin','yes');
+	$session->flush();
+	$session->clear(['nuova_regis']);
+	print $session->header(-location => "confermaRegistrazione.cgi");
 }
 else {
 	my $doc = data_registration::get_xml_doc();;

@@ -1,5 +1,4 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="it" lang="it">
  <head>
   <title>Gestisci il profilo - Travel Share</title>
@@ -7,7 +6,7 @@
   <meta name="title" content="..." />
   <meta name="description" content="..." />
   <meta name="keywords" content="profilo, travel share, car pooling, passaggio, auto" />
-  <meta name="author" content="Giovanni Sanna, Nicolò Rigato, Riccardo Ardossi, Riccardo Saggese" />
+  <meta name="author" content="Giovanni Sanna, Nicolò, Rigato, Riccardo Ardossi" />
   <meta name="language" content="italian it" />
 
   <meta name="viewport" content="width=device-width" />
@@ -15,8 +14,8 @@
   <link href="../screen.css" rel="stylesheet" type="text/css" media="screen" />
   <link href="../print.css" rel="stylesheet" type="text/css" media="print" />
 
-  <link rel="icon" href="Immagini/TS_icon.png" type="image/x-icon" />
-  <link rel="shortcut icon" href="Immagini/TS_icon.png" type="image/x-icon" />
+  <link rel="icon" href="../Immagini/TS_icon.png" type="image/x-icon" />
+  <link rel="shortcut icon" href="../Immagini/TS_icon.png" type="image/x-icon" />
   <script src="javascript/jquery-ui-1.12.0/jquery-ui.js"></script>
 
   <link rel="stylesheet" href="javascript/jquery-ui-1.12.0/jquery-ui.css" />
@@ -29,7 +28,7 @@
  <body onload="caricamento_modifica_profilo()">
 
   <div id="header">
-   <a href="homeLog.html" tabindex="1"><img src="Immagini/banner.png" id="banner" alt="Banner Travel Share - Link diretto alla Home" /></a>
+   <a href="home.cgi" tabindex="1"><img src="../Immagini/banner.png" id="banner" alt="Banner Travel Share - Link diretto alla Home" /></a>
    <a id="bottoneMenu" href="#menu">Men&ugrave;</a>
   </div>
 
@@ -41,7 +40,7 @@
   <div id="contenuto">
 	<h1>Modifica il profilo</h1>
 	<p id="info_conducente_err" class="errore">[% INFO_CONDUC_ERR %]</p>
-	<form action="test.html" method="post" onsubmit="return valida_submit_modifica_profilo();">
+	<form action="ricevitore_modifica.cgi" method="post" onsubmit="return valida_submit_modifica_profilo();">
 	<fieldset><legend></legend>
 	<label for="nome">Nome:</label>
     <input type="text" id="nome" name="nome" value="[%NOME%]" tabindex="9" onblur="valida_nome('nome','Nome')"></input><br />
@@ -87,37 +86,37 @@
 	<p>Chiacchiere:</p> <!--manca il checked="checked" e il tabindex che va assieme al checked (19-20-21-22)-->
 	<div class="preferenzeGroup">
 	<input type="radio" name="chiacchiere" id="chiacchiere0" [% CHECKED_C0 %] class="radioNascosto" value="0"></input>
-	<label for="chiacchiere0"><img class="preferenzeImg marginRadioNascosto" src="Immagini/BLA0.png" alt="Silenzioso"></img></label>
+	<label for="chiacchiere0"><img class="preferenzeImg marginRadioNascosto" src="../Immagini/BLA0.png" alt="Silenzioso"></img></label>
 	<input type="radio" name="chiacchiere" id="chiacchiere1" [% CHECKED_C1 %] class="radioNascosto" value="1" ></input>
-	<label for="chiacchiere1"><img class="preferenzeImg marginRadioNascosto" src="Immagini/BLA1.png" alt="Poche chiacchiere"></img></label>
+	<label for="chiacchiere1"><img class="preferenzeImg marginRadioNascosto" src="../Immagini/BLA1.png" alt="Poche chiacchiere"></img></label>
 	<input type="radio" name="chiacchiere" id="chiacchiere2" [% CHECKED_C2 %] class="radioNascosto" value="2"></input>
-	<label for="chiacchiere2"><img class="preferenzeImg marginRadioNascosto" src="Immagini/BLA2.png" alt="Chiacchierone"></img></label>
+	<label for="chiacchiere2"><img class="preferenzeImg marginRadioNascosto" src="../Immagini/BLA2.png" alt="Chiacchierone"></img></label>
 	</div>
 	
 	<p>Musica:</p>
 	<div class="preferenzeGroup">
 	<input type="radio" name="musica" id="musica0" [% CHECKED_M0 %] class="radioNascosto" value="0"></input>
-	<label for="musica0"><img class="preferenzeImg marginRadioNascosto" src="Immagini/musica0.png" alt=""></img></label>
+	<label for="musica0"><img class="preferenzeImg marginRadioNascosto" src="../Immagini/musica0.png" alt=""></img></label>
 	<input type="radio" name="musica" id="musica1" [% CHECKED_M1 %] class="radioNascosto" value="1" ></input>
-	<label for="musica1"><img class="preferenzeImg marginRadioNascosto" src="Immagini/musica1.png" alt=""></img></label>
+	<label for="musica1"><img class="preferenzeImg marginRadioNascosto" src="../Immagini/musica1.png" alt=""></img></label>
 	<input type="radio" name="musica" id="musica2" [% CHECKED_M2 %] class="radioNascosto" value="2"></input>
-	<label for="musica2"><img class="preferenzeImg marginRadioNascosto" src="Immagini/musica2.png" alt=""></img></label>
+	<label for="musica2"><img class="preferenzeImg marginRadioNascosto" src="../Immagini/musica2.png" alt=""></img></label>
 	</div>
 	
-	<p>Animali:</p>0
+	<p>Animali:</p>
 	<div class="preferenzeGroup">
 	<input type="radio" name="animali" id="animali0" [% CHECKED_A0 %] class="radioNascosto" value="0"></input>
-	<label for="animali0"><img class="preferenzeImg marginRadioNascosto" src="Immagini/animali0.png" alt=""></img></label>
+	<label for="animali0"><img class="preferenzeImg marginRadioNascosto" src="../Immagini/animali0.png" alt=""></img></label>
 	<input type="radio" name="animali" id="animali1" [% CHECKED_A1 %] class="radioNascosto" value="1" ></input>
-	<label for="animali1"><img class="preferenzeImg marginRadioNascosto" src="Immagini/animali1.png" alt=""></img></label>
+	<label for="animali1"><img class="preferenzeImg marginRadioNascosto" src="../Immagini/animali1.png" alt=""></img></label>
 	</div>
 	
 	<p>Fumatori:</p>
 	<div class="preferenzeGroup">
 	<input type="radio" name="fumatori" id="fumatori0" [% CHECKED_F0 %] class="radioNascosto" value="0"></input>
-	<label for="fumatori0"><img class="preferenzeImg marginRadioNascosto" src="Immagini/fumo0.png" alt=""></img></label>
+	<label for="fumatori0"><img class="preferenzeImg marginRadioNascosto" src="../Immagini/fumo0.png" alt=""></img></label>
 	<input type="radio" name="fumatori" id="fumatori1" [% CHECKED_F1 %] class="radioNascosto" value="1" ></input>	
-	<label for="fumatori1"><img class="preferenzeImg marginRadioNascosto" src="Immagini/fumo1.png" alt=""></img></label>
+	<label for="fumatori1"><img class="preferenzeImg marginRadioNascosto" src="../Immagini/fumo1.png" alt=""></img></label>
 	</div>
 	
 	</div>

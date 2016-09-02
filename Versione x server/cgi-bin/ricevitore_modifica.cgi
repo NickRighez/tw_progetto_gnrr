@@ -36,8 +36,8 @@ else {
 		);
 
 	if($q->param('nome') ne '') {
-		if(!($q->param('nome')=~m/^[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð]+$/)) {
-			$problems{ERR_NOME}="Nome utente non valido, inserire solo lettere, di cui, al più la prima lettera può essere mauiscola";
+		if(!($q->param('nome')=~m/^[\p{L}\ \,\.\'\-]*$/)) {
+			$problems{NOME_ERR}="Nome utente non valido, inserire solo lettere, di cui, al più la prima lettera può essere mauiscola";
 			$problems{empty}="no";
 		}
 		else {
@@ -47,8 +47,8 @@ else {
 	}
 
 	if($q->param('cognome') ne '') {
-		if(!($q->param('cognome')=~m/^[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.-]+$/)) {
-			$problems{ERR_COGNOME}="Cognome utente non valido, inserire solo lettere, di cui, al più la prima lettera può essere mauiscola";
+		if(!($q->param('cognome')=~m/^[\p{L}\ \,\.\'\-]*$/)) {
+			$problems{COGNOME_ERR}="Cognome utente non valido, inserire solo lettere, di cui, al più la prima lettera può essere mauiscola";
 			$problems{empty}="no";
 		}
 		else {
@@ -59,7 +59,7 @@ else {
 
 	if($q->param('email') ne '') {
 		if(!($q->param('email')=~m/^([a-z0-9_\.-]+)@([a-z]+)\.([a-z]{2,6})$/)) {
-			$problems{ERR_EMAIL}="Indirizzo email non valido";
+			$problems{EMAIL_ERR}="Indirizzo email non valido";
 			$problems{empty}="no";
 		}
 		else {		
@@ -67,7 +67,7 @@ else {
 			my @email = $doc->findnodes("//SetUtenti/Utente[Email='".$q->param('email')."']");
 			my $num = @email;
 			if($num!=0 and $q->param('email') ne $email[0]->findnodes("Email")->get_node(1)->textContent) {
-				$problems{ERR_EMAIL}="Indirizzo email già esistente";
+				$problems{EMAIL_ERR}="Indirizzo email già esistente";
 				$problems{empty}="no";
 			}
 			else {
@@ -80,14 +80,14 @@ else {
 
 	if($q->param('anno') ne '') {
 		if(!($q->param('anno')=~m/^[1-2][0-9][0-9][0-9]$/)) {
-			$problems{ERR_ANNO}="Anno di nascita non valida, inserire l anno in formato 'aaaa'";
+			$problems{ANNO_ERR}="Anno di nascita non valida, inserire l anno in formato 'aaaa'";
 			$problems{empty}="no";
 		}
 		else {
 			my ($sec,$min,$hour,$mday,$mon,$year,$wday,$yday,$isdst) = localtime();
 			$year=$year+1900-18;
 			if(($q->param('anno'))>$year) {
-				$problems{ERR_ANNO}="Possono registrarsi solo utenti maggiorenni";
+				$problems{ANNO_ERR}="Possono registrarsi solo utenti maggiorenni";
 				$problems{empty}="no";
 			}
 			else {
@@ -129,19 +129,19 @@ else {
 
 		if($q->param('annoPatente') ne '' or $q->param('auto') ne '' or $q->param('chiacchiere') ne '' or $q->param('musica') ne '' or $q->param('animali') ne '' or $q->param('fumatori') ne '') {
 			if($q->param('annoPatente') eq '' or $q->param('auto') eq '' or $q->param('chiacchiere') eq '' or $q->param('musica') eq '' or $q->param('animali') eq '' or $q->param('fumatori') eq '') {
-				$problems{ERR_INFO_CONDUCENTE}="Le informazioni necessarie per offrire un passaggio devono essere tutte presenti, o nessuna";
+				$problems{INFO_CONDUC_ERR}="Le informazioni necessarie per offrire un passaggio devono essere tutte presenti, o nessuna";
 				$problems{empty}="no";
 			}
 			elsif(!($q->param('annoPatente')=~m/^[1-2][0-9][0-9][0-9]$/)) {
-				$problems{ERR_ANNOPATENTE}="Anno di rilascio della patente non valido, inserire l anno in formato 'aaaa'";
+				$problems{ANNOPATENTE_ERR}="Anno di rilascio della patente non valido, inserire l anno in formato 'aaaa'";
 				$problems{empty}="no";
 			}
-				else {
+			else {
 					$old_input{ANNOPATENTE}=$q->param('annoPatente');
-				}
+			}
 
-			if(!($q->param('auto')=~m/^[a-z0-9A-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.-]+$/)) {
-				$problems{ERR_AUTO}="Auto non valida, inserire solo lettere o numeri";
+			if(!($q->param('auto')=~m/^[\p{L}\ \,\.\'\-]*$/)) {
+				$problems{AUTO_ERR}="Auto non valida, inserire solo lettere o numeri";
 				$problems{empty}="no";
 			}
 			else {
@@ -149,7 +149,7 @@ else {
 			}
 			$Modifica{Patente}=$q->param('annoPatente');
 			$Modifica{Auto}=$q->param('auto');
-			$Modifica{Chiacchere}=$q->param('chiacchiere');
+			$Modifica{Chiacchiere}=$q->param('chiacchiere');
 			$Modifica{Musica}=$q->param('musica');
 			$Modifica{Animali}=$q->param('animali');
 			$Modifica{Fumatore}=$q->param('fumatori');
@@ -162,8 +162,8 @@ else {
 
 	$old_input{$chiacc} = "checked='checked'";
 	$old_input{$mus} = "checked='checked'";
-	$old_input{anim} = "checked='checked'";
-	$old_input{fum} = "checked='checked'";
+	$old_input{$anim} = "checked='checked'";
+	$old_input{$fum} = "checked='checked'";
 
 	if($problems{'empty'} eq "no") {
 		$session->param('problems',\%problems);

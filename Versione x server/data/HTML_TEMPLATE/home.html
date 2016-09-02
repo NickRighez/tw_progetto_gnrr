@@ -7,7 +7,7 @@
   <meta name="title" content="..." />
   <meta name="description" content="Homepage di Travel Share - Cerca un passaggio" />
   <meta name="keywords" content="home, cerca, travel share, car pooling, passaggio, auto" />
-  <meta name="author" content="Giovanni Sanna, Nicolò Rigato, Riccardo Ardossi, Riccardo Saggese" />
+  <meta name="author" content="Giovanni Sanna, Nicolò Rigato, Riccardo Ardossi" />
   <meta name="language" content="italian it" />
 
   <meta name="viewport" content="width=device-width" />
@@ -15,8 +15,8 @@
   <link href="../screen.css" rel="stylesheet" type="text/css" media="screen" />
   <link href="../print.css" rel="stylesheet" type="text/css" media="print" />
 
-  <link rel="icon" href="Immagini/TS_icon.png" type="image/x-icon" />
-  <link rel="shortcut icon" href="Immagini/TS_icon.png" type="image/x-icon" />
+  <link rel="icon" href="../Immagini/TS_icon.png" type="image/x-icon" />
+  <link rel="shortcut icon" href="../Immagini/TS_icon.png" type="image/x-icon" />
   <script src="javascript/jquery-ui-1.12.0/jquery-ui.js"></script>
 
   <link rel="stylesheet" href="../javascript/jquery-ui-1.12.0/jquery-ui.css" />
@@ -27,7 +27,7 @@
  <body onload="caricamento_home()">
 
   <div id="header">
-   <a href="home.cgi" tabindex="1"><img src="Immagini/banner.png" id="banner" alt="Banner Travel Share - Link diretto alla Home" /></a>
+   <a href="home.cgi" tabindex="1"><img src="../Immagini/banner.png" id="banner" alt="Banner Travel Share - Link diretto alla Home" /></a>
    <a id="bottoneMenu" href="#menu">Men&ugrave;</a>
   </div>
 
@@ -41,7 +41,7 @@
 
 	<h1>Cerca un passaggio!</h1>
 
-	<form action="" method="get" onsubmit="return valida_submit_home();">
+	<form action="ricevitore_ricerca.cgi" method="post" onsubmit="return valida_submit_home();">
 	<fieldset><legend>Ricerca di un passaggio</legend>
 	<label for="partenza">Partenza</label><br />
 	<input type="text" id="partenza" name="partenza" tabindex="6" onblur="valida_nome('partenza','Luogo di partenza')" value="[%PARTENZA%]"></input><br />

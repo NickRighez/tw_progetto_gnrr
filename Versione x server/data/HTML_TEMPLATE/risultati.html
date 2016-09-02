@@ -7,7 +7,7 @@
   <meta name="title" content="..." />
   <meta name="description" content="..." />
   <meta name="keywords" content=", travel share, car pooling, passaggio, auto" />
-  <meta name="author" content="Giovanni Sanna, Nicolò Rigato, Riccardo Ardossi, Riccardo Saggese" />
+  <meta name="author" content="Giovanni Sanna, Nicolò Rigato, Riccardo Ardossi" />
   <meta name="language" content="italian it" />
 
   <meta name="viewport" content="width=device-width" />
@@ -15,8 +15,8 @@
   <link href="../screen.css" rel="stylesheet" type="text/css" media="screen" />
   <link href="../print.css" rel="stylesheet" type="text/css" media="print" />
 
-  <link rel="icon" href="Immagini/TS_icon.png" type="image/x-icon" />
-  <link rel="shortcut icon" href="Immagini/TS_icon.png" type="image/x-icon" />
+  <link rel="icon" href="../Immagini/TS_icon.png" type="image/x-icon" />
+  <link rel="shortcut icon" href="../Immagini/TS_icon.png" type="image/x-icon" />
 
 
   <script src="http://code.jquery.com/jquery-1.8.2.js"></script>
@@ -29,7 +29,7 @@
  <body onload="caricamento_risultati()">
 
   <div id="header">
-   <a href="home.cgi" tabindex=""><img src="Immagini/banner.png" id="banner" alt="Banner Travel Share - Link diretto alla Home" /></a>
+   <a href="home.cgi" tabindex=""><img src="../Immagini/banner.png" id="banner" alt="Banner Travel Share - Link diretto alla Home" /></a>
    <a id="bottoneMenu" href="#menu" tabindex="">Men&ugrave;</a>
   </div>
 
@@ -46,70 +46,11 @@
  [% END %]
   <div id="contenuto">
 
-	<h1>10 risultati trovati</h1>
-	<h2>Partenza &#8594; Arrivo</h2>
-	<h3>gg/mm/aaaa</h3>
+	<h1>[%  %] risultati trovati</h1>
+	<h2>[% PARTENZA %] &#8594; [% ARRIVO %]</h2>
+	<h3>[% DATA %]</h3>
 
-	<div class="risultato">
-	 <a href="singoloViaggioLog.html">
-     <span class="tratta" >
-     <span class="partenza">Llanfairpwllgwyngyl lgogerychwyrndrobwllll antysiliogogogoch </span> &#8594; <span class="arrivo">Llanfairpwllgwyngyllgogerychwyrndrobwllllantysiliogogogoch</span>
-   </span>
-      <span class="pulsante_goto"> Vai &gt; </span>
-    </a>
-<div class="spacer"></div>
-
-	 <p>Ora: 12:37</p>
-
-	 <p>Posti: 3<span class="destra">10&euro; <!--&#8364;--></span></p>
-
-	 <hr />
-
-	 <>Guidpo L <span class="destra">33 anni</span></p>
-
-	 <p>Voto medio: 5/5</p>
-
-	 <div class="infoGuidatore">
-	 <p>Auto: Lamborghini</p>
-
-	 <p>Preferenze:</p>
-	 <div class="preferenzeGroup">
-	 <img src="Immagini/BLA2.png" class="preferenze4Img" alt="" title=""></img>
-	 <img src="Immagini/musica1.png" class="preferenze4Img" alt="" title=""></img>
-	 <img src="Immagini/animali0.png" class="preferenze4Img" alt="" title=""></img>
-	 <img src="Immagini/fumo0.png" class="preferenze4Img" alt="" title=""></img>
-	 </div>
-
-	 </div>
-
-	</div>
-	<div class="risultato">
-	 <a href="singoloViaggioLog.html"><span class="partenza">Partenza</span> &#8594; <span class="arrivo">Arrivo</span></a>
-
-	 <p>Ora: 12:37 [tappa]</p>
-
-	 <p>Posti: 3<span class="destra">10&euro; <!--&#8364;--></span></p>
-
-	 <hr />
-
-	 <p>Vercingetorige L <span class="destra">25 anni</span></p>
-
-	 <p>Voto medio: 5/5</p>
-
-	 <div class="infoGuidatore">
-	 <p>Auto: Lamborghini</p>
-
-	 <p>Preferenze:</p>
-	 <div class="preferenzeGroup">
-	 <img src="Immagini/BLA2.png" class="preferenze4Img" alt="" title=""></img>
-	 <img src="Immagini/musica1.png" class="preferenze4Img" alt="" title=""></img>
-	 <img src="Immagini/animali0.png" class="preferenze4Img" alt="" title=""></img>
-	 <img src="Immagini/fumo0.png" class="preferenze4Img" alt="" title=""></img>
-	 </div>
-
-	 </div>
-
-	 </div>
+[% CONTENUTO %]
 
   </div>
 

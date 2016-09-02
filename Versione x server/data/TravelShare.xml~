@@ -23,10 +23,6 @@
         </Valutazione>
       </Profilo>
       <Notifiche>
-      	<NuovoMessaggio Mittente="gggggggggg" />
-      	<FeedDaRilasciare Destinatario="gggggggggg" Passaggio="v1" />
-      	<RichiestaPrenotaz Mittente="gggggggggg" Passaggio="v1" Partenza="0" Arrivo="4" />
-      	<EsitoPrenotaz Passaggio="v1" Esito="Accettata" />
     </Notifiche>
     </Utente>
     <Utente>

@@ -7,7 +7,7 @@
   <meta name="title" content="..." />
   <meta name="description" content="..." />
   <meta name="keywords" content="messaggi, travel share, car pooling, passaggio, auto" />
-  <meta name="author" content="Giovanni Sanna, Nicolò Rigato, Riccardo Ardossi, Riccardo Saggese" />
+  <meta name="author" content="Giovanni Sanna, Nicolò Rigato, Riccardo Ardossi" />
   <meta name="language" content="italian it" />
 
   <meta name="viewport" content="width=device-width" />
@@ -15,8 +15,8 @@
   <link href="../screen.css" rel="stylesheet" type="text/css" media="screen" />
   <link href="../print.css" rel="stylesheet" type="text/css" media="print" />
 
-  <link rel="icon" href="Immagini/TS_icon.png" type="image/x-icon" />
-  <link rel="shortcut icon" href="Immagini/TS_icon.png" type="image/x-icon" />
+  <link rel="icon" href="../Immagini/TS_icon.png" type="image/x-icon" />
+  <link rel="shortcut icon" href="../Immagini/TS_icon.png" type="image/x-icon" />
   <script src="javascript/jquery-ui-1.12.0/jquery-ui.js"></script>
 
   <link rel="stylesheet" href="javascript/jquery-ui-1.12.0/jquery-ui.css" />
@@ -27,40 +27,21 @@
  <body onload="caricamento_messaggi()">
 
   <div id="header">
-   <a href="home.cgi" tabindex=""><img src="Immagini/banner.png" id="banner" alt="Banner Travel Share - Link diretto alla Home" /></a>
-   <a id="bottoneMenu" href="#menu" tabindex="">Men&ugrave;</a>
+   <a href="home.cgi" tabindex=""><img src="../Immagini/banner.png" id="banner" alt="Banner Travel Share - Link diretto alla Home" /></a>
+   <a id="bottoneMenu" href="#menu" tabindex="1">Men&ugrave;</a>
   </div>
 
   <div id="utente">
    <p>Ciao [% NOME_UTENTE %]</p>
-   <p><a href="notifiche.cgi">Notifiche (0)</a>  <a href="ricevitore_logout.cgi" tabindex="">Logout</a></p>
+   <p><a href="notifiche.cgi" tabindex="2">Notifiche (0)</a>  <a href="ricevitore_logout.cgi" tabindex="3">Logout</a></p>
   </div>
 
   <div id="contenuto">
 
 	<h1>Messaggi</h1>
 
-	<div class="conversazione nuova">
-	<a href="singolaConversazione.html" title="Nuovo messaggio">Nome mittente <span class="data">Ora di invio</span></a> <!--nota: lo span toglie la sottolineatura-->
-	<p class="ultimoMessaggio">ciao, mi puoi passare a prendere? testo lungo prova ciao ciao test testoso di un messaggio lungo da mostrare e non so cosa altro scrivere</p>
-	</div>
-	<div class="conversazione nuova">
-	<a href="singolaConversazione.html" title="Nuovo messaggio">Giovanni <span class="data">18:19 - 30/12</span></a> <!--nota: lo span toglie la sottolineatura-->
-	<p class="ultimoMessaggio">ciao, mi puoi passare a prendere?</p>
-	</div>
+	 [% CONTENUTO %]
 
-	<div class="conversazione">
-	<a href="singolaConversazione.html" title="Messaggio letto">Massimiliano <span class="data">13:06 - 30/12</span></a> <!--nota: lo span toglie la sottolineatura-->
-	<p class="ultimoMessaggio">ciao, mi puoi passare a prendere?</p>
-	</div>
-	<div class="conversazione">
-	<a href="singolaConversazione.html" title="Messaggio letto">Riccardo <span class="data">20:49 - 30/12</span></a> <!--nota: lo span toglie la sottolineatura-->
-	<p class="ultimoMessaggio">ciao, mi puoi passare a prendere?</p>
-	</div>
-	<div class="conversazione">
-	<a href="singolaConversazione.html" title="Messaggio letto">WWWWWWWWWWWWWuholjoijWW<span class="data">12:23 - 30/12</span></a> <!--nota: lo span toglie la sottolineatura-->
-	<p class="ultimoMessaggio">ciao, mi puoi passare a prendere?</p>
-	</div>
 
   </div>
 

@@ -40,7 +40,7 @@ else {
   }  
 
   my %Ute=(
-    UTENTE => $session->param('username')   
+    UTENTE => $q->param('utente')   
   );
 
   my $file = "../data/HTML_TEMPLATE/profiloPubblico.html";

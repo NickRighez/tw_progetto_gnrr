@@ -28,7 +28,7 @@ my %Passaggio;
 
 if(!defined($session->param('username'))) {
   my %problems=(
-     not_logged => "Utente non loggato, pagina inaccessibile"
+     LOGIN_ERR => "Utente non loggato, pagina inaccessibile"
      );
   $session->param('problems',\%problems);
   print $session->header(-location => "login.cgi");
@@ -37,11 +37,11 @@ else {
 	my $username = $session->param('username');
 
 	if($q->param('partenza') eq "") {
-		$problems{ERR_PARTENZA} = "Luogo di partenza mancante";
+		$problems{PARTENZA_ERR} = "Luogo di partenza mancante";
 		$problems{empty} = 'no';
 	}
-	elsif (!($q->param('partenza')=~m/^[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð,-.\s]+$/)) {
-		$problems{ERR_PARTENZA} = "Luogo di partenza non valido, inserire lettere o i caratteri: ',' '-' '.'";
+	elsif (!($q->param('partenza')=~m/^[\p{L}\ \,\.\'\-]*$/)) {
+		$problems{PARTENZA_ERR} = "Luogo di partenza non valido, inserire lettere o i caratteri: ',' '-' '.'";
 		$problems{empty} = 'no';
 	}
 	else {
@@ -50,35 +50,35 @@ else {
 
 
 	if($q->param('arrivo') eq "") {
-		$problems{ERR_ARRIVO} = "Luogo di arrivo mancante";
+		$problems{ARRIVO_ERR} = "Luogo di arrivo mancante";
 		$problems{empty} = 'no';
 	}
-	elsif (!($q->param('arrivo')=~m/^[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð,-.\s]+$/)) {
-		$problems{ERR_ARRIVO} = "Luogo di arrivo non valido, inserire lettere o i caratteri: ',' '-' '.'";
+	elsif (!($q->param('arrivo')=~m/^[\p{L}\ \,\.\'\-]*$/)) {
+		$problems{ARRIVO_ERR} = "Luogo di arrivo non valido, inserire lettere o i caratteri: ',' '-' '.'";
 		$problems{empty} = 'no';
 	}
 	else {
 		$old_input{ARRIVO} = $q->param('arrivo');
 	}
 
-	if($q->param('tappa1') ne "" and !($q->param('tappa1')=~m/^[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð,-.\s]+$/)) {
-		$problems{ERR_TAPPA1} = "Luogo della tappa 1 non valido, inserire lettere o i caratteri: ',' '-' '.'";
+	if($q->param('tappa1') ne "" and !($q->param('tappa1')=~m/^[\p{L}\ \,\.\'\-]*$/)) {
+		$problems{TAPPA1_ERR} = "Luogo della tappa 1 non valido, inserire lettere o i caratteri: ',' '-' '.'";
 		$problems{empty} = 'no';
 	}
 	else {
 		$old_input{TAPPA1} = $q->param('tappa1');
 	} 
 
-	if($q->param('tappa2') ne "" and !($q->param('tappa2')=~m/^[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð,-.\s]+$/)) {
-		$problems{ERR_TAPPA2} = "Luogo della tappa 2 non valido, inserire lettere o i caratteri: ',' '-' '.'";
+	if($q->param('tappa2') ne "" and !($q->param('tappa2')=~m/^[\p{L}\ \,\.\'\-]*$/)) {
+		$problems{TAPPA2_ERR} = "Luogo della tappa 2 non valido, inserire lettere o i caratteri: ',' '-' '.'";
 		$problems{empty} = 'no';
 	} 
 	else {
 		$old_input{TAPPA2} = $q->param('tappa2');
 	} 
 
-	if($q->param('tappa3') ne "" and !($q->param('tappa3')=~m/^[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð,-.\s]+$/)) {
-		$problems{ERR_TAPPA3} = "Luogo della tappa 3 non valido, inserire lettere o i caratteri: ',' '-' '.'";
+	if($q->param('tappa3') ne "" and !($q->param('tappa3')=~m/^[\p{L}\ \,\.\'\-]*$/)) {
+		$problems{TAPPA3_ERR} = "Luogo della tappa 3 non valido, inserire lettere o i caratteri: ',' '-' '.'";
 		$problems{empty} = 'no';
 	} 
 	else {
@@ -87,18 +87,18 @@ else {
 
 	if($q->param('tappa3') ne "" ) {
 		if($q->param('tappa2') eq "" ) {
-			$problems{ERR_TAPPA2} = "Per inserire la terza tappa, è necessario inserire le tappe precedenti";
+			$problems{TAPPA2_ERR} = "Per inserire la terza tappa, è necessario inserire le tappe precedenti";
 			$problems{empty} = 'no';
 		}
 		if($q->param('tappa1') eq "" ) {
-			$problems{ERR_TAPPA1} = "Per inserire la terza tappa, è necessario inserire le tappe precedenti";
+			$problems{TAPPA1_ERR} = "Per inserire la terza tappa, è necessario inserire le tappe precedenti";
 			$problems{empty} = 'no';
 		}
 	}
 
 	if($q->param('tappa2') ne "" ) {
 		if($q->param('tappa1') eq "" ) {
-			$problems{ERR_TAPPA1} = "Per inserire la seconda tappa, è necessario inserire la tappa precedente";
+			$problems{TAPPA1_ERR} = "Per inserire la seconda tappa, è necessario inserire la tappa precedente";
 			$problems{empty} = 'no';
 		}
 	}
@@ -111,78 +111,78 @@ else {
 	my @oraA = split /:/, $q->param('oraA');
 
 	if($q->param('dataP') eq "") {
-		$problems{dataP_err} = "Data di partenza mancante";
+		$problems{DATAP_ERR} = "Data di partenza mancante";
 		$problems{empty} = 'no';
 	}
 	elsif (!($q->param('dataP')=~m/^[0-9]{1,2}-[0-9]{1,2}-[0-9]{4}$/)) { # aggiungere condizione date_time::valida_data
-		$problems{dataP_err} = "Data di partenza non valida. Inserire una data in formato gg-mm-aaaa oppure g-m-aaaa";
+		$problems{DATAP_ERR} = "Data di partenza non valida. Inserire una data in formato gg-mm-aaaa oppure g-m-aaaa";
 		$problems{empty} = 'no';
 	}
 	else {
-		$old_input{DATA_P} = $q->param('dataP');
+		$old_input{DATAP} = $q->param('dataP');
 	}
 
 	if($q->param('oraP') eq "") {
-		$problems{ERR_ORA_P} = "Ora di partenza mancante";
+		$problems{ORAP_ERR} = "Ora di partenza mancante";
 		$problems{empty} = 'no';
 	}
 	elsif (!($q->param('oraP')=~m/^(([0-1][0-9])|([2][0-3])):[0-5][0-9]$/)) {
-		$problems{ERR_ORA_P} = "Ora di partenza non valida. Inserire un ora in formato hh:mm";
+		$problems{ORAP_ERR} = "Ora di partenza non valida. Inserire un ora in formato hh:mm";
 		$problems{empty} = 'no';
 	}
 	else {
-		$old_input{ORA_P} = $q->param('oraP');
+		$old_input{ORAP} = $q->param('oraP');
 	}
 
-	if(!defined($problems{'dataP_err'}) and !defined($problems{'ERR_ORA_P'}) ) { # controllo che la data di partenza sia futura
+	if(!defined($problems{'DATAP_ERR'}) and !defined($problems{'ORAP_ERR'}) ) { # controllo che la data di partenza sia futura
 		#my @dataP = split /-/, $q->param('dataP');
 		#my @oraP = split /:/, $q->param('oraP');
 		# $oraP[0] - 1 => questo permette di obbligare l utente a inserire un passaggio $mon = $mon +1;che inizi almeno tra un ora, non prima 
 		if(date_time::confronto_dataora($mday, $mon, $year, $hour, $min, $dataP[0], $dataP[1]-1, $dataP[2], $oraP[0]-1, $oraP[1])) {
 			# la data di partenza è (correttamente) futura, quindi di passa a controllare la data di arrivo
 			if($q->param('dataA') eq "") {
-				$problems{dataA_err} = "Data di arrivo mancante";
+				$problems{DATAA_ERR} = "Data di arrivo mancante";
 				$problems{empty} = 'no';
 			}
 			elsif (!($q->param('dataA')=~m/^[0-9]{1,2}-[0-9]{1,2}-[0-9]{4}$/)) { # aggiungere condizione date_time::valida_data
-				$problems{dataA_err} = "Data di arrivo non valida. Inserire una data in formato gg-mm-aaaa oppure g-m-aaaa";
+				$problems{DATAA_ERR} = "Data di arrivo non valida. Inserire una data in formato gg-mm-aaaa oppure g-m-aaaa";
 				$problems{empty} = 'no';
 			}
 			else {
-				$old_input{DATA_A} = $q->param('dataA');
+				$old_input{DATAA} = $q->param('dataA');
 			}
 			
 			if($q->param('oraA') eq "") {
-				$problems{ERR_ORA_A} = "Ora di arrivo mancante";
+				$problems{ORAA_ERR} = "Ora di arrivo mancante";
 				$problems{empty} = 'no';
 			}
 			elsif (!($q->param('oraP')=~m/^(([0-1][0-9])|([2][0-3])):[0-5][0-9]$/)) {
-				$problems{ERR_ORA_A} = "Ora di arrivo non valida. Inserire un ora in formato hh:mm";
+				$problems{ORAA_ERR} = "Ora di arrivo non valida. Inserire un ora in formato hh:mm";
 				$problems{empty} = 'no';
 			}
 			else {
-				$old_input{ORA_A} = $q->param('oraA');
+				$old_input{ORAA} = $q->param('oraA');
 			} 
 
-			if(!defined($problems{'dataA_err'}) and !defined($problems{'ERR_ORA_A'}) ) { # le date sono corrette. Ora si controlla che l arrivo sia successivo alla partenza
+			if(!defined($problems{'dataA_err'}) and !defined($problems{'ORAA_ERR'}) ) { # le date sono corrette. Ora si controlla che l arrivo sia successivo alla partenza
 				if(!(date_time::confronto_dataora($dataP[0], $dataP[1]-1, $dataP[2], $oraP[0], $oraP[1], $dataA[0], $dataA[1]-1, $dataA[2], $oraA[0], $oraA[1]))) {
-					$old_input{DATA_A} = "";
-					$old_input{ORA_A} =  "";
-					$problems{dataA_err} = "la data/ora di partenza dev essere successiva alla data/ora d arrivo";
-					$problems{ERR_ORA_A} = "la data/ora di partenza dev essere successiva alla data/ora d arrivo";
+					$old_input{DATAA} = "";
+					$old_input{ORAA} =  "";
+					$problems{DATAA_ERR} = "la data/ora di partenza dev essere successiva alla data/ora d arrivo";
+					$problems{ORAA_ERR} = "la data/ora di partenza dev essere successiva alla data/ora d arrivo";
 					$problems{empty} = 'no';				
 				}			
 			}
 		}
 		else { # ramo in cui la data di partenza è corretta, ma non è futura
-			$problems{dataP_err} = "la data/ora di partenza dev essere almeno di un ora nel futuro";
-			$problems{ERR_ORA_P} = "la data/ora di partenza dev essere almeno di un ora nel futuro";
+			$problems{DATAP_ERR} = "la data/ora di partenza dev essere almeno di un ora nel futuro";
+			$problems{ORAP_ERR} = "la data/ora di partenza dev essere almeno di un ora nel futuro";
 			$problems{empty} = 'no';
 		}
 	}
 
 	if($q->param('prezzo') eq "") {
-		$problems{ERR_PREZZO} = "Prezzo mancante";
+		$problems{PREZZO_ERR} = "Prezzo mancante";
 		$problems{empty} = 'no';
 	}
 	else {
@@ -192,34 +192,26 @@ else {
 			$old_input{PREZZO} = $prezzo;
 		}	
 		else {
-			$problems{ERR_PREZZO} = "Prezzo non valido. Inserire un prezzo positivo valido";
+			$problems{PREZZO_ERR} = "Prezzo non valido. Inserire un prezzo positivo valido";
 			$problems{empty} = 'no';
 		} 
 	}
 
 	if($q->param('posti') eq "") {
-		$problems{ERR_POSTI} = "Posti disponibili mancante";
+		$problems{POSTI_ERR} = "Posti disponibili mancante";
 		$problems{empty} = 'no';
 	}
 	elsif (!($q->param('posti')=~m/^[0-9]{1,2}$/)) {
-		$problems{ERR_POSTI} = "Numero di posti disponibili non valido, inserire un valore intero positivo minore di 99";
+		$problems{POSTI_ERR} = "Numero di posti disponibili non valido, inserire un valore intero positivo minore di 99";
 		$problems{empty} = 'no';
 	}
 	else {
 		$old_input{POSTI} = $q->param('posti');
 	}
 
-	$old_input{descrizioneViaggio}= $q->param('descrizioneViaggio');  # code injection
+	$old_input{DESCRIZIONEVIAGGIO}= $q->param('descrizioneViaggio');  # code injection
 
-	if($q->param('bagagli') eq "piccolo") {
-		$old_input{BAGAGLIP} = "selected=\"selected\"";
-	}
-	if($q->param('bagagli') eq "medio") {
-		$old_input{BAGAGLIM} = "selected=\"selected\"";
-	}
-	if($q->param('bagagli') eq "grande") {
-		$old_input{BAGAGLIG} = "selected=\"selected\"";
-	}
+	
 	###############################################################################
 	if($problems{'empty'} eq "no") {
 		$session->param('problems',\%problems);

@@ -1,5 +1,5 @@
 #! /usr/bin/perl -w
-print "Content-type: text/html\n\n";
+#print "Content-type: text/html\n\n";
 
 use strict;
 use warnings;
@@ -12,7 +12,7 @@ use libreria::data_registration;
 #use lib "../libreria";
 use libreria::sessione;
 use XML::LibXML;
-
+use HTML::Entities;
 my $parser =  XML::LibXML->new();
 my $q=new CGI;
 
@@ -28,8 +28,7 @@ if(!defined($session->param('username'))) {
 } 
 else {
 	my $username = $session->param('username');
-
-	if(defined($q->param('CompagniaG')) and $q->request_method='POST') {
+	if(defined($q->param('CompagniaG')) and $q->request_method=='POST') {
 		my %Feedback= (
 			IDMitt => $session->param('username'),
 			IDDest => $q->param('G'),
@@ -75,7 +74,7 @@ else {
 		}
 	}
 
-	print $session->header(-location => "profilo?utente=$username");	
+	print $session->header(-location => "profilo.cgi?utente=$username");	
 
 }
 
