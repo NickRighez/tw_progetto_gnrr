@@ -20,11 +20,11 @@ my %problems = (empty => 'yes');
 my %old_input;
 
  if($q->param('partenza') eq '') {
-  $problems{ERR_PARTENZA} = 'Luogo di partenza mancante';
+  $problems{PARTENZA_ERR} = 'Luogo di partenza mancante';
   $problems{empty} = 'no';
 }
-elsif (!($q->param('partenza')=~m/^[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.-]+$/)) {
-  $problems{ERR_PARTENZA} = 'Luogo di partenza non valido';
+elsif (!($q->param('partenza')=~m/^[\p{L}\ \,\.\'\-]*$/)) {
+  $problems{PARTENZA_ERR} = 'Luogo di partenza non valido';
   $problems{empty} = 'no';
 }
 else {
@@ -32,11 +32,11 @@ else {
 }
 
 if($q->param('arrivo') eq '') {
-  $problems{ERR_ARRIVO} = 'Luogo di partenza mancante';
+  $problems{ARRIVO_ERR} = 'Luogo di partenza mancante';
   $problems{empty} = 'no';
 }
-elsif (!($q->param('arrivo')=~m/^[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.-]+$/)) {
-  $problems{ERR_ARRIVO} = 'Luogo di arrivo non valido';
+elsif (!($q->param('arrivo')=~m/^[\p{L}\ \,\.\'\-]*$/)) {
+  $problems{ARRIVO_ERR} = 'Luogo di arrivo non valido';
   $problems{empty} = 'no';
 }
 else {
@@ -44,11 +44,11 @@ else {
 }
 
 if($q->param('data') eq '') {
-  $problems{ERR_DATA} = 'Data di partenza mancante';
+  $problems{DATA_ERR} = 'Data di partenza mancante';
   $problems{empty} = 'no';
 }
 elsif (!($q->param('data')=~m/^[0-9]{1,2}-[0-9]{1,2}-[0-9]{4}$/)) { # aggiungere condizione date_time::valida_data
-  $problems{ERR_DATA} = "Data di partenza non valida. Inserire una data in formato gg-mm-aaaa oppure g-m-aaaa";
+  $problems{DATA_ERR} = "Data di partenza non valida. Inserire una data in formato gg-mm-aaaa oppure g-m-aaaa";
   $problems{empty} = 'no';
 }
 else {
@@ -59,15 +59,21 @@ else {
 
 if($problems{'empty'} eq 'yes') {
   my @data_arr = split /-/, $q->param('data');
+  my %Ricerca = (
+    partenza =>  $q->param('partenza'),
+    arrivo => $q->param('arrivo'),
+    data => $q->param('data')
+  );
+  $session->param('ricerca_prec', \%Ricerca);
   if (length($data_arr[1])  == 1) {$data_arr[1] = "0".$data_arr[1];}
   if (length($data_arr[0]) == 1) {$data_arr[0] = "0".$data_arr[0];}
   my $data = $data_arr[2]."-".$data_arr[1]."-".$data_arr[0];
-  print $session->header(-location => "http://localhost/cgi-bin/tw_progetto_gnrr/file_sito/PERL/assemblatori/assemblatore_risultati_ricerca.cgi?partenza=".$q->param('partenza')."&arrivo=".$q->param('arrivo')."&data=$data");
+  print $session->header(-location => "risultati_ricerca.cgi?partenza=".$q->param('partenza')."&arrivo=".$q->param('arrivo')."&data=$data");
 }
 else {
 	$session->param('problems',\%problems);
 	$session->param('old_input',\%old_input);
-	print $session->header(-location => "http://localhost/cgi-bin/tw_progetto_gnrr/file_sito/PERL/assemblatori/assemblatore_home.cgi");
+	print $session->header(-location => "home.cgi");
 }
 
 

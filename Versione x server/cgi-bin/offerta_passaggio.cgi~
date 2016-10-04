@@ -31,7 +31,7 @@ elsif (!($doc->exists("//SetUtenti/Utente[Username='".$session->param('username'
   	print $session->header(-location => "modificaProfilo.cgi"); 
 }	
 else {
-	my $file = "../data/HTML_TEMPLATE/offriLog.html";
+	my $file = "../data/HTML_TEMPLATE/offri.html";
 	my %hash_keys = ( NOME_UTENTE => $session->param('username'));
 
 	if(defined($session->param('problems'))) {
@@ -50,6 +50,9 @@ else {
 		}
   	}
 
+  	my $cont = research::query_notifiche_utente($session->param('username'), $doc);
+  	
+  	 $hash_keys{NUM_NOTIFICHE} = @$cont[1];
 	print "Content-type: text/html\n\n\n";
 	my $template_parser = Template->new;
 	my $foglio = '';

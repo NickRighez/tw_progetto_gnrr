@@ -134,19 +134,28 @@ sub query_ricerca
                       my $prezzo = '10'; # da sostituire con funzione che calcola il prezzo
                       my $posti = utility::calcola_posti_disponibili($j,$k,$idv,$doc);
                       my $conduc = $itiner[$i]->findnodes("../Conducente")->get_node(1)->textContent();
+                      my $auto = $doc->findnodes("//SetUtenti/Utente[Username='$conduc']/Profilo/Auto")->get_node(1)->textContent;
+                      my $punteggio = $doc->findnodes("//SetUtenti/Utente[Username='$conduc']/Profilo/Valutazione/PunteggioMedio")->get_node(1)->textContent;
                       my ($sec,$min,$hour,$mday,$mon,$year,$wday,$yday,$isdst) = localtime();
                       my $eta=$year + 1900 - ($doc->findnodes("//SetUtenti/Utente[Username='$conduc']/AnnoNascita")->get_node(1)->textContent() ) ;
                       $contenuto = $contenuto."\n
-                      <div class=\"risultato\">
-                         <a href=\"singolo_passaggio.cgi?passaggio=$idv&part=$j&arr=$k\"><span class=\"partenza\">$part</span> &#8594; <span class=\"arrivo\">$arr</span></a>
-                         
-                         <p>Ora: $ora</p>
-                         
-                         <p>Posti: $posti<span class=\"destra\">$prezzo&euro; </span></p>
-                         
-                         <p>$conduc <span class=\"destra\">$eta anni</span></p>
-                
-                      </div> ";                     
+                     <div class=\"risultato\">
+     <p><a href=\"singolo_passaggio.cgi?passaggio=$idv&part=$j&arr=$k\" class=\"linkMobileRisultati\"><span class=\"partenza\">$part</span> &#8594; <span class=\"arrivo\">$arr</span>
+        <span class=\"linkDesktop destra\">Vai al viaggio &raquo;</span></a></p>
+     
+     <p>Ora: $ora</p>
+     
+     <p>Posti: $posti<span class=\"destra\">$prezzo&euro; <!--&#8364;--></span></p>
+     
+     <hr />
+     
+     <p>$conduc <!-- <span class=\"destra\">33 anni</span> --></p> 
+     
+     <p>Voto medio: $punteggio/5</p>
+
+     <p>Auto: $auto</p>
+
+    </div> ";                     
                     }
                     }
                 }
@@ -270,12 +279,17 @@ sub query_notifiche_utente {
     my $doc = shift @_;
     my $contenuto="";
     my $numNotifiche = 0;
+    my $contatore=4; # per tabindex
     my @notifiche_mess = $doc->findnodes("//SetUtenti/Utente[Username='$ute']/Notifiche/NuovoMessaggio");
     my $size =@notifiche_mess;
     $numNotifiche = $numNotifiche + $size;
     for(my $i=0; $i<$size; $i++) {
         my $mittente = $notifiche_mess[$i]->findnodes("\@Mittente")->get_node(1)->textContent;
-        $contenuto = $contenuto."\n <a href=\"singola_conversaz.cgi?utente=$mittente\"> Nuovo messaggio privato da $mittente </a>";
+        $contenuto = $contenuto."\n 
+            <div class=\"notifica\">
+                <p>Hai un nuovo messaggio da $mittente<br class=\"aCapoMobile\"/> <a href=\"singola_conversaz.cgi?utente=$mittente\" class=\"destraDesktop\" tabindex=\"$contatore\">Vai ai messaggi</a></p>
+            </div>";
+        $contatore++;
     }
 
     my @notifiche_feedbd = $doc->findnodes("//SetUtenti/Utente[Username='$ute']/Notifiche/FeedDaRilasciare");
@@ -291,7 +305,11 @@ sub query_notifiche_utente {
         }
         if(!$presenza) {
             push @aux, $passaggio;
-            $contenuto = $contenuto."\n <a href=\"viaggio_recensire.cgi?passaggio=$passaggio\"> Passaggio ID:$passaggio da recensire </a>";
+            $contenuto = $contenuto."\n 
+            <div class=\"notifica\">
+                <p>Hai un nuovo viaggio da recensire <br class=\"aCapoMobile\"/> <a href=\"viaggio_recensire.cgi?passaggio=$passaggio\" class=\"destraDesktop\" tabindex=\"$contatore\">Inserisci i <span xml:lang=\"en\" lang=\"en\">feedback</span></a></p>
+            </div>";
+            $contatore++;
         }
     }
 
@@ -303,21 +321,28 @@ sub query_notifiche_utente {
         my $passaggio = $notifiche_richiesta_prenot[$i]->findnodes("\@Passaggio");
         my $partenza = $notifiche_richiesta_prenot[$i]->findnodes("\@Partenza");
         my $arrivo = $notifiche_richiesta_prenot[$i]->findnodes("\@Arrivo");
-        $contenuto = $contenuto."\n
+        # PER RICCARDO : MANCANO TABINDEX
+        $contenuto = $contenuto."\n  
+        <div class=\"notifica\">
+        <p>Hai una nuova richiesta di prenotazione da parte di $richiedente:</p>
             <form action=\"ricevitore_esito_prenotazione.cgi\" method=\"post\" >
                 <fieldset>
                     <legend>Richiesta prenotazione da $richiedente per il passaggio $passaggio</legend>
+                    <div class=\"test\">
+                    <input type=\"radio\" name=\"esito\" id=\"accetta\" value=\"Accettata\"></input>
                     <label for=\"accetta\">Accetta</label>
-                    <input type=\"radio\" name=\"esito\" id=\"accetta\" value=\"Accettata\" />
+                    <span class=\"paddingSpan\"></span>
+                    <input type=\"radio\" name=\"esito\" id=\"rifiuta\" value=\"Rifiutata\"></input>
                     <label for=\"rifiuta\">Rifiuta</label>
-                    <input type=\"radio\" name=\"esito\" id=\"rifiuta\" value=\"Rifiutata\" />
-                    <input type=\"hidden\" name=\"richiedente\" value=\"$richiedente\" />
-                    <input type=\"hidden\" name=\"passaggio\" value=\"$passaggio\" />
-                    <input type=\"hidden\" name=\"partenza\" value=\"$partenza\" />
-                    <input type=\"hidden\" name=\"arrivo\" value=\"$arrivo\" />
-                    <input type=\"submit\" value=\"invia\" />
+                    </div>
+                    <input type=\"hidden\" name=\"richiedente\" value=\"$richiedente\"></input>
+                    <input type=\"hidden\" name=\"passaggio\" value=\"$passaggio\"></input>
+                    <input type=\"hidden\" name=\"partenza\" value=\"$partenza\"></input>
+                    <input type=\"hidden\" name=\"arrivo\" value=\"$arrivo\"></input>
+                    <input type=\"submit\" value=\"Invia\"></input>
                 </fieldset>
             </form>
+            </div>
         ";
     }
 
@@ -327,10 +352,13 @@ sub query_notifiche_utente {
             my $passaggio = $notifiche_esito_prenot[$i]->findnodes("\@Passaggio");
             my $esito = $notifiche_esito_prenot[$i]->findnodes("\@Esito");
             $contenuto = $contenuto."\n
-                <p> Esito prenotazione per il passaggio $passaggio : $esito </p>
+                <div class=\"notifica\">
+                    <p>La tua richiesta di prenotazione &egrave; stata $esito <br class=\"aCapoMobile\"/> <a href=\"elimina_esito.cgi?utente=$ute&passaggio=$passaggio\" class=\"destraDesktop\" tabindex=\"$contatore\">Elimina esito</a></p>
+                </div>
             ";
+            $contatore++;
     }
-    return [$contenuto, $numNotifiche];
+    return [$contenuto, $numNotifiche, $contatore];
 }
 
 

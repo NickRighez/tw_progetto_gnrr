@@ -4,10 +4,10 @@
  <head>
   <title>Informazioni - Travel Share</title>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-  <meta name="title" content="..." />
-  <meta name="description" content="..." />
+  <meta name="title" content="Informazioni - Travel Share" />
+  <meta name="description" content="Informazioni generali sull uso della piattaforma" />
   <meta name="keywords" content="informazioni, come funziona, travel share, car pooling, passaggio, auto" />
-  <meta name="author" content="Giovanni Sanna, Nicolò Rigato, Riccardo Ardossi" />
+  <meta name="author" content="Giovanni Sanna, Nicolo' Rigato, Riccardo Ardossi" />
   <meta name="language" content="italian it" />
 
   <meta name="viewport" content="width=device-width" />
@@ -17,9 +17,10 @@
 
   <link rel="icon" href="../Immagini/TS_icon.png" type="image/x-icon" />
   <link rel="shortcut icon" href="../Immagini/TS_icon.png" type="image/x-icon" />
-  <script src="javascript/jquery-ui-1.12.0/jquery-ui.js"></script>
 
-  <link rel="stylesheet" href="javascript/jquery-ui-1.12.0/jquery-ui.css" />
+<script type="application/javascript" src="../javascript/jquery-ui-1.12.0/external/jquery/jquery.js"></script>
+  <script type="application/javascript" src="../javascript/jquery-ui-1.12.0/jquery-ui.js"></script>
+<link rel="stylesheet" href="../javascript/jquery-ui-1.12.0/jquery-ui.css" />
   <script type="application/javascript" src="../javascript/travelshare.js" ></script>
 
  </head>
@@ -27,13 +28,13 @@
  <body>
 
   <div id="header">
-   <a href="home.cgi" tabindex="1"><img src="../Immagini/banner.png" id="banner" alt="Banner Travel Share - Link diretto alla Home" /></a>
+   <a href="home.cgi" tabindex="1"><img src="../Immagini/banner.png" id="banner" alt="Banner Travel Share - Link diretto alla Home" title="Banner Travel Share - Link diretto alla Home" /></a>
    <a id="bottoneMenu" href="#menu">Men&ugrave;</a>
   </div>
 [% IF LOGGEDIN=='yes' %]
   <div id="utente">
    <p>Ciao [% NOME_UTENTE %]</p>
-   <p><a href="notifiche.cgi" tabindex="2">Notifiche (0)</a>  <a href="ricevitore_logout.cgi" tabindex="3">Logout</a></p>
+   <p><a href="notifiche.cgi" tabindex="2">Notifiche ([% NUM_NOTIFICHE %])</a>  <a href="ricevitore_logout.cgi" tabindex="3">Logout</a></p>
   </div>
 [% END %]
   <div id="contenuto">
@@ -44,9 +45,9 @@
    <div class="contenitore">
    <p>Hai bisogno di un passaggio per un evento, una vacanza o per una semplice visita in qualche citt&agrave;? Bene, sei sul sito giusto!
     Grazie a <span xml:lang="en" lang="en">Travel Share</span> puoi trovare il passaggio che cerchi a prezzi bassissimi in pochi semplici passi.</p>
-   <h3><a href="iscrizione.cgi" tabindex="6">Iscriviti</a></h3>
+   <h3><a href="iscrizione.cgi" tabindex="9">Iscriviti</a></h3>
    <p>Iscriviti al nostro servizio per poter prenotare <span xml:lang="en" lang="en">online</span> il tuo passaggio.</p>
-   <h3><a href="homeLog.html" tabindex="7">Cerca</a></h3>
+   <h3><a href="homeLog.html" tabindex="10">Cerca</a></h3>
    <p>Cerca il passaggio che ti serve e seleziona quello che preferisci tra i passaggi proposti dai nostri utenti.</p>
    <h3>Prenota</h3>
    <p>Una volta trovato il passaggio che cercavi prenotalo con un <span xml:lang="en" lang="en">click</span>!
@@ -59,10 +60,10 @@
    <h2>Offri un passaggio?</h2>
    <div class="contenitore">
    <p>Hai in programma un viaggio ma vuoi risparmiare dividendo le spese con qualcuno? Offri un passaggio su <span xml:lang="en" lang="en">Travel Share</span> e condividi il viaggio con altri utenti.</p>
-   <h3><a href="iscrizione.cgi" tabindex="8">Iscriviti</a></h3>
+   <h3><a href="iscrizione.cgi" tabindex="11">Iscriviti</a></h3>
    <p>Iscriviti al nostro servizio per poter offrire <span xml:lang="en" lang="en">online</span> il tuo passaggio.
     Per essere abilitato ad offrire un passaggio devi completare le informazioni aggiuntive del tuo profilo.</p>
-   <h3><a href="offerta_passaggio.cgi" tabindex="9">Offri il passaggio</a></h3>
+   <h3><a href="offerta_passaggio.cgi" tabindex="12">Offri il passaggio</a></h3>
    <p>Offri il passaggio descrivendone le varie caratteristiche come posti disponibili, prezzo, eventuali tappe e le regole della macchina.</p>
    <h3>Prenotazioni</h3>
    <p>Ti invieremo una notifica quando riceverai una richiesta di prenotazione al tuo viaggio. Avrai la possibilt&agrave; di accettare o rifiutare la richiesta.</p>
@@ -95,12 +96,14 @@
   </div>
 [% END %]
 
+
+<div id="footer">
 [% IF LOGGEDIN=='yes' %]
    <a href="ricevitore_logout.cgi" tabindex="13">Logout</a>
    <a href="#header" tabindex="14">Torna su</a>
  [% ELSE %]
   <a href="#header" tabindex="13">Torna su</a>
  [% END %]
-
+ </div>
   </body>
 </html>

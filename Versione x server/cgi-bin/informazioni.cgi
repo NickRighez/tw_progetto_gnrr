@@ -7,30 +7,29 @@ use CGI;
 use CGI::Session;
 use CGI::Carp qw(fatalsToBrowser);
 use Template;
-#use lib "../libreria";    
+#use lib "../libreria";
 use libreria::sessione;
 use libreria::data_registration;
 
- my $cgi = new CGI;                       
- my @s = sessione::creaSessione();  
- my $session = $s[0]; 
-  my $doc = data_registration::get_xml_doc();
+my $cgi = new CGI;
+my @s = sessione::creaSessione();
+my $session = $s[0];
+my $doc = data_registration::get_xml_doc();
 my %hash_keys;
 
- if(defined($session->param('username'))) {
-	my $cont = research::query_notifiche_utente($session->param('username'), $doc);
-	$hash_keys{LOGGEDIN} = 'yes';
-	$hash_keys{NOME_UTENTE} =  $session->param('username');
-	$hash_keys{NUM_NOTIFICHE} = @$cont[1];
- }
+if(defined($session->param('username'))) {
+    my $cont = research::query_notifiche_utente($session->param('username'), $doc);
+    $hash_keys{LOGGEDIN} = 'yes';
+    $hash_keys{NOME_UTENTE} =  $session->param('username');
+    $hash_keys{NUM_NOTIFICHE} = @$cont[1];
+}
 else {
-	$hash_keys{LOGGEDIN} = 'no';
+    $hash_keys{LOGGEDIN} = 'no';
 }
 
- my $file = "../data/HTML_TEMPLATE/info.html";
-  my $template_parser = Template->new;
-  open my $fh, '<', $file;
-  my $foglio = '';
-  $template_parser->process($fh,\%hash_keys,\$foglio);
-  print $foglio;
-
+my $file = "../data/HTML_TEMPLATE/info.html";
+my $template_parser = Template->new;
+open my $fh, '<', $file;
+my $foglio = '';
+$template_parser->process($fh,\%hash_keys,\$foglio);
+print $foglio;

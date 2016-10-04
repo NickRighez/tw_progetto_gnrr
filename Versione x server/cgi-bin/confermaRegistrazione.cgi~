@@ -15,6 +15,7 @@ use libreria::data_registration;
  my $cgi = new CGI;                       
  my @s = sessione::creaSessione();  
  my $session = $s[0];  
+   my $doc = data_registration::get_xml_doc();
 
 if(!defined($session->param('username'))) {
  	my %problems=(
@@ -24,10 +25,13 @@ if(!defined($session->param('username'))) {
   	print $session->header(-location => "login.cgi");
  }	 
 else {
-my $cont = research::query_notifiche_utente($username, $doc);
-	$username = $session->param('username');
+	my $username = $session->param('username');
+  my $cont = research::query_notifiche_utente($username, $doc);
 	my $file = "../data/HTML_TEMPLATE/confermaRegistrazione.html";
-  	my %hash_keys = ( NOME_UTENTE => $username);
+  	my %hash_keys = (
+		NOME_UTENTE => $username,
+		NUM_NOTIFICHE => @$cont[1]
+		);
 	my $template_parser = Template->new;
     my $foglio = '';
     open my $fh, '<', $file;

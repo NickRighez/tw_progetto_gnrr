@@ -4,10 +4,10 @@
  <head>
   <title>Risultati ricerca - Travel Share</title>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-  <meta name="title" content="..." />
-  <meta name="description" content="..." />
-  <meta name="keywords" content=", travel share, car pooling, passaggio, auto" />
-  <meta name="author" content="Giovanni Sanna, Nicolò Rigato, Riccardo Ardossi" />
+  <meta name="title" content="Risultati ricerca - Travel Share" />
+  <meta name="description" content="Pagina di visualizzazione dei risultati di ricerca" />
+  <meta name="keywords" content="risultati, ricerca, travel share, car pooling, passaggio, auto" />
+  <meta name="author" content="Giovanni Sanna, Nicolo' Rigato, Riccardo Ardossi" />
   <meta name="language" content="italian it" />
 
   <meta name="viewport" content="width=device-width" />
@@ -18,19 +18,17 @@
   <link rel="icon" href="../Immagini/TS_icon.png" type="image/x-icon" />
   <link rel="shortcut icon" href="../Immagini/TS_icon.png" type="image/x-icon" />
 
-
-  <script src="http://code.jquery.com/jquery-1.8.2.js"></script>
-  <script src="http://code.jquery.com/ui/1.9.1/jquery-ui.js"></script>
-  <link rel="stylesheet" href="http://code.jquery.com/ui/1.9.2/themes/base/jquery-ui.css" />
+<script type="application/javascript" src="../javascript/jquery-ui-1.12.0/external/jquery/jquery.js"></script>
+  <script type="application/javascript" src="../javascript/jquery-ui-1.12.0/jquery-ui.js"></script>
+<link rel="stylesheet" href="../javascript/jquery-ui-1.12.0/jquery-ui.css" />
   <script type="application/javascript" src="../javascript/travelshare.js" ></script>
-
  </head>
 
  <body onload="caricamento_risultati()">
 
   <div id="header">
-   <a href="home.cgi" tabindex=""><img src="../Immagini/banner.png" id="banner" alt="Banner Travel Share - Link diretto alla Home" /></a>
-   <a id="bottoneMenu" href="#menu" tabindex="">Men&ugrave;</a>
+   <a href="home.cgi" tabindex="1"><img src="../Immagini/banner.png" id="banner" alt="Banner Travel Share - Link diretto alla Home" title="Banner Travel Share - Link diretto alla Home" /></a>
+   <a id="bottoneMenu" href="#menu">Men&ugrave;</a>
   </div>
 
   [% IF LOGGEDIN=='yes' %]
@@ -39,14 +37,14 @@
 
    <p>Ciao [% NOME_UTENTE %]</p>
 
-   <p><a href="notifiche.cgi" tabindex="2">Notifiche (0)</a>  <a href="ricevitore_logout.cgi" tabindex="3">Logout</a></p>
+   <p><a href="notifiche.cgi" tabindex="2">Notifiche ([% NUM_NOTIFICHE %])</a>  <a href="ricevitore_logout.cgi" tabindex="3">Logout</a></p>
 
   </div>
 
  [% END %]
   <div id="contenuto">
 
-	<h1>[%  %] risultati trovati</h1>
+	<h1>Risultati trovati</h1>
 	<h2>[% PARTENZA %] &#8594; [% ARRIVO %]</h2>
 	<h3>[% DATA %]</h3>
 
@@ -100,13 +98,13 @@
 
   [% IF LOGGEDIN=='yes' %]
 
-   <a href="ricevitore_logout.cgi" tabindex="13">Logout</a>
+   <a href="ricevitore_logout.cgi">Logout</a>
 
-   <a href="#header" tabindex="14">Torna su</a>
+   <a href="#header">Torna su</a>
 
  [% ELSE %]
 
-  <a href="#header" tabindex="13">Torna su</a>
+  <a href="#header">Torna su</a>
 
  [% END %]
 

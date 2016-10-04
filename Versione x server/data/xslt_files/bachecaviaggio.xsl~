@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
 <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:ts="http://www.dominio.com">
-<xsl:output method='html' version='1.0' encoding='UTF-8' indent='yes' doctype-system="http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd" doctype-public="-//W3C//DTD XHTML 1.0 Strict//EN" omit-xml-declaration="yes"/>
+<!-- <xsl:output method='html' version='1.0' encoding='UTF-8' indent='yes' doctype-system="http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd" doctype-public="-//W3C//DTD XHTML 1.0 Strict//EN" omit-xml-declaration="yes"/> -->
 
 		    			
 	<xsl:template match="/">
@@ -27,7 +27,7 @@
 					</xsl:choose>
 				</xsl:for-each>	
 				<xsl:if test="@User1='[% UTENTE %]' or @User2='[% UTENTE %]'">
-							<form action="http://localhost/cgi-bin/tw_progetto_gnrr/file_sito/PERL/ricevitori/ricevitore_messaggio_pubblico.cgi" method="POST">
+							<form action="ricevitore_messaggio_pubblico.cgi" method="POST">
 							<input>
 										<xsl:attribute name="type">hidden</xsl:attribute>
 										<xsl:attribute name="name">passaggio</xsl:attribute>
@@ -85,9 +85,13 @@
 										<xsl:attribute name="type">hidden</xsl:attribute>
 										<xsl:attribute name="name">arrivo</xsl:attribute>
 										<xsl:attribute name="value">[% NUM_ARRIVO %]</xsl:attribute>
-									</input>		
-								<textarea rows="" cols="" name="messaggio"></textarea>
-								<div><input type="submit" value="Invia"></input></div>
+							</input>		
+								<textarea rows="0" cols="0" name="messaggio"> Inserisci un messaggio per il conducente.
+								</textarea>
+								
+								<div>
+									<input type="submit" value="Invia"></input>
+								</div>
 							</form>
 				</xsl:if>
 						

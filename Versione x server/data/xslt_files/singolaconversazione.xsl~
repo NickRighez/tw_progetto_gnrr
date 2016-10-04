@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-u<?xml version="1.0" encoding="UTF-8" ?>
 
 <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:ts="http://www.dominio.com">
   <!--<xsl:output method='html' version='1.0' encoding='UTF-8' indent='yes' doctype-system="http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd" doctype-public="-//W3C//DTD XHTML 1.0 Strict//EN" omit-xml-declaration="yes"/> -->
@@ -20,7 +19,13 @@ u<?xml version="1.0" encoding="UTF-8" ?>
       <xsl:choose>
         <xsl:when test=" Mittente ='[% MYSELF %]'  ">
           <div class="inviati" >
-            <p class="intestazioneMsg"><xsl:call-template name="formatdate"><xsl:with-param name="datestr" select="Data" /></xsl:call-template>  - <xsl:value-of select="Ora"/></p>
+            <p class="intestazioneMsg"><xsl:call-template name="formatdate"><xsl:with-param name="datestr" select="Data" /></xsl:call-template>  -
+           
+                       <xsl:call-template name="formathour">
+      <xsl:with-param name="hourstr" select="Ora" />
+      </xsl:call-template> 
+
+           </p>
             <p><xsl:value-of select="Testo"/></p>
           </div>
         </xsl:when>
@@ -29,7 +34,16 @@ u<?xml version="1.0" encoding="UTF-8" ?>
             <xsl:if test="@Letto = 'no'">
               <p>NUOVO MESSAGGIO</p>
             </xsl:if>
-            <p class="intestazioneMsg"><xsl:call-template name="formatdate"><xsl:with-param name="datestr" select="Data" /></xsl:call-template>  - <xsl:value-of select="Ora"/></p>
+            <p class="intestazioneMsg"><xsl:call-template name="formatdate"><xsl:with-param name="datestr" select="Data" /></xsl:call-template>  -
+
+
+            <xsl:call-template name="formathour">
+      <xsl:with-param name="hourstr" select="Ora" />
+      </xsl:call-template> 
+
+           </p>
+            
+
             <p><xsl:value-of select="Testo"/></p>
           </div>
         </xsl:otherwise>
@@ -60,5 +74,22 @@ u<?xml version="1.0" encoding="UTF-8" ?>
     <xsl:value-of select="$mm" />
     <xsl:value-of select="'-'" />
     <xsl:value-of select="$yyyy" />
+  </xsl:template>
+    <xsl:template name="formathour">
+    <xsl:param name="hourstr" />
+    <!-- input format hh:mm:ss -->
+    <!-- output format hh:mm -->
+
+    <xsl:variable name="hh">
+      <xsl:value-of select="substring($hourstr,1,2)" />
+    </xsl:variable>
+
+    <xsl:variable name="mm">
+      <xsl:value-of select="substring($hourstr,4,2)" />
+    </xsl:variable>
+    
+    <xsl:value-of select="$hh" />
+    <xsl:value-of select="':'" />
+    <xsl:value-of select="$mm" />
   </xsl:template>
 </xsl:stylesheet>

@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.0//EN" "http://www.w3.org/TR/2001/PR-SVG-20010719/DTD/svg10.dtd">
+<svg width="26cm" height="11cm" viewBox="377 105 506 207" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <g>
+    <rect style="fill: #ffffff" x="514.45" y="137" width="125.1" height="38"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="514.45" y="137" width="125.1" height="38"/>
+    <text font-size="12.8" style="fill: #000000;text-anchor:middle;font-family:sans-serif;font-style:normal;font-weight:normal" x="577" y="159.9">
+      <tspan x="577" y="159.9">ASSEMBLATORE</tspan>
+    </text>
+  </g>
+  <g>
+    <rect style="fill: #ffffff" x="527.4" y="259.996" width="99.2" height="38"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="527.4" y="259.996" width="99.2" height="38"/>
+    <text font-size="12.8" style="fill: #000000;text-anchor:middle;font-family:sans-serif;font-style:normal;font-weight:normal" x="577" y="282.896">
+      <tspan x="577" y="282.896">RICEVITORE</tspan>
+    </text>
+  </g>
+  <g>
+    <line style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x1="577" y1="259.996" x2="577" y2="180.428"/>
+    <polyline style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="582,188.192 577,178.192 572,188.192 "/>
+  </g>
+  <g>
+    <rect style="fill: #ffffff" x="795.072" y="106" width="87.75" height="54"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="795.072" y="106" width="87.75" height="54"/>
+    <text font-size="12.8" style="fill: #000000;text-anchor:middle;font-family:sans-serif;font-style:normal;font-weight:normal" x="838.947" y="128.9">
+      <tspan x="838.947" y="128.9">XSLT /</tspan>
+      <tspan x="838.947" y="144.9">TEMPLATE</tspan>
+    </text>
+  </g>
+  <g>
+    <ellipse style="fill: #ffffff" cx="792.948" cy="278.994" rx="37.9803" ry="18.9901"/>
+    <ellipse style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" cx="792.948" cy="278.994" rx="37.9803" ry="18.9901"/>
+    <text font-size="12.8" style="fill: #000000;text-anchor:middle;font-family:sans-serif;font-style:normal;font-weight:normal" x="792.948" y="282.894">
+      <tspan x="792.948" y="282.894">XML</tspan>
+    </text>
+  </g>
+  <g>
+    <path style="fill: #ffffff" d="M 388.15 197.358 L 433.85,197.358 C 440.705,205.358 442.99,209.358 442.99,217.358 C 442.99,225.358 440.705,229.358 433.85,237.358 L 388.15,237.358 L 379.01,217.358 L 388.15,197.358z"/>
+    <path style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" d="M 388.15 197.358 L 433.85,197.358 C 440.705,205.358 442.99,209.358 442.99,217.358 C 442.99,225.358 440.705,229.358 433.85,237.358 L 388.15,237.358 L 379.01,217.358 L 388.15,197.358"/>
+    <text font-size="12.8" style="fill: #000000;text-anchor:middle;font-family:sans-serif;font-style:normal;font-weight:normal" x="411" y="213.358">
+      <tspan x="411" y="213.358">HTML</tspan>
+      <tspan x="411" y="229.358">PAGE</tspan>
+    </text>
+  </g>
+  <g>
+    <path style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" d="M 513.484,160.928 A 187.312,187.312 0 0 0 441.009,197.439"/>
+    <polyline style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="443.614,188.548 439.278,198.853 450.124,196.139 "/>
+  </g>
+  <g>
+    <path style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" d="M 437.495,234.377 A 187.527,187.527 0 0 0 522.02,275.93"/>
+    <polyline style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="513.479,279.518 524.21,276.381 515.261,269.678 "/>
+  </g>
+  <g>
+    <line style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x1="743.17" y1="291.326" x2="645.072" y2="291.326"/>
+    <polyline style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="652.836,286.326 642.836,291.326 652.836,296.326 "/>
+  </g>
+  <g>
+    <polyline style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="783.868,258.504 782.938,258.504 782.938,161.138 645.704,161.138 "/>
+    <polyline style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="653.468,156.138 643.468,161.138 653.468,166.138 "/>
+  </g>
+  <g>
+    <line style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x1="819.676" y1="259.714" x2="819.703" y2="176.059"/>
+    <polyline style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="824.7,183.824 819.703,173.823 814.7,183.821 "/>
+  </g>
+  <g>
+    <line style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x1="783.372" y1="146.456" x2="644.022" y2="146.499"/>
+    <polyline style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="651.785,141.496 641.786,146.499 651.788,151.496 "/>
+  </g>
+  <g>
+    <line style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x1="738.08" y1="266.082" x2="639.982" y2="266.082"/>
+    <polyline style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="730.316,271.082 740.316,266.082 730.316,261.082 "/>
+  </g>
+  <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:sans-serif;font-style:normal;font-weight:normal" x="672" y="138">
+    <tspan x="672" y="138">composizione</tspan>
+  </text>
+  <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:sans-serif;font-style:normal;font-weight:normal" x="669.9" y="176.7">
+    <tspan x="669.9" y="176.7">composizione</tspan>
+  </text>
+  <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:sans-serif;font-style:normal;font-weight:normal" x="671" y="260">
+    <tspan x="671" y="260">salva</tspan>
+  </text>
+  <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:sans-serif;font-style:normal;font-weight:normal" x="655" y="308">
+    <tspan x="655" y="308">verifica dati</tspan>
+  </text>
+  <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:sans-serif;font-style:normal;font-weight:normal" x="418" y="169">
+    <tspan x="418" y="169">template</tspan>
+  </text>
+  <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:sans-serif;font-style:normal;font-weight:normal" x="426" y="284">
+    <tspan x="426" y="284">POST/GET</tspan>
+  </text>
+  <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:sans-serif;font-style:normal;font-weight:normal" x="583" y="215">
+    <tspan x="583" y="215">gestione errore /</tspan>
+    <tspan x="583" y="231">nuova richiesta</tspan>
+  </text>
+</svg>

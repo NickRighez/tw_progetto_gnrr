@@ -23,17 +23,17 @@ sub distruzione {
 
 
 sub creaSessione {
-  my $q=CGI->new();
-  my $header;
-  my $session = CGI::Session->load() or die CGI::Session->errstr();
-  if($session->is_expired || $session->is_empty){
-    $session = new CGI::Session(undef,$q, {Directory=>"/tmp"});
-    $header = $session->header();
-  }
-  else{
-    $header = $q->header();
-  }
-  return ($session,$header);
+    my $q=CGI->new();
+    my $header;
+    my $session = CGI::Session->load() or die CGI::Session->errstr();
+    if($session->is_expired || $session->is_empty){
+        $session = new CGI::Session(undef,$q, {Directory=>"/tmp"});
+        $header = $session->header();
+    }
+    else{
+        $header = $q->header();
+    }
+    return ($session,$header);
 }
 
 1;

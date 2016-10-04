@@ -1,5 +1,4 @@
 #! /usr/bin/perl -w
-print "Content-type: text/html\n\n\n";
 use strict;
 use warnings;
 use diagnostics;
@@ -43,11 +42,11 @@ else {
       my %old_hash = %$old;
       while( my( $key, $value ) = each %old_hash ){
         $hash_keys{$key}="$value";
-    }
+      }
     }
     else {
       my $ute = $doc->findnodes("//SetUtenti/Utente[Username=\"$username\"]")->get_node(1);
-      print "//SetUtenti/Utente[Username=\"$username\"]";
+      #print "//SetUtenti/Utente[Username=\"$username\"]";
       $hash_keys{NOME} = $ute->findnodes("Nome")->get_node(1)->textContent;
       $hash_keys{COGNOME} = $ute->findnodes("Cognome")->get_node(1)->textContent;
       $hash_keys{EMAIL} = $ute->findnodes("Email")->get_node(1)->textContent;
@@ -84,9 +83,10 @@ my $cont = research::query_notifiche_utente($username, $doc);
   $hash_keys{NUM_NOTIFICHE} = @$cont[1];
     my $template_parser = Template->new;
     my $foglio = '';
-    open my $fh, '<', $file;
+    open my $fh, '<:encoding(UTF-8)', $file;
     $template_parser->process($fh,\%hash_keys,\$foglio);
-    #print $q->header();
+    print $cgi->header();
+    #\print "Content-type: text/html\n\n\n";
     print $foglio;
 
 

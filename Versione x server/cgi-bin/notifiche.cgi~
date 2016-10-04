@@ -33,6 +33,7 @@ else {
 	my %hash_keys = (
 	  NOME_UTENTE => $username,
 	  CONTENUTO => $contenuto,
+	    NUM_NOTIFICHE => @$cont[1]
 	);  
 	my $template_parser = Template->new;
 	my $foglio = '';

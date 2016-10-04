@@ -2,4 +2,5 @@ Note perl
 #include disegno
 
 La gestione server-side è descritta nello schema in figura. Ogni interazione con col server è gestita dai seguenti componenti:
-un ricevitore che, appunto, riceve i dati da una form html (tramite get o post a seconda), si occupa di validare l'input e reindirizzare l'utente alla pagina opportuna. 
+un ricevitore che, appunto, riceve i dati da una form html (tramite get o post a seconda), si occupa di validare l'input e reindirizzare l'utente alla pagina opportuna.
+un assemblatore che crea la pagina dinamicamente in base a dati fornite da altre fonti

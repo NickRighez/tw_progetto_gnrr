@@ -41,13 +41,14 @@ sub generic_xslt_query
     #({ABSOLUTE => 1,});
     my $foglio_di_stile_con_parametri = '';
     $template_parser->process($style_file,\%vars,\$foglio_di_stile_con_parametri); #or die $template_parser->error()
-	(length $foglio_di_stile_con_parametri) or die("ERRORE 1: foglio xslt vuoto\n".$style_file . '    '. getcwd);
+    (length $foglio_di_stile_con_parametri) or die("ERRORE 1: foglio xslt vuoto\n".$style_file . '    '. getcwd);
     my $style_oggetto_xml = $xml_parser->parse_string($foglio_di_stile_con_parametri);
     my $style_oggetto_xsl = $xslt_parser->parse_stylesheet( $style_oggetto_xml );
     my $file_oggetto_xml = $xml_parser->parse_file( $xml_file );
     my $html_output = $style_oggetto_xsl->transform( $file_oggetto_xml);
-	(length $html_output) or die("ERRORE 2: output HTML vuoto\n".$style_file  . '    '. getcwd);
-return $html_output;
+    (length $html_output) or die("ERRORE 2: output HTML vuoto\n".$style_file  . '    '. getcwd);
+    $html_output =~ s/<\?xml\ version\=\"1\.0\"\?>//;
+    return $html_output;
 }
 
 sub query_users
@@ -110,65 +111,65 @@ sub query_ricerca
     my @itiner=$doc->findnodes("//SetPassaggi/Passaggio/Itinerario[*[Data='$data']]");
     my $num_it=@itiner;
     for(my $i=0;$i<$num_it;$i++) {
-      for(my $j=0;$j<5;$j++) {
-          my @tappa=$itiner[$i]->findnodes("*[\@Numero=$j]");
-          my $num = @tappa;
-          if($num!=0) {
-            my $luogo = $itiner[$i]->findnodes("*[\@Numero=$j]/Luogo")->get_node(1);
-            if (index($luogo, $partenza) != -1 && $itiner[$i]->findnodes("*[\@Numero=$j]/PostiDisp")->get_node(1)->textContent() > 0) {
-              for(my $k=$j+1;$k<5;$k++) {
-                my @tappe_s=$itiner[$i]->findnodes("*[\@Numero=$k]");
-                my $num = @tappe_s;
-                if($num!=0) {
-                  if($itiner[$i]->findnodes("*[\@Numero=$j]/PostiDisp")->get_node(1)->textContent() == 0) {
-                    $k=5;
-                    $j=5;
-                  } 
-                  else {
-                    my $luog = $itiner[$i]->findnodes("*[\@Numero=$k]/Luogo")->get_node(1);
-                    if (index($luog, $arrivo) != -1) {
-                      my $ora=$itiner[$i]->findnodes("*[\@Numero=0]/Ora")->get_node(1)->textContent();
-                      my $part = $itiner[$i]->findnodes("*[\@Numero=$j]/Luogo")->get_node(1)->textContent();
-                      my $arr = $itiner[$i]->findnodes("*[\@Numero=$k]/Luogo")->get_node(1)->textContent();
-                      my $idv = $itiner[$i]->findnodes("../IDViaggio")->get_node(1)->textContent();
-                      my $prezzo = '10'; # da sostituire con funzione che calcola il prezzo
-                      my $posti = utility::calcola_posti_disponibili($j,$k,$idv,$doc);
-                      my $conduc = $itiner[$i]->findnodes("../Conducente")->get_node(1)->textContent();
-                      my $auto = $doc->findnodes("//SetUtenti/Utente[Username='$conduc']/Profilo/Auto")->get_node(1)->textContent;
-                      my $punteggio = $doc->findnodes("//SetUtenti/Utente[Username='$conduc']/Profilo/Valutazione/PunteggioMedio")->get_node(1)->textContent;
-                      my ($sec,$min,$hour,$mday,$mon,$year,$wday,$yday,$isdst) = localtime();
-                      my $eta=$year + 1900 - ($doc->findnodes("//SetUtenti/Utente[Username='$conduc']/AnnoNascita")->get_node(1)->textContent() ) ;
-                      $contenuto = $contenuto."\n
+        for(my $j=0;$j<5;$j++) {
+            my @tappa=$itiner[$i]->findnodes("*[\@Numero=$j]");
+            my $num = @tappa;
+            if($num!=0) {
+                my $luogo = $itiner[$i]->findnodes("*[\@Numero=$j]/Luogo")->get_node(1);
+                if (index($luogo, $partenza) != -1 && $itiner[$i]->findnodes("*[\@Numero=$j]/PostiDisp")->get_node(1)->textContent() > 0) {
+                    for(my $k=$j+1;$k<5;$k++) {
+                        my @tappe_s=$itiner[$i]->findnodes("*[\@Numero=$k]");
+                        my $num = @tappe_s;
+                        if($num!=0) {
+                            if($itiner[$i]->findnodes("*[\@Numero=$j]/PostiDisp")->get_node(1)->textContent() == 0) {
+                                $k=5;
+                                $j=5;
+                            }
+                            else {
+                                my $luog = $itiner[$i]->findnodes("*[\@Numero=$k]/Luogo")->get_node(1);
+                                if (index($luog, $arrivo) != -1) {
+                                    my $ora=$itiner[$i]->findnodes("*[\@Numero=0]/Ora")->get_node(1)->textContent();
+                                    my $part = $itiner[$i]->findnodes("*[\@Numero=$j]/Luogo")->get_node(1)->textContent();
+                                    my $arr = $itiner[$i]->findnodes("*[\@Numero=$k]/Luogo")->get_node(1)->textContent();
+                                    my $idv = $itiner[$i]->findnodes("../IDViaggio")->get_node(1)->textContent();
+                                    my $prezzo = '10'; # da sostituire con funzione che calcola il prezzo
+                                    my $posti = utility::calcola_posti_disponibili($j,$k,$idv,$doc);
+                                    my $conduc = $itiner[$i]->findnodes("../Conducente")->get_node(1)->textContent();
+                                    my $auto = $doc->findnodes("//SetUtenti/Utente[Username='$conduc']/Profilo/Auto")->get_node(1)->textContent;
+                                    my $punteggio = $doc->findnodes("//SetUtenti/Utente[Username='$conduc']/Profilo/Valutazione/PunteggioMedio")->get_node(1)->textContent;
+                                    my ($sec,$min,$hour,$mday,$mon,$year,$wday,$yday,$isdst) = localtime();
+                                    my $eta=$year + 1900 - ($doc->findnodes("//SetUtenti/Utente[Username='$conduc']/AnnoNascita")->get_node(1)->textContent() ) ;
+                                    $contenuto = $contenuto."\n
                      <div class=\"risultato\">
      <p><a href=\"singolo_passaggio.cgi?passaggio=$idv&part=$j&arr=$k\" class=\"linkMobileRisultati\"><span class=\"partenza\">$part</span> &#8594; <span class=\"arrivo\">$arr</span>
         <span class=\"linkDesktop destra\">Vai al viaggio &raquo;</span></a></p>
-     
+
      <p>Ora: $ora</p>
-     
+
      <p>Posti: $posti<span class=\"destra\">$prezzo&euro; <!--&#8364;--></span></p>
-     
+
      <hr />
-     
-     <p>$conduc <!-- <span class=\"destra\">33 anni</span> --></p> 
-     
+
+     <p>$conduc <!-- <span class=\"destra\">33 anni</span> --></p>
+
      <p>Voto medio: $punteggio/5</p>
 
      <p>Auto: $auto</p>
 
-    </div> ";                     
+    </div> ";
+                                }
+                            }
+                        }
                     }
-                    }
+
                 }
             }
-                     
-            } 
-          }
 
-      }
-    } 
+        }
+    }
     if($contenuto eq "") {
-        $contenuto = "<p>Nessun passaggio corrisponde ai criteri di ricerca</p>";
-    }  
+        $contenuto = "<div class=\"contenitore\"><p>Nessun passaggio corrisponde ai criteri di ricerca</p></div>";
+    }
     return $contenuto;
 }
 
@@ -178,7 +179,7 @@ sub query_viaggi_utente {
     my $contenuto;
     my ($sec,$min,$hour,$mday, $mon, $year ,$wday,$yday,$isdst) = localtime();
     $year = $year + 1900;
-    # viaggi attivi di cui l utente è conducente
+    # viaggi attivi di cui l utente &egrave; conducente
     my @viaggi_cond = $doc->findnodes("//SetPassaggi/Passaggio[Conducente='$utente' and \@Passato='no']");
     my $num = @viaggi_cond;
     for(my $i=0;$i<$num;$i++) {
@@ -187,20 +188,20 @@ sub query_viaggi_utente {
         my $arrivo = $viaggi_cond[$i]->findnodes("Itinerario/Arrivo/Luogo")->get_node(1)->textContent;
         my $data = $viaggi_cond[$i]->findnodes("Itinerario/Partenza/Data")->get_node(1)->textContent;
         my $ora = $viaggi_cond[$i]->findnodes("Itinerario/Partenza/Ora")->get_node(1)->textContent;
-        my $prezzo = 11; # funzione che calcola il prezzo
+        my $prezzo = utility::calcola_prezzo('0','4',$idv,$doc); # funzione che calcola il prezzo
         my $posti = utility::calcola_posti_disponibili('0','4',$idv,$doc);
         $contenuto = $contenuto."\n
         <div class=\"viaggio\">
-        <a href=\"singolo_passaggio.cgi?passaggio=$idv&part=0&arr=4&prezzo=$prezzo&posti=$posti&cond=$utente\"><span class=\"partenza\">$partenza</span> &#8594; <span class=\"arrivo\">$arrivo</span></a>
+        <a class='linkMobileViaggi' href=\"singolo_passaggio.cgi?passaggio=$idv&part=0&arr=4&prezzo=$prezzo&posti=$posti&cond=$utente\"><span class=\"partenza\">$partenza</span> &#8594; <span class=\"arrivo\">$arrivo</span></a>
         <p>Data: $data</p>
-        <p>Ora: $ora</p>
+        <p>Ora: $ora <a href=\"singolo_passaggio.cgi?passaggio=$idv&part=0&arr=4&prezzo=$prezzo&posti=$posti&cond=$utente\" class=\"linkDesktop destra\">Vai al viaggio &raquo;</a></p> 
         <p>Posti liberi: $posti</p>
         <p>Prezzo: $prezzo</p>
         <br />
         </div> ";
     }
 
-    # viaggi attivi di cui il conducente è partecipante
+    # viaggi attivi di cui il conducente &egrave; partecipante
     my @viaggi_att = $doc->findnodes("//SetPassaggi/Passaggio[\@Passato='no' and Itinerario/*/Prenotazioni/Utente='$utente']");
     my $num = @viaggi_att;
     for(my $i=0;$i<$num;$i++) {
@@ -221,13 +222,13 @@ sub query_viaggi_utente {
                 $j=0;
             }
         }
-        my $prezzo = 11; # funzione che calcola il prezzo
-        my $posti = 2;#utility::calcola_posti_disponibili($num_p,$num_a,$idv,$doc);
+        my $prezzo = utility::calcola_prezzo($num_p,$num_a,$idv,$doc); # funzione che calcola il prezzo
+        my $posti = utility::calcola_posti_disponibili($num_p,$num_a,$idv,$doc);
         $contenuto = $contenuto."\n
         <div class=\"viaggio\">
         <a href=\"singolo_passaggio.cgi?passaggio=$idv&part=$num_p&arr=$num_a\"><span class=\"partenza\">$partenza</span> &#8594; <span class=\"arrivo\">$arrivo</span></a>
         <p>Data: $data</p>
-        <p>Ora: $ora</p>
+        <p>Ora: $ora <a href=\"singolo_passaggio.cgi?passaggio=$idv&part=$num_p&arr=$num_a\" class=\"linkDesktop destra\">Vai al viaggio &raquo;</a></p>
         <p>Posti liberi: $posti</p>
         <p>Prezzo: $prezzo</p>
         <br />
@@ -239,11 +240,11 @@ sub query_viaggi_utente {
     my @feed_da_ril = $doc->findnodes("//SetUtenti/Utente[Username='$utente']/Notifiche/FeedDaRilasciare");
     my $num = @feed_da_ril;
     if($num==0) {
-        $contenuto = $contenuto."\n<p>Nessun passaggio da recensire</p>";
+        $contenuto = $contenuto."\n<div class=\"contenitore\"><p>Nessun passaggio da recensire</p></div>";
     }
     else {
         my @passag_da_rec;
-        # popola @pass_da_rec, array con l insieme dei passaggi di cui c'è almeno un utente da recensire
+        # popola @pass_da_rec, array con l insieme dei passaggi di cui c'&egrave; almeno un utente da recensire
         for(my $i=0;$i<$num;$i++) {
             my $idv = $feed_da_ril[$i]->findnodes("\@Passaggio")->get_node(1)->textContent;
             my $num = @passag_da_rec;
@@ -255,7 +256,7 @@ sub query_viaggi_utente {
             }
             if($presenza==0) {
                 push @passag_da_rec, $idv;
-            }       
+            }
         }
 
         my $num_pas = @passag_da_rec;
@@ -285,7 +286,7 @@ sub query_notifiche_utente {
     $numNotifiche = $numNotifiche + $size;
     for(my $i=0; $i<$size; $i++) {
         my $mittente = $notifiche_mess[$i]->findnodes("\@Mittente")->get_node(1)->textContent;
-        $contenuto = $contenuto."\n 
+        $contenuto = $contenuto."\n
             <div class=\"notifica\">
                 <p>Hai un nuovo messaggio da $mittente<br class=\"aCapoMobile\"/> <a href=\"singola_conversaz.cgi?utente=$mittente\" class=\"destraDesktop\" tabindex=\"$contatore\">Vai ai messaggi</a></p>
             </div>";
@@ -305,7 +306,7 @@ sub query_notifiche_utente {
         }
         if(!$presenza) {
             push @aux, $passaggio;
-            $contenuto = $contenuto."\n 
+            $contenuto = $contenuto."\n
             <div class=\"notifica\">
                 <p>Hai un nuovo viaggio da recensire <br class=\"aCapoMobile\"/> <a href=\"viaggio_recensire.cgi?passaggio=$passaggio\" class=\"destraDesktop\" tabindex=\"$contatore\">Inserisci i <span xml:lang=\"en\" lang=\"en\">feedback</span></a></p>
             </div>";
@@ -322,7 +323,7 @@ sub query_notifiche_utente {
         my $partenza = $notifiche_richiesta_prenot[$i]->findnodes("\@Partenza");
         my $arrivo = $notifiche_richiesta_prenot[$i]->findnodes("\@Arrivo");
         # PER RICCARDO : MANCANO TABINDEX
-        $contenuto = $contenuto."\n  
+        $contenuto = $contenuto."\n
         <div class=\"notifica\">
         <p>Hai una nuova richiesta di prenotazione da parte di $richiedente:</p>
             <form action=\"ricevitore_esito_prenotazione.cgi\" method=\"post\" >
@@ -348,15 +349,19 @@ sub query_notifiche_utente {
 
     my @notifiche_esito_prenot = $doc->findnodes("//SetUtenti/Utente[Username='$ute']/Notifiche/EsitoPrenotaz");
     my $size =@notifiche_esito_prenot;
-        for(my $i=0; $i<$size; $i++) {
-            my $passaggio = $notifiche_esito_prenot[$i]->findnodes("\@Passaggio");
-            my $esito = $notifiche_esito_prenot[$i]->findnodes("\@Esito");
-            $contenuto = $contenuto."\n
+    $numNotifiche = $numNotifiche + $size;
+    for(my $i=0; $i<$size; $i++) {
+        my $passaggio = $notifiche_esito_prenot[$i]->findnodes("\@Passaggio");
+        my $esito = $notifiche_esito_prenot[$i]->findnodes("\@Esito");
+        $contenuto = $contenuto."\n
                 <div class=\"notifica\">
-                    <p>La tua richiesta di prenotazione &egrave; stata $esito <br class=\"aCapoMobile\"/> <a href=\"elimina_esito.cgi?utente=$ute&passaggio=$passaggio\" class=\"destraDesktop\" tabindex=\"$contatore\">Elimina esito</a></p>
+                    <p>La tua richiesta di prenotazione &egrave; stata $esito <br class=\"aCapoMobile\"/> <a href=\"ricevitore_esito_visualizz.cgi?passaggio=$passaggio\" class=\"destraDesktop\" tabindex=\"$contatore\">Elimina esito</a></p>
                 </div>
             ";
-            $contatore++;
+        $contatore++;
+    }
+    if($numNotifiche==0) {
+        $contenuto = "\n<div class=\"contenitore\"><p>Nessuna notifica presente</p></div>";
     }
     return [$contenuto, $numNotifiche, $contatore];
 }
@@ -390,43 +395,7 @@ sub query_conversazione
     return generic_xslt_query('../data/xslt_files/singolaconversazione.xsl',\%$lista);
 }
 
-################### RICERCA NOTIFICHE PER UTENTE #######################################
 
-
-#############################################
-## Ricerche tramite xpath semplice
-#############################################
-
-
-
-sub generic_xpath_query
-{
-    my $parser = XML::LibXML->new(  );
-    my $xml_doc = $parser->parse_file($xml_file);
-
-}
-
-
-sub query_usernamepwi {
-    my ($username, $password) = @_;
-   # my @userlist = $XML_DOC->getElementsByTagName('Utente');
-    #foreach my $utente (@userlist){
-	#my ( $nome, $passwd );
-	#$nome = $utente->find
-}
-
-
-
-
-
-sub getNotifications(){
-    my $username = shift @_;
-    #cercare i dati e fare una lista delle chiavi
-    my %messaggi;
-    my %prenotazioni;
-    my %bacheca;
-    return ('messaggi' =>\%messaggi,  )
-}
 
 
 1;

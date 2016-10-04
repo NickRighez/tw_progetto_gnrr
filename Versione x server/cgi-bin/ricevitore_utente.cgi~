@@ -15,6 +15,8 @@ use libreria::sessione;
 my $q=new CGI;;
 my @s = sessione::creaSessione();  
  my $session = $s[0];
+
+
 my %problems = ( empty => 'yes' );
 my %old_input;
 
@@ -24,23 +26,23 @@ my %old_input;
 if ($q->request_method eq 'POST') {
 
 	if($q->param('username') eq "") {
-		$problems{username_err} = "Username mancante";
+		$problems{USERNAME_ERR} = "Username mancante";
 		$problems{empty} = "no";
 	}
 	elsif(!($q->param('username')=~m/^[A-Za-z0-9_-]{5,18}$/)) {
-		$problems{username_err} = "Username non valido, caratteri ammessi: lettere, numeri, '_', '-'";
+		$problems{USERNAME_ERR} = "Username non valido, caratteri ammessi: lettere, numeri, '_', '-'";
 		$problems{empty} = "no";
 	}
 	else {
-		$old_input{username} = $q->param('Username');
+		$old_input{USERNAME} = $q->param('username');
 	} 
 
 	if($q->param('email') eq "") {
-		$problems{email_err} = "E-mail mancante";
+		$problems{EMAIL_ERR} = "E-mail mancante";
 		$problems{empty} = "no";
 	}
 	elsif(!($q->param('email')=~m/^([a-z0-9_\.-]+)@([a-z]+)\.([a-z]{2,6})$/)) {
-		$problems{email_err}="indirizzo email non valido";
+		$problems{EMAIL_ERR}="indirizzo email non valido";
 		$problems{empty}="no";
 	}
 	else {		
@@ -48,80 +50,79 @@ if ($q->request_method eq 'POST') {
 		my @email = $doc->findnodes("//SetUtenti/Utente[Email='".$q->param('email')."']");
 		my $num = @email;
 		if($num!=0) {
-			$problems{email_err}="indirizzo email già esistente";
+			$problems{EMAIL_ERR}="indirizzo email già esistente";
 			$problems{empty}="no";
 		}
 		else {
-			$old_input{email}=$q->param('email');
+			$old_input{EMAIL}=$q->param('email');
 		}
 	}
 		
 
 	if($q->param('nome') eq "") {
-		$problems{nome_err} = "Nome utente mancante";
+		$problems{NOME_ERR} = "Nome utente mancante";
 		$problems{empty} = "no";
 	}
-	elsif(!($q->param('nome')=~m/^[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð'\'']+$/)) {
-		$problems{nome_err}="nome utente non valido, inserire solo lettere, di cui, al più la prima lettera può essere mauiscola";
+	elsif(!($q->param('nome')=~m/^[\p{L}\ \,\.\'\-]*$/)) {
+		$problems{NOME_ERR}="nome utente non valido, inserire solo lettere, di cui, al più la prima lettera può essere mauiscola";
 		$problems{empty}="no";
 	}
 	else {
-		$old_input{nome}=$q->param('nome');
+		$old_input{NOME}=$q->param('nome');
 	}
 
 	if($q->param('cognome') eq "") {
-		$problems{cognome_err} = "Cognome utente mancante";
+		$problems{COGNOME_ERR} = "Cognome utente mancante";
 		$problems{empty} = "no";
 	}
-	elsif(!($q->param('cognome')=~m/^[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð]+$/)) {
-		$problems{cognome_err}="cognome utente non valido, inserire solo lettere, di cui, al più la prima lettera può essere mauiscola";
+	elsif(!($q->param('cognome')=~m/^[\p{L}\ \,\.\'\-]*$/)) {
+		$problems{COGNOME_ERR}="cognome utente non valido, inserire solo lettere, di cui, al più la prima lettera può essere mauiscola";
 		$problems{empty}="no";
 	}
 	else {
-		$old_input{cognome}=$q->param('cognome');
+		$old_input{COGNOME}=$q->param('cognome');
 	}
 
 	# non viene fatto controllo sul valore di 'sesso' in quanto i valori possibili sono dati dalla form
 
 	if($q->param('anno') eq "") {
-		$problems{anno_err}="Anno di nascita mancante";
+		$problems{ANNO_ERR}="Anno di nascita mancante";
 		$problems{empty}="no";
 	}
 	elsif(!($q->param('anno')=~m/^[1-2][0-9][0-9][0-9]$/)) {
-		$problems{anno_err}="Anno di nascita non valida, inserire l anno in formato 'aaaa'";
+		$problems{ANNO_ERR}="Anno di nascita non valida, inserire l anno in formato 'aaaa'";
 		$problems{empty}="no";
 	}
 	else {
 		my ($sec,$min,$hour,$mday,$mon,$year,$wday,$yday,$isdst) = localtime();
 		$year=$year+1900-18;
 		if(($q->param('anno'))>$year) {
-			$problems{anno_err}="Possono registrarsi solo utenti maggiorenni";
+			$problems{ANNO_ERR}="Possono registrarsi solo utenti maggiorenni";
 			$problems{empty}="no";
 		}
 		else {
-			$old_input{anno}=$q->param('anno');
+			$old_input{ANNO}=$q->param('anno');
 		}
 	} 
 
 	if($q->param('password') eq "") {
-		$problems{password_err} = "Password mancante";
+		$problems{PASSWORD_ERR} = "Password mancante";
 		$problems{empty}="no";
 	}
-	elsif (length($q->param('password'))<8 or length($q->param('password')>16)){
-		$problems{password_err} = "La password dev essere compresa fra 8 e 16 caratteri";
+	elsif (length($q->param('password'))<8 or length($q->param('password'))>16){
+		$problems{PASSWORD_ERR} = "La password dev essere compresa fra 8 e 16 caratteri";
 		$problems{empty}="no";
 	}		
 	elsif(!($q->param('password')=~m/^[A-Za-z0-9_\.-]{8,16}$/)) {
-		$problems{password_err} = "Password non valida, sono permesse lettere maiuscole o minuscole, e i caratteri underscore, hyphen o punto";
+		$problems{PASSWORD_ERR} = "Password non valida, sono permesse lettere maiuscole o minuscole, e i caratteri underscore, hyphen o punto";
 		$problems{empty}="no";
 	}
 	elsif($q->param('password') ne $q->param('conferma')) {
-			$problems{conferma_err} = "Password non coincidenti";
+			$problems{CONFERMA_ERR} = "Password non coincidenti";
 			$problems{empty}="no";
 	}
 
-	
-
+	#$nome= encode("utf-8",decode("iso-8859-2",$nome));
 	my %ute = (
 			Username => $q->param('username'),
 	        Email => $q->param('email'),       
@@ -136,14 +137,15 @@ if ($q->request_method eq 'POST') {
 	#	$ute{'DescrizionePers'}=$q->param('descr_pers');
 	#}
 	if($problems{'empty'} eq 'yes') {
-		if(data_registration::inserisci_nuovo_utente(\%ute)) {
-			print $session->header(-location => "http://localhost/cgi-bin/tw_progetto_gnrr/file_sito/PERL/assemblatori/assemblatore_login.cgi");
-		}
+		  data_registration::inserisci_nuovo_utente(\%ute);
+		  $session->param('nuova_regis',\%ute);
+		  print $session->header(-location => "ricevitore_login.cgi");
+		
 	}
 	else {
 		$session->param('problems', \%problems);
 		$session->param('old_input', \%old_input);
-		print $session->header(-location => "http://localhost/cgi-bin/tw_progetto_gnrr/file_sito/PERL/assemblatori/assemblatore_iscrizione.cgi");
+		print $session->header(-location => "iscrizione.cgi");
 	} 
 }	
 

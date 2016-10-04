@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
 <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:ts="http://www.dominio.com" >
-
-
   <xsl:template match="/">
 
     <xsl:for-each select="ts:TravelShare/SetMessaggi/Conversazione[@User1='[% UTENTE %]' or @User2='[% UTENTE %]']"> <!-- FILTRI PERL '[% UTENTE %]' -->
@@ -54,7 +52,14 @@
       <xsl:attribute name="title">Messaggio letto</xsl:attribute>
       <xsl:attribute name="class">linkMobile</xsl:attribute>
       <xsl:value-of select="$utente" />
-      <span class="data"></span><xsl:call-template name="formatdate"><xsl:with-param name="datestr" select="Messaggio[1]/Data" /></xsl:call-template> - <xsl:value-of select="Messaggio[1]/Ora"/>
+      <span class="data">
+        <xsl:call-template name="formatdate">
+          <xsl:with-param name="datestr" select="Messaggio[1]/Data" />
+          </xsl:call-template> -
+          <xsl:call-template name="formathour">
+            <xsl:with-param name="hourstr" select="Messaggio[1]/Ora" />
+          </xsl:call-template>
+      </span>
     </a>
     <p class="ultimoMessaggio"><xsl:value-of select="Messaggio[1]/Testo"/></p>
     <p class="linkVaiConversazione">
@@ -72,7 +77,16 @@
       <xsl:attribute name="title">Nuovo messaggio</xsl:attribute>
       <xsl:attribute name="class">linkMobile</xsl:attribute>
       <xsl:value-of select="$utente" />
-      <span class="data"></span><xsl:call-template name="formatdate"><xsl:with-param name="datestr" select="Messaggio[1]/Data" /></xsl:call-template> - <xsl:value-of select="Messaggio[1]/Ora"/>
+      <span class="data">
+        <xsl:call-template name="formatdate">
+          <xsl:with-param name="datestr" select="Messaggio[1]/Data" />
+        </xsl:call-template>
+        -
+        <xsl:call-template name="formathour">
+          <xsl:with-param name="hourstr" select="Messaggio[1]/Ora" />
+        </xsl:call-template>
+
+      </span>
     </a>
     <p class="ultimoMessaggio"><xsl:value-of select="Messaggio[1]/Testo"/></p>
     <p class="linkVaiConversazione blacktext">
@@ -104,6 +118,23 @@
     <xsl:value-of select="$mm" />
     <xsl:value-of select="'-'" />
     <xsl:value-of select="$yyyy" />
+  </xsl:template>
+  <xsl:template name="formathour">
+    <xsl:param name="hourstr" />
+    <!-- input format hh:mm:ss -->
+    <!-- output format hh:mm -->
+
+    <xsl:variable name="hh">
+      <xsl:value-of select="substring($hourstr,1,2)" />
+    </xsl:variable>
+
+    <xsl:variable name="mm">
+      <xsl:value-of select="substring($hourstr,4,2)" />
+    </xsl:variable>
+
+    <xsl:value-of select="$hh" />
+    <xsl:value-of select="':'" />
+    <xsl:value-of select="$mm" />
   </xsl:template>
 
 </xsl:stylesheet>

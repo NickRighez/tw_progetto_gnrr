@@ -11,6 +11,7 @@ use libreria::data_registration;
 #use lib "libreria";
 use libreria::sessione;
 use CGI::Session;
+use HTML::Entities;
 
 
  my @s = sessione::creaSessione();  
@@ -18,10 +19,10 @@ use CGI::Session;
 
  if(!defined($session->param('username'))) {
   my %problems=(
-     not_logged => "Utente non loggato, pagina inaccessibile"
+     LOGIN_ERR => "Utente non loggato, pagina inaccessibile"
      );
   $session->param('problems',\%problems);
-  print $session->header(-location => "http://localhost/cgi-bin/tw_progetto_gnrr/file_sito/PERL/assemblatori/assemblatore_login.cgi");
+  print $session->header(-location => "login.cgi");
 } 
 else {
 	my $q=CGI->new;
@@ -47,11 +48,9 @@ else {
 		Ora => $o,
 		Testo => $mess
 	);
-
-	#  CHECK INPUT Testo PER CODE INJECTION
-
+	
 	if(data_registration::inserisci_nuovo_messaggio_singolo(\%Messaggio)) {
-		print $session->header(-location => "http://localhost/cgi-bin/tw_progetto_gnrr/file_sito/PERL/assemblatori/assemblatore_singola_conversaz.cgi?utente=".$q->param('destinatario'));
+		print $session->header(-location => "singola_conversaz.cgi?utente=".$q->param('destinatario'));
 	}
 }
 

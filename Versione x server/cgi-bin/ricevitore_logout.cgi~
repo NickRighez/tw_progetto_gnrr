@@ -13,4 +13,4 @@ use libreria::sessione;
 my $q = new CGI;
 sessione::distruzione();
 
-print $q->redirect("../assemblatore_home.cgi");
+print $q->redirect("home.cgi");

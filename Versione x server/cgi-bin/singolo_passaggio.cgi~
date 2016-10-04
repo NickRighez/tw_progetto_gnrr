@@ -27,7 +27,7 @@ if(defined($session->param('problems'))) {
         $hash_keys{$key}="$value";
     }
 }
-my $pass = $q->param('passaggio'), ; 
+my $pass = $q->param('passaggio'); 
 my $part =$q->param('part');
 my $arr = $q->param('arr');
 my %Pass=(
@@ -35,7 +35,7 @@ my %Pass=(
 	NUM_PARTENZA =>$part,
 	NUM_ARRIVO => $arr,
 );
-my %Bacheca = %Passaggio;
+my %Bacheca = %Pass;
 
 $contenuto = research::query_viaggio(\%Pass);
 
@@ -43,11 +43,14 @@ if(defined($session->param('ricerca_prec'))) {
   my $aux = $session->param('ricerca_prec');
   my %ricerca = %$aux;
   $hash_keys{URL_RICERCA} = "<a class=\"linkSottoH\" href=\"ricevitore_ricerca?partenza=".$ricerca{'partenza'}."&arrivo=".$ricerca{'arrivo'}."&data=".$ricerca{'data'}."\" tabindex=\"7\">Torna ai risultati</a>";
+  $session->clear(['ricerca_prec']);
 }
 
 if(defined($session->param('loggedin'))) {
+    my $username = $session->param('username');
+  my $cont = research::query_notifiche_utente($username, $doc);
+  $hash_keys{NUM_NOTIFICHE} = @$cont[1];
   $hash_keys{LOGGEDIN} = 'yes';
-  my $username = $session->param('username');
   my $conducente = $doc->findnodes("//SetPassaggi/Passaggio[IDViaggio='$pass']/Conducente");
   $Bacheca{UTENTE} = $username;
   if($conducente ne $username) {
@@ -89,15 +92,14 @@ else {
 }
   
   my $file = "../data/HTML_TEMPLATE/singoloViaggio.html";
-  my $cont = research::query_notifiche_utente($username, $doc);
-    $hash_keys{NUM_NOTIFICHE} = @$cont[1];
   $hash_keys{CONTENUTO} = $contenuto;  
   my $template_parser = Template->new;
   open my $fh, '<', $file;
   my $foglio = '';
   $template_parser->process($fh,\%hash_keys,\$foglio);
+  print $q->header();
   print $foglio;
-}
+
 
 if(defined($session->param('problems'))) {
   $session->clear(['problems']);

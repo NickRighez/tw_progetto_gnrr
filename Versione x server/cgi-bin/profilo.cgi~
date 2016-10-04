@@ -40,13 +40,13 @@ else {
   }  
 
   my %Ute=(
-    UTENTE => $session->param('username')   
+    UTENTE => $q->param('utente')   
   );
 
   my $file = "../data/HTML_TEMPLATE/profiloPubblico.html";
-  my $cont = research::query_notifiche_utente($username, $doc);
+  my $cont = research::query_notifiche_utente($session->param('username'), $doc);
     $hash_keys{NUM_NOTIFICHE} = @$cont[1];
-  
+  $hash_keys{LOGGEDIN} = 'yes';
   $hash_keys{NOME_UTENTE}=$session->param('username');
   $hash_keys{CONTENUTO} = research::query_users(\%Ute);
   print $q->header();

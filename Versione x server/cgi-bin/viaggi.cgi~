@@ -31,11 +31,12 @@ else{
 
 	my $doc=data_registration::get_xml_doc();
 	my $contenuto = research::query_viaggi_utente($username, $doc);
-
+	my $cont = research::query_notifiche_utente($username, $doc);
 	my $file = "../data/HTML_TEMPLATE/viaggi.html";
 	my %hash_keys = (
 	  NOME_UTENTE => $username,
-	  CONTENUTO => $contenuto
+	  CONTENUTO => $contenuto,
+	    NUM_NOTIFICHE => @$cont[1]
 	);  
 	my $template_parser = Template->new;
 	open my $fh, '<', $file;

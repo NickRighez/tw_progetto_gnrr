@@ -9,8 +9,8 @@ use strict;
 use warnings;
 use CGI::Session;
 use CGI;
-use lib 'libreria';
-use research;
+#use lib 'libreria';
+use libreria::research;
 
 sub distruzione {
     my $session = CGI::Session->load() or die $!;

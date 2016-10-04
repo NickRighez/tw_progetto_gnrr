@@ -5,7 +5,7 @@ package utility;
 use strict;
 use warnings;
 use diagnostics;
-use Switch;
+#use Switch;
 use CGI;
 
 use XML::LibXML;
@@ -53,6 +53,9 @@ sub CreaTappa {
     my $t = shift @_; # hash con le informazioni della tappa (PostiDisp, Data, Ora, Luogo)
     my $node="<$tag Numero=\"$num_t\"> \n";
     my %tappa = %$t; 
+    foreach my $el (%tappa){
+        utf8::encode($el);
+    }
     my @parametri=('PostiDisp', 'Data', 'Ora', 'Luogo');
     foreach my $elemento (@parametri) {
         my $new = "<$elemento>$tappa{$elemento}</$elemento> \n";

@@ -35,9 +35,10 @@ my %hash_keys = (
   
   ##################!!!!!!!!!!!!!!!!!!!!!!!
   
-  my $cont = research::query_notifiche_utente($username, $doc);
+ 
   
 if(defined($session->param('username'))) {
+  my $cont = research::query_notifiche_utente($session->param('username'), $doc);
   $hash_keys{LOGGEDIN} = 'yes';
   $hash_keys{NOME_UTENTE} = $session->param('username');
     $hash_keys{NUM_NOTIFICHE} = @$cont[1];
