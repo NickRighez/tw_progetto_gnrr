@@ -1,3 +1,5 @@
+/*********** CSS DI STAMPA  **********/
+
 /** CSS RESET **/
 
 html, body, div, span, h1, h2, h3, h4, h5, h6, p, a, em, img, b, u, i, center,
@@ -15,21 +17,16 @@ dl, dt, dd, ol, ul, li, fieldset, form, label, legend {
 html{
 	margin : 0 auto;
 	max-width : 1024px;
-	border : 1px solid black;
-	border-top : 0px;
-	border-bottom : 0px;
-	background-color : grey;
 }
 
 body{
-	background-color :#b3b3b3;
-	font-size : 100%;
+	font-size : 12pt;
 	font-family: Verdana, Helvetica, sans-serif;
 	max-width : 100%;
 }	
 	
 h1{
-	margin-top : 65px;
+	margin-top : 10px;
 	font-size: 1.5em;
 	margin-bottom : 1.1%;
 	margin-left : 2%;
@@ -67,71 +64,21 @@ a:link{
 }
 
 #header{
-	background-color : white;
-	height : 40px;
-	border-bottom : 1px solid #666666;
-	box-shadow: 0px 1px 10px 0px #888888;
-	padding : 5px;
-}
-
-#bottoneMenu{
-	display : none;
-}
-
-/***  BARRA UTENTE  ***/
-
-#utente p{
-	display : inline; /* non va a capo ad ogni p */
-	padding-right : 5%;
-	white-space: nowrap; /*non c'è il supporto totale*/ /* non divide i link se il nome utente è lungo */
-}
-#utente a{
-	padding-left : 3%;
-	padding-right : 3%;
-}
-#utente{/* problema del relative: occupa spazio nella posizione originale; ignoriamo? */
-		position : relative; /* così rimane in una posizione decente e semi fissa dal 1024 in su */
-		top : -35px;
-		left : 420px;
-		text-align : center;
-		background-color : white;
-		padding : 0;
-		border : 0;
-		margin-bottom : 0;
-		width : 600px;
+	height : 30px;
+	padding : 10px;
 }
 
 /***  CORPO  ***/
 
-#contenuto{
-	margin-bottom : 1%;
-	padding : 0% 5% 5% 5%;
-}
-
 .contenitore{
-	background-color : #cccccc;
+	padding : 2%;
 	border-radius : 4px;
 	border : 1px solid #666666;
-	padding : 5%;
-	margin-bottom : 1%;
+	margin-bottom : 5px;
 }
 
 .contenitore h2, .contenitore h3{
 	margin : 2% 0% 2% 0%;
-}
-
-/***  FOOTER  ***/
-
-#footer{
-	border-top : 1px solid #666666;
-	border-bottom : 1px solid black;
-	padding : 2%;
-	background-color : white;
-	text-align : center;
-}
-#footer a{
-	padding-left: 4%;
-	padding-right : 4%;
 }
 
 /***  FORM  ***/
@@ -188,10 +135,9 @@ textarea{
 }
 
 fieldset {
-	background-color : #cccccc;
 	border-radius : 4px;
 	border : 1px solid #666666;
-	padding : 5%;
+	padding : 4% 5% 3% 5%;
 	margin-bottom : 1%;
 }
 
@@ -201,7 +147,7 @@ fieldset>h2{
 
 .errore{
 	color : red;
-	margin-bottom : 5%;
+	margin-bottom : 3%;
 	font-size : 0.9em;
 }
 
@@ -209,55 +155,11 @@ legend { /* Serve per validare */
     display: none;
 }
 
-/***  LISTA MENU'  ***/
-
-#menuLista a{
-	color : black;
-}
-
-#menu{
-	position : absolute;
-	top : 51px;
-	width : 1024px;
-}
-
-ul#menuLista{
-	list-style: none;
-	margin:0;
-	padding:0;
-	text-align:center;
-}
-#menuLista li {
-	display:inline;
-}
-#menuLista li a {
-	display:inline-block;
-	border : 1px solid #666666;
-	background-color : white;
-	padding:13px;
-	text-decoration: none;
-	margin-top : 1px;
-}
-
-#menuLista li a:hover{
-	background-color: #00ace6;
-}
-
-.frecceMenu{
-	display : none;
-}
-
-
 /***  Pagina MESSAGGI  ***/
-
-.blackText{
-	color: black;
-}
 
 .conversazione{
 	border : 1px solid #666666;
-	margin-bottom : 2px;
-	background-color : white;
+	margin-bottom : 10px;
 	border-radius : 10px;
 	padding : 0 0.5cm 0.5cm 0.5cm;
 }
@@ -266,13 +168,6 @@ ul#menuLista{
 	display : block; 
 	padding : 0.5cm 0;
 	text-decoration : none;
-	color : black;
-}
-
-.nuova{ 
-	background-color : #3399ff;
-}
-.nuova a{
 	color : black;
 }
 
@@ -287,7 +182,7 @@ ul#menuLista{
 	border : 1px solid #666666;
 	padding : 3.5%;
 	margin-bottom : 2%;
-	background-color : white;
+	page-break-inside: avoid;
 }
 
 .ricevuti{
@@ -330,7 +225,6 @@ ul#menuLista{
 .descrizione{ 
 	border : 1px solid #666666;
 	padding : 3% 5% 3% 5%;
-	background-color : white;
 	margin : 2% 3%;
 	border-radius : 15px;
 }
@@ -339,8 +233,8 @@ ul#menuLista{
 	border : 1px solid #666666;
 	padding : 3%;
 	border-radius : 15px;
-	background-color : white;
 	margin-bottom : 1%;
+	page-break-inside: avoid;
 }
 
 /**  RISULTATI  **/
@@ -348,9 +242,9 @@ ul#menuLista{
 .risultato{
 	border : 1px solid #666666;
 	border-radius : 15px;
-	background-color : white;
 	margin-bottom : 1%;
 	padding-bottom : 0.4cm;
+	page-break-inside: avoid;
 }
 
 .linkMobileRisultati{
@@ -408,8 +302,8 @@ input[type=radio]:checked + label>img { /* provvisorio */
 .viaggio{
 	border : 1px solid #666666;
 	border-radius : 15px;
-	background-color : white;
 	margin-bottom : 1%;
+	page-break-inside: avoid;
 }
 
 .data{
@@ -450,8 +344,6 @@ input[type=radio]:checked + label>img { /* provvisorio */
 	padding : 1.5%;
 	text-decoration : none;
 	border-radius : 15px;
-	box-shadow: 0px 2px 5px 0px #888888;
-	background-color : #f2f2f2;
 }
 .si{
 	margin : 6% 20% 0% 20%;
@@ -465,13 +357,12 @@ input[type=radio]:checked + label>img { /* provvisorio */
 .notifica{
 	border : 1px solid #666666;
 	border-radius : 15px;
-	background-color : white;
 	padding : 2.5%;
 	margin-bottom : 1%;
+	page-break-inside: avoid;
 }
 
 .notifica fieldset{
-	background : white;
 	border: none;
 	padding : 0%;
 }
@@ -490,185 +381,27 @@ input[type=radio]:checked + label>img { /* provvisorio */
 	padding: 10%;
 }
 
+/* Codice per la stampa */
 
-/*** MEDIA QUERY ***/
-
-@media screen and (min-width: 768px) { /* Media query necessaria per mantenere un layout funzionante anche su IE8 */
-
-	/* Pagina delle notifiche */
-	
-	.aCapoMobile{
-		display : none;
-	}
-	.destraDesktop{
-		float :right;
-	}
+#footer{
+	display : none;
 }
 
-@media screen and (max-width: 1023px) {
-	html{
-		border : 0px;
-	}
-	h1 {
-		margin : 3% 2% 3% 2%;
-	}
-	#header{
-		padding : 1%;
-	}
-	#utente{
-		position : static;
-		border : 1px solid #666666;
-		border-top : 0px;
-		padding : 2%;
-		width : inherit;
-	}
-	#bottoneMenu{
-		display : block;
-		border : 1px solid #666666;
-		float : right;
-		padding : 1.2%;
-		margin : 0%;
-		text-align : center;
-		text-decoration : none;
-		border-radius : 12px;
-		box-shadow: 0px 2px 5px 0px #888888;
-		color : #0088cc; /* Stesso colore dei link, ma non cambia colore dopo averlo cliccato*/
-	}
-	#footer{
-		padding : 3%;
-		border : 0;
-	}
-	#contenuto{
-		padding : 0% 3% 5% 3%;
-	}
-	.contenitore{
-		padding : 3% 4%;
-	}
-	fieldset {
-		padding : 3% 4%;
-	}	
-	#menu{
-		position : static;
-		max-width : 100%;
-	}
-	#menu ul{
-		list-style : none;
-		margin : 0;
-		padding : 0;
-		text-align : left;
-	}
-	#menuLista li a{
-		display : block;
-		padding : 0.4cm 5%;
-	}
-	.frecceMenu{
-		display : initial;
-		float : right;
-	}
-	.bottone{
-		padding : 2%;
-	}
-	.si{
-		margin : 6% 10% 0% 10%;
-	}
-	.no{
-		margin : 4% 20% 1% 20%;
-	}
-	.linkVaiConversazione{
-		display : none;
-	}
-	.linkDesktop{
-		display: none;
-	}
-
+#menu{
+	display : none;
 }
 
-@media screen and (max-width: 767px) {
-	#utente{
-		padding : 2.5%;
-	}
-	.ultimoMessaggio {
-		display : none;
-	}
-	.contenitore{
-		padding : 4%;
-	}
-	fieldset {
-		padding : 4%;
-	}
-	#bottoneMenu{
-		border-radius : 10px;
-	}
-	.bottone{
-		padding : 2.5%;
-	}
-	.si{
-		margin : 6% 5% 0% 5%;
-	}
-	.no{
-		margin : 4% 15% 1% 15%;
-	}
-	.votiGroup label {
-		margin-right : 7.5%;
-	}
-	.descrizione{
-		margin : 2% 0%;
-	}	
-	.intestazioneMsg{
-		font-size : 0.8em;
-	}
-	.preferenze4Img{ 
-		margin : 3% 4% 2% 4%;
-	}	
-	.data{
-		font-size : 0.8em;
-	}
-	.paddingSpan{
-		padding: 5%;
-	}
-	.notifica{
-		padding : 3%;
-	}
-	.notifica fieldset{
-		padding : 2%;
-	}
-	.conversazione{
-		padding-bottom : 0;
-	}
-	#footer{
-		padding : 4%;
-	}
-	
+#bottoneMenu{
+	display : none;
 }
 
-@media screen and (max-width: 600px) {
-	#bottoneMenu{
-		padding : 1.5%;
-	}
-	.notifica input[type=submit]{
-		margin-top : 3%;
-	}
-	
+#utente{
+	display : none;
 }
 
-@media screen and (max-width: 425px) {
-	#bottoneMenu{
-		margin : 1%;
-		padding : 1.9%;
-	}
-	.votiGroup label {
-		margin-right : 4%;
-	}
-	.preferenze4Img{ 
-		margin : 2%;
-	}
-	.notifica{
-		padding : 5%;
-	}
-	.notifica input[type=submit]{
-		margin-top : 5;
-		width : 50%;
-		margin-left : 25%;
-	}
-	
+a:link:after, a:visited:after {
+	content: " [" attr(href) "] "; font-size:90%; 
+}
+a[href]:after{
+	content: " (" attr(href) ")"
 }
