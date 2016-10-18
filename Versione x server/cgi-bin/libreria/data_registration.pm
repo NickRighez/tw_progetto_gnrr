@@ -95,6 +95,7 @@ sub serializzazione_inserimento {
     }
     else
     {
+        #die($xpath_padre);
         $doc->findnodes($xpath_padre)->get_node(1)->appendChild($fragm);
         $ris = 1;
     }

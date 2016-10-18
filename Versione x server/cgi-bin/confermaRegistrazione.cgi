@@ -26,11 +26,10 @@ if(!defined($session->param('username'))) {
 }
 else {
     my $username = $session->param('username');
-    my $cont = research::query_notifiche_utente($username, $doc);
     my $file = "../data/HTML_TEMPLATE/confermaRegistrazione.html";
     my %hash_keys = (
         NOME_UTENTE => $username,
-        NUM_NOTIFICHE => @$cont[1]
+        NUM_NOTIFICHE => research::conta_notifiche($username, $doc)
         );
     my $template_parser = Template->new;
     my $foglio = '';

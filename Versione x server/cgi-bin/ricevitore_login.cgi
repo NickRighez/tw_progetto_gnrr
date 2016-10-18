@@ -53,7 +53,7 @@ else {
 
         $session->param('username',$username);
         $session->param('loggedin','yes');
-        #$session->expires("+1h");
+        $session->expires("+2h"); # *** AGGIUNTA ***
         $session->flush();
         print $session->header(-location => "home.cgi");
         #print $cgi->redirect('http://localhost/cgi-bin/tw_progetto_gnrr/file_sito/PERL/home.cgi');

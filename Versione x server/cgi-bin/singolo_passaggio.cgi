@@ -16,7 +16,8 @@ my @s = sessione::creaSessione();
 my $session = $s[0];
 
 my $q=CGI->new;
-my $contenuto = "";
+my $contenuto_passaggio = "";
+my $contenuto_bacheca = "";
 my $doc = data_registration::get_xml_doc();
 my %hash_keys;
 
@@ -38,13 +39,12 @@ if($num==0 or $part==$arr) {
 }
 else {
     my %Pass=(
-    VIAGGIO => $pass,
-    NUM_PARTENZA =>$part,
-    NUM_ARRIVO => $arr,
-    );
-    my %Bacheca = %Pass;
+        VIAGGIO => $pass,
+        NUM_PARTENZA =>$part,
+        NUM_ARRIVO => $arr
+        );
 
-    $contenuto = research::query_viaggio(\%Pass);
+    $contenuto_passaggio = research::query_viaggio(\%Pass);
 
     if(defined($session->param('ricerca_prec'))) {
         my $aux = $session->param('ricerca_prec');
@@ -55,55 +55,53 @@ else {
 
     if(defined($session->param('loggedin'))) {
         my $username = $session->param('username');
-        my $cont = research::query_notifiche_utente($username, $doc);
-        $hash_keys{NUM_NOTIFICHE} = @$cont[1];
+        $hash_keys{NUM_NOTIFICHE} = research::conta_notifiche($username, $doc);;
         $hash_keys{LOGGEDIN} = 'yes';
+        $hash_keys{NOME_UTENTE} = $username;
         my $conducente = $doc->findnodes("//SetPassaggi/Passaggio[IDViaggio='$pass']/Conducente");
-        $Bacheca{UTENTE} = $username;
-        if($conducente ne $username) {
-            $session->param('Passaggio',\%Pass);
-            $contenuto = $contenuto."\n
-            <a href=\"ricevitore_richiesta_prenotazione.cgi?passaggio=$pass&partenza=$part&arrivo=$arr\" >Richiedi prenotazione</a>"."\n";
-        }
-
-        $contenuto = $contenuto."\n
-        <h2>Bacheca dei messaggi</h2>\n".research::query_bacheca_viaggio(\%Bacheca)."\n";
 
         if($conducente ne $username) {
-            $contenuto = $contenuto."
-              <div class=\"contenitore\" id=\"NuovaConversazione\"> \n
-               <form action=\"ricevitore_messaggio_pubblico.cgi\" method=\"POST\" >
-                <p>Inizia una nuova conversazione con il proprietario del viaggio!</p><br /> \n
-                <input type=\"hidden\" name=\"destinatario\" value=\"".$conducente."\"></input>
-                <input type=\"hidden\" name=\"passaggio\" value=\"".$q->param('passaggio')."\"></input>
-                <input type=\"hidden\" name=\"partenza\" value=\"".$q->param('part')."\"></input>
-                <input type=\"hidden\" name=\"arrivo\" value=\"".$q->param('arr')."\"></input>
-                <textarea rows=\"\" cols=\"\" name=\"messaggio\"></textarea> \n
-
-                <div><input type=\"submit\" value=\"Invia\"></input></div> \n";
-            }
-        }
-        else {
-            $hash_keys{LOGGEDIN} = 'no';
-            $Bacheca{UTENTE} = "";
-            $contenuto = $contenuto."\n
-            <h2>Bacheca dei messaggi</h2>  \n
-             <div class=\"contenitore\">
-              \n".research::query_bacheca_viaggio(\%Bacheca)."\n" ;
+            $hash_keys{PRENOTAZIONE} = 'yes';
+            $hash_keys{NUOVA_CONVERSAZIONE} = 'yes';
+            $hash_keys{CONDUCENTE} = $conducente;
+            $hash_keys{PASSAGGIO} = $pass;
+            $hash_keys{PARTENZA} = $part;
+            $hash_keys{ARRIVO} = $arr;
         }
 
-        my $file = "../data/HTML_TEMPLATE/singoloViaggio.html";
-        $hash_keys{CONTENUTO} = $contenuto;
-        my $template_parser = Template->new;
-        open my $fh, '<', $file;
-        my $foglio = '';
-        $template_parser->process($fh,\%hash_keys,\$foglio);
-        print $q->header();
-        print $foglio;
+        my %Bacheca = (
+            VIAGGIO => $pass,
+            NUM_PARTENZA =>$part,
+            NUM_ARRIVO => $arr,
+            UTENTE => $username
+        );
+        $contenuto_bacheca =research::query_bacheca_viaggio(\%Bacheca)."\n";
+    }
+    else {
+        $hash_keys{LOGGEDIN} = 'no';
+        
+         my %Bacheca = (
+            VIAGGIO => $pass,
+            NUM_PARTENZA =>$part,
+            NUM_ARRIVO => $arr,
+            UTENTE => ""
+        );
+        $contenuto_bacheca = research::query_bacheca_viaggio(\%Bacheca)."\n" ;
+    }
+
+    my $file = "../data/HTML_TEMPLATE/singoloViaggio.html";
+    $hash_keys{CONTENUTO_PASSAGGIO} = $contenuto_passaggio;
+    $hash_keys{CONTENUTO_BACHECA} = $contenuto_bacheca;
+    my $template_parser = Template->new;
+    open my $fh, '<', $file;
+    my $foglio = '';
+    $template_parser->process($fh,\%hash_keys,\$foglio);
+    print $q->header();
+    print $foglio;
 
 
-        if(defined($session->param('problems'))) {
-            $session->clear(['problems']);
-        }
+    if(defined($session->param('problems'))) {
+        $session->clear(['problems']);
+    }
 }
 

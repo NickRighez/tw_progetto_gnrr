@@ -18,10 +18,9 @@ my $doc = data_registration::get_xml_doc();
 my %hash_keys;
 
 if(defined($session->param('username'))) {
-    my $cont = research::query_notifiche_utente($session->param('username'), $doc);
     $hash_keys{LOGGEDIN} = 'yes';
     $hash_keys{NOME_UTENTE} =  $session->param('username');
-    $hash_keys{NUM_NOTIFICHE} = @$cont[1];
+    $hash_keys{NUM_NOTIFICHE} = conta_notifiche($session->param('username'), $doc);
 }
 else {
     $hash_keys{LOGGEDIN} = 'no';

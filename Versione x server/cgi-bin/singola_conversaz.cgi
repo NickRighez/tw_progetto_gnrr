@@ -58,13 +58,12 @@ else {
         
 
         my $file = "../data/HTML_TEMPLATE/singolaConversazione.html";
-        my $cont = research::query_notifiche_utente($session->param('username'), $doc);
         my %hash_keys = (
             NOME_UTENTE => $session->param('username'),
             CONTENUTO => $contenuto,
             DESTINATARIO_MESS_P => $q->param('utente'),
             CONVERSATORE => $q->param('utente'),
-            NUM_NOTIFICHE => @$cont[1]
+            NUM_NOTIFICHE => research::conta_notifiche($session->param('username'), $doc)
             );
         my $template_parser = Template->new;
         open my $fh, '<', $file;

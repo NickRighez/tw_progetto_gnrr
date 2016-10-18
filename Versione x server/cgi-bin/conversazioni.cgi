@@ -38,12 +38,10 @@ else {
         $contenuto = research::query_messaggi(\%Messaggi);
     }
 
-    my $cont = research::query_notifiche_utente($username, $doc);
-
     my %hash_keys = (
         NOME_UTENTE => $username,
         CONTENUTO => $contenuto,
-        NUM_NOTIFICHE => @$cont[1]
+        NUM_NOTIFICHE => research::conta_notifiche($username, $doc)
         );
 
     if(defined($session->param('problems'))) {
