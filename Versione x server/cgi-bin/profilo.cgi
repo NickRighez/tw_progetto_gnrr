@@ -16,7 +16,6 @@ my @s = sessione::creaSessione();
 my $session = $s[0];
 my $q=CGI->new;
 
-###################################################  MANCA LA PAGINA PROFILO VISUALIZZATA DA UN UTENTE NON LOGGATO (NECESSARIA??)
 if(!defined($session->param('username'))) {
     my %problems=(
         LOGIN_ERR => "<p class=\"errore\">Utente non loggato, pagina inaccessibile</p>"
@@ -37,25 +36,21 @@ else {
         print $session->header(-location => "home.cgi");
     }
     else {
-       $hash_keys{NOME} = $doc->findnodes("//SetUtenti/Utente[Username=\"$ute\"]/Nome")->get_node(1)->textContent;
+        $hash_keys{NOME} = $doc->findnodes("//SetUtenti/Utente[Username=\"$ute\"]/Nome")->get_node(1)->textContent;
         $hash_keys{COGNOME} = $doc->findnodes("//SetUtenti/Utente[Username=\"$ute\"]/Cognome")->get_node(1)->textContent;
-
-        if($session->param('username') eq $ute) {
-            $hash_keys{LINK_MODIFICA} = "<a class=\"linkSottoH\" href=\"modificaProfilo.cgi\">Modifica</a>";
-        }
-        else {
-            $hash_keys{LINK_MESS_PRIVATO} = "<a class=\"linkSottoH\" href=\"singola_conversaz.cgi?utente=$ute\">Scrivi un messaggio privato</a> ";
-        }
-
+        
+        my ($sec,$min,$hour,$mday,$mon,$year,$wday,$yday,$isdst) = localtime();
+        $year = $year+1900;
         my %Ute=(
-            UTENTE => $q->param('utente')
-            );
+            UTENTE => $q->param('utente'),
+            ANNO_C => $year
+        );
 
         my $file = "../data/HTML_TEMPLATE/profiloPubblico.html";
-        my $cont = research::query_notifiche_utente($session->param('username'), $doc);
-        $hash_keys{NUM_NOTIFICHE} = @$cont[1];
+        $hash_keys{NUM_NOTIFICHE} = research::conta_notifiche($session->param('username'), $doc);
         $hash_keys{LOGGEDIN} = 'yes';
         $hash_keys{NOME_UTENTE}=$session->param('username');
+        $hash_keys{NOME_PROFILO} = $ute;
         $hash_keys{CONTENUTO} = research::query_users(\%Ute);
         print $q->header();
         my $template_parser = Template->new;

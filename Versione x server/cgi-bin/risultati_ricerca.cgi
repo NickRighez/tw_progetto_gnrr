@@ -22,11 +22,17 @@ my $partenza=$q->param('partenza');
 my $arrivo=$q->param('arrivo');
 my $data=$q->param('data');
 my $doc = data_registration::get_xml_doc();
-my $contenuto = research::query_ricerca($partenza, $arrivo, $data, $doc);
+my @viaggi_list = research::query_ricerca($partenza, $arrivo, $data, $doc);
+my $empty = "false";
+my $num_viaggi = @viaggi_list;
+if($num_viaggi == 0){
+    $empty = "true";
+}
 my %hash_keys;
 
 my %hash_keys = (
-    CONTENUTO => $contenuto,
+    VIAGGI_LIST => \@viaggi_list,
+    EMPTY_LIST => $empty,
     PARTENZA => $partenza,
     ARRIVO => $arrivo,
     DATA => $data
@@ -38,10 +44,9 @@ my %hash_keys = (
 
 
 if(defined($session->param('username'))) {
-    my $cont = research::query_notifiche_utente($session->param('username'), $doc);
     $hash_keys{LOGGEDIN} = 'yes';
     $hash_keys{NOME_UTENTE} = $session->param('username');
-    $hash_keys{NUM_NOTIFICHE} = @$cont[1];
+    $hash_keys{NUM_NOTIFICHE} = research::conta_notifiche($session->param('username'), $doc);
 }
 else {
     $hash_keys{LOGGEDIN} = 'no';

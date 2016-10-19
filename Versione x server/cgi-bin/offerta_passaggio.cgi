@@ -10,6 +10,7 @@ use Template;
 use libreria::sessione;
 #use lib "../libreria";
 use libreria::data_registration;
+use libreria::research;
 
 my $cgi = new CGI;
 my @s = sessione::creaSessione();
@@ -50,9 +51,7 @@ else {
         }
     }
 
-    my $cont = research::query_notifiche_utente($session->param('username'), $doc);
-
-    $hash_keys{NUM_NOTIFICHE} = @$cont[1];
+    $hash_keys{NUM_NOTIFICHE} = research::conta_notifiche($session->param('username'), $doc);
     print "Content-type: text/html\n\n\n";
     my $template_parser = Template->new;
     my $foglio = '';

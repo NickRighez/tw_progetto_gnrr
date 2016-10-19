@@ -278,7 +278,24 @@
           <Prenotazioni />
         </Arrivo>
       </Itinerario>
-      <Bacheca />
+      <Bacheca>
+        <ConversazioneBacheca User1="nrigato" User2="utente_uno">
+          <Messaggio>
+            <Mittente>nrigato</Mittente>
+            <Data>2016-10-18</Data>
+            <Ora>13:32:06</Ora>
+            <Testo>ciao
+</Testo>
+          </Messaggio>
+          <Messaggio>
+            <Mittente>utente_uno</Mittente>
+            <Data>2016-10-18</Data>
+            <Ora>13:33:01</Ora>
+            <Testo>ciaociao
+            </Testo>
+          </Messaggio>
+        </ConversazioneBacheca>
+      </Bacheca>
     </Passaggio>
     <Passaggio Passato="no">
       <IDViaggio>v3</IDViaggio>

@@ -31,6 +31,8 @@ else {
     my @prenotazioni = $doc->findnodes("//SetPassaggi/Passaggio[IDViaggio=\"$pass\"]/Itinerario/*[\@Numero>=$part and \@Numero<=$arr]/Prenotazioni[Utente=\"$username\"]");
     my $num = @prenotazioni;
 
+#*******************************************************************************************************************************************************
+#************* Mancano controlli sul richiedente prenotazione: non dev essere il conducente e non si possono prenotare viaggi passati ******************
     if($num!=0) {
         my %problems=(
             ERR_PRENOTAZIONE => "<p class=\"errore\"> Esiste già una prenotazione per questo passaggio</p>"

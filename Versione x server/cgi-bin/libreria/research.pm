@@ -58,6 +58,10 @@ sub query_users
     {
         die "Non esiste la chiave UTENTE nella query users\n";
     }
+    if(! exists $lista->{"ANNO_C"})
+    {
+        die "Non esiste la chiave ANNO_C nella query users\n";
+    }
 
     return generic_xslt_query('../data/xslt_files/users.xsl',\%$lista);
 }
@@ -103,11 +107,16 @@ sub query_viaggio
 
 sub query_ricerca
 {
+# Il contenuto và sostituito con il tag RISULTATI_LIST, una lista di hash, ognuno della forma:
+#       { href => $link_passaggio, partenza => $partenza, arrivo => $arrivo, ora => $ora, posti => $posti, conducente => $user_conduc, eta => $conduc_eta, punteggio => $conduc_punteg, auto => $conduc_auto, start_index => $tab_index }
+
+# Inoltre è necessario passare un tag PARTENZA (la partenza inserita nella ricerca), ARRIVO (l arrivo inserito nella ricerca) e la DATA
     my $partenza = shift @_;
     my $arrivo=shift @_;
     my $data=shift @_;
     my $doc = shift @_;
     my $contenuto= "";
+    my @viaggi_list;
     my @itiner=$doc->findnodes("//SetPassaggi/Passaggio/Itinerario[*[Data='$data']]");
     my $num_it=@itiner;
     for(my $i=0;$i<$num_it;$i++) {
@@ -132,31 +141,16 @@ sub query_ricerca
                                     my $part = $itiner[$i]->findnodes("*[\@Numero=$j]/Luogo")->get_node(1)->textContent();
                                     my $arr = $itiner[$i]->findnodes("*[\@Numero=$k]/Luogo")->get_node(1)->textContent();
                                     my $idv = $itiner[$i]->findnodes("../IDViaggio")->get_node(1)->textContent();
-                                    my $prezzo = '10'; # da sostituire con funzione che calcola il prezzo
+                                    my $prezzo = utility::calcola_prezzo($j,$k,$idv,$doc);
                                     my $posti = utility::calcola_posti_disponibili($j,$k,$idv,$doc);
                                     my $conduc = $itiner[$i]->findnodes("../Conducente")->get_node(1)->textContent();
                                     my $auto = $doc->findnodes("//SetUtenti/Utente[Username='$conduc']/Profilo/Auto")->get_node(1)->textContent;
                                     my $punteggio = $doc->findnodes("//SetUtenti/Utente[Username='$conduc']/Profilo/Valutazione/PunteggioMedio")->get_node(1)->textContent;
                                     my ($sec,$min,$hour,$mday,$mon,$year,$wday,$yday,$isdst) = localtime();
                                     my $eta=$year + 1900 - ($doc->findnodes("//SetUtenti/Utente[Username='$conduc']/AnnoNascita")->get_node(1)->textContent() ) ;
-                                    $contenuto = $contenuto."\n
-                     <div class=\"risultato\">
-     <p><a href=\"singolo_passaggio.cgi?passaggio=$idv&part=$j&arr=$k\" class=\"linkMobileRisultati\"><span class=\"partenza\">$part</span> &#8594; <span class=\"arrivo\">$arr</span>
-        <span class=\"linkDesktop destra\">Vai al viaggio &raquo;</span></a></p>
-
-     <p>Ora: $ora</p>
-
-     <p>Posti: $posti<span class=\"destra\">$prezzo&euro; <!--&#8364;--></span></p>
-
-     <hr />
-
-     <p>$conduc <!-- <span class=\"destra\">33 anni</span> --></p>
-
-     <p>Voto medio: $punteggio/5</p>
-
-     <p>Auto: $auto</p>
-
-    </div> ";
+                    ###################  MANCA L HREF ###################################################
+                                    push @viaggi_list, { href => "", partenza => $part, arrivo => $arr, ora => $ora, posti => $posti, conducente => $conduc, eta => $eta, punteggio => $punteggio, auto => $auto };
+                            
                                 }
                             }
                         }
@@ -167,16 +161,25 @@ sub query_ricerca
 
         }
     }
-    if($contenuto eq "") {
-        $contenuto = "<div class=\"contenitore\"><p>Nessun passaggio corrisponde ai criteri di ricerca</p></div>";
-    }
-    return $contenuto;
+    #return $contenuto;
+    return @viaggi_list;
 }
 
-sub query_viaggi_utente {
+sub query_viaggi_attivi_utente {
+    ### RICORDARSI DI GESTIRE IL CASO NON CI SIA NESSUN VIAGGIO ATTIVO O NESSUN PASSAGGIO DA RECENSIRE (aggiungere all hash una key 'empty => $bool'?) ###
+
+# Il CONTENUTO viene sostituito da una lista, di nome VIAGGI_LIST, di hash (uno per ogni viaggio attivo) ognuno della forma:
+#   { href => $link_passaggio, partenza => $partenza, arrivo => $arrivo, posti => $posti, prezzo => $prezzo, data => $data, ora => $ora }
+# NOTA: includere nei viaggi attivi anche quelli di cui l utente è conducente.
+
+# Inoltre dev venire restituito anche una lista, di nome FEEDB_RECENS, di hash (uno per ogni viaggio da recensire) ognuno della forma:
+#   { href => $link_passaggio_da_recensire, partenza => $partenza, arrivo => $arrivo, data => $data}
+
     my $utente=shift @_;
     my $doc = shift @_;
-    my $contenuto;
+    
+    my @viaggi_list;
+
     my ($sec,$min,$hour,$mday, $mon, $year ,$wday,$yday,$isdst) = localtime();
     $year = $year + 1900;
     # viaggi attivi di cui l utente &egrave; conducente
@@ -190,15 +193,14 @@ sub query_viaggi_utente {
         my $ora = $viaggi_cond[$i]->findnodes("Itinerario/Partenza/Ora")->get_node(1)->textContent;
         my $prezzo = utility::calcola_prezzo('0','4',$idv,$doc); # funzione che calcola il prezzo
         my $posti = utility::calcola_posti_disponibili('0','4',$idv,$doc);
-        $contenuto = $contenuto."\n
-        <div class=\"viaggio\">
-        <a class='linkMobileViaggi' href=\"singolo_passaggio.cgi?passaggio=$idv&part=0&arr=4&prezzo=$prezzo&posti=$posti&cond=$utente\"><span class=\"partenza\">$partenza</span> &#8594; <span class=\"arrivo\">$arrivo</span></a>
-        <p>Data: $data</p>
-        <p>Ora: $ora <a href=\"singolo_passaggio.cgi?passaggio=$idv&part=0&arr=4&prezzo=$prezzo&posti=$posti&cond=$utente\" class=\"linkDesktop destra\">Vai al viaggio &raquo;</a></p> 
-        <p>Posti liberi: $posti</p>
-        <p>Prezzo: $prezzo</p>
-        <br />
-        </div> ";
+
+        push @viaggi_list, {href => "singolo_passaggio.cgi?passaggio=$idv&part=0&arr=4",
+            partenza => $partenza,
+            arrivo => $arrivo,
+            prezzo => $prezzo,
+            posti => $posti,
+            data => $data,
+            ora => $ora};
     }
 
     # viaggi attivi di cui il conducente &egrave; partecipante
@@ -224,25 +226,29 @@ sub query_viaggi_utente {
         }
         my $prezzo = utility::calcola_prezzo($num_p,$num_a,$idv,$doc); # funzione che calcola il prezzo
         my $posti = utility::calcola_posti_disponibili($num_p,$num_a,$idv,$doc);
-        $contenuto = $contenuto."\n
-        <div class=\"viaggio\">
-        <a href=\"singolo_passaggio.cgi?passaggio=$idv&part=$num_p&arr=$num_a\"><span class=\"partenza\">$partenza</span> &#8594; <span class=\"arrivo\">$arrivo</span></a>
-        <p>Data: $data</p>
-        <p>Ora: $ora <a href=\"singolo_passaggio.cgi?passaggio=$idv&part=$num_p&arr=$num_a\" class=\"linkDesktop destra\">Vai al viaggio &raquo;</a></p>
-        <p>Posti liberi: $posti</p>
-        <p>Prezzo: $prezzo</p>
-        <br />
-        </div> ";
+
+    
+        push @viaggi_list, {
+            href => "singolo_passaggio.cgi?passaggio=$idv&part=$num_p&arr=$num_a",
+            partenza => $partenza,
+            arrivo => $arrivo,
+            prezzo => $prezzo,
+            posti => $posti,
+            data => $data,
+            ora => $ora};
     }
 
-    $contenuto = $contenuto."\n<h2>Viaggi passati da recensire</h2>";
+   
+    #return $contenuto;
+    return @viaggi_list;
+}
 
-    my @feed_da_ril = $doc->findnodes("//SetUtenti/Utente[Username='$utente']/Notifiche/FeedDaRilasciare");
+sub query_viaggi_recensire_utente {
+    my $utente=shift @_;
+    my $doc = shift @_;
+     my @feed_da_ril = $doc->findnodes("//SetUtenti/Utente[Username='$utente']/Notifiche/FeedDaRilasciare");
     my $num = @feed_da_ril;
-    if($num==0) {
-        $contenuto = $contenuto."\n<div class=\"contenitore\"><p>Nessun passaggio da recensire</p></div>";
-    }
-    else {
+    my @viaggi_list;
         my @passag_da_rec;
         # popola @pass_da_rec, array con l insieme dei passaggi di cui c'&egrave; almeno un utente da recensire
         for(my $i=0;$i<$num;$i++) {
@@ -265,37 +271,48 @@ sub query_viaggi_utente {
             my $partenza = $doc->findnodes("//SetPassaggi/Passaggio[IDViaggio='$idv']/Itinerario/Partenza/Luogo")->get_node(1)->textContent;
             my $arrivo = $doc->findnodes("//SetPassaggi/Passaggio[IDViaggio='$idv']/Itinerario/Arrivo/Luogo")->get_node(1)->textContent;
             my $data = $doc->findnodes("//SetPassaggi/Passaggio[IDViaggio='$idv']/Itinerario/Partenza/Data")->get_node(1)->textContent;
-            $contenuto = $contenuto."\n
-                <div class=\"viaggio\">
-                    <a href=\"viaggio_recensire.cgi?passaggio=$idv\"><span class=\"partenza\">$partenza</span> &#8594; <span class=\"arrivo\">$arrivo</span><span class=\"data\">$data</span></a>
-                </div>
-                ";
+          push @viaggi_list, {
+                                href => "viaggio_recensire.cgi?passaggio=$idv",
+                                partenza => $partenza,
+                                arrivo => $arrivo,
+                                data => $data
+                            }
         }
-    }
-    return $contenuto;
+    return @viaggi_list;
 }
 
 sub query_notifiche_utente {
+# Per le notifiche dei nuovi messaggi viene richiesto un tag MESSAGGI_LIST, una lista di hash, ognuno della forma: 
+#       { href => $link_singola_conversazione, mittente => $user_mittente, start_index => $tab_index }
+
+# Per le notifiche sui viaggi da recensire viene richiesto un tag VIAGGI_RECENS_LIST, una lista di hash, ognuno della forma:
+#       { href => $link_viaggio_recensire, start_index => $tab_index }
+
+# Per le notifiche sulle richieste di prenotazione, viene usato un tag RICHIESTE_LIST, una lista di hash, ognuno della forma:
+#       { richiedente => $user_richied, passaggio => $passaggio, partenza => $partenza, arrivo => $arrivo, start_index => $tab_index }
+
+# Per le notifiche sull esito delle prenotazioni, viene usato un tag ESITI_LIST, una lista di hash, ognuno della forma:
+#       { passaggio => $passaggio, esito => $esito, start_index => $tab_index }
+
+# NOTA: è necessario passare un tag CONTATORE, che indica il numero totale di notifiche presenti. Attraverso un costrutto condizionale bisogna 
+#        testare se esso è uguale a 0.
+
     my $ute = shift @_;
     my $doc = shift @_;
-    my $contenuto="";
-    my $numNotifiche = 0;
-    my $contatore=4; # per tabindex
+    my @messaggi_list;
+    my @feedback_list;
+    my @richieste_list;
+    my @esito_list;
+
     my @notifiche_mess = $doc->findnodes("//SetUtenti/Utente[Username='$ute']/Notifiche/NuovoMessaggio");
     my $size =@notifiche_mess;
-    $numNotifiche = $numNotifiche + $size;
     for(my $i=0; $i<$size; $i++) {
         my $mittente = $notifiche_mess[$i]->findnodes("\@Mittente")->get_node(1)->textContent;
-        $contenuto = $contenuto."\n
-            <div class=\"notifica\">
-                <p>Hai un nuovo messaggio da $mittente<br class=\"aCapoMobile\"/> <a href=\"singola_conversaz.cgi?utente=$mittente\" class=\"destraDesktop\" tabindex=\"$contatore\">Vai ai messaggi</a></p>
-            </div>";
-        $contatore++;
+        push @messaggi_list, { href => "singola_conversaz.cgi?utente=$mittente", mittente => $mittente};
     }
 
     my @notifiche_feedbd = $doc->findnodes("//SetUtenti/Utente[Username='$ute']/Notifiche/FeedDaRilasciare");
     my $size =@notifiche_feedbd;
-    $numNotifiche = $numNotifiche + $size;
     my @aux;
     for(my $i=0; $i<$size; $i++) {
         my $presenza = 0;
@@ -306,64 +323,54 @@ sub query_notifiche_utente {
         }
         if(!$presenza) {
             push @aux, $passaggio;
-            $contenuto = $contenuto."\n
-            <div class=\"notifica\">
-                <p>Hai un nuovo viaggio da recensire <br class=\"aCapoMobile\"/> <a href=\"viaggio_recensire.cgi?passaggio=$passaggio\" class=\"destraDesktop\" tabindex=\"$contatore\">Inserisci i <span xml:lang=\"en\" lang=\"en\">feedback</span></a></p>
-            </div>";
-            $contatore++;
+            push @feedback_list, { href => "viaggio_recensire.cgi?passaggio=$passaggio" };
         }
     }
 
     my @notifiche_richiesta_prenot = $doc->findnodes("//SetUtenti/Utente[Username='$ute']/Notifiche/RichiestaPrenotaz");
     my $size =@notifiche_richiesta_prenot;
-    $numNotifiche = $numNotifiche + $size;
     for(my $i=0; $i<$size; $i++) {
         my $richiedente = $notifiche_richiesta_prenot[$i]->findnodes("\@Mittente");
         my $passaggio = $notifiche_richiesta_prenot[$i]->findnodes("\@Passaggio");
         my $partenza = $notifiche_richiesta_prenot[$i]->findnodes("\@Partenza");
         my $arrivo = $notifiche_richiesta_prenot[$i]->findnodes("\@Arrivo");
+        push @richieste_list, { richiedente => $richiedente, passaggio => $passaggio, partenza => $partenza, arrivo => $arrivo };
         # PER RICCARDO : MANCANO TABINDEX
-        $contenuto = $contenuto."\n
-        <div class=\"notifica\">
-        <p>Hai una nuova richiesta di prenotazione da parte di $richiedente:</p>
-            <form action=\"ricevitore_esito_prenotazione.cgi\" method=\"post\" >
-                <fieldset>
-                    <legend>Richiesta prenotazione da $richiedente per il passaggio $passaggio</legend>
-                    <div class=\"test\">
-                    <input type=\"radio\" name=\"esito\" id=\"accetta\" value=\"Accettata\"></input>
-                    <label for=\"accetta\">Accetta</label>
-                    <span class=\"paddingSpan\"></span>
-                    <input type=\"radio\" name=\"esito\" id=\"rifiuta\" value=\"Rifiutata\"></input>
-                    <label for=\"rifiuta\">Rifiuta</label>
-                    </div>
-                    <input type=\"hidden\" name=\"richiedente\" value=\"$richiedente\"></input>
-                    <input type=\"hidden\" name=\"passaggio\" value=\"$passaggio\"></input>
-                    <input type=\"hidden\" name=\"partenza\" value=\"$partenza\"></input>
-                    <input type=\"hidden\" name=\"arrivo\" value=\"$arrivo\"></input>
-                    <input type=\"submit\" value=\"Invia\"></input>
-                </fieldset>
-            </form>
-            </div>
-        ";
     }
 
     my @notifiche_esito_prenot = $doc->findnodes("//SetUtenti/Utente[Username='$ute']/Notifiche/EsitoPrenotaz");
     my $size =@notifiche_esito_prenot;
-    $numNotifiche = $numNotifiche + $size;
     for(my $i=0; $i<$size; $i++) {
         my $passaggio = $notifiche_esito_prenot[$i]->findnodes("\@Passaggio");
         my $esito = $notifiche_esito_prenot[$i]->findnodes("\@Esito");
-        $contenuto = $contenuto."\n
-                <div class=\"notifica\">
-                    <p>La tua richiesta di prenotazione &egrave; stata $esito <br class=\"aCapoMobile\"/> <a href=\"ricevitore_esito_visualizz.cgi?passaggio=$passaggio\" class=\"destraDesktop\" tabindex=\"$contatore\">Elimina esito</a></p>
-                </div>
-            ";
-        $contatore++;
+        push @esito_list, { href => "ricevitore_esito_visualizz.cgi?passaggio=$passaggio", esito => $esito };
     }
-    if($numNotifiche==0) {
-        $contenuto = "\n<div class=\"contenitore\"><p>Nessuna notifica presente</p></div>";
-    }
-    return [$contenuto, $numNotifiche, $contatore];
+    return (\@messaggi_list, \@feedback_list, \@richieste_list, \@esito_list);
+}
+
+sub conta_notifiche{
+    my $ute = shift @_;
+    my $doc = shift @_;
+    my $count = 0;
+
+    my @notifiche_mess = $doc->findnodes("//SetUtenti/Utente[Username='$ute']/Notifiche/NuovoMessaggio");
+    my $size =@notifiche_mess;
+    $count = $count + $size;
+
+    my @notifiche_feedbd = $doc->findnodes("//SetUtenti/Utente[Username='$ute']/Notifiche/FeedDaRilasciare");
+    my $size =@notifiche_feedbd;
+    $count = $count + $size;
+
+    my @notifiche_richiesta_prenot = $doc->findnodes("//SetUtenti/Utente[Username='$ute']/Notifiche/RichiestaPrenotaz");
+    my $size =@notifiche_richiesta_prenot;
+    $count = $count + $size;
+
+    my @notifiche_esito_prenot = $doc->findnodes("//SetUtenti/Utente[Username='$ute']/Notifiche/EsitoPrenotaz");
+    my $size =@notifiche_esito_prenot;
+    $count = $count + $size;
+
+    return $count;
+
 }
 
 
@@ -395,7 +402,30 @@ sub query_conversazione
     return generic_xslt_query('../data/xslt_files/singolaconversazione.xsl',\%$lista);
 }
 
-
-
+sub query_feedback_da_rilasciare_viaggio
+{
+    my $username = shift @_;
+    my $passaggio = shift @_;
+    my @feedback_list;
+    my $doc=data_registration::get_xml_doc();
+    my $conducente = $doc->findnodes("//SetPassaggi/Passaggio[IDViaggio='$passaggio']/Conducente")->get_node(1)->textContent;
+    my @destinatari = $doc->findnodes("//SetUtenti/Utente[Username='$username']/Notifiche/FeedDaRilasciare[\@Passaggio='$passaggio']/\@Destinatario");
+    my $num = @destinatari;
+    my $ind = 1;
+    
+    for(my $i=0; $i<$num; $i++){
+        my $dest = $destinatari[$i]->textContent;
+        my $nome = $doc->findnodes("//SetUtenti/Utente[Username='$dest']/Nome")->get_node(1)->textContent;
+        my $cognome = $doc->findnodes("//SetUtenti/Utente[Username='$dest']/Cognome")->get_node(1)->textContent;
+        if($conducente eq $dest) {
+            push @feedback_list, { username => $dest, nome => $nome, cognome => $cognome, index => 0 };
+        }
+        else {
+            push @feedback_list, { username => $dest, nome => $nome, cognome => $cognome, index => $ind };
+            $ind++;
+        }
+    }
+    return @feedback_list;
+}
 
 1;

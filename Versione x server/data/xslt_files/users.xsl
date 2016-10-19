@@ -3,19 +3,29 @@
 <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:ts="http://www.dominio.com" >
   <!-- <xsl:output method='html' version='1.0' encoding='UTF-8' indent='yes' doctype-system="http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd" doctype-public="-//W3C//DTD XHTML 1.0 Strict//EN" omit-xml-declaration="yes"/> -->
 
+   <xsl:variable name="Anno_n">
+    <xsl:value-of select="ts:TravelShare/SetUtenti/Utente[Username='[% UTENTE %]']/AnnoNascita" />
+  </xsl:variable>
+
+  <xsl:variable name="eta">
+    <xsl:value-of select=" [% ANNO_C %] - $Anno_n" />
+  </xsl:variable>
+
   <xsl:template match="/">
     <xsl:for-each select="ts:TravelShare/SetUtenti/Utente[Username='[% UTENTE %]']" >  <!--  FILTRO PERL -->
       <div class="contenitore">
-        <p>Sesso : <xsl:value-of select="Sesso"/> <span class="destra"><xsl:value-of select="AnnoNascita"/></span></p>
+        <p>Sesso : <xsl:value-of select="Sesso"/> <span class="destra"> <xsl:value-of select="$eta" /> anni</span></p>
 
         <div class="descrizione">
         <p>Descrizione : <xsl:value-of select="DescrizionePers" /></p>
       </div>
         <xsl:choose>
           <xsl:when test="count(Profilo/Patente)=0">
-            <p> L utente non ha impostato informazioni sulla patente. </p>
-            <p> L utente non ha impostato informazioni sulla auto. </p>
-            <p> L utente non ha impostato informazioni sulle proprie preferenze. </p>
+            <div class="contenitore">
+              <p> L utente non ha impostato informazioni sulla patente. </p>
+              <p> L utente non ha impostato informazioni sulla auto. </p>
+              <p> L utente non ha impostato informazioni sulle proprie preferenze. </p>
+            </div>
           </xsl:when>
           <xsl:otherwise>
             <p>Anno di rilascio della patente: <xsl:value-of select="Profilo/Patente"/></p>

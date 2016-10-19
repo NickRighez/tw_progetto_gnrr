@@ -45,7 +45,29 @@
 
   <div id="contenuto">
 
-		[% CONTENUTO %]
+		[% CONTENUTO_PASSAGGIO %]
+     [% IF PRENOTAZIONE == 'yes' %]
+      <div>
+        <form action="ricevitore_richiesta_prenotazione.cgi?passaggio=$pass&partenza=$part&arrivo=$arr" method="post">
+          <input type="submit" value="Prenota" tabindex="12"></input>
+        </form>  
+      </div>
+    [% END %]
+
+    [% CONTENUTO_BACHECA %]
+    [% IF NUOVA_CONVERSAZIONE == 'yes' %]
+      <div class="contenitore" id="NuovaConversazione"> 
+            <form action="ricevitore_messaggio_pubblico.cgi" method="POST" >
+              <p>Inizia una nuova conversazione con il proprietario del viaggio!</p><br /> 
+              <input type="hidden" name="destinatario" value="[% CONDUCENTE %]"></input>
+              <input type="hidden" name="passaggio" value="[% PASSAGGIO %]"></input>
+              <input type="hidden" name="partenza" value="[% PARTENZA %]"></input>
+              <input type="hidden" name="arrivo" value="[% ARRIVO %]"></input>
+              <textarea rows="" cols="" name="messaggio"></textarea> 
+              <div><input type="submit" value="Invia"></input></div> 
+            </form>
+      </div>
+    [% END %]
 
   </div>
 
@@ -54,39 +76,24 @@
 [% IF LOGGEDIN=='no' %]
 
   <div id="menu">
-
-  <ul id="menuLista">
-
-   <li><a href="offerta_passaggio.cgi" tabindex="2">Offri un passaggio <span class="frecceMenu">&raquo;</span></a></li>
-
-   <li><a href="iscrizione.cgi" tabindex="3">Iscriviti <span class="frecceMenu">&raquo;</span></a></li>
-
-   <li><a href="login.cgi" tabindex="4">Accedi <span class="frecceMenu">&raquo;</span></a></li>
-
-   <li><a href="informazioni.cgi" tabindex="5">Informazioni su <span xml:lang="en" lang="en">Travel Share</span> <span class="frecceMenu">&raquo;</span></a></li>
-
-  </ul>
-
+    <ul id="menuLista">
+       <li><a href="offerta_passaggio.cgi" tabindex="2">Offri un passaggio <span class="frecceMenu">&raquo;</span></a></li>
+       <li><a href="iscrizione.cgi" tabindex="3">Iscriviti <span class="frecceMenu">&raquo;</span></a></li>
+       <li><a href="login.cgi" tabindex="4">Accedi <span class="frecceMenu">&raquo;</span></a></li>
+       <li><a href="informazioni.cgi" tabindex="5">Informazioni su <span xml:lang="en" lang="en">Travel Share</span> <span class="frecceMenu">&raquo;</span></a></li>
+    </ul>
   </div>
 
 [% ELSE %]
 
   <div id="menu">
-
-  <ul id="menuLista">
-
-   <li><a href="offerta_passaggio.cgi" tabindex="4">Offri un passaggio <span class="frecceMenu">&raquo;</span></a></li>
-
-   <li><a href="profilo.cgi?utente=[%NOME_UTENTE%]" tabindex="5">Gestisci il profilo <span class="frecceMenu">&raquo;</span></a></li>
-
-   <li><a href="viaggi.cgi" tabindex="6">Viaggi<span class="frecceMenu">&raquo;</span></a></li>
-
-   <li><a href="conversazioni.cgi" tabindex="7">Messaggi <span class="frecceMenu">&raquo;</span></a></li>
-
-   <li><a href="informazioni.cgi" tabindex="8">Informazioni su <span xml:lang="en" lang="en">Travel Share</span> <span class="frecceMenu">&raquo;</span></a></li>
-
-  </ul>
-
+    <ul id="menuLista">
+       <li><a href="offerta_passaggio.cgi" tabindex="4">Offri un passaggio <span class="frecceMenu">&raquo;</span></a></li>
+       <li><a href="profilo.cgi?utente=[%NOME_UTENTE%]" tabindex="5">Gestisci il profilo <span class="frecceMenu">&raquo;</span></a></li>
+       <li><a href="viaggi.cgi" tabindex="6">Viaggi<span class="frecceMenu">&raquo;</span></a></li>
+       <li><a href="conversazioni.cgi" tabindex="7">Messaggi <span class="frecceMenu">&raquo;</span></a></li>
+       <li><a href="informazioni.cgi" tabindex="8">Informazioni su <span xml:lang="en" lang="en">Travel Share</span> <span class="frecceMenu">&raquo;</span></a></li>
+    </ul>
   </div>
 
 [% END %]

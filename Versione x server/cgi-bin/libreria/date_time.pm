@@ -32,6 +32,7 @@ sub confronto_dataora {
     #
     my $hourfi  = shift @_;
     my $minutefi = shift @_;
+    
     my $epoch_in = timelocal(0, $minutein, $hourin, $din, $min, $yin);
     my $epoch_fi = timelocal(0, $minutefi, $hourfi, $dfi, $mfi, $yfi);
     if($epoch_fi<$epoch_in) {
