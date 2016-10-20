@@ -61,13 +61,33 @@ else {
         my $conducente = $doc->findnodes("//SetPassaggi/Passaggio[IDViaggio='$pass']/Conducente");
 
         if($conducente ne $username) {
-            $hash_keys{PRENOTAZIONE} = 'yes';
             $hash_keys{NUOVA_CONVERSAZIONE} = 'yes';
             $hash_keys{CONDUCENTE} = $conducente;
             $hash_keys{PASSAGGIO} = $pass;
             $hash_keys{PARTENZA} = $part;
             $hash_keys{ARRIVO} = $arr;
         }
+
+        if($doc->exists("//SetPassaggi/Passaggio[IDViaggio=\"$pass\" and \@Passato=\"si\"]")) {
+            $hash_keys{MOTIVAZIONE} = "Passaggio non prenotabile, in quanto gi&agrave; avvenuto";
+        }
+        elsif($conducente eq $username){
+            $hash_keys{MOTIVAZIONE} = "Passaggio non prenotabile, in quanto ne sei il conducente";
+        }
+        elsif($doc->exists("//SetPassaggi/Passaggio[IDViaggio=\"$pass\"]/Itinerario/*[\@Numero>=$part and \@Numero<=$arr]/Prenotazioni[Utente=\"$username\"]")){
+            $hash_keys{MOTIVAZIONE} = "Passaggio non prenotabile, in quanto esiste gi&agrave; una prenotazione per esso";
+        }
+        elsif($doc->exists("//SetUtenti/Utente[Username='$conducente']/Notifiche/RichiestaPrenotaz[ \@Mittente='$username' and \@Passaggio='$pass' ]")) {
+            $hash_keys{MOTIVAZIONE} = "Passaggio non prenotabile, in quanto esiste gi&agrave; una richiesta di prenotazione per esso";
+        }
+        elsif(utility::calcola_posti_disponibili($part, $arr, $pass) == 0){
+            $hash_keys{MOTIVAZIONE} = "Passaggio non prenotabile, posti disponibili esauriti";
+        }   
+        else {
+            $hash_keys{PRENOTAZIONE} = 'yes';
+        }
+            
+        
 
         my %Bacheca = (
             VIAGGIO => $pass,

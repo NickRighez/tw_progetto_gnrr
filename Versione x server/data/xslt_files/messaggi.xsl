@@ -96,6 +96,7 @@
       </a>
     </p>
   </xsl:template>
+
   <xsl:template name="formatdate">
     <xsl:param name="datestr" />
     <!-- input format yyyy-mm-dd -->
@@ -119,6 +120,7 @@
     <xsl:value-of select="'-'" />
     <xsl:value-of select="$yyyy" />
   </xsl:template>
+  
   <xsl:template name="formathour">
     <xsl:param name="hourstr" />
     <!-- input format hh:mm:ss -->

@@ -28,14 +28,14 @@
   
   <div id="utente">
    <p>Ciao [% NOME_UTENTE %]</p>
-   <p><a href="notifiche.html" tabindex="2">Notifiche ( [% NUM_NOTIFICHE %] )</a>  <a href="logout.cgi?operation=logout" tabindex="3">Logout</a></p>
+   <p><a href="notifiche.html" tabindex="2">Notifiche ( [% NUM_NOTIFICHE %] )</a>  <a href="logout.cgi" tabindex="3">Logout</a></p>
   </div>
   
   <div id="contenuto">
   
   <h1>Inserisci i feedback dei tuoi compagni di viaggio</h1>
   
-  <form action="" method="get">
+  <form action="ricevitore_feedback.cgi" method="POST">
 [% IF EMPTY_FEEDB == 'true' %]
   <div class="contenitore"><p>Non ci sono feedback da rilasciare per il passaggio selezionato<p></div>  
 [% ELSE %]

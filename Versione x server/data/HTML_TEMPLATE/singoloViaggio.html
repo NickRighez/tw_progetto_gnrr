@@ -45,13 +45,24 @@
 
   <div id="contenuto">
 
+    [% ERR_PRENOTAZIONE %]
+    [% ERR_RICHIESTA %]
+    [% ERR_CONDUCENTE %]
+    [% ERR_PASSATO %]
+    [% ERR_POSTI %]
+
 		[% CONTENUTO_PASSAGGIO %]
      [% IF PRENOTAZIONE == 'yes' %]
       <div>
-        <form action="ricevitore_richiesta_prenotazione.cgi?passaggio=$pass&partenza=$part&arrivo=$arr" method="post">
+        <form action="ricevitore_richiesta_prenotazione.cgi?" method="post">
+          <input type="hidden" name="passaggio" value="[% PASSAGGIO %]"></input>
+          <input type="hidden" name="partenza" value="[% PARTENZA %]"></input>
+          <input type="hidden" name="arrivo" value="[% ARRIVO %]"></input>
           <input type="submit" value="Prenota" tabindex="12"></input>
         </form>  
       </div>
+    [% ELSE %]
+      <div class="contenitore"><p>[% MOTIVAZIONE %]</p></div>
     [% END %]
 
     [% CONTENUTO_BACHECA %]

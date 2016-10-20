@@ -1,0 +1,15 @@
+
+
+- RICEVITORE_RICHIESTA_PRENOTAZIONE.CGI
+	Gestire la visualizzazione dell errore nel caso in cui esista già una prenotazione, esiste una richiesta prenotazione per il passaggio
+	 selezionato, il prenotante è lo stesso conducente, il viaggio che si tenta di prenotare è passato. 
+	 Soluzione corrente: ERR_PRENOTAZIONE => "<p class=\"errore\"> Esiste già una prenotazione per questo passaggio</p>"
+
+- SINGOLO_PASSAGGIO.CGI
+	Come gestire gli errori che arrivano dalla richiesta di prenotazione? Soluzione corrente: 4 tag, uno per ogni tipo di errore.
+	Se si nasconde il bottone di prenotazione perchè l utente non è abilitato, come avvertire l utente?
+
+- X RICCARDO
+	Pagina dei viaggi, doppio link da eliminare
+
+- NON VIENE VISUALIZZATO L ERRORE DI PASSAGGIO NMON VALIDO

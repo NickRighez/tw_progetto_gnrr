@@ -54,7 +54,7 @@ else {
                 Esito => $esito
                 );
         data_registration::inserisci_notifica("EsitoPrenotaz",\%Notifica,$richiedente);
-        if($doc->exist("//SetUtenti/Utente[Username='$username']/Notifiche/RichiestaPrenotaz[\@Mittente='".$q->param('richiedente')."' and \@Passaggio='".$q->param('passaggio')."' and \@Partenza='".$q->param('partenza')."' and \@Arrivo='".$q->param('arrivo')."']")) {
+        if($doc->exists("//SetUtenti/Utente[Username='$username']/Notifiche/RichiestaPrenotaz[\@Mittente='".$q->param('richiedente')."' and \@Passaggio='".$q->param('passaggio')."' and \@Partenza='".$q->param('partenza')."' and \@Arrivo='".$q->param('arrivo')."']")) {
             data_registration::elimina_notifica($username,"RichiestaPrenotaz","\@Mittente='".$q->param('richiedente')."' and \@Passaggio='".$q->param('passaggio')."' and \@Partenza='".$q->param('partenza')."' and \@Arrivo='".$q->param('arrivo')."'");
         }
     }    

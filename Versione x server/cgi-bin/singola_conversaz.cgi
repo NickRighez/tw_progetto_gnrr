@@ -44,13 +44,6 @@ else {
             MYSELF => $username
             );
         $contenuto = research::query_conversazione(\%Conversazione);
-        $contenuto = $contenuto."\n
-        <form action=\"ricevitore_messaggio_privato.cgi\" method=\"post\">
-          <input type=\"hidden\" name=\"destinatario\" value=\"$utente\" />
-          <textarea rows=\"0\" cols=\"0\" name=\"messaggio\" tabindex=\"11\" title=\"Inserisci un messaggio\"></textarea>
-          <div><input type=\"submit\" value=\"Invia\" tabindex=\"12\" ></input></div>
-        </form> ";
-
         if($doc->exists("//SetMessaggi/Conversazione[\@User1=\"$utente\" and \@User2=\"$username\"] | SetMessaggi/Conversazione[\@User1=\"$username\" and \@User2=\"$utente\"]")) {
             data_registration::aggiorna_messaggi_letti($session->param('username'), $q->param('utente'));
         }
@@ -61,7 +54,6 @@ else {
         my %hash_keys = (
             NOME_UTENTE => $session->param('username'),
             CONTENUTO => $contenuto,
-            DESTINATARIO_MESS_P => $q->param('utente'),
             CONVERSATORE => $q->param('utente'),
             NUM_NOTIFICHE => research::conta_notifiche($session->param('username'), $doc)
             );

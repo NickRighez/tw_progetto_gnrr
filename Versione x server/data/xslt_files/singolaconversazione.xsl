@@ -34,13 +34,13 @@
             <xsl:if test="@Letto = 'no'">
               <p>NUOVO MESSAGGIO</p>
             </xsl:if>
-            <p class="intestazioneMsg"><xsl:call-template name="formatdate"><xsl:with-param name="datestr" select="Data" /></xsl:call-template>  -
-
-
-            <xsl:call-template name="formathour">
+            <p class="intestazioneMsg">
+              <xsl:call-template name="formatdate">
+                  <xsl:with-param name="datestr" select="Data" />
+              </xsl:call-template>  -
+              <xsl:call-template name="formathour">
               <xsl:with-param name="hourstr" select="Ora" />
-            </xsl:call-template>
-
+              </xsl:call-template>
             </p>
 
 
@@ -52,6 +52,7 @@
 
     </xsl:for-each>
   </xsl:template>
+  
   <xsl:template name="formatdate">
     <xsl:param name="datestr" />
     <!-- input format yyyy-mm-dd -->

@@ -48,10 +48,11 @@
 
   <h1>[% NOME %] [% COGNOME %]</h1>
 
-  [% IF NOME_UTENTE == NOME_PROFILO %]
+  [% IF NOME_UTENTE == NOME_PROFILO AND LOGGEDIN == 'yes' %]
   <a class="linkSottoH" href="modificaProfilo.cgi">Modifica</a>
-  [% ELSE %]
-  <a class="linkSottoH" href="singola_conversaz.cgi?utente=$ute">Scrivi un messaggio privato</a>
+  [% END %]
+  [% IF NOME_UTENTE != NOME_PROFILO AND LOGGEDIN == 'yes' %]
+  <a class="linkSottoH" href="singola_conversaz.cgi?utente=[% NOME_PROFILO %]">Scrivi un messaggio privato</a>
   [% END %]
 
   [% CONTENUTO %]

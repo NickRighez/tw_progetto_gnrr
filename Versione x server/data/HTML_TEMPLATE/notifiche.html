@@ -64,7 +64,7 @@
         <input type="hidden" name="richiedente" value="[% richiesta.richiedente %]"></input>
         <input type="hidden" name="passaggio" value="[% richiesta.passaggio %]"></input>
         <input type="hidden" name="partenza" value="[% richiesta.partenza %]"></input>
-        <input type="hidden" name="arrivo" value="$[% richiesta.arrivo %]"></input>
+        <input type="hidden" name="arrivo" value="[% richiesta.arrivo %]"></input>
         <input type="submit" value="Invia"></input>
         </fieldset>
        </form>
@@ -72,7 +72,7 @@
     [% END %]
     [% FOREACH esito IN ESITO_LIST %]
        <div class="notifica">
-        <p>La tua richiesta di prenotazione &egrave; stata [% esito.esito %] <br class="aCapoMobile"/> <a href="[% esito.href %]" class="destraDesktop" tabindex="6">Vai al viaggio</a></p>
+        <p>La tua richiesta di prenotazione &egrave; stata [% esito.esito %] <br class="aCapoMobile"/> <a href="[% esito.href %]" class="destraDesktop" tabindex="6">Elimina notifica</a></p>
         </div>
     [% END %]
   [% END %]

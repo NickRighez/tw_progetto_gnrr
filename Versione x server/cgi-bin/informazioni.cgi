@@ -10,7 +10,7 @@ use Template;
 #use lib "../libreria";
 use libreria::sessione;
 use libreria::data_registration;
-
+use libreria::research;
 my $cgi = new CGI;
 my @s = sessione::creaSessione();
 my $session = $s[0];
@@ -20,7 +20,7 @@ my %hash_keys;
 if(defined($session->param('username'))) {
     $hash_keys{LOGGEDIN} = 'yes';
     $hash_keys{NOME_UTENTE} =  $session->param('username');
-    $hash_keys{NUM_NOTIFICHE} = conta_notifiche($session->param('username'), $doc);
+    $hash_keys{NUM_NOTIFICHE} = research::conta_notifiche($session->param('username'), $doc);
 }
 else {
     $hash_keys{LOGGEDIN} = 'no';
