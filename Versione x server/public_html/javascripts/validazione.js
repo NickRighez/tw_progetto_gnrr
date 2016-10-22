@@ -216,7 +216,7 @@ var funzioniDiValidazione = {
 
   valida_data: function(id) {
     var input = document.getElementById(id).value;
-    if (!test_data(input) || !input.length) {
+    if (!funzioniDiValidazione.test_data(input) || !input.length) {
       document.getElementById(id + '_err').innerHTML = "Inserire una data in formato gg-mm-aaaa.";
       return false;
     } else {

@@ -10,7 +10,7 @@ var funzioniDiCaricamento = {
       // jquery applet per calendario
       $(function() {
         $("#data").datepicker({
-          dateFormat: 'dd-mm-yy',
+          dateFormat: "dd-mm-yy",
           minDate: 0 /*, maxDate: +30 */
         });
       });
@@ -22,6 +22,41 @@ var funzioniDiCaricamento = {
       var giorno = document.getElementById("data");
       giorno.onblur = funzioniDiValidazione.valida_data("data");
       // onsubmit forse che tutto sia non nullo????
+      var form = document.forms[0];
+      if (typeof form != "undefined") {
+        form.onsubmit = function() {
+          return funzioniDiValidazioneSubmit.valida_submit_home();
+        };
+      } else {
+        console.log("O non sono presenti forms oppure il metodo document.form non è supportato.");
+      }
+    } else {
+      console.log("Funzioni Dom necessarie non sono supportate.");
+    }
+  },
+
+  caricamento_iscrizione: function() {
+    if (document.getElementById != "undefined") {
+      // Actions
+      var n = document.getElementById("nome");
+      n.onblur = funzioniDiValidazione.valida_nome("nome", "Nome");
+      var c = document.getElementById("cognome");
+      c.onblur = funzioniDiValidazione.valida_nome("cognome", "Cognome");
+      var mail = document.getElementById("email");
+      mail.onblur = funzioniDiValidazione.valida_email("email");
+      var pw = document.getElementById("password");
+      pw.onblur = funzioniDiValidazione.valida_password("password");
+      var pwc = document.getElementById("conferma");
+      pwc.onblur = funzioniDiValidazione.valida_password("conferma");
+      // submit
+      var form = document.forms[0];
+      if (typeof form != "undefined") {
+        form.onsubmit = function() {
+          return funzioniDiValidazioneSubmit.valida_submit_iscrizione();
+        };
+      } else {
+        console.log("O non sono presenti forms oppure il metodo document.form non è supportato.");
+      }
     } else {
       console.log("Funzioni Dom necessarie non sono supportate.");
     }
@@ -31,11 +66,11 @@ var funzioniDiCaricamento = {
     if (document.getElementById != "undefined") {
       // jquery applet per calendario
       $("#dataA").datepicker({
-        dateFormat: 'dd-mm-yy',
+        dateFormat: "dd-mm-yy",
         minDate: 0 /*, maxDate: +30 */
       });
       $("#dataP").datepicker({
-        dateFormat: 'dd-mm-yy',
+        dateFormat: "dd-mm-yy",
         minDate: 0 /*, maxDate: +30 */
       });
       //Actions
@@ -53,14 +88,24 @@ var funzioniDiCaricamento = {
       oraP.onblur = funzioniDiValidazione.valida_ora("oraP");
 
       var t1 = document.getElementById("tappa1");
-      arr.onblur = funzioniDiValidazione.valida_tappa(1);
+      t1.onblur = funzioniDiValidazione.valida_tappa(1);
       var t2 = document.getElementById("tappa2");
-      arr.onblur = funzioniDiValidazione.valida_tappa(2);
+      t2.onblur = funzioniDiValidazione.valida_tappa(2);
       var t3 = document.getElementById("tappa3");
-      arr.onblur = funzioniDiValidazione.valida_tappa(3);
+      t3.onblur = funzioniDiValidazione.valida_tappa(3);
 
       var prezzo = document.getElementById("prezzo");
       prezzo.onblur = funzioniDiValidazione.valida_soldi("prezzo");
+      var posti = document.getElementById("posti");
+      posti.onblur = funzioniDiValidazione.valida_posti("posti");
+      var form = document.forms[0];
+      if (typeof form != "undefined") {
+        form.onsubmit = function() {
+          return funzioniDiValidazioneSubmit.valida_submit_offerta();
+        };
+      } else {
+        console.log("O non sono presenti forms oppure il metodo document.form non è supportato.");
+      }
 
     } else {
       console.log("Funzioni Dom necessarie non sono supportate.");
@@ -68,13 +113,30 @@ var funzioniDiCaricamento = {
   },
 
   caricamento_messaggi: function() {
-    $('.conversazione').css('cursor', 'pointer');
-    $('.conversazione').click(function() {
+    // div cliccabile
+    $(".conversazione").css("cursor", "pointer");
+    $(".conversazione").click(function() {
       window.location = $(this).find("a").attr("href");
       return false;
     });
+    ///// ok
+
   },
 
+  caricamento_accesso: function() {
+    if (document.getElementById != "undefined") {
+      var form = document.forms[0];
+      if (typeof form != "undefined") {
+        form.onsubmit = function() {
+          return funzioniDiValidazioneSubmit.valida_tutto_compilato("username", "password");
+        };
+      } else {
+        console.log("O non sono presenti forms oppure il metodo document.form non è supportato.");
+      }
+    } else {
+      console.log("Funzioni Dom necessarie non sono supportate.");
+    }
+  },
 
   caricamento_modifica_profilo: function() {
     if (document.getElementById != "undefined") {
@@ -82,7 +144,29 @@ var funzioniDiCaricamento = {
       var n = document.getElementById("nome");
       n.onblur = funzioniDiValidazione.valida_nome("nome", "Nome");
       var c = document.getElementById("cognome");
-      c.onblur = funzioniDiValidazione.valida_nome('cognome','Cognome');
+      c.onblur = funzioniDiValidazione.valida_nome("cognome", "Cognome");
+      var mail = document.getElementById("email");
+      mail.onblur = funzioniDiValidazione.valida_email("email");
+      var pwold = document.getElementById("vecchiaPassword");
+      pwold.onblur = funzioniDiValidazione.valida_password("vecchiaPassword");
+      var pwnew = document.getElementById("nuovaPassword");
+      pwnew.onblur = funzioniDiValidazione.valida_password("nuovaPassword");
+      var anno = document.getElementById("anno");
+      anno.onblur = funzioniDiValidazione.valida_anno_nasc();
+      var annop = document.getElementById("annoPatente");
+      annop.onblur = funzioniDiValidazione.valida_anno_pat();
+      var auto = document.getElementById("auto");
+      auto.onblur = funzioniDiValidazione.valida_nome("auto", "Automobile");
+      // submit
+      var form = document.forms[0];
+      if (typeof form != "undefined") {
+        form.onsubmit = function() {
+          return funzioniDiValidazioneSubmit.valida_submit_modifica_profilo();
+        };
+      } else {
+        console.log("O non sono presenti forms oppure il metodo document.form non è supportato.");
+      }
+
       // Test con modernizr
       if (Modernizr.csstransforms) {
         document.getElementById("chiacchiere0").className = "radioNascosto";
@@ -117,8 +201,8 @@ var funzioniDiCaricamento = {
   },
 
   caricamento_risultati: function() {
-    $('.risultato').css('cursor', 'pointer');
-    $('.risultato').click(function() {
+    $(".risultato").css("cursor", "pointer");
+    $(".risultato").click(function() {
       window.location = $(this).find("a").attr("href");
       return false;
     });
