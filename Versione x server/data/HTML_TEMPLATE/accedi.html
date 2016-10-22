@@ -22,6 +22,10 @@
   <script type="application/javascript" src="../javascript/jquery-ui-1.12.0/jquery-ui.js"></script>
 <link rel="stylesheet" href="../javascript/jquery-ui-1.12.0/jquery-ui.css" />
   <script type="application/javascript" src="../javascript/travelshare.js" ></script>
+ <script type="application/javascript"> <!--
+	window.onload = funzioniDiCaricamento.caricamento_accesso;
+//-->
+</script>
 
 
 <!-- blocca submit se non compilato -->
@@ -37,7 +41,7 @@
 
   <div id="contenuto">
    <h1>Accedi</h1>
-   <form action="ricevitore_login.cgi" method="post" onsubmit="return valida_tutto_compilato('username','password');">
+   <form action="ricevitore_login.cgi" method="post">
    <fieldset><legend>Accesso al sito</legend>
     <label for="username"><span xml:lang="en" lang="en">Username:</span></label>
     <input type="text" id="username" name="username" tabindex="6" value="[%USERNAME%]"></input><br />
