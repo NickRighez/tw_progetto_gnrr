@@ -16,11 +16,17 @@ var funzioniDiCaricamento = {
       });
       // Actions
       var part = document.getElementById("partenza");
-      part.onblur = funzioniDiValidazione.valida_nome("partenza", "Luogo di partenza");
+      part.onblur = function() {
+        funzioniDiValidazione.valida_nome("partenza", "Luogo di partenza");
+      };
       var arr = document.getElementById("arrivo");
-      arr.onblur = funzioniDiValidazione.valida_nome("arrivo", "Luogo di arrivo");
+      arr.onblur = function() {
+        funzioniDiValidazione.valida_nome("arrivo", "Luogo di arrivo");
+      };
       var giorno = document.getElementById("data");
-      giorno.onblur = funzioniDiValidazione.valida_data("data");
+      giorno.onblur = function() {
+        funzioniDiValidazione.valida_data("data");
+      };
       // onsubmit forse che tutto sia non nullo????
       var form = document.forms[0];
       if (typeof form != "undefined") {
@@ -39,15 +45,33 @@ var funzioniDiCaricamento = {
     if (document.getElementById != "undefined") {
       // Actions
       var n = document.getElementById("nome");
-      n.onblur = funzioniDiValidazione.valida_nome("nome", "Nome");
+      n.onblur = function() {
+        funzioniDiValidazione.valida_nome("nome", "Nome");
+      };
       var c = document.getElementById("cognome");
-      c.onblur = funzioniDiValidazione.valida_nome("cognome", "Cognome");
+      c.onblur = function() {
+        funzioniDiValidazione.valida_nome("cognome", "Cognome");
+      };
+      var u = document.getElementById("username");
+      u.onblur = function() {
+        funzioniDiValidazione.valida_username();
+      };
+      var y = document.getElementById("anno");
+      y.onblur = function() {
+        funzioniDiValidazione.valida_anno_nasc();
+      };
       var mail = document.getElementById("email");
-      mail.onblur = funzioniDiValidazione.valida_email("email");
+      mail.onblur = function() {
+        funzioniDiValidazione.valida_email("email");
+      };
       var pw = document.getElementById("password");
-      pw.onblur = funzioniDiValidazione.valida_password("password");
+      pw.onblur = function() {
+        funzioniDiValidazione.valida_password("password");
+      };
       var pwc = document.getElementById("conferma");
-      pwc.onblur = funzioniDiValidazione.valida_password("conferma");
+      pwc.onblur = function() {
+        funzioniDiValidazione.valida_password("conferma");
+      };
       // submit
       var form = document.forms[0];
       if (typeof form != "undefined") {
@@ -75,29 +99,51 @@ var funzioniDiCaricamento = {
       });
       //Actions
       var part = document.getElementById("partenza");
-      part.onblur = funzioniDiValidazione.valida_nome("partenza", "Luogo di partenza");
+      part.onblur = function() {
+        funzioniDiValidazione.valida_nome("partenza", "Luogo di partenza");
+      };
       var arr = document.getElementById("arrivo");
-      arr.onblur = funzioniDiValidazione.valida_nome("arrivo", "Luogo di arrivo");
+      arr.onblur = function() {
+        funzioniDiValidazione.valida_nome("arrivo", "Luogo di arrivo");
+      };
       var giornoA = document.getElementById("dataA");
-      giornoA.onblur = funzioniDiValidazione.valida_data("dataA");
+      giornoA.onblur = function() {
+        funzioniDiValidazione.valida_data("dataA");
+      };
       var giornoP = document.getElementById("dataP");
-      giornoP.onblur = funzioniDiValidazione.valida_data("dataP");
+      giornoP.onblur = function() {
+        funzioniDiValidazione.valida_data("dataP");
+      };
       var oraA = document.getElementById("oraA");
-      oraA.onblur = funzioniDiValidazione.valida_ora("oraA");
+      oraA.onblur = function() {
+        funzioniDiValidazione.valida_ora("oraA");
+      };
       var oraP = document.getElementById("oraP");
-      oraP.onblur = funzioniDiValidazione.valida_ora("oraP");
+      oraP.onblur = function() {
+        funzioniDiValidazione.valida_ora("oraP");
+      };
 
       var t1 = document.getElementById("tappa1");
-      t1.onblur = funzioniDiValidazione.valida_tappa(1);
+      t1.onblur = function() {
+        funzioniDiValidazione.valida_tappa(1);
+      };
       var t2 = document.getElementById("tappa2");
-      t2.onblur = funzioniDiValidazione.valida_tappa(2);
+      t2.onblur = function() {
+        funzioniDiValidazione.valida_tappa(2);
+      };
       var t3 = document.getElementById("tappa3");
-      t3.onblur = funzioniDiValidazione.valida_tappa(3);
+      t3.onblur = function() {
+        funzioniDiValidazione.valida_tappa(3);
+      };
 
       var prezzo = document.getElementById("prezzo");
-      prezzo.onblur = funzioniDiValidazione.valida_soldi("prezzo");
+      prezzo.onblur = function() {
+        funzioniDiValidazione.valida_soldi("prezzo");
+      };
       var posti = document.getElementById("posti");
-      posti.onblur = funzioniDiValidazione.valida_posti("posti");
+      posti.onblur = function() {
+        funzioniDiValidazione.valida_posti("posti");
+      };
       var form = document.forms[0];
       if (typeof form != "undefined") {
         form.onsubmit = function() {
@@ -142,21 +188,37 @@ var funzioniDiCaricamento = {
     if (document.getElementById != "undefined") {
       // Azioni
       var n = document.getElementById("nome");
-      n.onblur = funzioniDiValidazione.valida_nome("nome", "Nome");
+      n.onblur = function() {
+        funzioniDiValidazione.valida_nome("nome", "Nome");
+      };
       var c = document.getElementById("cognome");
-      c.onblur = funzioniDiValidazione.valida_nome("cognome", "Cognome");
+      c.onblur = function() {
+        funzioniDiValidazione.valida_nome("cognome", "Cognome");
+      };
       var mail = document.getElementById("email");
-      mail.onblur = funzioniDiValidazione.valida_email("email");
+      mail.onblur = function() {
+        funzioniDiValidazione.valida_email("email");
+      };
       var pwold = document.getElementById("vecchiaPassword");
-      pwold.onblur = funzioniDiValidazione.valida_password("vecchiaPassword");
+      pwold.onblur = function() {
+        funzioniDiValidazione.valida_password("vecchiaPassword");
+      };
       var pwnew = document.getElementById("nuovaPassword");
-      pwnew.onblur = funzioniDiValidazione.valida_password("nuovaPassword");
+      pwnew.onblur = function() {
+        funzioniDiValidazione.valida_password("nuovaPassword");
+      };
       var anno = document.getElementById("anno");
-      anno.onblur = funzioniDiValidazione.valida_anno_nasc();
+      anno.onblur = function() {
+        funzioniDiValidazione.valida_anno_nasc();
+      };
       var annop = document.getElementById("annoPatente");
-      annop.onblur = funzioniDiValidazione.valida_anno_pat();
+      annop.onblur = function() {
+        funzioniDiValidazione.valida_anno_pat();
+      };
       var auto = document.getElementById("auto");
-      auto.onblur = funzioniDiValidazione.valida_nome("auto", "Automobile");
+      auto.onblur = function() {
+        funzioniDiValidazione.valida_nome("auto", "Automobile");
+      };
       // submit
       var form = document.forms[0];
       if (typeof form != "undefined") {
