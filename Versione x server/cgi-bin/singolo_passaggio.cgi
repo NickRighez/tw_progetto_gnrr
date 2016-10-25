@@ -49,6 +49,8 @@ else {
         $hash_keys{PASSAGGIO} = $pass;
         $hash_keys{PARTENZA} = $doc->findnodes("//SetPassaggi/Passaggio[IDViaggio='$pass']/Itinerario/*[\@Numero='$part']/Luogo");
         $hash_keys{ARRIVO} = $doc->findnodes("//SetPassaggi/Passaggio[IDViaggio='$pass']/Itinerario/*[\@Numero='$arr']/Luogo");
+        $hash_keys{NUM_PARTENZA} = $part;
+        $hash_keys{NUM_ARRIVO} = $arr;
 
     $contenuto_passaggio = research::query_viaggio(\%Pass);
 

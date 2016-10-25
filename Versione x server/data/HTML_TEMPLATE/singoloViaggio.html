@@ -62,8 +62,8 @@
       <div>
         <form action="ricevitore_richiesta_prenotazione.cgi" method="post">
           <input type="hidden" name="passaggio" value="[% PASSAGGIO %]"></input>
-          <input type="hidden" name="partenza" value="[% PARTENZA %]"></input>
-          <input type="hidden" name="arrivo" value="[% ARRIVO %]"></input>
+          <input type="hidden" name="partenza" value="[% NUM_PARTENZA %]"></input>
+          <input type="hidden" name="arrivo" value="[% NUM_ARRIVO %]"></input>
           <input type="submit" value="Prenota" tabindex="[% INDEX %]"></input>
           [% INDEX = INDEX+1 %]
         </form>  
