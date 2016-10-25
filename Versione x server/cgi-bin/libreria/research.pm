@@ -14,7 +14,7 @@ use Cwd;
 use strict;
 use warnings;
 use diagnostics;
-
+use utf8;
 #per il MIO server
 #use lib '/usr/share/perl5';
 
@@ -35,20 +35,30 @@ sub generic_xslt_query
     $style_file  = shift @_;
     $lista_filtri = shift @_;
     my %vars= %$lista_filtri;
+    #my $min_index = $vars{'INDEX'};
+    #delete $vars{'INDEX'};
     my $xml_parser = XML::LibXML->new( );
     my $xslt_parser = XML::LibXSLT->new( );
     my $template_parser = Template->new({RELATIVE => 1,});
     #({ABSOLUTE => 1,});
     my $foglio_di_stile_con_parametri = '';
-    $template_parser->process($style_file,\%vars,\$foglio_di_stile_con_parametri); #or die $template_parser->error()
+    $template_parser->process($style_file,\%vars,\$foglio_di_stile_con_parametri);#or die $template_parser->error();
     (length $foglio_di_stile_con_parametri) or die("ERRORE 1: foglio xslt vuoto\n".$style_file . '    '. getcwd);
+    
     my $style_oggetto_xml = $xml_parser->parse_string($foglio_di_stile_con_parametri);
     my $style_oggetto_xsl = $xslt_parser->parse_stylesheet( $style_oggetto_xml );
     my $file_oggetto_xml = $xml_parser->parse_file( $xml_file );
-    my $html_output = $style_oggetto_xsl->transform( $file_oggetto_xml);
-    (length $html_output) or die("ERRORE 2: output HTML vuoto\n".$style_file  . '    '. getcwd);
-    $html_output =~ s/<\?xml\ version\=\"1\.0\"\?>//;
-    return $html_output;
+    my $html_output_1 = $style_oggetto_xsl->transform( $file_oggetto_xml);
+    (length $html_output_1) or die("ERRORE 2: output HTML vuoto\n".$style_file  . '    '. getcwd);
+    #open my $f, '>prova_html_1.txt';
+     #   print $f $html_output_1;
+    #my $html_output = '';
+    #$template_parser->process(\$html_output_1,{INDEX => $min_index},\$html_output) or die $template_parser->error();
+    #(length $html_output) or die("ERRORE 1.1: foglio xslt vuoto\n" . '    '. getcwd);
+
+    $html_output_1 =~ s/<\?xml\ version\=\"1\.0\"\?>//;
+   # return $html_output;
+   return $html_output_1;
 }
 
 sub query_users
@@ -148,8 +158,7 @@ sub query_ricerca
                                     my $punteggio = $doc->findnodes("//SetUtenti/Utente[Username='$conduc']/Profilo/Valutazione/PunteggioMedio")->get_node(1)->textContent;
                                     my ($sec,$min,$hour,$mday,$mon,$year,$wday,$yday,$isdst) = localtime();
                                     my $eta=$year + 1900 - ($doc->findnodes("//SetUtenti/Utente[Username='$conduc']/AnnoNascita")->get_node(1)->textContent() ) ;
-                    ###################  MANCA L HREF ###################################################
-                                    push @viaggi_list, { href => "", partenza => $part, arrivo => $arr, ora => $ora, posti => $posti, conducente => $conduc, eta => $eta, punteggio => $punteggio, auto => $auto };
+                                    push @viaggi_list, { href => "singolo_passaggio.cgi?passaggio=$idv&part=$j&&arr=$k", partenza => $part, arrivo => $arr, ora => $ora, posti => $posti, prezzo => $prezzo, conducente => $conduc, eta => $eta, punteggio => $punteggio, auto => $auto };
                             
                                 }
                             }
@@ -161,7 +170,6 @@ sub query_ricerca
 
         }
     }
-    #return $contenuto;
     return @viaggi_list;
 }
 
@@ -239,14 +247,13 @@ sub query_viaggi_attivi_utente {
     }
 
    
-    #return $contenuto;
     return @viaggi_list;
 }
 
 sub query_viaggi_recensire_utente {
     my $utente=shift @_;
     my $doc = shift @_;
-     my @feed_da_ril = $doc->findnodes("//SetUtenti/Utente[Username='$utente']/Notifiche/FeedDaRilasciare");
+    my @feed_da_ril = $doc->findnodes("//SetUtenti/Utente[Username='$utente']/Notifiche/FeedDaRilasciare");
     my $num = @feed_da_ril;
     my @viaggi_list;
         my @passag_da_rec;
@@ -348,18 +355,31 @@ sub query_notifiche_utente {
     return (\@messaggi_list, \@feedback_list, \@richieste_list, \@esito_list);
 }
 
-sub conta_notifiche{
+sub conta_notifiche {
     my $ute = shift @_;
     my $doc = shift @_;
     my $count = 0;
 
     my @notifiche_mess = $doc->findnodes("//SetUtenti/Utente[Username='$ute']/Notifiche/NuovoMessaggio");
-    my $size =@notifiche_mess;
+    my $size = @notifiche_mess;
     $count = $count + $size;
 
     my @notifiche_feedbd = $doc->findnodes("//SetUtenti/Utente[Username='$ute']/Notifiche/FeedDaRilasciare");
-    my $size =@notifiche_feedbd;
-    $count = $count + $size;
+    my $num_feedb =@notifiche_feedbd;
+    my @aux;
+    for(my $i=0; $i<$num_feedb; $i++) {
+        my $presenza = 0;
+        my $passaggio = $notifiche_feedbd[$i]->findnodes("\@Passaggio")->get_node(1)->textContent;
+        my $size= @aux;
+        for(my $j=0; $j<$size; $j++) {
+            if($aux[$j] eq $passaggio) { $presenza = 1; }
+        }
+        if(!$presenza) {
+            push @aux, $passaggio;
+            $count = $count + 1;
+        }
+    }
+    
 
     my @notifiche_richiesta_prenot = $doc->findnodes("//SetUtenti/Utente[Username='$ute']/Notifiche/RichiestaPrenotaz");
     my $size =@notifiche_richiesta_prenot;
@@ -418,10 +438,16 @@ sub query_feedback_da_rilasciare_viaggio
         my $nome = $doc->findnodes("//SetUtenti/Utente[Username='$dest']/Nome")->get_node(1)->textContent;
         my $cognome = $doc->findnodes("//SetUtenti/Utente[Username='$dest']/Cognome")->get_node(1)->textContent;
         if($conducente eq $dest) {
-            push @feedback_list, { username => $dest, nome => $nome, cognome => $cognome, index => 0 };
+            utf8::encode($nome);
+            utf8::encode($cognome);
+            utf8::encode($dest);
+            push @feedback_list, { passaggio => $passaggio, username => $dest, nome => $nome, cognome => $cognome, index => 0 };
         }
         else {
-            push @feedback_list, { username => $dest, nome => $nome, cognome => $cognome, index => $ind };
+            utf8::encode($nome);
+            utf8::encode($cognome);
+            utf8::encode($dest);
+            push @feedback_list, { passaggio => $passaggio, username => $dest, nome => $nome, cognome => $cognome, index => $ind };
             $ind++;
         }
     }

@@ -34,8 +34,6 @@ else {
 #*******************************************************************************************************************************************************
 
 ####       Controllare se pass, part e arr corrispondono a un passaggio esistente?   ##############################################à    
-
-### I controlli sottostanti hanno senso solo se è necessario validare gli input passati come HIDDEN fields  
     if($doc->exists("//SetPassaggi/Passaggio[IDViaggio=\"$pass\"]/Itinerario/*[\@Numero>=$part and \@Numero<=$arr]/Prenotazioni[Utente=\"$richiedente\"]")) {
         $problems{ERR_PRENOTAZIONE} = "<p class=\"errore\"> Esiste già una prenotazione per questo passaggio</p>";
     }
@@ -48,10 +46,9 @@ else {
     if($doc->exists("SetPassaggi/Passaggio[IDViaggio=\"$pass\" and \@Passato=\"si\"]")){
         $problems{ERR_PASSATO} = "<p class=\"errore\"> Tentativo di richiedere una prenotazione per un viaggio passato </p>";
     }
-    if(utility::calcola_posti_disponibili($part, $arr, $pass) == 0){
-        $problems{ERR_POSTI} = "<p class=\"errore\"> Tentativo di richiesta prenotazione per un viaggio senza posti disponibili </p>";
+    if(utility::calcola_posti_disponibili($part, $arr, $pass, $doc) == 0){
+        $problems{ERR_POSTI} = "<p class=\"errore\"> Tentativo di richiedere una prenotazione per un viaggio senza posti disponibili </p>";
     }
-##########################################################à##à############ààààààà
 
     if(!%problems){
         my %Prenotazione=(

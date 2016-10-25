@@ -48,31 +48,26 @@
 	<form action="ricevitore_ricerca.cgi" method="post" onsubmit="return valida_submit_home();">
 	<fieldset><legend>Ricerca di un passaggio</legend>
 	<label for="partenza">Partenza</label><br />
-	<input type="text" id="partenza" name="partenza" tabindex="9" onblur="valida_nome('partenza','Luogo di partenza')" value="[%PARTENZA%]"></input><br />
+	<input type="text" id="partenza" name="partenza" tabindex="[% INDEX %]" onblur="valida_nome('partenza','Luogo di partenza')" value="[%PARTENZA%]"></input><br />
+  [% INDEX = INDEX+1 %]
 	<p id="partenza_err" class="errore">[%PARTENZA_ERR%]</p>
 	<label for="arrivo">Arrivo</label><br />
-	<input type="text" id="arrivo" name="arrivo" tabindex="10" onblur="valida_nome('arrivo','Luogo di arrivo')" value="[%ARRIVO%]"></input><br />
+	<input type="text" id="arrivo" name="arrivo" tabindex="[% INDEX %]" onblur="valida_nome('arrivo','Luogo di arrivo')" value="[%ARRIVO%]"></input><br />
+  [% INDEX = INDEX+1 %]
 	<p id="arrivo_err" class="errore">[%ARRIVO_ERR%]</p>
 	<label for="data">Data</label><br />
-	<input type="text" id="data" name="data" tabindex="11" onblur="valida_data('data')" value="[%DATA%]"></input><br />
-	<p id="data_err" class="errore">[%DATA_ERR%]</p>
-	<input type="submit" value="Cerca" tabindex="12"></input>
+	<input type="text" id="data" name="data" tabindex="[% INDEX %]" onblur="valida_data('data')" value="[%DATA%]"></input><br />
+	[% INDEX = INDEX+1 %]
+  <p id="data_err" class="errore">[%DATA_ERR%]</p>
+	<input type="submit" value="Cerca" tabindex="[% INDEX %]"></input>
+  [% INDEX = INDEX+1 %]
   <p id="submitbutton_err" class="errore"></p>
 	</fieldset>
 	</form>
 
   </div>
 
-[% IF LOGGEDIN=='no' %]
-  <div id="menu">
-  <ul id="menuLista">
-   <li><a href="offerta_passaggio.cgi" tabindex="2">Offri un passaggio <span class="frecceMenu">&raquo;</span></a></li>
-   <li><a href="iscrizione.cgi" tabindex="3">Iscriviti <span class="frecceMenu">&raquo;</span></a></li>
-   <li><a href="login.cgi" tabindex="4">Accedi <span class="frecceMenu">&raquo;</span></a></li>
-   <li><a href="informazioni.cgi" tabindex="5">Informazioni su <span xml:lang="en" lang="en">Travel Share</span> <span class="frecceMenu">&raquo;</span></a></li>
-  </ul>
-  </div>
-[% ELSE %]
+[% IF LOGGEDIN=='yes' %]
   <div id="menu">
   <ul id="menuLista">
    <li><a href="offerta_passaggio.cgi" tabindex="4">Offri un passaggio <span class="frecceMenu">&raquo;</span></a></li>
@@ -82,15 +77,25 @@
    <li><a href="informazioni.cgi" tabindex="8">Informazioni su <span xml:lang="en" lang="en">Travel Share</span> <span class="frecceMenu">&raquo;</span></a></li>
   </ul>
   </div>
+[% ELSE %]
+  <div id="menu">
+  <ul id="menuLista">
+   <li><a href="offerta_passaggio.cgi" tabindex="2">Offri un passaggio <span class="frecceMenu">&raquo;</span></a></li>
+   <li><a href="iscrizione.cgi" tabindex="3">Iscriviti <span class="frecceMenu">&raquo;</span></a></li>
+   <li><a href="login.cgi" tabindex="4">Accedi <span class="frecceMenu">&raquo;</span></a></li>
+   <li><a href="informazioni.cgi" tabindex="5">Informazioni su <span xml:lang="en" lang="en">Travel Share</span> <span class="frecceMenu">&raquo;</span></a></li>
+  </ul>
+  </div>
 [% END %]
 
   <div id="footer">
   [% IF LOGGEDIN=='yes' %]
-   <a href="ricevitore_logout.cgi" tabindex="13">Logout</a>
-   <a href="#header" tabindex="14">Torna su</a>
- [% ELSE %]
-  <a href="#header" tabindex="15">Torna su</a>
- [% END %]
+     <a href="ricevitore_logout.cgi" tabindex="[% INDEX %]">Logout</a>
+     [% INDEX = INDEX+1 %]
+  [% END %]
+
+  <a href="#header" tabindex="[% INDEX %]">Torna su</a>
+ 
    
   </div>
 

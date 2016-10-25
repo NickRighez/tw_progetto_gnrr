@@ -39,7 +39,8 @@ else {
         FEEDBACK_LIST => \@feedback_list,
         RICHIESTE_LIST => \@richieste_list,
         ESITO_LIST => \@esito_list,
-        NUM_NOTIFICHE => research::conta_notifiche($username, data_registration::get_xml_doc())
+        NUM_NOTIFICHE => research::conta_notifiche($username, data_registration::get_xml_doc()),
+        INDEX => 9
         );
     my $template_parser = Template->new;
     my $foglio = '';

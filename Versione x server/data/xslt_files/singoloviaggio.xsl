@@ -33,9 +33,6 @@
   <xsl:template match="/">
     <xsl:for-each select="ts:TravelShare/SetPassaggi/Passaggio[IDViaggio='[% VIAGGIO %]']" >
 
-      <h1><xsl:value-of select="Itinerario/*[@Numero=[% NUM_PARTENZA %]]/Luogo"/> - <xsl:value-of select="Itinerario/*[@Numero=[% NUM_ARRIVO %]]/Luogo"/></h1>
-      [% URL_RICERCA %]
-
       <div class="contenitore">
         <p>Partenza : <xsl:value-of select="Itinerario/*[@Numero=[% NUM_PARTENZA %]]/Luogo"/> </p>
         <xsl:for-each select="Itinerario/*">

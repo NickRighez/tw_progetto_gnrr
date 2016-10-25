@@ -3,9 +3,9 @@
 <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:ts="http://www.dominio.com" >
   <xsl:template match="/">
 
-    <xsl:for-each select="ts:TravelShare/SetMessaggi/Conversazione[@User1='[% UTENTE %]' or @User2='[% UTENTE %]']"> <!-- FILTRI PERL '[% UTENTE %]' -->
+    <xsl:for-each select="ts:TravelShare/SetMessaggi/Conversazione[@User1='utente_uno' or @User2='utente_uno']"> <!-- FILTRI PERL 'utente_uno' -->
       <xsl:choose>
-        <xsl:when test="@User1='[% UTENTE %]'"> <!-- mostra 1 come mittente quando io sono 2 e viceversa -->
+        <xsl:when test="@User1='utente_uno'"> <!-- mostra 1 come mittente quando io sono 2 e viceversa -->
           <xsl:choose>
             <xsl:when test="Messaggio[1]/@Letto='no'">
               <div class="conversazione nuova">
@@ -44,17 +44,15 @@
       </xsl:choose>
     </xsl:for-each>
   </xsl:template>
-[%  stag = "\[\%"
-    etag = "\%\]"
-%]
+
   <xsl:template name="conversazione" >
     <xsl:param name="utente" />
     <a>
       <xsl:attribute name="href">singola_conversaz.cgi?utente=<xsl:value-of select="$utente" /></xsl:attribute>
       <xsl:attribute name="title">Messaggio letto</xsl:attribute>
       <xsl:attribute name="class">linkMobile</xsl:attribute>
-      <xsl:attribute name="tabindex">[% stag;  ' INDEX '; etag; %]</xsl:attribute>
-      [% stag; ' INDEX = INDEX+1 '; etag;  %]
+      <xsl:attribute name="tabindex">[%INDEX%]</xsl:attribute>
+      [%INDEX = INDEX+1%]
       <xsl:value-of select="$utente" />
       <span class="data">
         <xsl:call-template name="formatdate">
@@ -69,8 +67,8 @@
     <p class="linkVaiConversazione">
       <a>
         <xsl:attribute name="href">singola_conversaz.cgi?utente=<xsl:value-of select="$utente" /></xsl:attribute>
-        <xsl:attribute name="tabindex">[% stag;  ' INDEX '; etag; %]</xsl:attribute>
-        [% stag; ' INDEX = INDEX+1 '; etag;  %]
+        <xsl:attribute name="tabindex">[%INDEX%]</xsl:attribute>
+        [%INDEX = INDEX+1%]
         Vai alla conversazione <xsl:text disable-output-escaping="yes">&amp;raquo;</xsl:text>
       </a>
     </p>
@@ -82,8 +80,8 @@
       <xsl:attribute name="href">singola_conversaz.cgi?utente=<xsl:value-of select="$utente" /></xsl:attribute>
       <xsl:attribute name="title">Nuovo messaggio</xsl:attribute>
       <xsl:attribute name="class">linkMobile</xsl:attribute>
-       <xsl:attribute name="tabindex">[% stag;  ' INDEX '; etag; %]</xsl:attribute>
-      [% stag; ' INDEX = INDEX+1 '; etag;  %]
+       <xsl:attribute name="tabindex">[%INDEX%]</xsl:attribute>
+      [%INDEX = INDEX+1%]
       <xsl:value-of select="$utente" />
       <span class="data">
         <xsl:call-template name="formatdate">
@@ -100,8 +98,8 @@
     <p class="linkVaiConversazione blacktext">
       <a>
         <xsl:attribute name="href">singola_conversaz.cgi?utente=<xsl:value-of select="$utente" /></xsl:attribute>
-        <xsl:attribute name="tabindex">[% stag;  ' INDEX '; etag; %]</xsl:attribute>
-        [% stag; ' INDEX = INDEX+1 '; etag;  %]
+        <xsl:attribute name="tabindex">[%INDEX%]</xsl:attribute>
+        [%INDEX = INDEX+1%]
         Vai alla conversazione <xsl:text disable-output-escaping="yes">&amp;raquo; </xsl:text>
       </a>
     </p>

@@ -21,14 +21,16 @@ if(defined($session->param('username'))) {
     $hash_keys{LOGGEDIN} = 'yes';
     $hash_keys{NOME_UTENTE} =  $session->param('username');
     $hash_keys{NUM_NOTIFICHE} = research::conta_notifiche($session->param('username'), $doc);
+    $hash_keys{INDEX} = 9;
 }
 else {
     $hash_keys{LOGGEDIN} = 'no';
+    $hash_keys{INDEX} = 6;
 }
 
 my $file = "../data/HTML_TEMPLATE/info.html";
 my $template_parser = Template->new;
 open my $fh, '<', $file;
 my $foglio = '';
-$template_parser->process($fh,\%hash_keys,\$foglio);
+$template_parser->process($fh,\%hash_keys,\$foglio) or die($template_parser->error());
 print $foglio;

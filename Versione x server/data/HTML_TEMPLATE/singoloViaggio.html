@@ -44,6 +44,12 @@
  [% END %]
 
   <div id="contenuto">
+    <h1>[% PARTENZA %] - [% ARRIVO %]</h1> <!--ricercati-->
+
+    [% IF RICERCA_PREC == 'yes' %]
+    <a class="linkSottoH" href="risultatiLog.html" tabindex="[% INDEX %]">Torna ai risultati</a>
+    [% INDEX = INDEX+1 %]
+    [% END %]
 
     [% ERR_PRENOTAZIONE %]
     [% ERR_RICHIESTA %]
@@ -54,14 +60,16 @@
 		[% CONTENUTO_PASSAGGIO %]
      [% IF PRENOTAZIONE == 'yes' %]
       <div>
-        <form action="ricevitore_richiesta_prenotazione.cgi?" method="post">
+        <form action="ricevitore_richiesta_prenotazione.cgi" method="post">
           <input type="hidden" name="passaggio" value="[% PASSAGGIO %]"></input>
           <input type="hidden" name="partenza" value="[% PARTENZA %]"></input>
           <input type="hidden" name="arrivo" value="[% ARRIVO %]"></input>
-          <input type="submit" value="Prenota" tabindex="12"></input>
+          <input type="submit" value="Prenota" tabindex="[% INDEX %]"></input>
+          [% INDEX = INDEX+1 %]
         </form>  
       </div>
-    [% ELSE %]
+    [% END %]
+    [% IF MOTIVAZIONE %]
       <div class="contenitore"><p>[% MOTIVAZIONE %]</p></div>
     [% END %]
 
@@ -75,7 +83,8 @@
               <input type="hidden" name="partenza" value="[% PARTENZA %]"></input>
               <input type="hidden" name="arrivo" value="[% ARRIVO %]"></input>
               <textarea rows="" cols="" name="messaggio"></textarea> 
-              <div><input type="submit" value="Invia"></input></div> 
+              <div><input type="submit" value="Invia" tabindex="[% INDEX %]"></input></div> 
+              [% INDEX = INDEX+1 %]
             </form>
       </div>
     [% END %]
@@ -115,15 +124,13 @@
 
   [% IF LOGGEDIN=='yes' %]
 
-   <a href="ricevitore_logout.cgi">Logout</a>
-
-   <a href="#header">Torna su</a>
-
- [% ELSE %]
-
-  <a href="#header">Torna su</a>
-
+   <a href="ricevitore_logout.cgi" tabindex="[% INDEX %]">Logout</a>
+   [% INDEX = INDEX+1 %]
  [% END %]
+
+  <a href="#header" tabindex="[% INDEX %]">Torna su</a>
+
+
 
    
   </div>

@@ -8,8 +8,3 @@
 - SINGOLO_PASSAGGIO.CGI
 	Come gestire gli errori che arrivano dalla richiesta di prenotazione? Soluzione corrente: 4 tag, uno per ogni tipo di errore.
 	Se si nasconde il bottone di prenotazione perchè l utente non è abilitato, come avvertire l utente?
-
-- X RICCARDO
-	Pagina dei viaggi, doppio link da eliminare
-
-- NON VIENE VISUALIZZATO L ERRORE DI PASSAGGIO NMON VALIDO

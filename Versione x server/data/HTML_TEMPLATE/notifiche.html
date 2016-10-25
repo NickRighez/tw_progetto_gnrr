@@ -28,7 +28,7 @@
   
   <div id="utente">
    <p>Ciao [% NOME_UTENTE %]</p>
-   <p><a href="notifiche.cgi" tabindex="2">Notifiche ( [% NUM_NOTIFICHE %] )</a>  <a href="logout.cgi?operation=logout" tabindex="3">Logout</a></p>
+   <p><a href="notifiche.cgi" tabindex="2">Notifiche ( [% NUM_NOTIFICHE %] )</a>  <a href="ricevitore_logout.cgi" tabindex="3">Logout</a></p>
   </div>
   
   <div id="contenuto">
@@ -39,12 +39,14 @@
   [% ELSE %]
     [% FOREACH messaggio IN MESSAGGI_LIST %]
       <div class="notifica">
-        <p>Hai un nuovo messaggio da [% messaggio.mittente %] <br class="aCapoMobile"/> <a href="[% messaggio.href %]" class="destraDesktop" tabindex="6">Vai ai messaggi</a></p>
+        <p>Hai un nuovo messaggio da [% messaggio.mittente %] <br class="aCapoMobile"/> <a href="[% messaggio.href %]" class="destraDesktop" tabindex="[% INDEX %]">Vai ai messaggi</a></p>
+        [% INDEX = INDEX+1 %]
       </div>
     [% END %]
     [% FOREACH viaggio IN FEEDBACK_LIST %]
       <div class="notifica">
-      <p>Hai un nuovo viaggio da recensire <br class="aCapoMobile"/> <a href="[% feedback.href %]" class="destraDesktop" tabindex="6">Inserisci i <span xml:lang="en" lang="en">feedback</span></a></p>
+      <p>Hai un nuovo viaggio da recensire <br class="aCapoMobile"/> <a href="[% viaggio.href %]" class="destraDesktop" tabindex="[% INDEX %]">Inserisci i <span xml:lang="en" lang="en">feedback</span></a></p>
+      [% INDEX = INDEX+1 %]
       </div>
     [% END %]
     [% FOREACH richiesta IN RICHIESTE_LIST %]
@@ -55,24 +57,27 @@
         <fieldset>
         <legend>Richiesta prenotazione da $richiedente per il passaggio $passaggio</legend>
         <div class="testoCentrato">
-        <input type="radio" name="esito" id="accetta" value="Accettata" checked="checked"></input>
+        <input type="radio" name="esito" id="accetta" value="Accettata" checked="checked" tabindex="[% INDEX %]"></input>
         <label for="accetta">Accetta</label>
         <span class="paddingSpan"></span>
         <input type="radio" name="esito" id="rifiuta" value="Rifiutata"></input>
         <label for="rifiuta">Rifiuta</label>
+        [% INDEX = INDEX+1 %]
         </div>
         <input type="hidden" name="richiedente" value="[% richiesta.richiedente %]"></input>
         <input type="hidden" name="passaggio" value="[% richiesta.passaggio %]"></input>
         <input type="hidden" name="partenza" value="[% richiesta.partenza %]"></input>
         <input type="hidden" name="arrivo" value="[% richiesta.arrivo %]"></input>
-        <input type="submit" value="Invia"></input>
+        <input type="submit" value="Invia" tabindex="[% INDEX %]"></input>
+        [% INDEX = INDEX+1 %]
         </fieldset>
        </form>
       </div>
     [% END %]
     [% FOREACH esito IN ESITO_LIST %]
        <div class="notifica">
-        <p>La tua richiesta di prenotazione &egrave; stata [% esito.esito %] <br class="aCapoMobile"/> <a href="[% esito.href %]" class="destraDesktop" tabindex="6">Elimina notifica</a></p>
+        <p>La tua richiesta di prenotazione &egrave; stata [% esito.esito %] <br class="aCapoMobile"/> <a href="[% esito.href %]" class="destraDesktop" tabindex="[% INDEX %]">Elimina notifica</a></p>
+        [% INDEX = INDEX+1 %]
         </div>
     [% END %]
   [% END %]
@@ -95,8 +100,10 @@
   </div>
   
   <div id="footer">
-   <a href="logout.cgi" tabindex="">Logout</a>
-   <a href="#header" tabindex="">Torna su</a>
+   <a href="logout.cgi" tabindex="[% INDEX %]">Logout</a>
+   [% INDEX = INDEX+1 %]
+   <a href="#header" tabindex="[% INDEX %]">Torna su</a>
+   [% INDEX = INDEX+1 %]
   </div>
   
   </body>

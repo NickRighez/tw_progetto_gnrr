@@ -46,9 +46,11 @@
   [% ELSE %]
 		[% FOREACH viaggio IN VIAGGI_ATT_LIST %]
        <div class="viaggio">
-       <a href="[% viaggio.href %]" class="linkMobileViaggi"><span class="partenza">[% viaggio.partenza %]</span> &#8594; <span class="arrivo">[% viaggio.arrivo %]</span></a>
-       <p>Data: [% viaggio.data %]</p>
-       <p>Ora: [% viaggio.ora %] <a href="[% viaggio.href %]" class="linkDesktop destra">Vai al viaggio &raquo;</a></p>
+       <a href="[% viaggio.href %]" class="linkMobileViaggi" tabindex="[% INDEX %]"><span class="partenza">[% viaggio.partenza %]</span> &#8594; <span class="arrivo">[% viaggio.arrivo %]</span></a>
+       [% INDEX = INDEX+1 %]
+       <p>Data: [% viaggio.data %]</p> 
+       <p>Ora: [% viaggio.ora %] <a href="[% viaggio.href %]" class="linkDesktop destra" tabindex="[% INDEX %]">Vai al viaggio &raquo;</a></p>
+       [% INDEX = INDEX+1 %]
        <p>Posti liberi: [% viaggio.posti %]</p>
        <p>Prezzo: [% viaggio.prezzo %]€</p>
        <br />
@@ -62,7 +64,8 @@
 [% ELSE %]
   [% FOREACH viaggio IN VIAGGI_REC_LIST %]
      <div class="viaggio">
-      <a href="[% viaggio.href %]" class="linkMobileViaggi"><span class="partenza">[% viaggio.partenza %]</span> &#8594; <span class="arrivo">[% viaggio.arrivo %]</span> <span class="data">[% viaggio.data %]</span></a>
+      <a href="[% viaggio.href %]" class="linkMobileViaggi" tabindex="[% INDEX %]"><span class="partenza">[% viaggio.partenza %]</span> &#8594; <span class="arrivo">[% viaggio.arrivo %]</span> <span class="data">[% viaggio.data %]</span></a>
+      [% INDEX = INDEX+1 %]
      </div>
    [% END %]
 [% END %]
@@ -80,8 +83,9 @@
 
 
   <div id="footer">
-   <a href="ricevitore_logout.cgi">Logout</a>
-   <a href="#header">Torna su</a>
+   <a href="ricevitore_logout.cgi" tabindex="[% INDEX %]">Logout</a>
+   [% INDEX = INDEX+1 %]
+   <a href="#header" tabindex="[% INDEX %]">Torna su</a>
   </div>
 
   </body>

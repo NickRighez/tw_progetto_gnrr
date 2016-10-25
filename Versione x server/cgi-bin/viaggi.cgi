@@ -52,7 +52,8 @@ else{
         EMPTY_ATTIVI => $empty_att,
         VIAGGI_REC_LIST => \@viaggi_rec_list,
         EMPTY_RECENSIRE => $empty_rec,
-        NUM_NOTIFICHE => research::conta_notifiche($session->param('username'), $doc)
+        NUM_NOTIFICHE => research::conta_notifiche($session->param('username'), $doc),
+        INDEX => 9
         );
     my $template_parser = Template->new;
     open my $fh, '<', $file;

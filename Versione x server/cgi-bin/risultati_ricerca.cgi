@@ -36,7 +36,7 @@ my %hash_keys = (
     PARTENZA => $partenza,
     ARRIVO => $arrivo,
     DATA => $data
-    );
+);
 
 
 ##################!!!!!!!!!!!!!!!!!!!!!!!
@@ -47,9 +47,11 @@ if(defined($session->param('username'))) {
     $hash_keys{LOGGEDIN} = 'yes';
     $hash_keys{NOME_UTENTE} = $session->param('username');
     $hash_keys{NUM_NOTIFICHE} = research::conta_notifiche($session->param('username'), $doc);
+    $hash_keys{INDEX} = 9;
 }
 else {
     $hash_keys{LOGGEDIN} = 'no';
+    $hash_keys{INDEX} = 6;
 }
 
 

@@ -34,14 +34,16 @@ else {
         $contenuto = "<div class=\"contenitore\"><p>Non ci sono conversazioni con altri utenti </p></div>";
     }
     else {
-        my %Messaggi = ( UTENTE => $username );
+        my %Messaggi = ( UTENTE => $username);
         $contenuto = research::query_messaggi(\%Messaggi);
+       # open my $f, '>prova_cont.txt';
+        #print $f $contenuto;
     }
 
     my %hash_keys = (
         NOME_UTENTE => $username,
         CONTENUTO => $contenuto,
-        NUM_NOTIFICHE => research::conta_notifiche($username, $doc)
+        NUM_NOTIFICHE => research::conta_notifiche($username, $doc),
         );
 
     if(defined($session->param('problems'))) {
@@ -57,7 +59,14 @@ else {
     open my $fh, '<', $file;
     my $foglio = '';
     $template_parser->process($fh,\%hash_keys,\$foglio);
-    print $foglio;
+
+    ######
+    #print $foglio;
+    # foglio contiene il framm html a meno dei tabindex
+    my %hash_index = (INDEX => 9 );
+    my $foglio_def = '';
+    $template_parser->process(\$foglio,\%hash_index,\$foglio_def);
+    print $foglio_def;
 
     if(defined($session->param('problems'))) {
         $session->clear(['problems']);

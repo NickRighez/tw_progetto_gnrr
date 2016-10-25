@@ -22,7 +22,7 @@
  <body>
   
   <div id="header">
-   <a href="homeLog.html" tabindex="1"><img src="Immagini/banner.png" id="banner" alt="Banner Travel Share - Link diretto alla Home" /></a>
+   <a href="home.cgi" tabindex="1"><img src="Immagini/banner.png" id="banner" alt="Banner Travel Share - Link diretto alla Home" /></a>
    <a id="bottoneMenu" href="#menu">Men&ugrave;</a>
   </div>
   
@@ -43,12 +43,14 @@
     [% IF feedback.index == 0 %]
       <fieldset><legend>Valutazioni del conducente [% feedback.username %] </legend> 
       <h2>[% feedback.nome %] [% feedback.cognome %] - Conducente</h2>
-      
+      <input type="hidden" name="G" value="[% feedback.username %]"></input>
+      <input type="hidden" name="passaggio" value="[% feedback.passaggio %]"></input>
       <p>Compagnia</p>  <!--"Traduttore" ID: ruolo.Valutazione.valoreNumerico; ruolo: g=guidatore, p1..4=passeggero1..4; -->
       <div class="votiGroup">
       <input type="radio" name="CompagniaG" id="gCompagnia1" value="1"></input><label  for="gCompagnia1">1</label>
       <input type="radio" name="CompagniaG" id="gCompagnia2" value="2"></input><label  for="gCompagnia2">2</label>
-      <input type="radio" name="CompagniaG" id="gCompagnia3" value="3" tabindex="9" checked="checked"></input><label  for="gCompagnia3">3</label>
+      <input type="radio" name="CompagniaG" id="gCompagnia3" value="3" tabindex="[% INDEX %]" checked="checked"></input><label  for="gCompagnia3">3</label>
+      [% INDEX = INDEX+1 %]
       <input type="radio" name="CompagniaG" id="gCompagnia4" value="4"></input><label  for="gCompagnia4">4</label>
       <input type="radio" name="CompagniaG" id="gCompagnia5" value="5"></input><label  for="gCompagnia5">5</label>
       </div>
@@ -56,7 +58,8 @@
       <div class="votiGroup">
       <input type="radio" name="PuntualitaG" id="gPuntualita1" value="1"></input><label  for="gPuntualita1">1</label>
       <input type="radio" name="PuntualitaG" id="gPuntualita2" value="2"></input><label  for="gPuntualita2">2</label>
-      <input type="radio" name="PuntualitaG" id="gPuntualita3" value="3" tabindex="10" checked="checked"></input><label  for="gPuntualita3">3</label>
+      <input type="radio" name="PuntualitaG" id="gPuntualita3" value="3" tabindex="[% INDEX %]" checked="checked"></input><label  for="gPuntualita3">3</label>
+      [% INDEX = INDEX+1 %]
       <input type="radio" name="PuntualitaG" id="gPuntualita4" value="4"></input><label  for="gPuntualita4">4</label>
       <input type="radio" name="PuntualitaG" id="gPuntualita5" value="5"></input><label  for="gPuntualita5">5</label>
       </div>
@@ -64,7 +67,7 @@
       <div class="votiGroup">
       <input type="radio" name="Guida" id="Guida1" value="1"></input><label  for="Guida1">1</label>
       <input type="radio" name="Guida" id="Guida2" value="2"></input><label  for="Guida2">2</label>
-      <input type="radio" name="Guida" id="Guida3" value="3" tabindex="11" checked="checked"></input><label  for="Guida3">3</label>
+      <input type="radio" name="Guida" id="Guida3" value="3" tabindex="[% INDEX %]" checked="checked"></input><label  for="Guida3">3</label>
       <input type="radio" name="Guida" id="Guida4" value="4"></input><label  for="Guida4">4</label>
       <input type="radio" name="Guida" id="Guida5" value="5"></input><label  for="Guida5">5</label>
       </div>
@@ -72,23 +75,26 @@
       <div class="votiGroup">
       <input type="radio" name="Pulizia" id="Pulizia1" value="1"></input><label  for="Pulizia1">1</label>
       <input type="radio" name="Pulizia" id="Pulizia2" value="2"></input><label  for="Pulizia2">2</label>
-      <input type="radio" name="Pulizia" id="Pulizia3" value="3" tabindex="12" checked="checked"></input><label  for="Pulizia3">3</label>
+      <input type="radio" name="Pulizia" id="Pulizia3" value="3" tabindex="[% INDEX %]" checked="checked"></input><label  for="Pulizia3">3</label>
+      [% INDEX = INDEX+1 %]
       <input type="radio" name="Pulizia" id="Pulizia4" value="4"></input><label  for="Pulizia4">4</label>
       <input type="radio" name="Pulizia" id="Pulizia5" value="5"></input><label  for="Pulizia5">5</label>
       </div>
       
-      <textarea rows="0" cols="0" name="commentoG" tabindex="13" title="Inserisci un commento facoltativo">Commento facoltativo</textarea>
-      
+      <textarea rows="0" cols="0" name="commentoG" tabindex="[% INDEX %]" title="Inserisci un commento facoltativo">Commento facoltativo</textarea>
+      [% INDEX = INDEX+1 %]
       </fieldset>
     [% ELSE %]
       <fieldset><legend>Valutazioni del passeggero [% feedback.username %]</legend>
       <h2>[% feedback.nome %] [% feedback.cognome %] - Passeggero ([% feedback.index %])</h2>
-      
+      <input type="hidden" name="P[% feedback.index %]" value="[% feedback.username %]" ></input>
+      <input type="hidden" name="passaggio" value="[% feedback.passaggio %]"></input>
       <p>Compagnia</p>
       <div class="votiGroup">
       <input type="radio" name="CompagniaP[% feedback.index %]" id="p[% feedback.index %]Compagnia1" value="1"></input><label  for="p[% feedback.index %]Compagnia1">1</label>
       <input type="radio" name="CompagniaP[% feedback.index %]" id="p[% feedback.index %]Compagnia2" value="2"></input><label  for="p[% feedback.index %]Compagnia2">2</label>
-      <input type="radio" name="CompagniaP[% feedback.index %]" id="p[% feedback.index %]Compagnia3" value="3" tabindex="9" checked="checked"></input><label  for="p[% feedback.index %]Compagnia3">3</label>
+      <input type="radio" name="CompagniaP[% feedback.index %]" id="p[% feedback.index %]Compagnia3" value="3" tabindex="[% INDEX %]" checked="checked"></input><label  for="p[% feedback.index %]Compagnia3">3</label>
+      [% INDEX = INDEX+1 %]
       <input type="radio" name="CompagniaP[% feedback.index %]" id="p[% feedback.index %]Compagnia4" value="4"></input><label  for="p[% feedback.index %]Compagnia4">4</label>
       <input type="radio" name="CompagniaP[% feedback.index %]" id="p[% feedback.index %]Compagnia5" value="5"></input><label  for="p[% feedback.index %]Compagnia5">5</label>
       </div>
@@ -96,98 +102,23 @@
       <div class="votiGroup">
       <input type="radio" name="PuntualitaP[% feedback.index %]" id="p[% feedback.index %]Puntualita1" value="1"></input><label  for="p[% feedback.index %]Puntualita1">1</label>
       <input type="radio" name="PuntualitaP[% feedback.index %]" id="p[% feedback.index %]Puntualita2" value="2"></input><label  for="p[% feedback.index %]Puntualita2">2</label>
-      <input type="radio" name="PuntualitaP[% feedback.index %]" id="p[% feedback.index %]Puntualita3" value="3" tabindex="10" checked="checked"></input><label  for="p[% feedback.index %]Puntualita3">3</label>
+      <input type="radio" name="PuntualitaP[% feedback.index %]" id="p[% feedback.index %]Puntualita3" value="3" tabindex="[% INDEX %]" checked="checked"></input><label  for="p[% feedback.index %]Puntualita3">3</label>
+      [% INDEX = INDEX+1 %]
       <input type="radio" name="PuntualitaP[% feedback.index %]" id="p[% feedback.index %]Puntualita4" value="4"></input><label  for="p[% feedback.index %]Puntualita4">4</label>
       <input type="radio" name="PuntualitaP[% feedback.index %]" id="p[% feedback.index %]Puntualita5" value="5"></input><label  for="p[% feedback.index %]Puntualita5">5</label>
       </div>
       
-      <textarea rows="0" cols="0" name="commentoP[% feedback.index %]" tabindex="11" title="Inserisci un commento facoltativo">Commento facoltativo</textarea>
-      
+      <textarea rows="0" cols="0" name="commentoP[% feedback.index %]" tabindex="[% INDEX %]" title="Inserisci un commento facoltativo">Commento facoltativo</textarea>
+      [% INDEX = INDEX+1 %]
       </fieldset>
     [% END %]
   [% END %]
 [% END %]
+  <div><input type="submit" value="Invia" tabindex="[% INDEX %]"></input></div>
+  [% INDEX = INDEX+1 %]
+</form>
   
-  
-  
-  
-  <fieldset><legend>Valutazioni del passeggero Nome C.</legend>
-  <h2>Nome C. - Passeggero (2)</h2>
-  
-  <p>Compagnia</p>
-  <div class="votiGroup">
-  <input type="radio" name="CompagniaP2" id="p2Compagnia1" value="1"></input><label  for="p2Compagnia1">1</label>
-  <input type="radio" name="CompagniaP2" id="p2Compagnia2" value="2"></input><label  for="p2Compagnia2">2</label>
-  <input type="radio" name="CompagniaP2" id="p2Compagnia3" value="3" tabindex="12" checked="checked"></input><label  for="p2Compagnia3">3</label>
-  <input type="radio" name="CompagniaP2" id="p2Compagnia4" value="4"></input><label  for="p2Compagnia4">4</label>
-  <input type="radio" name="CompagniaP2" id="p2Compagnia5" value="5"></input><label  for="p2Compagnia5">5</label>
-  </div>
-  <p>Puntualit&agrave;</p>
-  <div class="votiGroup">
-  <input type="radio" name="PuntualitaP2" id="p2Puntualita1" value="1"></input><label  for="p2Puntualita1">1</label>
-  <input type="radio" name="PuntualitaP2" id="p2Puntualita2" value="2"></input><label  for="p2Puntualita2">2</label>
-  <input type="radio" name="PuntualitaP2" id="p2Puntualita3" value="3" tabindex="13" checked="checked"></input><label  for="p2Puntualita3">3</label>
-  <input type="radio" name="PuntualitaP2" id="p2Puntualita4" value="4"></input><label  for="p2Puntualita4">4</label>
-  <input type="radio" name="PuntualitaP2" id="p2Puntualita5" value="5"></input><label  for="p2Puntualita5">5</label>
-  </div>
-  
-  <textarea rows="0" cols="0" name="commentoP2" tabindex="14" title="Inserisci un commento facoltativo">Commento facoltativo</textarea>
-  
-  </fieldset>
-  
-  <fieldset><legend>Valutazioni del passeggero Nome C.</legend>
-  <h2>Nome C. - Passeggero (3)</h2>
-  
-  <p>Compagnia</p>
-  <div class="votiGroup">
-  <input type="radio" name="CompagniaP3" id="p3Compagnia1" value="1"></input><label  for="p3Compagnia1">1</label>
-  <input type="radio" name="CompagniaP3" id="p3Compagnia2" value="2"></input><label  for="p3Compagnia2">2</label>
-  <input type="radio" name="CompagniaP3" id="p3Compagnia3" value="3" tabindex="15" checked="checked"></input><label  for="p3Compagnia3">3</label>
-  <input type="radio" name="CompagniaP3" id="p3Compagnia4" value="4"></input><label  for="p3Compagnia4">4</label>
-  <input type="radio" name="CompagniaP3" id="p3Compagnia5" value="5"></input><label  for="p3Compagnia5">5</label>
-  </div>
-  <p>Puntualit&agrave;</p>
-  <div class="votiGroup">
-  <input type="radio" name="PuntualitaP3" id="p3Puntualita1" value="1"></input><label  for="p3Puntualita1">1</label>
-  <input type="radio" name="PuntualitaP3" id="p3Puntualita2" value="2"></input><label  for="p3Puntualita2">2</label>
-  <input type="radio" name="PuntualitaP3" id="p3Puntualita3" value="3" tabindex="16" checked="checked"></input><label  for="p3Puntualita3">3</label>
-  <input type="radio" name="PuntualitaP3" id="p3Puntualita4" value="4"></input><label  for="p3Puntualita4">4</label>
-  <input type="radio" name="PuntualitaP3" id="p3Puntualita5" value="5"></input><label  for="p3Puntualita5">5</label>
-  </div>
-  
-  <textarea rows="0" cols="0" name="commentoP3" tabindex="17" title="Inserisci un commento facoltativo">Commento facoltativo</textarea>
-  
-  </fieldset>
-  
-  <fieldset><legend>Valutazioni del passeggero Nome C.</legend>
-  <h2>Nome C. - Passeggero (4)</h2>
-  
-  <p>Compagnia</p>
-  <div class="votiGroup">
-  <input type="radio" name="CompagniaP4" id="p4Compagnia1" value="1"></input><label  for="p4Compagnia1">1</label>
-  <input type="radio" name="CompagniaP4" id="p4Compagnia2" value="2"></input><label  for="p4Compagnia2">2</label>
-  <input type="radio" name="CompagniaP4" id="p4Compagnia3" value="3" tabindex="18" checked="checked"></input><label  for="p4Compagnia3">3</label>
-  <input type="radio" name="CompagniaP4" id="p4Compagnia4" value="4"></input><label  for="p4Compagnia4">4</label>
-  <input type="radio" name="CompagniaP4" id="p4Compagnia5" value="5"></input><label  for="p4Compagnia5">5</label>
-  </div>
-  <p>Puntualit&agrave;</p>
-  <div class="votiGroup">
-  <input type="radio" name="PuntualitaP4" id="p4Puntualita1" value="1"></input><label  for="p4Puntualita1">1</label>
-  <input type="radio" name="PuntualitaP4" id="p4Puntualita2" value="2"></input><label  for="p4Puntualita2">2</label>
-  <input type="radio" name="PuntualitaP4" id="p4Puntualita3" value="3" tabindex="19" checked="checked"></input><label  for="p4Puntualita3">3</label>
-  <input type="radio" name="PuntualitaP4" id="p4Puntualita4" value="4"></input><label  for="p4Puntualita4">4</label>
-  <input type="radio" name="PuntualitaP4" id="p4Puntualita5" value="5"></input><label  for="p4Puntualita5">5</label>
-  </div>
-  
-  <textarea rows="0" cols="0" name="commentoP4" tabindex="20" title="Inserisci un commento facoltativo">Commento facoltativo</textarea>
-  
-  </fieldset>
-  
-   <div><input type="submit" value="Invia" tabindex="21"></input></div>
-  
-  </form>
-  
-  </div>
+</div>
  
   
  <div id="menu">
@@ -202,8 +133,9 @@
   </div>
 
   <div id="footer">
-   <a href="logout.cgi?operation=logout" tabindex="22">Logout</a>
-   <a href="#header" tabindex="23">Torna su</a>
+   <a href="logout.cgi?operation=logout" tabindex="[% INDEX %]">Logout</a>
+   [% INDEX = INDEX+1 %]
+   <a href="#header" tabindex="[% INDEX %]">Torna su</a>
   </div>
   
   </body>

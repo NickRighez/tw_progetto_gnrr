@@ -44,7 +44,8 @@ else {
             MYSELF => $username
             );
         $contenuto = research::query_conversazione(\%Conversazione);
-        if($doc->exists("//SetMessaggi/Conversazione[\@User1=\"$utente\" and \@User2=\"$username\"] | SetMessaggi/Conversazione[\@User1=\"$username\" and \@User2=\"$utente\"]")) {
+
+        if($doc->exists("//SetMessaggi/Conversazione[\@User1=\"$utente\" and \@User2=\"$username\"] | //SetMessaggi/Conversazione[\@User1=\"$username\" and \@User2=\"$utente\"]")) {
             data_registration::aggiorna_messaggi_letti($session->param('username'), $q->param('utente'));
         }
         

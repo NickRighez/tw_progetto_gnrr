@@ -45,9 +45,11 @@
    <div class="contenitore">
    <p>Hai bisogno di un passaggio per un evento, una vacanza o per una semplice visita in qualche citt&agrave;? Bene, sei sul sito giusto!
     Grazie a <span xml:lang="en" lang="en">Travel Share</span> puoi trovare il passaggio che cerchi a prezzi bassissimi in pochi semplici passi.</p>
-   <h3><a href="iscrizione.cgi" tabindex="9">Iscriviti</a></h3>
+   <h3><a href="iscrizione.cgi" tabindex="[% INDEX %]">Iscriviti</a></h3>
+   [% INDEX = INDEX+1 %]
    <p>Iscriviti al nostro servizio per poter prenotare <span xml:lang="en" lang="en">online</span> il tuo passaggio.</p>
-   <h3><a href="homeLog.html" tabindex="10">Cerca</a></h3>
+   <h3><a href="homeLog.html" tabindex="[% INDEX %]">Cerca</a></h3>
+   [% INDEX = INDEX+1 %]
    <p>Cerca il passaggio che ti serve e seleziona quello che preferisci tra i passaggi proposti dai nostri utenti.</p>
    <h3>Prenota</h3>
    <p>Una volta trovato il passaggio che cercavi prenotalo con un <span xml:lang="en" lang="en">click</span>!
@@ -60,10 +62,12 @@
    <h2>Offri un passaggio?</h2>
    <div class="contenitore">
    <p>Hai in programma un viaggio ma vuoi risparmiare dividendo le spese con qualcuno? Offri un passaggio su <span xml:lang="en" lang="en">Travel Share</span> e condividi il viaggio con altri utenti.</p>
-   <h3><a href="iscrizione.cgi" tabindex="11">Iscriviti</a></h3>
+   <h3><a href="iscrizione.cgi" tabindex="[% INDEX %]">Iscriviti</a></h3>
+   [% INDEX = INDEX+1 %]
    <p>Iscriviti al nostro servizio per poter offrire <span xml:lang="en" lang="en">online</span> il tuo passaggio.
     Per essere abilitato ad offrire un passaggio devi completare le informazioni aggiuntive del tuo profilo.</p>
-   <h3><a href="offerta_passaggio.cgi" tabindex="12">Offri il passaggio</a></h3>
+   <h3><a href="offerta_passaggio.cgi" tabindex="[% INDEX %]">Offri il passaggio</a></h3>
+   [% INDEX = INDEX+1 %]
    <p>Offri il passaggio descrivendone le varie caratteristiche come posti disponibili, prezzo, eventuali tappe e le regole della macchina.</p>
    <h3>Prenotazioni</h3>
    <p>Ti invieremo una notifica quando riceverai una richiesta di prenotazione al tuo viaggio. Avrai la possibilt&agrave; di accettare o rifiutare la richiesta.</p>
@@ -85,7 +89,7 @@
   </ul>
   </div>
 [% ELSE %]
-   <div id="menu">localhost/ProgettoBasi/notifiche/notifiche_page.php
+   <div id="menu">
   <ul id="menuLista">
    <li><a href="home.cgi" tabindex="4">Cerca un passaggio <span class="frecceMenu">&raquo;</span></a></li>
    <li><a href="offerta_passaggio.cgi" tabindex="5">Offri un passaggio <span class="frecceMenu">&raquo;</span></a></li>
@@ -99,11 +103,11 @@
 
 <div id="footer">
 [% IF LOGGEDIN=='yes' %]
-   <a href="ricevitore_logout.cgi" tabindex="13">Logout</a>
-   <a href="#header" tabindex="14">Torna su</a>
- [% ELSE %]
-  <a href="#header" tabindex="13">Torna su</a>
- [% END %]
+   <a href="ricevitore_logout.cgi" tabindex="[% INDEX %]">Logout</a>
+   [% INDEX = INDEX+1 %]
+[% END %]
+
+ <a href="#header" tabindex="[% INDEX %]">Torna su</a>
  </div>
   </body>
 </html>

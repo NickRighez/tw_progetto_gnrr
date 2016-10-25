@@ -54,7 +54,6 @@ else {
     my $p=$q->param('passaggio');
     my @feed_da_rilas=$doc->findnodes("//SetUtenti/Utente[Username=\"$username\"]/Notifiche/FeedDaRilasciare[\@Passaggio=\"$p\"]");
     my $num_da_rilasc=@feed_da_rilas;
-    print $num_da_rilasc;
 
     for(my $i=1;$i<=$num_da_rilasc;$i++) {
         if(defined($q->param('P').$i) and $q->request_method=='POST') {
@@ -73,6 +72,9 @@ else {
                 data_registration::aggiorna_valutazione_utente(\%Feedback, $q->param('P'.$i));
                 data_registration::elimina_notifica("$Feedback{'IDMitt'}","FeedDaRilasciare","\@Destinatario=\"$Feedback{'IDDest'}\" and \@Passaggio=\"$Feedback{'Passaggio'}\"",$doc);
             }
+            #else {
+            #    die("<br>".$q->param('P'.$i)."<br>".$q->param('passaggio')."<br>".$q->param('CompagniaP'.$i)."<br>".$q->param('PuntualitaP'.$i)."<br>".$q->param('commentoP'.$i)."<br>");
+            #}
         }
     }
 

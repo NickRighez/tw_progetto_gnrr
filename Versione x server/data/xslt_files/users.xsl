@@ -17,15 +17,24 @@
         <p>Sesso : <xsl:value-of select="Sesso"/> <span class="destra"> <xsl:value-of select="$eta" /> anni</span></p>
 
         <div class="descrizione">
-        <p>Descrizione : <xsl:value-of select="DescrizionePers" /></p>
+        <p>Descrizione :
+          <xsl:choose>
+            <xsl:when test="count(ts:TravelShare/SetUtenti/Utente[Username='[% UTENTE %]']/DescrizionePers)=0">
+              L&#39; utente non ha inserito una descrizione.
+          </xsl:when>
+          <xsl:otherwise>
+            <xsl:value-of select="DescrizionePers" />
+          </xsl:otherwise>
+          </xsl:choose> 
+        </p>
       </div>
         <xsl:choose>
           <xsl:when test="count(Profilo/Patente)=0">
-            <div class="contenitore">
-              <p> L utente non ha impostato informazioni sulla patente. </p>
-              <p> L utente non ha impostato informazioni sulla auto. </p>
-              <p> L utente non ha impostato informazioni sulle proprie preferenze. </p>
-            </div>
+           
+              <p> L&#39; utente non ha impostato informazioni sulla patente. </p>
+              <p> L&#39; utente non ha impostato informazioni sulla auto. </p>
+              <p> L&#39; utente non ha impostato informazioni sulle proprie preferenze. </p>
+            
           </xsl:when>
           <xsl:otherwise>
             <p>Anno di rilascio della patente: <xsl:value-of select="Profilo/Patente"/></p>
@@ -89,7 +98,7 @@
     <div id="commenti"> <!--serve il div?-->
       <h3>Commenti degli utenti</h3>
       <xsl:if test="count(ts:TravelShare/SetFeedback/Feedback[@IDDest='[% UTENTE %]'])=0">
-        <div class="contenitore"><p>L utente non ha ricevuto nessun commento.</p></div>
+        <div class="contenitore"><p>L&#39; utente non ha ricevuto nessun commento.</p></div>
       </xsl:if>
       <xsl:for-each select="ts:TravelShare/SetFeedback/Feedback[@IDDest='[% UTENTE %]']" >
         <div class="commentoUtente">

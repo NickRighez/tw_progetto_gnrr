@@ -36,7 +36,7 @@ else {
         print $session->header(-location => "home.cgi");
     }
     else {
-        $hash_keys{NOME} = $doc->findnodes("//SetUtenti/Utente[Username=\"$ute\"]/Nome")->get_node(1)->textContent;
+        $hash_keys{NOME} = $doc->findnodes("//SetUtenti/Utente[Username='$ute']/Nome")->get_node(1)->textContent;
         $hash_keys{COGNOME} = $doc->findnodes("//SetUtenti/Utente[Username=\"$ute\"]/Cognome")->get_node(1)->textContent;
         
         my ($sec,$min,$hour,$mday,$mon,$year,$wday,$yday,$isdst) = localtime();

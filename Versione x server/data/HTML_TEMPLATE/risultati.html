@@ -42,13 +42,43 @@
   </div>
 
  [% END %]
-  <div id="contenuto">
+  
 
-	<h1>Risultati trovati</h1>
-	<h2>[% PARTENZA %] &#8594; [% ARRIVO %]</h2>
-	<h3>[% DATA %]</h3>
 
-[% CONTENUTO %]
+<div id="contenuto">
+
+  <h1>Risultati trovati</h1>
+  <h2>[% PARTENZA %] &#8594; [% ARRIVO %]</h2>
+  <h3>[% DATA %]</h3>
+
+  [% IF EMPTY_LIST == 'true' %]
+    <div class="contenitore">
+      <p> Nessun risultato corrisponde ai criteridi ricerca </p>
+    </div>
+  [% END %]
+
+ [% FOREACH viaggio IN VIAGGI_LIST %]
+    <div class="risultato">
+   <p><a href="[% viaggio.href %]" class="linkMobileRisultati" tabindex="[% INDEX %]"><span class="partenza">[% viaggio.partenza %]</span> &#8594; <span class="arrivo">[% viaggio.arrivo %]</span>
+    [% INDEX = INDEX+1 %]
+    <span class="linkDesktop destra">Vai al viaggio &raquo;</span></a></p>
+   
+   <p>Ora: [% viaggio.ora %]</p>
+   
+   <p>Posti: [% viaggio.posti %]<span class="destra">[% viaggio.prezzo %] &euro; <!--&#8364;--></span></p>
+   
+   <hr />
+   
+   <p>[% viaggio.conducente %] <span class="destra">[% viaggio.eta %] anni</span></p>
+   
+   <p>Voto medio: [% viaggio.punteggio %]/5</p>
+
+   <p>Auto: [% viaggio.auto %]</p>
+
+  </div>
+
+ [% END %]
+
 
   </div>
 
@@ -97,17 +127,11 @@
   <div id="footer">
 
   [% IF LOGGEDIN=='yes' %]
+   <a href="ricevitore_logout.cgi" tabindex="[% INDEX %]">Logout</a>
+   [% INDEX = INDEX+1 %]
+  [% END %]
 
-   <a href="ricevitore_logout.cgi">Logout</a>
-
-   <a href="#header">Torna su</a>
-
- [% ELSE %]
-
-  <a href="#header">Torna su</a>
-
- [% END %]
-
+  <a href="#header" tabindex="[% INDEX %]">Torna su</a>
    
 
   </div>
