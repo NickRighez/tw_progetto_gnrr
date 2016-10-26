@@ -42,7 +42,14 @@
 	<h1>Modifica il profilo</h1>
 	<p id="info_conducente_err" class="errore">[% INFO_CONDUC_ERR %]</p>
 	<form action="ricevitore_modifica.cgi" method="post" onsubmit="return valida_submit_modifica_profilo();">
-	<fieldset><legend></legend>
+	<fieldset><legend>Modifica le informazioni del profilo</legend>
+		
+	<p>Sesso:
+	<input type="radio" name="sesso" id="maschio" value="maschio" checked="checked" tabindex="14"></input><label  for="maschio">Maschio</label>
+    	<input type="radio" name="sesso" id="femmina" value="femmina"></input><label  for="femmina">Femmina</label>
+    	</p><br />
+		
+		
 	<label for="nome">Nome:</label>
     <input type="text" id="nome" name="nome" value="[%NOME%]" tabindex="9" onblur="valida_nome('nome','Nome')"></input><br />
     	<p id="nome_err" class="errore">[%NOME_ERR%]</p>
@@ -59,11 +66,6 @@
     <label for="nuovaPassword">Nuova <span xml:lang="en" lang="en">Password:</span></label>
     <input type="password" id="nuovaPassword" name="nuovaPassword" tabindex="13" onblur="valida_password('nuovaPassword')"></input><br />
 	<p id="nuovaPassword_err" class="errore">[%NUOVAPASSWORD_ERR%]</p>
-
-    <p>Sesso:
-	<input type="radio" name="sesso" id="maschio" value="maschio" checked="checked" tabindex="14"></input><label  for="maschio">Maschio</label>
-    <input type="radio" name="sesso" id="femmina" value="femmina"></input><label  for="femmina">Femmina</label><br />
-    </p>
 
     <label for="anno">Anno di nascita:</label>
     <input type="text" id="anno" name="anno" value="[%ANNO%]" tabindex="15" onblur="valida_anno_nasc()"></input><br />
