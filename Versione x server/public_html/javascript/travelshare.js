@@ -15,6 +15,8 @@ var funzioniDiCaricamento = {
         });
       });
       // Actions
+      var menu = document.getElementById("bottoneMenu");
+      menu.onclick = animazione.menuMobile;
       var part = document.getElementById("partenza");
       part.onblur = function() {
         funzioniDiValidazione.valida_nome("partenza", "Luogo di partenza");
@@ -703,4 +705,15 @@ var funzioniDiValidazioneSubmit = {
       return false;
     }
   }
+};
+var animazione = {
+    menuMobile: function(){
+        var i = document.getElementById('menu');
+        //controlli
+        if(i)
+        {
+          i.class = i.class + " menuAperto";
+        }
+        return false;
+    }
 };

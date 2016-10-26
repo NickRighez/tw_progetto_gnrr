@@ -588,7 +588,18 @@ input[type=radio]:checked + label>img { /* provvisorio */
 	.linkDesktop{
 		display: none;
 	}
+	
 
+	/* TESTING OUT NEW STUFF */
+	#menu {
+		display: none;
+		position: absolute;
+		
+	}
+	
+	.menuAperto {
+		display: block;
+	}
 }
 
 @media screen and (max-width: 767px) {
