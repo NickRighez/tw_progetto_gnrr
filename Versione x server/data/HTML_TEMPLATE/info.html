@@ -45,8 +45,14 @@
    <div class="contenitore">
    <p>Hai bisogno di un passaggio per un evento, una vacanza o per una semplice visita in qualche citt&agrave;? Bene, sei sul sito giusto!
     Grazie a <span xml:lang="en" lang="en">Travel Share</span> puoi trovare il passaggio che cerchi a prezzi bassissimi in pochi semplici passi.</p>
+   
+   [% IF LOGGEDIN=='no' %]   
    <h3><a href="iscrizione.cgi" tabindex="[% INDEX %]">Iscriviti</a></h3>
    [% INDEX = INDEX+1 %]
+   [% ELSE %]
+   <h3>Iscriviti</h3>
+   [% END %]
+	   
    <p>Iscriviti al nostro servizio per poter prenotare <span xml:lang="en" lang="en">online</span> il tuo passaggio.</p>
    <h3><a href="homeLog.html" tabindex="[% INDEX %]">Cerca</a></h3>
    [% INDEX = INDEX+1 %]
@@ -62,8 +68,14 @@
    <h2>Offri un passaggio?</h2>
    <div class="contenitore">
    <p>Hai in programma un viaggio ma vuoi risparmiare dividendo le spese con qualcuno? Offri un passaggio su <span xml:lang="en" lang="en">Travel Share</span> e condividi il viaggio con altri utenti.</p>
+	   
+   [% IF LOGGEDIN=='no' %]   
    <h3><a href="iscrizione.cgi" tabindex="[% INDEX %]">Iscriviti</a></h3>
    [% INDEX = INDEX+1 %]
+   [% ELSE %]
+   <h3>Iscriviti</h3>
+   [% END %]
+	   
    <p>Iscriviti al nostro servizio per poter offrire <span xml:lang="en" lang="en">online</span> il tuo passaggio.
     Per essere abilitato ad offrire un passaggio devi completare le informazioni aggiuntive del tuo profilo.</p>
    <h3><a href="offerta_passaggio.cgi" tabindex="[% INDEX %]">Offri il passaggio</a></h3>
@@ -82,10 +94,10 @@
 [% IF LOGGEDIN=='no' %]
   <div id="menu">
   <ul id="menuLista">
-   <li><a href="offerta_passaggio.cgi" tabindex="2">Offri un passaggio <span class="frecceMenu">&raquo;</span></a></li>
-   <li><a href="iscrizione.cgi" tabindex="3">Iscriviti <span class="frecceMenu">&raquo;</span></a></li>
-   <li><a href="login.cgi" tabindex="4">Accedi <span class="frecceMenu">&raquo;</span></a></li>
-   <li><a href="home.cgi" tabindex="5">Cerca un passaggio <span class="frecceMenu">&raquo;</span></a></li>
+   <li><a href="home.cgi" tabindex="2">Cerca un passaggio <span class="frecceMenu">&raquo;</span></a></li>
+   <li><a href="offerta_passaggio.cgi" tabindex="3">Offri un passaggio <span class="frecceMenu">&raquo;</span></a></li>
+   <li><a href="iscrizione.cgi" tabindex="4">Iscriviti <span class="frecceMenu">&raquo;</span></a></li>
+   <li><a href="login.cgi" tabindex="5">Accedi <span class="frecceMenu">&raquo;</span></a></li>
   </ul>
   </div>
 [% ELSE %]
