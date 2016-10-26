@@ -14,13 +14,13 @@
   <xsl:template match="/">
     <xsl:for-each select="ts:TravelShare/SetUtenti/Utente[Username='[% UTENTE %]']" >  <!--  FILTRO PERL -->
       <div class="contenitore">
-        <p>Sesso : <xsl:value-of select="Sesso"/> <span class="destra"> <xsl:value-of select="$eta" /> anni</span></p>
+        <p>Sesso: <xsl:value-of select="Sesso"/> <span class="destra"> <xsl:value-of select="$eta" /> anni</span></p>
 
         <div class="descrizione">
-        <p>Descrizione :
+        <p>Descrizione:
           <xsl:choose>
             <xsl:when test="count(ts:TravelShare/SetUtenti/Utente[Username='[% UTENTE %]']/DescrizionePers)=0">
-              L&#39; utente non ha inserito una descrizione.
+              L&#39;utente non ha inserito una descrizione.
           </xsl:when>
           <xsl:otherwise>
             <xsl:value-of select="DescrizionePers" />
@@ -31,9 +31,9 @@
         <xsl:choose>
           <xsl:when test="count(Profilo/Patente)=0">
            
-              <p> L&#39; utente non ha impostato informazioni sulla patente. </p>
-              <p> L&#39; utente non ha impostato informazioni sulla auto. </p>
-              <p> L&#39; utente non ha impostato informazioni sulle proprie preferenze. </p>
+              <p>L&#39;utente non ha impostato informazioni sulla patente.</p>
+              <p>L&#39;utente non ha impostato informazioni sulla auto.</p>
+              <p>L&#39;utente non ha impostato informazioni sulle proprie preferenze.</p>
             
           </xsl:when>
           <xsl:otherwise>
@@ -49,7 +49,7 @@
                   <img src="../Immagini/BLA1.png" class="preferenze4Img" alt="Poche Chiacchiere" title="Poche Chiacchiere"></img>
                 </xsl:when>
                 <xsl:otherwise>
-                  <img src="../Immagini/BLA2.png" class="preferenze4Img" alt="Chiaccherone" title="Chiaccherone"></img>
+                  <img src="../Immagini/BLA2.png" class="preferenze4Img" alt="Chiacchierone" title="Chiacchierone"></img>
                 </xsl:otherwise>
               </xsl:choose>
               <xsl:choose>
@@ -85,20 +85,20 @@
       </div>
       <h2>Feedback</h2>
       <div class="contenitore">
-        <p>Passaggi offerti : <xsl:value-of select="Profilo/NumPassaggiOff"/> </p>
-        <p>Passaggi partecipati : <xsl:value-of select="Profilo/NumPassaggiPart"/> </p>
+        <p>Passaggi offerti: <xsl:value-of select="Profilo/NumPassaggiOff"/> </p>
+        <p>Passaggi partecipati: <xsl:value-of select="Profilo/NumPassaggiPart"/> </p>
 
-        <p>Punteggio medio : <xsl:value-of select="Profilo/Valutazione/PunteggioMedio"/> su <xsl:value-of select="Profilo/NumFeedbRicevuti"/> feedback ricevuti</p>
-        <p>Compagnia : <xsl:value-of select="Profilo/Valutazione/Compagnia"/> </p>
-        <p>Puntualità : <xsl:value-of select="Profilo/Valutazione/Puntualita"/> </p>
-        <p>Pulizia : <xsl:value-of select="Profilo/Valutazione/Pulizia"/> </p>
-        <p>Guida : <xsl:value-of select="Profilo/Valutazione/Guida"/> </p>
+        <p>Punteggio medio: <xsl:value-of select="Profilo/Valutazione/PunteggioMedio"/> su <xsl:value-of select="Profilo/NumFeedbRicevuti"/> feedback ricevuti</p>
+        <p>Compagnia: <xsl:value-of select="Profilo/Valutazione/Compagnia"/> </p>
+        <p>Puntualità: <xsl:value-of select="Profilo/Valutazione/Puntualita"/> </p>
+        <p>Pulizia: <xsl:value-of select="Profilo/Valutazione/Pulizia"/> </p>
+        <p>Guida: <xsl:value-of select="Profilo/Valutazione/Guida"/> </p>
       </div>
     </xsl:for-each>
     <div id="commenti"> <!--serve il div?-->
       <h3>Commenti degli utenti</h3>
       <xsl:if test="count(ts:TravelShare/SetFeedback/Feedback[@IDDest='[% UTENTE %]'])=0">
-        <div class="contenitore"><p>L&#39; utente non ha ricevuto nessun commento.</p></div>
+        <div class="contenitore"><p>L&#39;utente non ha ricevuto nessun commento.</p></div>
       </xsl:if>
       <xsl:for-each select="ts:TravelShare/SetFeedback/Feedback[@IDDest='[% UTENTE %]']" >
         <div class="commentoUtente">
