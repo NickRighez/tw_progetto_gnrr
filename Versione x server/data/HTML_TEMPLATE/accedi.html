@@ -36,6 +36,12 @@
 
 
   <div id="contenuto">
+   
+   <div class="div_errore">
+		  <p id="submitbutton_err">[% LOGIN_ERR %]</p>
+	  </div>
+
+    
    <h1>Accedi</h1>
    <form action="ricevitore_login.cgi" method="post" onsubmit="return valida_tutto_compilato('username','password');">
    <fieldset><legend>Accesso al sito</legend>
@@ -44,7 +50,6 @@
     <label for="password"><span xml:lang="en" lang="en">Password:</span></label>
     <input type="password" id="password" name="password" tabindex="7"></input><br />
     <input type="submit" value="Accedi" tabindex="8"></input>
-    <p id="submitbutton_err" class="errore">[% LOGIN_ERR %]</p>
    </fieldset>
    </form>
 
@@ -53,9 +58,9 @@
 
   <div id="menu">
   <ul id="menuLista">
+   <li><a href="home.cgi" tabindex="4">Cerca un passaggio <span class="frecceMenu">&raquo;</span></a></li>
    <li><a href="offerta_passaggio.cgi" tabindex="2">Offri un passaggio <span class="frecceMenu">&raquo;</span></a></li>
    <li><a href="iscrizione.cgi" tabindex="3">Iscriviti <span class="frecceMenu">&raquo;</span></a></li>
-   <li><a href="home.cgi" tabindex="4">Cerca un passaggio <span class="frecceMenu">&raquo;</span></a></li>
    <li><a href="informazioni.cgi" tabindex="5">Informazioni su <span xml:lang="en" lang="en">Travel Share</span> <span class="frecceMenu">&raquo;</span></a></li>
   </ul>
   </div>
