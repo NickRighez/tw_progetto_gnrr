@@ -1,2 +1,2 @@
--errore per l'username corto
--nell'iscrizione non mantiene il value del sesso se fai un errore nel form
+-home :: è necessario compilare tutti i campi dati (messaggio js in caso di errore nel submit). va bene visualizzato in questo modo?
+
