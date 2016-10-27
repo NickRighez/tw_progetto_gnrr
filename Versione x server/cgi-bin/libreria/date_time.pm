@@ -32,7 +32,7 @@ sub confronto_dataora {
     #
     my $hourfi  = shift @_;
     my $minutefi = shift @_;
-    
+
     my $epoch_in = timelocal(0, $minutein, $hourin, $din, $min, $yin);
     my $epoch_fi = timelocal(0, $minutefi, $hourfi, $dfi, $mfi, $yfi);
     if($epoch_fi<$epoch_in) {
@@ -92,5 +92,27 @@ sub calcola_tappe {
     return @ans;
 }
 
+
+sub formatta_data {
+    my $in = shift @_;
+    my @arr = split '-', $in;
+    my $y = @arr[0];
+    my $d = @arr[2];
+    my $m = @arr[1];
+    if(length $d == 1) $d = '0'.$d;
+    if(length $m == 1) $m = '0'.$m;
+    return $d .'-'.$m.'-'.$y;
+}
+
+sub formatta_ora {
+    my $in = shift @_;
+    my @arr = split ':', $in;
+    my $h = @arr[0];
+    my $m = @arr[1];
+    my $s = @arr[2];
+    if(length $h == 1) $h = '0'.$h;
+    if(length $m == 1) $m = '0'.$m;
+    return $h .':'.$m;
+}
 
 1;
