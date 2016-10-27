@@ -13,6 +13,7 @@ use libreria::sessione;
 use libreria::research;
 #use lib "../libreria";
 use libreria::data_registration;
+use libreria::date_time;
 
 my $q = new CGI;
 my @s = sessione::creaSessione();
@@ -35,7 +36,7 @@ my %hash_keys = (
     EMPTY_LIST => $empty,
     PARTENZA => $partenza,
     ARRIVO => $arrivo,
-    DATA => $data
+    DATA => date_time::formatta_data($data)
 );
 
 

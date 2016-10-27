@@ -10,6 +10,8 @@ use XML::LibXML;
 use XML::LibXSLT;
 use Template;
 use Cwd;
+use libreria::date_time;
+
 
 use strict;
 use warnings;
@@ -44,7 +46,7 @@ sub generic_xslt_query
     my $foglio_di_stile_con_parametri = '';
     $template_parser->process($style_file,\%vars,\$foglio_di_stile_con_parametri);#or die $template_parser->error();
     (length $foglio_di_stile_con_parametri) or die("ERRORE 1: foglio xslt vuoto\n".$style_file . '    '. getcwd);
-    
+
     my $style_oggetto_xml = $xml_parser->parse_string($foglio_di_stile_con_parametri);
     my $style_oggetto_xsl = $xslt_parser->parse_stylesheet( $style_oggetto_xml );
     my $file_oggetto_xml = $xml_parser->parse_file( $xml_file );
@@ -118,7 +120,8 @@ sub query_viaggio
 sub query_ricerca
 {
 # Il contenuto và sostituito con il tag RISULTATI_LIST, una lista di hash, ognuno della forma:
-#       { href => $link_passaggio, partenza => $partenza, arrivo => $arrivo, ora => $ora, posti => $posti, conducente => $user_conduc, eta => $conduc_eta, punteggio => $conduc_punteg, auto => $conduc_auto, start_index => $tab_index }
+#       { href => $link_passaggio, partenza => $partenza, arrivo => $arrivo, ora => $ora, posti => $posti,
+# conducente => $user_conduc, eta => $conduc_eta, punteggio => $conduc_punteg, auto => $conduc_auto, start_index => $tab_index }
 
 # Inoltre è necessario passare un tag PARTENZA (la partenza inserita nella ricerca), ARRIVO (l arrivo inserito nella ricerca) e la DATA
     my $partenza = shift @_;
@@ -158,8 +161,11 @@ sub query_ricerca
                                     my $punteggio = $doc->findnodes("//SetUtenti/Utente[Username='$conduc']/Profilo/Valutazione/PunteggioMedio")->get_node(1)->textContent;
                                     my ($sec,$min,$hour,$mday,$mon,$year,$wday,$yday,$isdst) = localtime();
                                     my $eta=$year + 1900 - ($doc->findnodes("//SetUtenti/Utente[Username='$conduc']/AnnoNascita")->get_node(1)->textContent() ) ;
-                                    push @viaggi_list, { href => "singolo_passaggio.cgi?passaggio=$idv&part=$j&&arr=$k", partenza => $part, arrivo => $arr, ora => $ora, posti => $posti, prezzo => $prezzo, conducente => $conduc, eta => $eta, punteggio => $punteggio, auto => $auto };
-                            
+                                    push @viaggi_list, {
+                                                  href => "singolo_passaggio.cgi?passaggio=$idv&part=$j&&arr=$k", partenza => $part, arrivo => $arr,
+                                                  ora => date_time::formatta_ora($ora), posti => $posti, prezzo => $prezzo, conducente => $conduc,
+                                                  eta => $eta, punteggio => $punteggio, auto => $auto };
+
                                 }
                             }
                         }
@@ -185,7 +191,7 @@ sub query_viaggi_attivi_utente {
 
     my $utente=shift @_;
     my $doc = shift @_;
-    
+
     my @viaggi_list;
 
     my ($sec,$min,$hour,$mday, $mon, $year ,$wday,$yday,$isdst) = localtime();
@@ -235,7 +241,7 @@ sub query_viaggi_attivi_utente {
         my $prezzo = utility::calcola_prezzo($num_p,$num_a,$idv,$doc); # funzione che calcola il prezzo
         my $posti = utility::calcola_posti_disponibili($num_p,$num_a,$idv,$doc);
 
-    
+
         push @viaggi_list, {
             href => "singolo_passaggio.cgi?passaggio=$idv&part=$num_p&arr=$num_a",
             partenza => $partenza,
@@ -246,7 +252,7 @@ sub query_viaggi_attivi_utente {
             ora => $ora};
     }
 
-   
+
     return @viaggi_list;
 }
 
@@ -289,7 +295,7 @@ sub query_viaggi_recensire_utente {
 }
 
 sub query_notifiche_utente {
-# Per le notifiche dei nuovi messaggi viene richiesto un tag MESSAGGI_LIST, una lista di hash, ognuno della forma: 
+# Per le notifiche dei nuovi messaggi viene richiesto un tag MESSAGGI_LIST, una lista di hash, ognuno della forma:
 #       { href => $link_singola_conversazione, mittente => $user_mittente, start_index => $tab_index }
 
 # Per le notifiche sui viaggi da recensire viene richiesto un tag VIAGGI_RECENS_LIST, una lista di hash, ognuno della forma:
@@ -301,7 +307,7 @@ sub query_notifiche_utente {
 # Per le notifiche sull esito delle prenotazioni, viene usato un tag ESITI_LIST, una lista di hash, ognuno della forma:
 #       { passaggio => $passaggio, esito => $esito, start_index => $tab_index }
 
-# NOTA: è necessario passare un tag CONTATORE, che indica il numero totale di notifiche presenti. Attraverso un costrutto condizionale bisogna 
+# NOTA: è necessario passare un tag CONTATORE, che indica il numero totale di notifiche presenti. Attraverso un costrutto condizionale bisogna
 #        testare se esso è uguale a 0.
 
     my $ute = shift @_;
@@ -379,7 +385,7 @@ sub conta_notifiche {
             $count = $count + 1;
         }
     }
-    
+
 
     my @notifiche_richiesta_prenot = $doc->findnodes("//SetUtenti/Utente[Username='$ute']/Notifiche/RichiestaPrenotaz");
     my $size =@notifiche_richiesta_prenot;
@@ -432,7 +438,7 @@ sub query_feedback_da_rilasciare_viaggio
     my @destinatari = $doc->findnodes("//SetUtenti/Utente[Username='$username']/Notifiche/FeedDaRilasciare[\@Passaggio='$passaggio']/\@Destinatario");
     my $num = @destinatari;
     my $ind = 1;
-    
+
     for(my $i=0; $i<$num; $i++){
         my $dest = $destinatari[$i]->textContent;
         my $nome = $doc->findnodes("//SetUtenti/Utente[Username='$dest']/Nome")->get_node(1)->textContent;
