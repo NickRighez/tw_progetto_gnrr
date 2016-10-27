@@ -34,7 +34,6 @@ else {
         Username => $session->param('username'), # username dell utente che modifica il profilo
         Sesso => $q->param('sesso')
         );
-$old_input{SESSO}=$q->param('sesso');
 
     if($q->param('nome') ne '') {
         if(!($q->param('nome')=~m/^(\x{0027}|\x{002C}|\x{002D}|\x{002F}|[\x{0030}-\x{0039}]|[\x{0041}-\x{005A}]|[\x{0061}-\x{007A}]|[\x{00C0}-\x{024F}]|\s)+$/)) {
@@ -119,12 +118,12 @@ $old_input{SESSO}=$q->param('sesso');
         $Modifica{Password}=$q->param('password');
     }
 
-    if($q->param('descrizioneForm') ne '') {
-        my $mess = $q->param('descrizioneForm');
-        $mess =encode_entities($mess,'>');
-        $mess = encode_entities($mess, '<');
-        $old_input{DESCRIZIONEFORM}=$q->param('descrizioneForm');
-        $Modifica{DescrizionePers}=$q->param('descrizioneForm');
+    my $descr = $q->param('descrizioneForm');
+    $descr =~ s/^\s*(.*?)\s*$/$1/;
+    if($descr ne '') {
+        $descr =encode_entities($descr,'<');
+        $old_input{DESCRIZIONEFORM}=$descr;
+        $Modifica{DescrizionePers}=$descr;
     }
 
 
