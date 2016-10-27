@@ -41,9 +41,9 @@
           </xsl:if>
         </xsl:for-each>
         <p>Arrivo: <xsl:value-of select="Itinerario/*[@Numero=[% NUM_ARRIVO %]]/Luogo"/> </p>
-        <p>Data : <xsl:value-of select="Itinerario/*[@Numero=[% NUM_PARTENZA %]]/Data"/> </p>
-        <p>Ora partenza: <xsl:value-of select="Itinerario/*[@Numero=[% NUM_PARTENZA %]]/Ora"/> </p>
-        <p>Ora arrivo: <xsl:value-of select="Itinerario/*[@Numero=[% NUM_ARRIVO %]]/Ora"/> </p>
+        <p>Data : <xsl:call-template name="formatdate"><xsl:with-param name="datestr" select="Itinerario/*[@Numero=[% NUM_PARTENZA %]]/Data"/> </xsl:call-template></p>
+        <p>Ora partenza: <xsl:call-template name="formathour"> <xsl:with-param name="hourstr"  select="Itinerario/*[@Numero=[% NUM_PARTENZA %]]/Ora"/> </xsl:call-template></p>
+        <p>Ora arrivo: <xsl:call-template name="formathour"> <xsl:with-param name="hourstr"  select="Itinerario/*[@Numero=[% NUM_ARRIVO %]]/Ora"/></xsl:call-template> </p>
         <p>Prezzo: <xsl:value-of select="$prezzo" />   <xsl:text disable-output-escaping="yes">&amp;euro;</xsl:text> </p>
         <p>Posti: <xsl:value-of select="$minPostiDisp" /> </p>
         <p>Descrizione del viaggio</p>
@@ -126,5 +126,47 @@
     </div>
   </xsl:template>
 
+<!-- FORMATTAZIONE DATA E ORA -->
+
+<xsl:template name="formatdate">
+    <xsl:param name="datestr" />
+    <!-- input format yyyy-mm-dd -->
+    <!-- output format dd-mm-yyyy -->
+
+    <xsl:variable name="mm">
+      <xsl:value-of select="substring($datestr,6,2)" />
+    </xsl:variable>
+
+    <xsl:variable name="dd">
+      <xsl:value-of select="substring($datestr,9,2)" />
+    </xsl:variable>
+
+    <xsl:variable name="yyyy">
+      <xsl:value-of select="substring($datestr,1,4)" />
+    </xsl:variable>
+
+    <xsl:value-of select="$dd" />
+    <xsl:value-of select="'-'" />
+    <xsl:value-of select="$mm" />
+    <xsl:value-of select="'-'" />
+    <xsl:value-of select="$yyyy" />
+  </xsl:template>
+  <xsl:template name="formathour">
+    <xsl:param name="hourstr" />
+    <!-- input format hh:mm:ss -->
+    <!-- output format hh:mm -->
+
+    <xsl:variable name="hh">
+      <xsl:value-of select="substring($hourstr,1,2)" />
+    </xsl:variable>
+
+    <xsl:variable name="mm">
+      <xsl:value-of select="substring($hourstr,4,2)" />
+    </xsl:variable>
+
+    <xsl:value-of select="$hh" />
+    <xsl:value-of select="':'" />
+    <xsl:value-of select="$mm" />
+  </xsl:template>
 
 </xsl:stylesheet>
