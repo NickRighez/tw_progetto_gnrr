@@ -18,7 +18,7 @@ my $q=CGI->new;
 
 if(!defined($session->param('username'))) {
     my %problems=(
-        LOGIN_ERR => "Utente non loggato, pagina inaccessibile"
+        LOGIN_ERR => "Utente non loggato, pagina inaccessibile."
         );
     $session->param('problems',\%problems);
     print $session->header(-location => "login.cgi");

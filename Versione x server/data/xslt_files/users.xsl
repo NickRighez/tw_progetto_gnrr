@@ -38,7 +38,7 @@
           </xsl:when>
           <xsl:otherwise>
             <p>Anno di rilascio della patente: <xsl:value-of select="Profilo/Patente"/></p>
-            <p><xsl:value-of select="Profilo/Auto"/></p>
+            <p>Automobile: <xsl:value-of select="Profilo/Auto"/></p>
             <p>Preferenze:</p>
             <div class="preferenzeGroup">
               <xsl:choose>

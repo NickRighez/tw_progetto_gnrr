@@ -42,7 +42,7 @@
 	<h1>Viaggi</h1>
 	<h2>Viaggi attivi</h2>
   [% IF EMPTY_ATTIVI == 'true' %]
-    <div class="contenitore"><p>Non ci sono viaggi attivi</p></div>
+    <div class="contenitore"><p>Non ci sono viaggi attivi.</p></div>
   [% ELSE %]
 		[% FOREACH viaggio IN VIAGGI_ATT_LIST %]
        <div class="viaggio">
@@ -60,7 +60,7 @@
 
   <h2>Viaggi passati da recensire</h2>
 [% IF EMPTY_RECENSIRE == 'true' %]
-  <div class="contenitore"><p>Non ci sono viaggi da recensire</p></div>
+  <div class="contenitore"><p>Non ci sono viaggi da recensire.</p></div>
 [% ELSE %]
   [% FOREACH viaggio IN VIAGGI_REC_LIST %]
      <div class="viaggio">
