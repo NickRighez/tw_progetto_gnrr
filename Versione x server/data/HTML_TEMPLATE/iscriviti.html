@@ -22,6 +22,10 @@
   <script type="application/javascript" src="../javascript/jquery-ui-1.12.0/jquery-ui.js"></script>
 <link rel="stylesheet" href="../javascript/jquery-ui-1.12.0/jquery-ui.css" />
   <script type="application/javascript" src="../javascript/travelshare.js" ></script>
+ <script type="application/javascript"> <!--
+	window.onload = funzioniDiCaricamento.caricamento_iscrizione;
+//-->
+</script>
 
  </head>
 
@@ -37,30 +41,30 @@
 
    <h1>Iscriviti</h1>
 
-   <form action="ricevitore_utente.cgi" method="post" onsubmit="return valida_submit_iscrizione()">
+   <form action="ricevitore_utente.cgi" method="post">
     <fieldset><legend>Iscrizione al sito</legend>
     <input type="radio" name="sesso" id="maschio" value="maschio" checked="checked" tabindex="6"></input><label  for="maschio">Maschio</label><!--<br />-->
     <input type="radio" name="sesso" id="femmina" value="femmina"></input><label  for="femmina">Femmina</label><br />
     <label for="nome">Nome:</label>
-    <input type="text" id="nome" name="nome" value="[%NOME%]" tabindex="7" onblur="valida_nome('nome','Nome')"></input><br />
+    <input type="text" id="nome" name="nome" value="[%NOME%]" tabindex="7"></input><br />
 	<p id="nome_err" class="errore">[%NOME_ERR%]</p>
     <label for="cognome">Cognome:</label>
-    <input type="text" id="cognome" name="cognome" value="[%COGNOME%]" tabindex="8" onblur="valida_nome('cognome','Cognome')"></input><br />
+    <input type="text" id="cognome" name="cognome" value="[%COGNOME%]" tabindex="8"></input><br />
 	<p id="cognome_err" class="errore">[%COGNOME_ERR%]</p>
 	<label for="username"><span xml:lang="en" lang="en">Username:</span></label>
-    <input type="text" id="username" name="username" value="[%USERNAME%]" tabindex="9" onblur="valida_username()"></input><br />
+    <input type="text" id="username" name="username" value="[%USERNAME%]" tabindex="9"></input><br />
 	<p id="username_err" class="errore">[%USERNAME_ERR%]</p>
     <label for="email"><span xml:lang="en" lang="en">Email:</span></label>
-    <input type="text" id="email" name="email" value="[%EMAIL%]" tabindex="10" onblur="valida_email('email')"></input><br />
+    <input type="text" id="email" name="email" value="[%EMAIL%]" tabindex="10"></input><br />
 	<p id="email_err" class="errore">[%EMAIL_ERR%]</p>
     <label for="password"><span xml:lang="en" lang="en">Password:</span></label>
-    <input type="password" id="password" name="password" tabindex="11" onblur="valida_password('password')"></input><br />
+    <input type="password" id="password" name="password" tabindex="11"></input><br />
 	<p id="password_err" class="errore">[%PASSWORD_ERR%]</p>
     <label for="conferma">Conferma <span xml:lang="en" lang="en">Password:</span></label>
-    <input type="password" id="conferma" name="conferma" tabindex="12" onblur="valida_password('conferma')"></input><br />
+    <input type="password" id="conferma" name="conferma" tabindex="12"></input><br />
 	<p id="conferma_err" class="errore">[%CONFERMA_ERR%]</p>
     <label for="anno">Anno di nascita:</label>
-    <input type="text" id="anno" name="anno" value="[%ANNO%]" tabindex="13" onblur="valida_anno_nasc()"></input><br />
+    <input type="text" id="anno" name="anno" value="[%ANNO%]" tabindex="13"></input><br />
 	<p id="anno_err" class="errore">[%ANNO_ERR%]</p>
     <input type="submit" value="Invia" tabindex="14"></input>
       <p id="submitbutton_err" class="errore"></p>

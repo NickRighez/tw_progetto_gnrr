@@ -23,9 +23,14 @@
 
   <link rel="icon" href="../Immagini/TS_icon.png" type="image/x-icon" />
   <link rel="shortcut icon" href="../Immagini/TS_icon.png" type="image/x-icon" />
+
+ <script type="application/javascript"> <!--
+	window.onload = funzioniDiCaricamento.caricamento_offerta;
+//-->
+</script>
 </head>
 
-<body onload="caricamento_offerta()">
+<body>
 
   <div id="header">
    <a href="home.cgi" tabindex="1"><img src="../Immagini/banner.png" id="banner" alt="Banner Travel Share - Link diretto alla Home" title="Banner Travel Share - Link diretto alla Home" /></a>
@@ -41,47 +46,47 @@
 
    <h1>Offri un passaggio!</h1>
 
-   <form action="ricevitore_passaggio.cgi" method="post" onsubmit="return valida_submit_offerta()">
+   <form action="ricevitore_passaggio.cgi" method="post">
      <fieldset><legend>Partenza e tappe</legend>
       <label for="partenza">Partenza</label>
-      <input type="text" id="partenza" name="partenza" tabindex="9" value="[%PARTENZA%]" onblur="valida_nome('partenza','Partenza')"></input><br />
+      <input type="text" id="partenza" name="partenza" tabindex="9" value="[%PARTENZA%]"></input><br />
       <p id="partenza_err" class="errore">[%PARTENZA_ERR%]</p>
       <label for="arrivo">Arrivo</label>
-      <input type="text" id="arrivo" name="arrivo" tabindex="10" value="[%ARRIVO%]" onblur="valida_nome('arrivo','Arrivo')"></input><br />
+      <input type="text" id="arrivo" name="arrivo" tabindex="10" value="[%ARRIVO%]"></input><br />
       <p id="arrivo_err" class="errore">[%ARRIVO_ERR%]</p>
 
       <label for="tappa1">Tappa (facoltativa)</label>
-      <input type="text" id="tappa1" name="tappa1" tabindex="11" value="[%TAPPA1%]" onblur="valida_tappa(1)"></input><br />
+      <input type="text" id="tappa1" name="tappa1" tabindex="11" value="[%TAPPA1%]"></input><br />
       <p id="tappa1_err" class="errore">[%TAPPA1_ERR%]</p>
       <label for="tappa2">Tappa (facoltativa)</label>
-      <input type="text" id="tappa2" name="tappa2" tabindex="12" value="[%TAPPA2%]" onblur="valida_tappa(2)"></input><br />
+      <input type="text" id="tappa2" name="tappa2" tabindex="12" value="[%TAPPA2%]"></input><br />
       <p id="tappa2_err" class="errore">[%TAPPA2_ERR%]</p>
       <label for="tappa3">Tappa (facoltativa)</label>
-      <input type="text" id="tappa3" name="tappa3" tabindex="13" value="[%TAPPA3%]" onblur="valida_tappa(3)"></input><br />
+      <input type="text" id="tappa3" name="tappa3" tabindex="13" value="[%TAPPA3%]"></input><br />
       <p id="tappa3_err" class="errore">[%TAPPA3_ERR%]</p>
     </fieldset>
 
     <fieldset><legend>Data e ora</legend>
       <label for="dataP">Data di partenza</label>
-      <input type="text" id="dataP" name="dataP" tabindex="14" value="[%DATAP%]" onblur="valida_data('dataP')"></input><br />
+      <input type="text" id="dataP" name="dataP" tabindex="14" value="[%DATAP%]"></input><br />
       <p id="dataP_err" class="errore">[%DATAP_ERR%]</p>
       <label for="oraP">Ora partenza</label>
-      <input type="text" id="oraP" name="oraP" tabindex="15" value="[%ORAP%]" onblur="valida_ora('oraP')"></input><br />
+      <input type="text" id="oraP" name="oraP" tabindex="15" value="[%ORAP%]"></input><br />
       <p id="oraP_err" class="errore">[%ORAP_ERR%]</p>
       <label for="dataA">Data di arrivo</label>
-      <input type="text" id="dataA" name="dataA" tabindex="16" value="[%DATAA%]" onblur="valida_data('dataA')"></input><br />
+      <input type="text" id="dataA" name="dataA" tabindex="16" value="[%DATAA%]"></input><br />
       <p id="dataA_err" class="errore">[%DATAA_ERR%]</p>
       <label for="oraA">Ora arrivo</label>
-      <input type="text" id="oraA" name="oraA" tabindex="17" value="[%ORAA%]" onblur="valida_ora('oraA')"></input><br />
+      <input type="text" id="oraA" name="oraA" tabindex="17" value="[%ORAA%]"></input><br />
       <p id="oraA_err" class="errore">[%ORAA_ERR%]</p>
     </fieldset>
 
     <fieldset><legend>Informazioni aggiuntive sul viaggio</legend>
       <label for="prezzo">Prezzo</label>
-      <input type="text" id="prezzo" name="prezzo" tabindex="18" value="[%PREZZO%]" onblur="valida_soldi('prezzo')"></input><br />
+      <input type="text" id="prezzo" name="prezzo" tabindex="18" value="[%PREZZO%]"></input><br />
       <p id="prezzo_err" class="errore">[%PREZZO_ERR%]</p>
       <label for="posti">Posti</label>
-      <input type="text" id="posti" name="posti" tabindex="19" value="[%POSTI%]" onblur="valida_posti('posti')"></input><br />
+      <input type="text" id="posti" name="posti" tabindex="19" value="[%POSTI%]"></input><br />
       <p id="posti_err" class="errore">[%POSTI_ERR%]</p>
 
       <label for="descrizioneViaggio">Note sul viaggio (facoltativa)</label>
