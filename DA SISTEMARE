@@ -1,2 +1,7 @@
 -home :: è necessario compilare tutti i campi dati (messaggio js in caso di errore nel submit). va bene visualizzato in questo modo?
 
+- risultati_ricerca.cgi -> devono essere validati i parametri passati con la get.
+	formattare data di partenza 
+
+- formattare data e ora dappertutto
+
