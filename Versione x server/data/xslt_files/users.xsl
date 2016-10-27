@@ -32,7 +32,7 @@
           <xsl:when test="count(Profilo/Patente)=0">
            
               <p>L&#39;utente non ha impostato informazioni sulla patente.</p>
-              <p>L&#39;utente non ha impostato informazioni sulla auto.</p>
+              <p>L&#39;utente non ha impostato informazioni sull&#39;auto.</p>
               <p>L&#39;utente non ha impostato informazioni sulle proprie preferenze.</p>
             
           </xsl:when>
