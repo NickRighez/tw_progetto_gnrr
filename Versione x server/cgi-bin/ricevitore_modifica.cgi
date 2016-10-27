@@ -17,6 +17,8 @@ my $q=new CGI;;
 my @s = sessione::creaSessione();
 my $session = $s[0];
 
+my $doc = data_registration::get_xml_doc();
+
 if(!defined($session->param('username'))) {
     my %problems=(
         not_logged => "Utente non loggato, pagina inaccessibile"
@@ -63,7 +65,6 @@ else {
             $problems{empty}="no";
         }
         else {
-            my $doc = data_registration::get_xml_doc();
             my @email = $doc->findnodes("//SetUtenti/Utente[Email='".$q->param('email')."']");
             my $num = @email;
             if($num!=0 and $q->param('email') ne $email[0]->findnodes("Email")->get_node(1)->textContent) {
@@ -120,11 +121,10 @@ else {
 
     my $descr = $q->param('descrizioneForm');
     $descr =~ s/^\s*(.*?)\s*$/$1/;
-    if($descr ne '') {
-        $descr =encode_entities($descr,'<');
-        $old_input{DESCRIZIONEFORM}=$descr;
-        $Modifica{DescrizionePers}=$descr;
-    }
+    $descr =encode_entities($descr,'<');
+    $old_input{DESCRIZIONEFORM}=$descr;
+    $Modifica{DescrizionePers}=$descr;
+
 
 
     if($q->param('annoPatente') ne '' or $q->param('auto') ne '' or $q->param('chiacchiere') ne '' or $q->param('musica') ne '' or $q->param('animali') ne '' or $q->param('fumatori') ne '') {

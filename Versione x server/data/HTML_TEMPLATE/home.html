@@ -44,7 +44,11 @@
     [% END %]
     <div id="contenuto">
 
-      [% DESCRIZIONE_ERRORE %]
+      [% IF DESCRIZIONE_ERRORE %]
+        <div class="div_errore">
+          <p>[% DESCRIZIONE_ERRORE %]</p>
+        </div>
+      [% END %]
 
 
       <h1>Cerca un passaggio!</h1>

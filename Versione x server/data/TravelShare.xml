@@ -7,7 +7,7 @@
       <Email>pepe@iii.ii</Email>
       <Nome>giovanni</Nome>
       <Cognome>sannat</Cognome>
-      <DescrizionePers>   blablabal balab bblalala </DescrizionePers>
+      <DescrizionePers />
       <Sesso>maschio</Sesso>
       <AnnoNascita>1990</AnnoNascita>
       <Password>11111111</Password>
@@ -456,7 +456,22 @@
           <Prenotazioni />
         </Arrivo>
       </Itinerario>
-      <Bacheca />
+      <Bacheca>
+        <ConversazioneBacheca User1="utente_due" User2="utente_uno">
+          <Messaggio>
+            <Mittente>utente_due</Mittente>
+            <Data>2016-10-27</Data>
+            <Ora>12:07:18</Ora>
+            <Testo>ciao</Testo>
+          </Messaggio>
+          <Messaggio>
+            <Mittente>utente_due</Mittente>
+            <Data>2016-10-27</Data>
+            <Ora>12:07:48</Ora>
+            <Testo>ciao</Testo>
+          </Messaggio>
+        </ConversazioneBacheca>
+      </Bacheca>
     </Passaggio>
   </SetPassaggi>
   <!--  ***************************************************************   SET MESSAGGI   ************************** -->

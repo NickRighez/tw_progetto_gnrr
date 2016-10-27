@@ -99,8 +99,8 @@ sub formatta_data {
     my $y = @arr[0];
     my $d = @arr[2];
     my $m = @arr[1];
-    if(length $d == 1) $d = '0'.$d;
-    if(length $m == 1) $m = '0'.$m;
+    if(length $d == 1) { $d = '0'.$d; }
+    if(length $m == 1) { $m = '0'.$m; }
     return $d .'-'.$m.'-'.$y;
 }
 
@@ -110,8 +110,8 @@ sub formatta_ora {
     my $h = @arr[0];
     my $m = @arr[1];
     my $s = @arr[2];
-    if(length $h == 1) $h = '0'.$h;
-    if(length $m == 1) $m = '0'.$m;
+    if(length $h == 1) { $h = '0'.$h; }
+    if(length $m == 1) { $m = '0'.$m; }
     return $h .':'.$m;
 }
 

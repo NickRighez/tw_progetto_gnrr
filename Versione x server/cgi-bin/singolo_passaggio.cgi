@@ -21,6 +21,7 @@ my $contenuto_passaggio = "";
 my $contenuto_bacheca = "";
 my $doc = data_registration::get_xml_doc();
 my %hash_keys;
+
 if(defined($session->param('problems'))) {
     my $prob = $session->param('problems');
     my %prob_hash = %$prob;
@@ -35,7 +36,8 @@ my @passaggi = $doc->findnodes("//SetPassaggi/Passaggio[IDViaggio='$pass']/Itine
 #die("//SetPassaggi/Passaggio[IDViaggio='$pass']/Itinerario[*/\@Numero='$part']/*[\@Numero='$arr']");
 my $num = @passaggi;
 if($num==0 or $part==$arr) {
-    my %problems = ( DESCRIZIONE_ERRORE => "Si e' tentato di visualizzare un passaggio non valido.").
+    my %problems = ( DESCRIZIONE_ERRORE => "Si e' tentato di visualizzare un passaggio non valido.");
+    $session->param('problems',\%problems);
     print $session->header(-location => "home.cgi");
 }
 else {
