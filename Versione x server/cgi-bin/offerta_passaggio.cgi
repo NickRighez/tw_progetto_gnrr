@@ -19,14 +19,14 @@ my $doc = data_registration::get_xml_doc();
 
 if(!defined($session->param('username'))) {
     my %problems=(
-        LOGIN_ERR => "Devi effettuare l'accesso per poter offrire un passaggio."
+        LOGIN_ERR => "Utente non loggato, pagina inaccessibile"
         );
     $session->param('problems',\%problems);
     print $session->header(-location => "login.cgi");
 }
 elsif (!($doc->exists("//SetUtenti/Utente[Username='".$session->param('username')."']/Profilo/Preferenze"))) {
     my %problems=(
-        INFO_CONDUC_ERR => "Per offrire un passaggio devi inserire le informazioni per Auto, Patente e Preferenze nel tuo profilo personale."
+        INFO_CONDUC_ERR => "Per offrire un passaggio bisogna inserire le informazioni per Auto, Patente e Preferenze"
         );
     $session->param('problems',\%problems);
     print $session->header(-location => "modificaProfilo.cgi");

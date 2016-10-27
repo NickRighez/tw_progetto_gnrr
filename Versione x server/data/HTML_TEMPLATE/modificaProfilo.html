@@ -45,8 +45,8 @@
 	<fieldset><legend>Modifica le informazioni del profilo</legend>
 		
 	<p>Sesso:
-	<input type="radio" name="sesso" id="maschio" value="maschio" checked="checked" tabindex="14"></input><label  for="maschio">Maschio</label>
-    	<input type="radio" name="sesso" id="femmina" value="femmina"></input><label  for="femmina">Femmina</label>
+	<input type="radio" name="sesso" id="maschio" value="maschio" [% IF SESSO == 'maschio' %] checked="checked" [% END %]tabindex="14"></input><label  for="maschio">Maschio</label>
+    	<input type="radio" name="sesso" id="femmina" value="femmina" [% IF SESSO == 'femmina' %] checked="checked" [% END %] ></input><label  for="femmina">Femmina</label>
     	</p><br />
 		
 		

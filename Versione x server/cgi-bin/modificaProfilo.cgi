@@ -52,6 +52,7 @@ else {
         $hash_keys{COGNOME} = $ute->findnodes("Cognome")->get_node(1)->textContent;
         $hash_keys{EMAIL} = $ute->findnodes("Email")->get_node(1)->textContent;
         $hash_keys{ANNO} = $ute->findnodes("AnnoNascita")->get_node(1)->textContent;
+        $hash_keys{SESSO} = $ute->findnodes("Sesso")->get_node(1)->textContent;
         if($ute->exists("DescrizionePers")) {
             $hash_keys{DESCRIZIONEFORM} = $ute->findnodes("DescrizionePers")->get_node(1)->textContent;
         }

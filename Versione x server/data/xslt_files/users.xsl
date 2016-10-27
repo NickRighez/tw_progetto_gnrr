@@ -19,7 +19,7 @@
         <div class="descrizione">
         <p>Descrizione:
           <xsl:choose>
-            <xsl:when test="count(ts:TravelShare/SetUtenti/Utente[Username='[% UTENTE %]']/DescrizionePers)=0">
+            <xsl:when test="DescrizionePers[not(normalize-space(.))]">
               L&#39;utente non ha inserito una descrizione.
           </xsl:when>
           <xsl:otherwise>
@@ -32,7 +32,7 @@
           <xsl:when test="count(Profilo/Patente)=0">
            
               <p>L&#39;utente non ha impostato informazioni sulla patente.</p>
-              <p>L&#39;utente non ha impostato informazioni sull&#39;auto.</p>
+              <p>L&#39;utente non ha impostato informazioni sull&#39; auto.</p>
               <p>L&#39;utente non ha impostato informazioni sulle proprie preferenze.</p>
             
           </xsl:when>

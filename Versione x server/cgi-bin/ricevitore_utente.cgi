@@ -30,7 +30,7 @@ if ($q->request_method eq 'POST') {
         $problems{empty} = "no";
     }
     elsif(!($q->param('username')=~m/^[A-Za-z0-9_-]{5,18}$/)) {
-        $problems{USERNAME_ERR} = "Username non valido, caratteri ammessi: lettere (non accentate), numeri, '_', '-'";
+        $problems{USERNAME_ERR} = "Username non valido, caratteri ammessi: lettere (non accentate), numeri, '_', '-'. Lunghezza: minimo 5 caratteri, massimo 18 caratteri.";
         $problems{empty} = "no";
     }
     else {

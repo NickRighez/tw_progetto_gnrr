@@ -34,6 +34,7 @@ else {
         Username => $session->param('username'), # username dell utente che modifica il profilo
         Sesso => $q->param('sesso')
         );
+$old_input{SESSO}=$q->param('sesso');
 
     if($q->param('nome') ne '') {
         if(!($q->param('nome')=~m/^(\x{0027}|\x{002C}|\x{002D}|\x{002F}|[\x{0030}-\x{0039}]|[\x{0041}-\x{005A}]|[\x{0061}-\x{007A}]|[\x{00C0}-\x{024F}]|\s)+$/)) {
