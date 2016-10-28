@@ -5,3 +5,12 @@
 
 - formattare data e ora dappertutto
 
+-la pagina del viaggio deve avere il nome del conducente, non il nickname
+
+-con js esce l'errore nella data dei form
+
+-"Passaggio non prenotabile, in quanto ne sei il conducente" va sostituito con l'elenco dei passeggeri
+
+-la maiuscola distingue due tappe diverse -> padova != Padova
+
+
