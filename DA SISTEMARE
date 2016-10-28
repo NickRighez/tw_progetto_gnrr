@@ -13,8 +13,6 @@
 
 -la maiuscola distingue due tappe diverse -> padova != Padova
 
--non funziona l'accetta/rifiuta
-
 -non è indicato il riferimento al viaggio nella notifica di prenotazione e il richiedente non ha il link al profilo; il richiedente non andrebbe con il nickname
 
 -il reindirizzamento dopo la prenotazione non va bene -> almeno un msg di conferma
@@ -23,6 +21,11 @@
 
 -sistemare i link nella pagina delle notifiche
 
--i viaggi attivi rimangono attivi anche quando terminati
+-i viaggi attivi rimangono attivi anche quando terminati (da controllare dato che l'ora del server e' diversa)
 
--"Tentativo di visualizzazione di un profilo inesistente" ma il profilo esiste ed è connesso
+-da eliminare "nuovo messaggio"
+
+-notifiche msg non si eliminano (da controllare meglio)
+
+-tanti problemi con i msg, da controllare tutto
+
