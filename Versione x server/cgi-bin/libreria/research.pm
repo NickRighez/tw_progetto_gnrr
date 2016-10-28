@@ -213,8 +213,8 @@ sub query_viaggi_attivi_utente {
             arrivo => $arrivo,
             prezzo => $prezzo,
             posti => $posti,
-            data => $data,
-            ora => $ora};
+            data => date_time::formatta_data($data),
+            ora => date_time::formatta_ora($ora)};
     }
 
     # viaggi attivi di cui il conducente &egrave; partecipante
@@ -248,8 +248,8 @@ sub query_viaggi_attivi_utente {
             arrivo => $arrivo,
             prezzo => $prezzo,
             posti => $posti,
-            data => $data,
-            ora => $ora};
+            data => date_time::formatta_data($data),
+            ora => date_time::formatta_ora($ora)};
     }
 
 
@@ -288,7 +288,7 @@ sub query_viaggi_recensire_utente {
                                 href => "viaggio_recensire.cgi?passaggio=$idv",
                                 partenza => $partenza,
                                 arrivo => $arrivo,
-                                data => $data
+                                data => date_time::formatta_data($data)
                             }
         }
     return @viaggi_list;

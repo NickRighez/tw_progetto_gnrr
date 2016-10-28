@@ -33,7 +33,6 @@ my $pass = $q->param('passaggio');
 my $part =$q->param('part');
 my $arr = $q->param('arr');
 my @passaggi = $doc->findnodes("//SetPassaggi/Passaggio[IDViaggio='$pass']/Itinerario[*/\@Numero='$part' and */\@Numero='$arr']");
-#die("//SetPassaggi/Passaggio[IDViaggio='$pass']/Itinerario[*/\@Numero='$part']/*[\@Numero='$arr']");
 my $num = @passaggi;
 if($num==0 or $part==$arr) {
     my %problems = ( DESCRIZIONE_ERRORE => "Si e' tentato di visualizzare un passaggio non valido.");

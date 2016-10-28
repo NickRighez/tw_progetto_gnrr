@@ -13,7 +13,7 @@
       <Password>11111111</Password>
       <Profilo>
         <NumFeedbRicevuti>2</NumFeedbRicevuti>
-        <NumPassaggiOff>2</NumPassaggiOff>
+        <NumPassaggiOff>3</NumPassaggiOff>
         <NumPassaggiPart>0</NumPassaggiPart>
         <Valutazione>
           <PunteggioMedio>4</PunteggioMedio>
@@ -120,7 +120,7 @@
       <Profilo>
         <NumFeedbRicevuti>2</NumFeedbRicevuti>
         <NumPassaggiOff>0</NumPassaggiOff>
-        <NumPassaggiPart>1</NumPassaggiPart>
+        <NumPassaggiPart>2</NumPassaggiPart>
         <Valutazione>
           <PunteggioMedio>3.5</PunteggioMedio>
           <Compagnia>3.5</Compagnia>
@@ -138,7 +138,7 @@
         </Preferenze>
       </Profilo>
       <Notifiche>
-        
+        <EsitoPrenotaz Passaggio="v3" Esito="Accettata" />
       </Notifiche>
     </Utente>
     <Utente>
@@ -421,39 +421,49 @@
       <PostiTot>3</PostiTot>
       <Itinerario>
         <Partenza Numero="0">
-          <PostiDisp>3</PostiDisp>
+          <PostiDisp>2</PostiDisp>
           <Data>2016-12-21</Data>
           <Ora>12:00:00</Ora>
           <Luogo>padova</Luogo>
-          <Prenotazioni />
+          <Prenotazioni>
+            <Utente>utente_cinque</Utente>
+          </Prenotazioni>
         </Partenza>
         <Tappa Numero="1">
-          <PostiDisp>3</PostiDisp>
+          <PostiDisp>2</PostiDisp>
           <Data>2016-12-21</Data>
           <Ora>14:12:00</Ora>
           <Luogo>Verona</Luogo>
-          <Prenotazioni />
+          <Prenotazioni>
+            <Utente>utente_cinque</Utente>
+          </Prenotazioni>
         </Tappa>
         <Tappa Numero="2">
-          <PostiDisp>3</PostiDisp>
+          <PostiDisp>2</PostiDisp>
           <Data>2016-12-21</Data>
           <Ora>16:24:00</Ora>
           <Luogo>Brescia</Luogo>
-          <Prenotazioni />
+          <Prenotazioni>
+            <Utente>utente_cinque</Utente>
+          </Prenotazioni>
         </Tappa>
         <Tappa Numero="3">
-          <PostiDisp>3</PostiDisp>
+          <PostiDisp>2</PostiDisp>
           <Data>2016-12-21</Data>
           <Ora>18:36:00</Ora>
           <Luogo>Monza</Luogo>
-          <Prenotazioni />
+          <Prenotazioni>
+            <Utente>utente_cinque</Utente>
+          </Prenotazioni>
         </Tappa>
         <Arrivo Numero="4">
-          <PostiDisp>3</PostiDisp>
+          <PostiDisp>2</PostiDisp>
           <Data>2016-12-21</Data>
           <Ora>23:00:00</Ora>
           <Luogo>milano</Luogo>
-          <Prenotazioni />
+          <Prenotazioni>
+            <Utente>utente_cinque</Utente>
+          </Prenotazioni>
         </Arrivo>
       </Itinerario>
       <Bacheca>
@@ -472,6 +482,36 @@
           </Messaggio>
         </ConversazioneBacheca>
       </Bacheca>
+    </Passaggio>
+    <Passaggio Passato="no">
+      <IDViaggio>v4</IDViaggio>
+      <Conducente>utente_uno</Conducente>
+      <PrezzoTot>22</PrezzoTot>
+      <PostiTot>3</PostiTot>
+      <Itinerario>
+        <Partenza Numero="0">
+          <PostiDisp>3</PostiDisp>
+          <Data>2016-12-21</Data>
+          <Ora>12:00:00</Ora>
+          <Luogo>verona</Luogo>
+          <Prenotazioni />
+        </Partenza>
+        <Tappa Numero="1">
+          <PostiDisp>3</PostiDisp>
+          <Data>2016-12-21</Data>
+          <Ora>15:40:00</Ora>
+          <Luogo>bellunio</Luogo>
+          <Prenotazioni />
+        </Tappa>
+        <Arrivo Numero="4">
+          <PostiDisp>3</PostiDisp>
+          <Data>2016-12-21</Data>
+          <Ora>23:00:00</Ora>
+          <Luogo>ancona</Luogo>
+          <Prenotazioni />
+        </Arrivo>
+      </Itinerario>
+      <Bacheca />
     </Passaggio>
   </SetPassaggi>
   <!--  ***************************************************************   SET MESSAGGI   ************************** -->
