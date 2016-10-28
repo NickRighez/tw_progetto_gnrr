@@ -15,6 +15,10 @@
 
 -non funziona l'accetta/rifiuta
 
+-non è indicato il riferimento al viaggio nella notifica di prenotazione
+
+-il reindirizzamento dopo la prenotazione non va bene -> almeno un msg di conferma
+
 -da rifare tutte le modifiche perse con il merge
 
 
