@@ -134,14 +134,6 @@ a:link{
 	padding-right : 4%;
 }
 
-.descrizione_errore{ /** ?????????? **/
-	border : 1px solid #666666;
-	padding : 3% 5% 3% 5%;
-	background-color : white;
-	margin : 2% 3%;
-	border-radius : 15px;
-}
-
 /***  FORM  ***/
 
 input{
@@ -217,8 +209,9 @@ fieldset>h2{
 	border : 2px solid red;
 	padding : 2% 5%;
 	background-color : #ff6666;
-	margin-top: 6%;
-	margin-bottom : -50px;
+	margin-top: 7%;
+ 	margin-bottom : -45px;
+	text-align: center;
 }
 
 legend { /* Serve per validare */
