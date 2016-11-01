@@ -2,7 +2,7 @@
 
 /** CSS RESET **/
 
-html, body, div, span, h1, h2, h3, h4, h5, h6, p, a, em, img, b, u, i, center,
+html, body, div, span, h1, h2, h3, h4, h5, h6, p, a, em, center,
 dl, dt, dd, ol, ul, li, fieldset, form, label, legend {
 	margin: 0;
 	padding: 0;
@@ -11,8 +11,6 @@ dl, dt, dd, ol, ul, li, fieldset, form, label, legend {
 	font: inherit;
 	vertical-align: baseline;
 }
-
-/* bordi tondi e ombre da documentare */
 
 html{
 	margin : 0 auto;
@@ -49,7 +47,7 @@ a:link{
 
 .linkSottoH{
 	display : block;
-	margin : -1% 0% 2% 4%;
+	margin : 0% 0% 2% 4%;
 	font-size : 0.9em;
 }
 
@@ -71,7 +69,7 @@ a:link{
 /***  CORPO  ***/
 
 .contenitore{
-	padding : 2%;
+	padding : 3%;
 	border-radius : 4px;
 	border : 1px solid #666666;
 	margin-bottom : 5px;
@@ -149,6 +147,14 @@ fieldset>h2{
 	color : red;
 	margin-bottom : 3%;
 	font-size : 0.9em;
+}
+
+.div_errore{ /**** NEW *****/
+	border : 1px solid red;
+	padding : 2% 5%;
+	margin-top: 10px; /* da controllare */
+ 	margin-bottom : 10px;
+	text-align: center;
 }
 
 legend { /* Serve per validare */
@@ -286,7 +292,8 @@ legend { /* Serve per validare */
 }
 
 input[type=radio]:checked + label>img { /* provvisorio */
-  transform:scale(1.2,1.2);
+  	transform:scale(1.2,1.2);
+	border: 1px solid #0088cc;	
 }
 
 .preferenzeGroup{
