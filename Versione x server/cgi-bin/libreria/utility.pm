@@ -9,9 +9,6 @@ use diagnostics;
 use CGI;
 
 
-use XML::Tidy;
-use HTML::Tidy;
-
 use XML::LibXML;
 
 our $q = new CGI;
@@ -80,20 +77,6 @@ sub calcola_prezzo {
     return ($prezzoTot/$numTappeTot)*$numTappeCorrenti;
 }
 
-
-sub pulisci {
-my $in = shift @_;
-$in =~ s/\&/\&amp\;/;
-    my $tidy_obj = XML::Tidy->new( 'xml' => $in );
-    $tidy_obj->tidy()
-        ; # eventualmente come argomento accetta i caratteri da usare per l'identazione. def: 2 spazi.
-my $p = $tidy_obj->toString();
- $p =~ s/\&amp\;/\&/;
-return $p;
-  #  my $tidy = HTML::Tidy->new( {output_xhtml => 1,tidy_mark => 0,'preserve-entities' => 'yes', indent => 'yes', 'indent-spaces' => 4, 'char-encoding' => 'utf8', doctype => 'omit', 'show-body-only' => 'yes'   } );
-#return $tidy->clean($in);
-
-}
 
 
 
