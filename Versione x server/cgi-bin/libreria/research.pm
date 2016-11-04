@@ -12,7 +12,6 @@ use Template;
 use Cwd;
 use libreria::date_time;
 
-
 use strict;
 use warnings;
 use diagnostics;
@@ -114,6 +113,10 @@ sub query_viaggio
     {
         die "Non esiste la chiave NUM_ARRIVO nella query viaggi\n";
     }
+    if(! exists $lista->{"PREZZO"})
+    {
+        die "Non esiste la chiave PREZZO nella query viaggi\n";
+    }
     return generic_xslt_query('../data/xslt_files/singoloviaggio.xsl',\%$lista);
 }
 
@@ -213,8 +216,8 @@ sub query_viaggi_attivi_utente {
             arrivo => $arrivo,
             prezzo => $prezzo,
             posti => $posti,
-            data => $data,
-            ora => $ora};
+            data => date_time::formatta_data($data),
+            ora => date_time::formatta_ora($ora)};
     }
 
     # viaggi attivi di cui il conducente &egrave; partecipante
@@ -229,13 +232,15 @@ sub query_viaggi_attivi_utente {
         my $ora = $viaggi_att[$i]->findnodes("Itinerario/*[Prenotazioni/Utente='$utente']/Ora")->get_node(1)->textContent;
         my $arrivo;
         my $num_a;
-        for(my $j=4;$j>0;$j--) {
-            my @tappa = $viaggi_att[$i]->findnodes("Itinerario/*[Prenotazioni/Utente='$utente' and \@Numero='$j']");
-            my $num = @tappa;
-            if($num!=0) {
-                $arrivo=$tappa[0]->findnodes("Luogo")->get_node(1)->textContent;
-                $num_a=$tappa[0]->findnodes("\@Numero")->get_node(1)->textContent;
-                $j=0;
+        for(my $j=$num_p+1;$j<=4;$j++) {
+            #my @tappa = $viaggi_att[$i]->findnodes("Itinerario/*[Prenotazioni/Utente='$utente' and \@Numero='$j']");
+            #my $num = @tappa;
+
+            # se esiste una tappa con attributo Numero=$j e questa non ha prenotazioni dell utente, essa è la tappa d arrivo
+            if(!($viaggi_att[$i]->exists("Itinerario/*[Prenotazioni/Utente='$utente' and \@Numero='$j']")) && ($viaggi_att[$i]->exists("Itinerario/*[\@Numero='$j']")) ) {
+                $arrivo=$viaggi_att[$i]->findnodes("Itinerario/*[\@Numero='$j']/Luogo")->get_node(1)->textContent;
+                $num_a=$j;
+                $j=5;
             }
         }
         my $prezzo = utility::calcola_prezzo($num_p,$num_a,$idv,$doc); # funzione che calcola il prezzo
@@ -248,8 +253,8 @@ sub query_viaggi_attivi_utente {
             arrivo => $arrivo,
             prezzo => $prezzo,
             posti => $posti,
-            data => $data,
-            ora => $ora};
+            data => date_time::formatta_data($data),
+            ora => date_time::formatta_ora($ora)};
     }
 
 
@@ -288,7 +293,7 @@ sub query_viaggi_recensire_utente {
                                 href => "viaggio_recensire.cgi?passaggio=$idv",
                                 partenza => $partenza,
                                 arrivo => $arrivo,
-                                data => $data
+                                data => date_time::formatta_data($data)
                             }
         }
     return @viaggi_list;
@@ -336,6 +341,7 @@ sub query_notifiche_utente {
         }
         if(!$presenza) {
             push @aux, $passaggio;
+
             push @feedback_list, { href => "viaggio_recensire.cgi?passaggio=$passaggio" };
         }
     }
@@ -347,8 +353,9 @@ sub query_notifiche_utente {
         my $passaggio = $notifiche_richiesta_prenot[$i]->findnodes("\@Passaggio");
         my $partenza = $notifiche_richiesta_prenot[$i]->findnodes("\@Partenza");
         my $arrivo = $notifiche_richiesta_prenot[$i]->findnodes("\@Arrivo");
-        push @richieste_list, { richiedente => $richiedente, passaggio => $passaggio, partenza => $partenza, arrivo => $arrivo };
-        # PER RICCARDO : MANCANO TABINDEX
+        my $luogo_p = $doc->findnodes("//SetPassaggi/Passaggio[IDViaggio=\"$passaggio\"]/Itinerario/*[\@Numero=\"$partenza\"]/Luogo")->get_node(1)->textContent;
+        my $luogo_a = $doc->findnodes("//SetPassaggi/Passaggio[IDViaggio=\"$passaggio\"]/Itinerario/*[\@Numero=\"$arrivo\"]/Luogo")->get_node(1)->textContent;
+        push @richieste_list, { richiedente => $richiedente, passaggio => $passaggio, partenza => $partenza, arrivo => $arrivo, luogo_p => $luogo_p, luogo_a => $luogo_a };
     }
 
     my @notifiche_esito_prenot = $doc->findnodes("//SetUtenti/Utente[Username='$ute']/Notifiche/EsitoPrenotaz");
@@ -356,7 +363,12 @@ sub query_notifiche_utente {
     for(my $i=0; $i<$size; $i++) {
         my $passaggio = $notifiche_esito_prenot[$i]->findnodes("\@Passaggio");
         my $esito = $notifiche_esito_prenot[$i]->findnodes("\@Esito");
-        push @esito_list, { href => "ricevitore_esito_visualizz.cgi?passaggio=$passaggio", esito => $esito };
+        my $NumPartenza = $notifiche_esito_prenot[$i]->findnodes("\@Partenza");
+        my $NumArrivo = $notifiche_esito_prenot[$i]->findnodes("\@Arrivo");
+        my $luogo_p = $doc->findnodes("//SetPassaggi/Passaggio[IDViaggio=\"$passaggio\"]/Itinerario/*[\@Numero=\"$NumPartenza\"]/Luogo")->get_node(1)->textContent;
+        my $luogo_a = $doc->findnodes("//SetPassaggi/Passaggio[IDViaggio=\"$passaggio\"]/Itinerario/*[\@Numero=\"$NumArrivo\"]/Luogo")->get_node(1)->textContent;
+        
+        push @esito_list, { href => "ricevitore_esito_visualizz.cgi?passaggio=$passaggio", passaggio => $passaggio, esito => $esito, partenza => $NumPartenza, arrivo => $NumArrivo, luogo_p => $luogo_p, luogo_a => $luogo_a };
     }
     return (\@messaggi_list, \@feedback_list, \@richieste_list, \@esito_list);
 }

@@ -97,10 +97,10 @@
     </xsl:for-each>
     <div id="commenti"> <!--serve il div?-->
       <h3>Commenti degli utenti</h3>
-      <xsl:if test="count(ts:TravelShare/SetFeedback/Feedback[@IDDest='[% UTENTE %]'])=0">
+      <xsl:if test="count(ts:TravelShare/SetFeedback/Feedback[@IDDest='[% UTENTE %]']/Commento)=0">
         <div class="contenitore"><p>L&#39;utente non ha ricevuto nessun commento.</p></div>
       </xsl:if>
-      <xsl:for-each select="ts:TravelShare/SetFeedback/Feedback[@IDDest='[% UTENTE %]']" >
+      <xsl:for-each select="ts:TravelShare/SetFeedback/Feedback[@IDDest='[% UTENTE %]']/Commento" >
         <div class="commentoUtente">
           <p class="intestazioneMsg"><span class="mittenteMsg"><xsl:value-of select="@IDMitt"/></span></p>
           <p><xsl:value-of select="Commento" /></p>

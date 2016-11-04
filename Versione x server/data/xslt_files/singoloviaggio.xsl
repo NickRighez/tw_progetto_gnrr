@@ -3,26 +3,10 @@
 <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:ts="http://www.dominio.com">
   <!-- <xsl:output method='html' version='1.0' encoding='UTF-8' indent='yes' doctype-system="http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd" doctype-public="-//W3C//DTD XHTML 1.0 Strict//EN" omit-xml-declaration="yes"  /> -->
 
-  <xsl:variable name="num_tappe_tot">
-    <xsl:value-of select="count(ts:TravelShare/SetPassaggi/Passaggio[IDViaggio='[% VIAGGIO %]']/Itinerario/*)" />
-  </xsl:variable>
-
-  <xsl:variable name="num_tappe_corrente">
-    <xsl:value-of select="count(ts:TravelShare/SetPassaggi/Passaggio[IDViaggio='[% VIAGGIO %]']/Itinerario/*[@Numero&gt;=[% NUM_PARTENZA %] and @Numero&lt;=[% NUM_ARRIVO %]])" />
-  </xsl:variable>
-
-  <xsl:variable name="prezzoTot">
-    <xsl:value-of select="ts:TravelShare/SetPassaggi/Passaggio[IDViaggio='[% VIAGGIO %]']/PrezzoTot" />
-  </xsl:variable>
-
-  <xsl:variable name="prezzo">
-    <xsl:value-of select="$prezzoTot div $num_tappe_tot * $num_tappe_corrente" />
-  </xsl:variable>
-
   <xsl:variable name="minPostiDisp">
     <xsl:for-each select="ts:TravelShare/SetPassaggi/Passaggio[IDViaggio='[% VIAGGIO %]']/Itinerario/*/PostiDisp" >
       <xsl:sort data-type="number" />
-      <xsl:if test="position()=1">
+      <xsl:if test="position()=2">
         <xsl:value-of select="."/>
       </xsl:if>
     </xsl:for-each>
@@ -44,7 +28,7 @@
         <p>Data : <xsl:call-template name="formatdate"><xsl:with-param name="datestr" select="Itinerario/*[@Numero=[% NUM_PARTENZA %]]/Data"/> </xsl:call-template></p>
         <p>Ora partenza: <xsl:call-template name="formathour"> <xsl:with-param name="hourstr"  select="Itinerario/*[@Numero=[% NUM_PARTENZA %]]/Ora"/> </xsl:call-template></p>
         <p>Ora arrivo: <xsl:call-template name="formathour"> <xsl:with-param name="hourstr"  select="Itinerario/*[@Numero=[% NUM_ARRIVO %]]/Ora"/></xsl:call-template> </p>
-        <p>Prezzo: <xsl:value-of select="$prezzo" />   <xsl:text disable-output-escaping="yes">&amp;euro;</xsl:text> </p>
+        <p>Prezzo: [% PREZZO %]   <xsl:text disable-output-escaping="yes">&amp;euro;</xsl:text> </p>
         <p>Posti: <xsl:value-of select="$minPostiDisp" /> </p>
         <p>Descrizione del viaggio</p>
         <div class="descrizione">
@@ -74,7 +58,7 @@
     <a>
 
       <xsl:attribute name="href">profilo.cgi?utente=<xsl:value-of select="$ute" /></xsl:attribute>
-      <xsl:attribute name="tabindex">8</xsl:attribute>
+      <xsl:attribute name="tabindex">9</xsl:attribute>
       <xsl:value-of select="$ute" />
     </a>
 

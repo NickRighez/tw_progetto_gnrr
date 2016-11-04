@@ -19,10 +19,12 @@ my $q = new CGI;
 my @s = sessione::creaSessione();
 my $session = $s[0];
 
+############################################################################ valori appesi alla stringa URL
 my $partenza=$q->param('partenza');
 my $arrivo=$q->param('arrivo');
 my $data=$q->param('data');
 my $doc = data_registration::get_xml_doc();
+
 my @viaggi_list = research::query_ricerca($partenza, $arrivo, $data, $doc);
 my $empty = "false";
 my $num_viaggi = @viaggi_list;

@@ -237,7 +237,7 @@ else {
             Luogo => $q->param('arrivo'),
             Data => $dataA[2]."-".$dataA[1]."-".$dataA[0],
             Ora => $q->param('oraA').":00",
-            PostiDisp => $q->param('posti')
+            PostiDisp => 0
             );
 
         if($q->param('descrizioneViaggio') ne "") {

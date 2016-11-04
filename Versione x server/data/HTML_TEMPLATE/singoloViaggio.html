@@ -37,25 +37,32 @@
 
    <p>Ciao [% NOME_UTENTE %]</p>
 
-   <p><a href="notifiche.html" tabindex="2">Notifiche ([% NUM_NOTIFICHE %])</a>  <a href="ricevitore_logout.cgi" tabindex="3">Logout</a></p>
+   <p><a href="notifiche.cgi" tabindex="2">Notifiche ([% NUM_NOTIFICHE %])</a>  <a href="ricevitore_logout.cgi" tabindex="3">Logout</a></p>
 
   </div>
 
  [% END %]
 
   <div id="contenuto">
+      [% IF DESCRIZIONE_ERRORE %]
+        <div class="div_errore">
+          <p>[% DESCRIZIONE_ERRORE %]</p>
+        </div>
+      [% END %]
+
     <h1>[% PARTENZA %] - [% ARRIVO %]</h1> <!--ricercati-->
 
+      [% IF NOTA %]
+        <div class="contenitore">
+          <p>[% NOTA %]</p>
+        </div>
+      [% END %]
+
     [% IF RICERCA_PREC == 'yes' %]
-    <a class="linkSottoH" href="risultatiLog.html" tabindex="[% INDEX %]">Torna ai risultati</a>
+    <a class="linkSottoH" href="risultati_ricerca.cgi" tabindex="[% INDEX %]">Torna ai risultati</a>
     [% INDEX = INDEX+1 %]
     [% END %]
 
-    [% ERR_PRENOTAZIONE %]
-    [% ERR_RICHIESTA %]
-    [% ERR_CONDUCENTE %]
-    [% ERR_PASSATO %]
-    [% ERR_POSTI %]
 
 		[% CONTENUTO_PASSAGGIO %]
      [% IF PRENOTAZIONE == 'yes' %]
@@ -69,6 +76,7 @@
         </form>  
       </div>
     [% END %]
+    
     [% IF MOTIVAZIONE %]
       <div class="contenitore"><p>[% MOTIVAZIONE %]</p></div>
     [% END %]
@@ -80,9 +88,10 @@
               <p>Inizia una nuova conversazione con il proprietario del viaggio!</p><br /> 
               <input type="hidden" name="destinatario" value="[% CONDUCENTE %]"></input>
               <input type="hidden" name="passaggio" value="[% PASSAGGIO %]"></input>
-              <input type="hidden" name="partenza" value="[% PARTENZA %]"></input>
-              <input type="hidden" name="arrivo" value="[% ARRIVO %]"></input>
-              <textarea rows="" cols="" name="messaggio"></textarea> 
+              <input type="hidden" name="partenza" value="[% NUM_PARTENZA %]"></input>
+              <input type="hidden" name="arrivo" value="[% NUM_ARRIVO %]"></input>
+              <textarea rows="" cols="" name="messaggio" tabindex="[% INDEX %]"></textarea>
+              [% INDEX = INDEX+1 %] 
               <div><input type="submit" value="Invia" tabindex="[% INDEX %]"></input></div> 
               [% INDEX = INDEX+1 %]
             </form>

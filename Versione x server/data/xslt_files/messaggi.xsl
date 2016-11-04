@@ -7,7 +7,7 @@
       <xsl:choose>
         <xsl:when test="@User1='[% UTENTE %]'"> <!-- mostra 1 come mittente quando io sono 2 e viceversa -->
           <xsl:choose>
-            <xsl:when test="Messaggio[1]/@Letto='no'">
+            <xsl:when test="Messaggio[last()]/@Letto='no'">
               <div class="conversazione nuova">
                 <xsl:call-template name="conversazione_nuova">
                   <xsl:with-param name="utente" select="@User2" />
@@ -25,7 +25,7 @@
         </xsl:when>
         <xsl:otherwise>
           <xsl:choose>
-            <xsl:when test="Messaggio[1]/@Letto='no'">
+            <xsl:when test="Messaggio[last()]/@Letto='no'">
               <div class="conversazione nuova">
                 <xsl:call-template name="conversazione_nuova">
                   <xsl:with-param name="utente" select="@User1" />

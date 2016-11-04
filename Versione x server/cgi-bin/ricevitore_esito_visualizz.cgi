@@ -15,6 +15,7 @@ my $q=new CGI;
 
 my @s = sessione::creaSessione();
 my $session = $s[0];
+my $doc = data_registration::get_xml_doc();
 
 if(!defined($session->param('username'))) {
     my %problems=(
@@ -23,20 +24,23 @@ if(!defined($session->param('username'))) {
     $session->param('problems',\%problems);
     print $session->header(-location => "login.cgi");
 }
+elsif (!($q->param('passaggio')=~m/^v[0-9]+$/) || 
+        !($doc->exists("//SetUtenti/Utente[Username='".$session->param('username')."']/Notifiche/EsitoPrenotaz[\@Passaggio='".$q->param('passaggio')."']"))) {
+    my %problems=(
+        DESCRIZIONE_ERRORE => "Tentativo di eliminare una notifica con una modalit&agrave; non permessa."
+        );
+    $session->param('problems',\%problems);
+    print $session->header(-location => "home.cgi");
+}
 else {
     my $username = $session->param('username');
-    my $doc = data_registration::get_xml_doc();
-    my $passaggio = $q->param('passaggio');
-    if($doc->exists("//SetUtenti/Utente[Username='$username']/Notifiche/EsitoPrenotaz[\@Passaggio='$passaggio']")) {
-    	data_registration::elimina_notifica($username,"EsitoPrenotaz","\@Passaggio='$passaggio'");
-    	print $session->header(-location => "notifiche.cgi");
-    }
-    else {
-    	#########################  AGGIUNGERE ERRORE ALLA HOME
-    	my %problems=(
-        	DESCRIZIONE_ERRORE => "<div class=\"descrizione_errore\"><p>Errore eliminazione notifica di un esito di prenotazione. Notifica inesistente.</p></div>"
-        );
-	    $session->param('problems',\%problems);
-	    print $session->header(-location => "home.cgi");
-    }
+
+    # $q->param('passaggio') passato con GET (appeso alla stringa URL)
+    my $passaggio = $q->param('passaggio');    
+
+    data_registration::elimina_notifica($username,"EsitoPrenotaz","\@Passaggio='$passaggio'");
+    my %nota = ( nota => "Notifica di esito prenotazione eliminato con successo.");
+    $session->param('nota',\%nota);
+
+    print $session->header(-location => "notifiche.cgi");
 }

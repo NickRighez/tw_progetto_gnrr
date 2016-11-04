@@ -15,13 +15,13 @@
           <xsl:choose>
             <xsl:when test="Mittente=../../../Conducente">
               <div class="inviati">                                                          <xsl:text>&#xa;</xsl:text>
-                <p class="intestazioneMsg"><span class="mittenteMsg"><xsl:value-of select="Mittente"/></span><xsl:value-of select="Data"/> - <xsl:value-of select="Ora"/></p>                                                         <xsl:text>&#xa;</xsl:text>
+                <p class="intestazioneMsg"><span class="mittenteMsg"><xsl:value-of select="Mittente"/></span><xsl:call-template name="formatdate"><xsl:with-param name="datestr" select="Data"/> </xsl:call-template> - <xsl:call-template name="formathour"> <xsl:with-param name="hourstr"  select="Ora"/> </xsl:call-template></p>                                                         <xsl:text>&#xa;</xsl:text>
                 <p><xsl:value-of select="Testo"/></p>                                                         <xsl:text>&#xa;</xsl:text>
               </div>                                                         <xsl:text>&#xa;</xsl:text>
             </xsl:when>
             <xsl:otherwise>
               <div class="ricevuti">                                                         <xsl:text>&#xa;</xsl:text>
-                <p class="intestazioneMsg"><span class="mittenteMsg"><xsl:value-of select="Mittente"/></span><xsl:value-of select="Data"/> - <xsl:value-of select="Ora"/></p>                                                         <xsl:text>&#xa;</xsl:text>
+                <p class="intestazioneMsg"><span class="mittenteMsg"><xsl:value-of select="Mittente"/></span><xsl:call-template name="formatdate"><xsl:with-param name="datestr" select="Data"/></xsl:call-template> - <xsl:call-template name="formathour"> <xsl:with-param name="hourstr"  select="Ora"/> </xsl:call-template> </p>                                                         <xsl:text>&#xa;</xsl:text>
                 <p><xsl:value-of select="Testo"/></p>                                                         <xsl:text>&#xa;</xsl:text>
               </div>                                                         <xsl:text>&#xa;</xsl:text>
             </xsl:otherwise>
@@ -93,8 +93,51 @@
         </xsl:if>
 
       </div>                                                         <xsl:text>&#xa;</xsl:text>
-    </xsl:for-each>
-    
+    </xsl:for-each>   
+  </xsl:template>
+
+  <!-- FORMATTAZIONE DATA E ORA -->
+
+<xsl:template name="formatdate">
+    <xsl:param name="datestr" />
+    <!-- input format yyyy-mm-dd -->
+    <!-- output format dd-mm-yyyy -->
+
+    <xsl:variable name="mm">
+      <xsl:value-of select="substring($datestr,6,2)" />
+    </xsl:variable>
+
+    <xsl:variable name="dd">
+      <xsl:value-of select="substring($datestr,9,2)" />
+    </xsl:variable>
+
+    <xsl:variable name="yyyy">
+      <xsl:value-of select="substring($datestr,1,4)" />
+    </xsl:variable>
+
+    <xsl:value-of select="$dd" />
+    <xsl:value-of select="'-'" />
+    <xsl:value-of select="$mm" />
+    <xsl:value-of select="'-'" />
+    <xsl:value-of select="$yyyy" />
+  </xsl:template>
+  
+  <xsl:template name="formathour">
+    <xsl:param name="hourstr" />
+    <!-- input format hh:mm:ss -->
+    <!-- output format hh:mm -->
+
+    <xsl:variable name="hh">
+      <xsl:value-of select="substring($hourstr,1,2)" />
+    </xsl:variable>
+
+    <xsl:variable name="mm">
+      <xsl:value-of select="substring($hourstr,4,2)" />
+    </xsl:variable>
+
+    <xsl:value-of select="$hh" />
+    <xsl:value-of select="':'" />
+    <xsl:value-of select="$mm" />
   </xsl:template>
 
 </xsl:stylesheet>

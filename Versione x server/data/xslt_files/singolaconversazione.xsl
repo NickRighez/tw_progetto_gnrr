@@ -31,9 +31,6 @@
         </xsl:when>
         <xsl:otherwise>
           <div class="ricevuti" >  <!-- DIVISIONE FRA LETTI E NON LETTI -->
-            <xsl:if test="@Letto = 'no'">
-              <p>NUOVO MESSAGGIO</p>
-            </xsl:if>
             <p class="intestazioneMsg">
               <xsl:call-template name="formatdate">
                   <xsl:with-param name="datestr" select="Data" />

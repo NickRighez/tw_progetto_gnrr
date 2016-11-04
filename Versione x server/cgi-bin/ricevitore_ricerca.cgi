@@ -58,15 +58,17 @@ else {
 
 if($problems{'empty'} eq 'yes') {
     my @data_arr = split /-/, $q->param('data');
-    my %Ricerca = (
-        partenza =>  $q->param('partenza'),
-        arrivo => $q->param('arrivo'),
-        data => $q->param('data')
-        );
-    $session->param('ricerca_prec', \%Ricerca);
     if (length($data_arr[1])  == 1) {$data_arr[1] = "0".$data_arr[1];}
     if (length($data_arr[0]) == 1) {$data_arr[0] = "0".$data_arr[0];}
     my $data = $data_arr[2]."-".$data_arr[1]."-".$data_arr[0];
+
+    my %Ricerca = (
+        partenza =>  $q->param('partenza'),
+        arrivo => $q->param('arrivo'),
+        data => $data
+        );
+    $session->param('ricerca', \%Ricerca);
+    
     print $session->header(-location => "risultati_ricerca.cgi?partenza=".$q->param('partenza')."&arrivo=".$q->param('arrivo')."&data=$data");
 }
 else {
