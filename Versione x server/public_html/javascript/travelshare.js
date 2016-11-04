@@ -11,7 +11,10 @@ var funzioniDiCaricamento = {
       $(function() {
         $("#data").datepicker({
           dateFormat: "dd-mm-yy",
-          minDate: 0 /*, maxDate: +30 */
+          minDate: 0 /*, maxDate: +30 */ ,
+          onClose: function() {
+              funzioniDiValidazione.valida_data("data");
+            }
         });
       });
       // Actions
@@ -91,11 +94,17 @@ var funzioniDiCaricamento = {
       // jquery applet per calendario
       $("#dataA").datepicker({
         dateFormat: "dd-mm-yy",
-        minDate: 0 /*, maxDate: +30 */
+        minDate: 0 /*, maxDate: +30 */,
+        onClose: function() {
+            funzioniDiValidazione.valida_data("dataA");
+          }
       });
       $("#dataP").datepicker({
         dateFormat: "dd-mm-yy",
-        minDate: 0 /*, maxDate: +30 */
+        minDate: 0 /*, maxDate: +30 */,
+        onClose: function() {
+            funzioniDiValidazione.valida_data("dataP");
+          }
       });
       //Actions
       var part = document.getElementById("partenza");
@@ -644,9 +653,10 @@ var funzioniDiValidazioneSubmit = {
     var hp = document.getElementById("oraP").value.split(":");
     var da = document.getElementById("dataA").value.split("-");
     var dp = document.getElementById("dataP").value.split("-");
-    var part = new Date(dp[2], dp[1], dp[0], hp[1], hp[0], 0, 0);
-    var arr = new Date(da[2], da[1], da[0], ha[1], ha[0], 0, 0);
+    var part = new Date(dp[2], dp[1], dp[0], hp[0], hp[1], 0, 0);
+    var arr = new Date(da[2], da[1], da[0], ha[0], ha[1], 0, 0);
     var diff = arr.getTime() - part.getTime();
+    console.log(diff);
     return diff > 0;
   },
 

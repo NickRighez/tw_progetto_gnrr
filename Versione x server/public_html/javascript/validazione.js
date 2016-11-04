@@ -78,7 +78,6 @@ var funzioniDiValidazione = {
   },
 
   valida_tappa: function(num) {
-    console.log('tappa' + num);
     var input = document.getElementById('tappa' + num).value;
     var sol = /^(\u0027|\u002C|\u002D|\u002F|[\u0030-\u0039]|[\u0041-\u005A]|[\u0061-\u007A]|[\u00C0-\u024F]|\s)*$/.test(input);
     if (!sol) {

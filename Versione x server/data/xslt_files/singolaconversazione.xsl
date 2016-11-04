@@ -25,14 +25,14 @@
               <xsl:with-param name="hourstr" select="Ora" />
             </xsl:call-template>
 
-            </p>
-            <p><xsl:value-of select="Testo"/></p>
+            </p><xsl:text>&#x0A;</xsl:text>
+            <p><xsl:value-of select="Testo"/></p><xsl:text>&#x0A;</xsl:text>
           </div>
         </xsl:when>
         <xsl:otherwise>
           <div class="ricevuti" >  <!-- DIVISIONE FRA LETTI E NON LETTI -->
             <xsl:if test="@Letto = 'no'">
-              <p>NUOVO MESSAGGIO</p>
+              <p>NUOVO MESSAGGIO</p><xsl:text>&#x0A;</xsl:text>
             </xsl:if>
             <p class="intestazioneMsg">
               <xsl:call-template name="formatdate">
@@ -41,10 +41,10 @@
               <xsl:call-template name="formathour">
               <xsl:with-param name="hourstr" select="Ora" />
               </xsl:call-template>
-            </p>
+            </p><xsl:text>&#x0A;</xsl:text>
 
 
-            <p><xsl:value-of select="Testo"/></p>
+            <p><xsl:value-of select="Testo"/></p><xsl:text>&#x0A;</xsl:text>
           </div>
         </xsl:otherwise>
       </xsl:choose>

@@ -145,8 +145,8 @@ var funzioniDiValidazioneSubmit = {
     var hp = document.getElementById("oraP").value.split(":");
     var da = document.getElementById("dataA").value.split("-");
     var dp = document.getElementById("dataP").value.split("-");
-    var part = new Date(dp[2], dp[1], dp[0], hp[1], hp[0], 0, 0);
-    var arr = new Date(da[2], da[1], da[0], ha[1], ha[0], 0, 0);
+    var part = new Date(dp[2], dp[1], dp[0], hp[0], hp[1], 0, 0);
+    var arr = new Date(da[2], da[1], da[0], ha[0], ha[1], 0, 0);
     var diff = arr.getTime() - part.getTime();
     return diff > 0;
   },

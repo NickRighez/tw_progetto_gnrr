@@ -32,7 +32,8 @@
         </Preferenze>
       </Profilo>
       <Notifiche>
-        
+        <NuovoMessaggio Mittente="pappone" />
+        <NuovoMessaggio Mittente="pappone" />
       </Notifiche>
     </Utente>
     <Utente>
@@ -205,14 +206,14 @@
       <Email>nrt@mail.com</Email>
       <Nome>Nicolò</Nome>
       <Cognome>Parà</Cognome>
-      <DescrizionePers>Ciao èè+è+ùàùàùàùàù</DescrizionePers>
+      <DescrizionePers />
       <Sesso>maschio</Sesso>
       <AnnoNascita>1991</AnnoNascita>
       <Password>123456789</Password>
       <Profilo>
         <NumFeedbRicevuti>0</NumFeedbRicevuti>
-        <NumPassaggiOff>0</NumPassaggiOff>
-        <NumPassaggiPart>0</NumPassaggiPart>
+        <NumPassaggiOff>2</NumPassaggiOff>
+        <NumPassaggiPart>1</NumPassaggiPart>
         <Valutazione>
           <PunteggioMedio>0</PunteggioMedio>
           <Compagnia>0</Compagnia>
@@ -230,7 +231,8 @@
         </Preferenze>
       </Profilo>
       <Notifiche>
-    </Notifiche>
+        <EsitoPrenotaz Passaggio="v9" Esito="Accettata" />
+      </Notifiche>
     </Utente>
     <Utente>
       <Username>qwerty</Username>
@@ -283,9 +285,99 @@
       <Email>riccardoardossi@hotmail.it</Email>
       <Nome>Riccardo</Nome>
       <Cognome>Ardossi</Cognome>
+      <DescrizionePers>ciao</DescrizionePers>
       <Sesso>maschio</Sesso>
       <AnnoNascita>1993</AnnoNascita>
       <Password>progetto</Password>
+      <Profilo>
+        <NumFeedbRicevuti>1</NumFeedbRicevuti>
+        <NumPassaggiOff>5</NumPassaggiOff>
+        <NumPassaggiPart>0</NumPassaggiPart>
+        <Valutazione>
+          <PunteggioMedio>4</PunteggioMedio>
+          <Compagnia>3</Compagnia>
+          <Puntualita>5</Puntualita>
+          <Pulizia>3</Pulizia>
+          <Guida>5</Guida>
+        </Valutazione>
+        <Auto>Fiat Grande Punto</Auto>
+        <Patente>2012</Patente>
+        <Preferenze>
+          <Chiacchiere>1</Chiacchiere>
+          <Musica>2</Musica>
+          <Animali>0</Animali>
+          <Fumatore>0</Fumatore>
+        </Preferenze>
+      </Profilo>
+      <Notifiche>
+        
+      </Notifiche>
+    </Utente>
+    <Utente>
+      <Username>VRossi</Username>
+      <Email>dh@gj.it</Email>
+      <Nome>Valentina</Nome>
+      <Cognome>Rossi</Cognome>
+      <Sesso>femmina</Sesso>
+      <AnnoNascita>1990</AnnoNascita>
+      <Password>11111111</Password>
+      <Profilo>
+        <NumFeedbRicevuti>1</NumFeedbRicevuti>
+        <NumPassaggiOff>0</NumPassaggiOff>
+        <NumPassaggiPart>4</NumPassaggiPart>
+        <Valutazione>
+          <PunteggioMedio>3</PunteggioMedio>
+          <Compagnia>3</Compagnia>
+          <Puntualita>3</Puntualita>
+          <Pulizia>0</Pulizia>
+          <Guida>0</Guida>
+        </Valutazione>
+      </Profilo>
+      <Notifiche>
+        
+      </Notifiche>
+    </Utente>
+    <Utente>
+      <Username>Monty</Username>
+      <Email>ml@mail.com</Email>
+      <Nome>Lucia</Nome>
+      <Cognome>Monteleone</Cognome>
+      <DescrizionePers>Guido con prudenza. No rompiscatole.... if u know what i mean....</DescrizionePers>
+      <Sesso>femmina</Sesso>
+      <AnnoNascita>1982</AnnoNascita>
+      <Password>123456789</Password>
+      <Profilo>
+        <NumFeedbRicevuti>0</NumFeedbRicevuti>
+        <NumPassaggiOff>1</NumPassaggiOff>
+        <NumPassaggiPart>0</NumPassaggiPart>
+        <Valutazione>
+          <PunteggioMedio>0</PunteggioMedio>
+          <Compagnia>0</Compagnia>
+          <Puntualita>0</Puntualita>
+          <Pulizia>0</Pulizia>
+          <Guida>0</Guida>
+        </Valutazione>
+        <Auto>Fiesta</Auto>
+        <Patente>1999</Patente>
+        <Preferenze>
+          <Chiacchiere>1</Chiacchiere>
+          <Musica>1</Musica>
+          <Animali>0</Animali>
+          <Fumatore>1</Fumatore>
+        </Preferenze>
+      </Profilo>
+      <Notifiche>
+        
+      </Notifiche>
+    </Utente>
+    <Utente>
+      <Username>Sempronio</Username>
+      <Email>ave@cesare.it</Email>
+      <Nome>Tizio</Nome>
+      <Cognome>Caio</Cognome>
+      <Sesso>maschio</Sesso>
+      <AnnoNascita>1989</AnnoNascita>
+      <Password>11111111</Password>
       <Profilo>
         <NumFeedbRicevuti>0</NumFeedbRicevuti>
         <NumPassaggiOff>0</NumPassaggiOff>
@@ -299,7 +391,8 @@
         </Valutazione>
       </Profilo>
       <Notifiche>
-    </Notifiche>
+        <EsitoPrenotaz Passaggio="v10" Esito="Rifiutata" />
+      </Notifiche>
     </Utente>
   </SetUtenti>
   <!--  ***************************************************************   SET PASSAGGI   ************************** -->
@@ -379,6 +472,32 @@
             <Ora>07:40:47</Ora>
             <Testo>ciaoooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo
             </Testo>
+          </Messaggio>
+        </ConversazioneBacheca>
+        <ConversazioneBacheca User1="pappone" User2="utente_uno">
+          <Messaggio>
+            <Mittente>pappone</Mittente>
+            <Data>2016-10-28</Data>
+            <Ora>07:02:06</Ora>
+            <Testo>Ciao</Testo>
+          </Messaggio>
+          <Messaggio>
+            <Mittente>pappone</Mittente>
+            <Data>2016-10-28</Data>
+            <Ora>07:05:03</Ora>
+            <Testo>Ciao</Testo>
+          </Messaggio>
+          <Messaggio>
+            <Mittente>pappone</Mittente>
+            <Data>2016-10-28</Data>
+            <Ora>07:05:45</Ora>
+            <Testo>Ciao</Testo>
+          </Messaggio>
+          <Messaggio>
+            <Mittente>pappone</Mittente>
+            <Data>2016-10-28</Data>
+            <Ora>07:16:19</Ora>
+            <Testo>ciao</Testo>
           </Messaggio>
         </ConversazioneBacheca>
       </Bacheca>
@@ -483,35 +602,298 @@
         </ConversazioneBacheca>
       </Bacheca>
     </Passaggio>
-    <Passaggio Passato="no">
+    <Passaggio Passato="si">
       <IDViaggio>v4</IDViaggio>
-      <Conducente>utente_uno</Conducente>
-      <PrezzoTot>22</PrezzoTot>
+      <Conducente>ARDbones</Conducente>
+      <PrezzoTot>10</PrezzoTot>
       <PostiTot>3</PostiTot>
+      <Dettagli>Partenza puntuale</Dettagli>
       <Itinerario>
         <Partenza Numero="0">
-          <PostiDisp>3</PostiDisp>
-          <Data>2016-12-21</Data>
+          <PostiDisp>2</PostiDisp>
+          <Data>2016-10-28</Data>
+          <Ora>10:30:00</Ora>
+          <Luogo>Padova</Luogo>
+          <Prenotazioni>
+            <Utente>VRossi</Utente>
+          </Prenotazioni>
+        </Partenza>
+        <Tappa Numero="1">
+          <PostiDisp>2</PostiDisp>
+          <Data>2016-10-28</Data>
+          <Ora>10:31:40</Ora>
+          <Luogo>vicenza</Luogo>
+          <Prenotazioni>
+            <Utente>VRossi</Utente>
+          </Prenotazioni>
+        </Tappa>
+        <Arrivo Numero="4">
+          <PostiDisp>2</PostiDisp>
+          <Data>2016-10-28</Data>
+          <Ora>10:35:00</Ora>
+          <Luogo>milano</Luogo>
+          <Prenotazioni>
+            <Utente>VRossi</Utente>
+          </Prenotazioni>
+        </Arrivo>
+      </Itinerario>
+      <Bacheca />
+    </Passaggio>
+    <Passaggio Passato="si">
+      <IDViaggio>v5</IDViaggio>
+      <Conducente>ARDbones</Conducente>
+      <PrezzoTot>5</PrezzoTot>
+      <PostiTot>1</PostiTot>
+      <Itinerario>
+        <Partenza Numero="0">
+          <PostiDisp>0</PostiDisp>
+          <Data>2016-10-28</Data>
+          <Ora>10:35:00</Ora>
+          <Luogo>Padova</Luogo>
+          <Prenotazioni>
+            <Utente>VRossi</Utente>
+          </Prenotazioni>
+        </Partenza>
+        <Arrivo Numero="4">
+          <PostiDisp>0</PostiDisp>
+          <Data>2016-10-28</Data>
+          <Ora>10:37:00</Ora>
+          <Luogo>Milano</Luogo>
+          <Prenotazioni>
+            <Utente>VRossi</Utente>
+          </Prenotazioni>
+        </Arrivo>
+      </Itinerario>
+      <Bacheca />
+    </Passaggio>
+    <Passaggio Passato="si">
+      <IDViaggio>v6</IDViaggio>
+      <Conducente>pappone</Conducente>
+      <PrezzoTot>55</PrezzoTot>
+      <PostiTot>4</PostiTot>
+      <Dettagli>Gran casino!!!!</Dettagli>
+      <Itinerario>
+        <Partenza Numero="0">
+          <PostiDisp>4</PostiDisp>
+          <Data>2016-10-31</Data>
           <Ora>12:00:00</Ora>
-          <Luogo>verona</Luogo>
+          <Luogo>Milano</Luogo>
           <Prenotazioni />
         </Partenza>
         <Tappa Numero="1">
-          <PostiDisp>3</PostiDisp>
-          <Data>2016-12-21</Data>
-          <Ora>15:40:00</Ora>
-          <Luogo>bellunio</Luogo>
+          <PostiDisp>4</PostiDisp>
+          <Data>2016-10-31</Data>
+          <Ora>20:40:00</Ora>
+          <Luogo>Bologna</Luogo>
           <Prenotazioni />
         </Tappa>
         <Arrivo Numero="4">
-          <PostiDisp>3</PostiDisp>
-          <Data>2016-12-21</Data>
-          <Ora>23:00:00</Ora>
-          <Luogo>ancona</Luogo>
+          <PostiDisp>4</PostiDisp>
+          <Data>2016-11-01</Data>
+          <Ora>14:00:00</Ora>
+          <Luogo>Padova</Luogo>
           <Prenotazioni />
         </Arrivo>
       </Itinerario>
       <Bacheca />
+    </Passaggio>
+    <Passaggio Passato="si">
+      <IDViaggio>v7</IDViaggio>
+      <Conducente>pappone</Conducente>
+      <PrezzoTot>55</PrezzoTot>
+      <PostiTot>4</PostiTot>
+      <Dettagli>Gran casino!!!!</Dettagli>
+      <Itinerario>
+        <Partenza Numero="0">
+          <PostiDisp>4</PostiDisp>
+          <Data>2016-10-31</Data>
+          <Ora>12:00:00</Ora>
+          <Luogo>Milano</Luogo>
+          <Prenotazioni />
+        </Partenza>
+        <Tappa Numero="1">
+          <PostiDisp>4</PostiDisp>
+          <Data>2016-10-31</Data>
+          <Ora>20:40:00</Ora>
+          <Luogo>Bologna</Luogo>
+          <Prenotazioni />
+        </Tappa>
+        <Arrivo Numero="4">
+          <PostiDisp>4</PostiDisp>
+          <Data>2016-11-01</Data>
+          <Ora>14:00:00</Ora>
+          <Luogo>Padova</Luogo>
+          <Prenotazioni />
+        </Arrivo>
+      </Itinerario>
+      <Bacheca />
+    </Passaggio>
+    <Passaggio Passato="si">
+      <IDViaggio>v8</IDViaggio>
+      <Conducente>ARDbones</Conducente>
+      <PrezzoTot>10</PrezzoTot>
+      <PostiTot>3</PostiTot>
+      <Dettagli>dkjv</Dettagli>
+      <Itinerario>
+        <Partenza Numero="0">
+          <PostiDisp>2</PostiDisp>
+          <Data>2016-10-28</Data>
+          <Ora>10:56:00</Ora>
+          <Luogo>Padova</Luogo>
+          <Prenotazioni>
+            <Utente>VRossi</Utente>
+          </Prenotazioni>
+        </Partenza>
+        <Arrivo Numero="4">
+          <PostiDisp>2</PostiDisp>
+          <Data>2016-10-28</Data>
+          <Ora>10:57:00</Ora>
+          <Luogo>Milano</Luogo>
+          <Prenotazioni>
+            <Utente>VRossi</Utente>
+          </Prenotazioni>
+        </Arrivo>
+      </Itinerario>
+      <Bacheca />
+    </Passaggio>
+    <Passaggio Passato="no">
+      <IDViaggio>v9</IDViaggio>
+      <Conducente>Monty</Conducente>
+      <PrezzoTot>64</PrezzoTot>
+      <PostiTot>4</PostiTot>
+      <Itinerario>
+        <Partenza Numero="0">
+          <PostiDisp>3</PostiDisp>
+          <Data>2016-11-23</Data>
+          <Ora>12:10:00</Ora>
+          <Luogo>Milano</Luogo>
+          <Prenotazioni>
+            <Utente>pappone</Utente>
+          </Prenotazioni>
+        </Partenza>
+        <Tappa Numero="1">
+          <PostiDisp>3</PostiDisp>
+          <Data>2016-11-23</Data>
+          <Ora>17:52:30</Ora>
+          <Luogo>Firenze</Luogo>
+          <Prenotazioni>
+            <Utente>pappone</Utente>
+          </Prenotazioni>
+        </Tappa>
+        <Tappa Numero="2">
+          <PostiDisp>3</PostiDisp>
+          <Data>2016-11-23</Data>
+          <Ora>23:35:00</Ora>
+          <Luogo>Roma</Luogo>
+          <Prenotazioni>
+            <Utente>pappone</Utente>
+          </Prenotazioni>
+        </Tappa>
+        <Arrivo Numero="4">
+          <PostiDisp>3</PostiDisp>
+          <Data>2016-11-24</Data>
+          <Ora>11:00:00</Ora>
+          <Luogo>Bari</Luogo>
+          <Prenotazioni>
+            <Utente>pappone</Utente>
+          </Prenotazioni>
+        </Arrivo>
+      </Itinerario>
+      <Bacheca>
+        <ConversazioneBacheca User1="pappone" User2="Monty">
+          <Messaggio>
+            <Mittente>pappone</Mittente>
+            <Data>2016-11-02</Data>
+            <Ora>08:30:30</Ora>
+            <Testo>Ciao come stai</Testo>
+          </Messaggio>
+          <Messaggio>
+            <Mittente>pappone</Mittente>
+            <Data>2016-11-02</Data>
+            <Ora>14:13:44</Ora>
+            <Testo>              Inserisci un messaggio per il conducente.
+            </Testo>
+          </Messaggio>
+        </ConversazioneBacheca>
+      </Bacheca>
+    </Passaggio>
+    <Passaggio Passato="no">
+      <IDViaggio>v10</IDViaggio>
+      <Conducente>ARDbones</Conducente>
+      <PrezzoTot>7</PrezzoTot>
+      <PostiTot>3</PostiTot>
+      <Dettagli>asdas</Dettagli>
+      <Itinerario>
+        <Partenza Numero="0">
+          <PostiDisp>3</PostiDisp>
+          <Data>2016-11-04</Data>
+          <Ora>15:00:00</Ora>
+          <Luogo>Padova</Luogo>
+          <Prenotazioni />
+        </Partenza>
+        <Tappa Numero="1">
+          <PostiDisp>3</PostiDisp>
+          <Data>2016-11-04</Data>
+          <Ora>15:20:00</Ora>
+          <Luogo>vicenza</Luogo>
+
+          <Prenotazioni />
+        </Tappa>
+        <Arrivo Numero="4">
+          <PostiDisp>3</PostiDisp>
+          <Data>2016-11-04</Data>
+          <Ora>16:00:00</Ora>
+          <Luogo>Venezia</Luogo>
+          <Prenotazioni />
+        </Arrivo>
+      </Itinerario>
+      <Bacheca>
+        <ConversazioneBacheca User1="Sempronio" User2="ARDbones">
+          <Messaggio>
+            <Mittente>Sempronio</Mittente>
+            <Data>2016-11-04</Data>
+            <Ora>12:17:47</Ora>
+            <Testo>asdfgj</Testo>
+          </Messaggio>
+        </ConversazioneBacheca>
+      </Bacheca>
+    </Passaggio>
+    <Passaggio Passato="no">
+      <IDViaggio>v11</IDViaggio>
+      <Conducente>ARDbones</Conducente>
+      <PrezzoTot>4</PrezzoTot>
+      <PostiTot>2</PostiTot>
+      <Dettagli>asdf</Dettagli>
+      <Itinerario>
+        <Partenza Numero="0">
+          <PostiDisp>1</PostiDisp>
+          <Data>2016-11-04</Data>
+          <Ora>16:45:00</Ora>
+          <Luogo>Milano</Luogo>
+          <Prenotazioni>
+            <Utente>VRossi</Utente>
+          </Prenotazioni>
+        </Partenza>
+        <Arrivo Numero="4">
+          <PostiDisp>1</PostiDisp>
+          <Data>2016-11-04</Data>
+          <Ora>17:00:00</Ora>
+          <Luogo>Venezia</Luogo>
+          <Prenotazioni>
+            <Utente>VRossi</Utente>
+          </Prenotazioni>
+        </Arrivo>
+      </Itinerario>
+      <Bacheca>
+        <ConversazioneBacheca User1="VRossi" User2="ARDbones">
+          <Messaggio>
+            <Mittente>VRossi</Mittente>
+            <Data>2016-11-04</Data>
+            <Ora>12:12:48</Ora>
+            <Testo>test</Testo>
+          </Messaggio>
+        </ConversazioneBacheca>
+      </Bacheca>
     </Passaggio>
   </SetPassaggi>
   <!--  ***************************************************************   SET MESSAGGI   ************************** -->
@@ -564,6 +946,87 @@
         <Data>2016-10-24</Data>
         <Ora>12:01:12</Ora>
         <Testo>ciao</Testo>
+      </Messaggio>
+    </Conversazione>
+    <Conversazione User1="pappone" User2="utente_uno">
+      <Messaggio Letto="no">
+        <Mittente>pappone</Mittente>
+        <Data>2016-10-28</Data>
+        <Ora>07:02:43</Ora>
+        <Testo>Hey there!!!
+</Testo>
+      </Messaggio>
+      <Messaggio Letto="no">
+        <Mittente>pappone</Mittente>
+        <Data>2016-10-28</Data>
+        <Ora>07:02:58</Ora>
+        <Testo>how r u?</Testo>
+      </Messaggio>
+    </Conversazione>
+    <Conversazione User1="ARDbones" User2="VRossi">
+      <Messaggio Letto="si">
+        <Mittente>ARDbones</Mittente>
+        <Data>2016-10-28</Data>
+        <Ora>07:44:36</Ora>
+        <Testo>ciao :)</Testo>
+      </Messaggio>
+      <Messaggio Letto="si">
+        <Mittente>VRossi</Mittente>
+        <Data>2016-10-28</Data>
+        <Ora>07:47:02</Ora>
+        <Testo>:D</Testo>
+      </Messaggio>
+      <Messaggio Letto="si">
+        <Mittente>ARDbones</Mittente>
+        <Data>2016-10-28</Data>
+        <Ora>07:51:06</Ora>
+        <Testo>sdf</Testo>
+      </Messaggio>
+      <Messaggio Letto="si">
+        <Mittente>VRossi</Mittente>
+        <Data>2016-10-28</Data>
+        <Ora>07:52:06</Ora>
+        <Testo>fggfgfggfgf</Testo>
+      </Messaggio>
+      <Messaggio Letto="si">
+        <Mittente>ARDbones</Mittente>
+        <Data>2016-10-28</Data>
+        <Ora>07:55:31</Ora>
+        <Testo>sdfghjkl</Testo>
+      </Messaggio>
+      <Messaggio Letto="si">
+        <Mittente>ARDbones</Mittente>
+        <Data>2016-10-28</Data>
+        <Ora>11:03:36</Ora>
+        <Testo>aaaaaaaaaaaaaaaaaaa</Testo>
+      </Messaggio>
+    </Conversazione>
+    <Conversazione User1="pappone" User2="Monty">
+      <Messaggio Letto="si">
+        <Mittente>pappone</Mittente>
+        <Data>2016-11-01</Data>
+        <Ora>14:33:37</Ora>
+        <Testo>Ciao io sono un pappone come si capisce dal mio username :)</Testo>
+      </Messaggio>
+      <Messaggio Letto="si">
+        <Mittente>Monty</Mittente>
+        <Data>2016-11-01</Data>
+        <Ora>14:34:34</Ora>
+        <Testo>vai a quel paese!!!!!</Testo>
+      </Messaggio>
+      <Messaggio Letto="si">
+        <Mittente>Monty</Mittente>
+        <Data>2016-11-01</Data>
+        <Ora>14:35:10</Ora>
+        <Testo>no sul serio lasciami in pace</Testo>
+      </Messaggio>
+    </Conversazione>
+    <Conversazione User1="Sempronio" User2="VRossi">
+      <Messaggio Letto="si">
+        <Mittente>Sempronio</Mittente>
+        <Data>2016-11-04</Data>
+        <Ora>11:55:30</Ora>
+        <Testo>Ciao!</Testo>
       </Messaggio>
     </Conversazione>
   </SetMessaggi>
@@ -653,6 +1116,26 @@
         <Compagnia>3</Compagnia>
         <Puntualita>3</Puntualita>
       </ValutazionePasseg>
+    </Feedback>
+    <Feedback IDMitt="ARDbones" IDDest="VRossi">
+      <Passaggio>v8</Passaggio>
+      <Commento>Commento facoltativo</Commento>
+      <ValutazionePasseg>
+        <PunteggioMedio>3</PunteggioMedio>
+        <Compagnia>3</Compagnia>
+        <Puntualita>3</Puntualita>
+      </ValutazionePasseg>
+    </Feedback>
+    <Feedback IDMitt="VRossi" IDDest="ARDbones">
+      <Passaggio>v8</Passaggio>
+      <Commento />
+      <ValutazioneConduc>
+        <PunteggioMedio>4</PunteggioMedio>
+        <Compagnia>3</Compagnia>
+        <Puntualita>5</Puntualita>
+        <Pulizia>3</Pulizia>
+        <Guida>5</Guida>
+      </ValutazioneConduc>
     </Feedback>
   </SetFeedback>
 </ts:TravelShare>

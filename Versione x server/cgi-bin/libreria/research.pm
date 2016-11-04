@@ -138,7 +138,7 @@ sub query_ricerca
             my $num = @tappa;
             if($num!=0) {
                 my $luogo = $itiner[$i]->findnodes("*[\@Numero=$j]/Luogo")->get_node(1);
-                if (index($luogo, $partenza) != -1 && $itiner[$i]->findnodes("*[\@Numero=$j]/PostiDisp")->get_node(1)->textContent() > 0) {
+                if (index(lc $luogo, lc $partenza) != -1 && $itiner[$i]->findnodes("*[\@Numero=$j]/PostiDisp")->get_node(1)->textContent() > 0) {
                     for(my $k=$j+1;$k<5;$k++) {
                         my @tappe_s=$itiner[$i]->findnodes("*[\@Numero=$k]");
                         my $num = @tappe_s;
@@ -149,7 +149,7 @@ sub query_ricerca
                             }
                             else {
                                 my $luog = $itiner[$i]->findnodes("*[\@Numero=$k]/Luogo")->get_node(1);
-                                if (index($luog, $arrivo) != -1) {
+                                if (index(lc $luog, lc $arrivo) != -1) {
                                     my $ora=$itiner[$i]->findnodes("*[\@Numero=0]/Ora")->get_node(1)->textContent();
                                     my $part = $itiner[$i]->findnodes("*[\@Numero=$j]/Luogo")->get_node(1)->textContent();
                                     my $arr = $itiner[$i]->findnodes("*[\@Numero=$k]/Luogo")->get_node(1)->textContent();
@@ -459,5 +459,42 @@ sub query_feedback_da_rilasciare_viaggio
     }
     return @feedback_list;
 }
+
+sub utenti_prenotati {
+my $viaggio = shift @_;
+my $doc=data_registration::get_xml_doc();
+my $userNodesP = $doc->findnodes("//SetPassaggi/Passaggio[IDViaggio=\"$viaggio\"]/Itinerario/Partenza/Prenotazioni/Utente");
+my $userNodesA = $doc->findnodes("//SetPassaggi/Passaggio[IDViaggio=\"$viaggio\"]/Itinerario/Arrivo/Prenotazioni/Utente");
+my $userNodesT = $doc->findnodes("//SetPassaggi/Passaggio[IDViaggio=\"$viaggio\"]/Itinerario/Tappa/Prenotazioni/Utente");
+my @userList = ();
+my $numA = $userNodesA->size();
+my $numP = $userNodesP->size();
+my $numT = $userNodesT->size();
+for(my $i =1;$i<=$numP;$i++){
+  my $nome = $userNodesP->get_node($i)->textContent;
+  my $m = grep { $nome } @userList;
+  if(!$m){
+    push @userList, $nome;
+  }
+}
+for(my $i =1;$i<=$numA;$i++){
+  my $nome = $userNodesA->get_node($i)->textContent;
+  my $m = grep { $nome } @userList;
+  if(!$m){
+    push @userList, $nome;
+  }
+}
+for(my $i =$1;$i<=$numT;$i++){
+  my $nome = $userNodesT->get_node($i)->textContent;
+  my $m = grep { $nome } @userList;
+  if(!$m){
+    push @userList, $nome;
+  }
+}
+
+return @userList;
+}
+
+
 
 1;
