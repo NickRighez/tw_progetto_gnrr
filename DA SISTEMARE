@@ -7,12 +7,6 @@
 
 -la pagina del viaggio deve avere il nome del conducente, non il nickname
 
--con js esce l'errore nella data dei form
-
--"Passaggio non prenotabile, in quanto ne sei il conducente" va sostituito con l'elenco dei passeggeri
-
--la maiuscola distingue due tappe diverse -> padova != Padova
-
 -non è indicato il riferimento al viaggio nella notifica di prenotazione e il richiedente non ha il link al profilo; il richiedente non andrebbe con il nickname
 
 -il reindirizzamento dopo la prenotazione non va bene -> almeno un msg di conferma
@@ -34,3 +28,7 @@
 -dopo l'inserimento del feedback non deve reindirizzare al profilo personale, ma tornare ai viaggi
 
 -un commento vuoto viene inserito lo stesso nel profilo
+
+
+- nella pagina del viaggio singolo c'è da formattare in css la lista dei passeggeri
+- verificare js.
