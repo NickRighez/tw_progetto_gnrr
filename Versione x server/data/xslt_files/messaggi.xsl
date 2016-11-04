@@ -65,7 +65,7 @@
           </xsl:call-template>
       </span>
     </a>
-    <p class="ultimoMessaggio"><xsl:value-of select="Messaggio[1]/Testo"/></p>
+    <p class="ultimoMessaggio"><xsl:value-of select="Messaggio[1]/Testo"/></p><xsl:text>&#x0A;</xsl:text>
     <p class="linkVaiConversazione">
       <a>
         <xsl:attribute name="href">singola_conversaz.cgi?utente=<xsl:value-of select="$utente" /></xsl:attribute>
@@ -73,7 +73,7 @@
         [% stag; ' INDEX = INDEX+1 '; etag;  %]
         Vai alla conversazione <xsl:text disable-output-escaping="yes">&amp;raquo;</xsl:text>
       </a>
-    </p>
+    </p><xsl:text>&#x0A;</xsl:text>
   </xsl:template>
 
   <xsl:template name="conversazione_nuova" >
@@ -96,7 +96,7 @@
 
       </span>
     </a>
-    <p class="ultimoMessaggio"><xsl:value-of select="Messaggio[1]/Testo"/></p>
+    <p class="ultimoMessaggio"><xsl:value-of select="Messaggio[1]/Testo"/></p><xsl:text>&#x0A;</xsl:text>
     <p class="linkVaiConversazione blacktext">
       <a>
         <xsl:attribute name="href">singola_conversaz.cgi?utente=<xsl:value-of select="$utente" /></xsl:attribute>
@@ -104,7 +104,7 @@
         [% stag; ' INDEX = INDEX+1 '; etag;  %]
         Vai alla conversazione <xsl:text disable-output-escaping="yes">&amp;raquo; </xsl:text>
       </a>
-    </p>
+    </p><xsl:text>&#x0A;</xsl:text>
   </xsl:template>
 
   <xsl:template name="formatdate">

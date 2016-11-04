@@ -34,8 +34,8 @@ my %hash_keys;
 my %hash_keys = (
     VIAGGI_LIST => \@viaggi_list,
     EMPTY_LIST => $empty,
-    PARTENZA => $partenza,
-    ARRIVO => $arrivo,
+    PARTENZA => ucfirst $partenza,
+    ARRIVO => ucfirst $arrivo,
     DATA => date_time::formatta_data($data)
 );
 

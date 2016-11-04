@@ -11,7 +11,7 @@ use libreria::data_registration;
 use CGI::Session;
 #use lib "../libreria";
 use libreria::sessione;
-use libreria::utility;
+#use libreria::utility;
 
 my @s = sessione::creaSessione();
 my $session = $s[0];
@@ -33,7 +33,7 @@ my $pass = $q->param('passaggio');
 my $part =$q->param('part');
 my $arr = $q->param('arr');
 my @passaggi = $doc->findnodes("//SetPassaggi/Passaggio[IDViaggio='$pass']/Itinerario[*/\@Numero='$part' and */\@Numero='$arr']");
-#die("//SetPassaggi/Passaggio[IDViaggio='$pass']/Itinerario[*/\@Numero='$part']/*[\@Numero='$arr']");
+#die("//SetPassaggi/Passaggio[IDViaggio='$pass']/Itinerario[*/\@Numero='$part' and */\@Numero='$arr']");
 my $num = @passaggi;
 if($num==0 or $part==$arr) {
     my %problems = ( DESCRIZIONE_ERRORE => "Si e' tentato di visualizzare un passaggio non valido.");
@@ -48,11 +48,11 @@ else {
         );
 
 
-        $hash_keys{PASSAGGIO} = $pass;
-        $hash_keys{PARTENZA} = $doc->findnodes("//SetPassaggi/Passaggio[IDViaggio='$pass']/Itinerario/*[\@Numero='$part']/Luogo");
-        $hash_keys{ARRIVO} = $doc->findnodes("//SetPassaggi/Passaggio[IDViaggio='$pass']/Itinerario/*[\@Numero='$arr']/Luogo");
-        $hash_keys{NUM_PARTENZA} = $part;
-        $hash_keys{NUM_ARRIVO} = $arr;
+    $hash_keys{PASSAGGIO} = $pass;
+    $hash_keys{PARTENZA} = $doc->findnodes("//SetPassaggi/Passaggio[IDViaggio='$pass']/Itinerario/*[\@Numero='$part']/Luogo");
+    $hash_keys{ARRIVO} = $doc->findnodes("//SetPassaggi/Passaggio[IDViaggio='$pass']/Itinerario/*[\@Numero='$arr']/Luogo");
+    $hash_keys{NUM_PARTENZA} = $part;
+    $hash_keys{NUM_ARRIVO} = $arr;
 
     $contenuto_passaggio = research::query_viaggio(\%Pass);
 
@@ -83,40 +83,48 @@ else {
             $hash_keys{MOTIVAZIONE} = "Passaggio non prenotabile, in quanto gi&agrave; avvenuto";
         }
         elsif($conducente eq $username){
-            $hash_keys{MOTIVAZIONE} = "Passaggio non prenotabile, in quanto ne sei il conducente";
+            #$hash_keys{MOTIVAZIONE} = "Passaggio non prenotabile, in quanto ne sei il conducente.";
+	# Visualizzo la lista di utenti prenotati
+		my @user_ref = research::utenti_prenotati($hash_keys{PASSAGGIO},$part,$arr);
+  #  use Data::Dumper;
+  # die Dumper(@user_ref);
+#my $numUte = @users;
+#die "utente: $users[0] \n" ;
+#die("ci sono $numUte utenti \n");
+            $hash_keys{LISTA_UTENTI} = \@user_ref;
         }
         elsif($doc->exists("//SetPassaggi/Passaggio[IDViaggio=\"$pass\"]/Itinerario/*[\@Numero>=$part and \@Numero<=$arr]/Prenotazioni[Utente=\"$username\"]")){
-            $hash_keys{MOTIVAZIONE} = "Passaggio non prenotabile, in quanto esiste gi&agrave; una prenotazione per esso";
+            $hash_keys{MOTIVAZIONE} = "Passaggio non prenotabile, hai gi&agrave; effettuato una prenotazione.";
         }
         elsif($doc->exists("//SetUtenti/Utente[Username='$conducente']/Notifiche/RichiestaPrenotaz[ \@Mittente='$username' and \@Passaggio='$pass' ]")) {
-            $hash_keys{MOTIVAZIONE} = "Passaggio non prenotabile, in quanto esiste gi&agrave; una richiesta di prenotazione per esso";
+            $hash_keys{MOTIVAZIONE} = "Passaggio non prenotabile, hai gi&agrave; una richiesta di prenotazione pendente.";
         }
         elsif (utility::calcola_posti_disponibili($part, $arr, $pass, $doc) == 0){
-            $hash_keys{MOTIVAZIONE} = "Passaggio non prenotabile, posti disponibili esauriti";
-        }           
+            $hash_keys{MOTIVAZIONE} = "Passaggio non prenotabile, posti disponibili esauriti.";
+        }
         else {
             $hash_keys{PRENOTAZIONE} = 'yes';
         }
-            
-        
+
+
 
         my %Bacheca = (
             VIAGGIO => $pass,
             NUM_PARTENZA =>$part,
             NUM_ARRIVO => $arr,
             UTENTE => $username
-        );
+            );
         $contenuto_bacheca =research::query_bacheca_viaggio(\%Bacheca)."\n";
     }
     else {
         $hash_keys{LOGGEDIN} = 'no';
-        
-         my %Bacheca = (
+
+        my %Bacheca = (
             VIAGGIO => $pass,
             NUM_PARTENZA =>$part,
             NUM_ARRIVO => $arr,
             UTENTE => ""
-        );
+            );
         $contenuto_bacheca = research::query_bacheca_viaggio(\%Bacheca)."\n" ;
     }
 
@@ -128,11 +136,7 @@ else {
     my $foglio = '';
     $template_parser->process($fh,\%hash_keys,\$foglio);
     print $q->header();
+
+
     print $foglio;
-
-
-    if(defined($session->param('problems'))) {
-        $session->clear(['problems']);
-    }
 }
-

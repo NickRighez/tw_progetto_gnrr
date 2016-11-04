@@ -37,7 +37,7 @@
 
    <p>Ciao [% NOME_UTENTE %]</p>
 
-   <p><a href="notifiche.html" tabindex="2">Notifiche ([% NUM_NOTIFICHE %])</a>  <a href="ricevitore_logout.cgi" tabindex="3">Logout</a></p>
+   <p><a href="notifiche.cgi" tabindex="2">Notifiche ([% NUM_NOTIFICHE %])</a>  <a href="ricevitore_logout.cgi" tabindex="3">Logout</a></p>
 
   </div>
 
@@ -73,6 +73,17 @@
       <div class="contenitore"><p>[% MOTIVAZIONE %]</p></div>
     [% END %]
 
+    [% IF LISTA_UTENTI %]
+      <div class="contenitore">
+	<p>Passeggeri prenotati:</p>
+	<ul id="utentiLista">
+	[% FOREACH elem IN LISTA_UTENTI %]
+    <li><a href="profilo.cgi?utente=[% elem %]" tabindex="8">[% elem %]</a></li>
+	[% END %]
+	</ul>
+     </div>
+    [% END %]
+
     [% CONTENUTO_BACHECA %]
     [% IF NUOVA_CONVERSAZIONE == 'yes' %]
       <div class="contenitore" id="NuovaConversazione"> 
@@ -80,8 +91,8 @@
               <p>Inizia una nuova conversazione con il proprietario del viaggio!</p><br /> 
               <input type="hidden" name="destinatario" value="[% CONDUCENTE %]"></input>
               <input type="hidden" name="passaggio" value="[% PASSAGGIO %]"></input>
-              <input type="hidden" name="partenza" value="[% PARTENZA %]"></input>
-              <input type="hidden" name="arrivo" value="[% ARRIVO %]"></input>
+              <input type="hidden" name="partenza" value="[% NUM_PARTENZA %]"></input>
+              <input type="hidden" name="arrivo" value="[% NUM_ARRIVO %]"></input>
               <textarea rows="" cols="" name="messaggio"></textarea> 
               <div><input type="submit" value="Invia" tabindex="[% INDEX %]"></input></div> 
               [% INDEX = INDEX+1 %]

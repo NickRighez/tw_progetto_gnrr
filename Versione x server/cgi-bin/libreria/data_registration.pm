@@ -65,7 +65,7 @@ sub serializzazione_chiusura{
     my $fileHandle = shift @_;
     my $doc = shift @_;
     # abbellimento codice
-    ###################################################################### per la prof: posso metterlo fuori dal lock?
+    ###################################################################### 
     my $docString = $doc->toString();
     my $tidy_obj = XML::Tidy->new( 'xml' => $docString );
     $tidy_obj->tidy()

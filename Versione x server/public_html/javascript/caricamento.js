@@ -11,7 +11,10 @@ var funzioniDiCaricamento = {
       $(function() {
         $("#data").datepicker({
           dateFormat: "dd-mm-yy",
-          minDate: 0 /*, maxDate: +30 */
+          minDate: 0 /*, maxDate: +30 */ ,
+          onClose: function() {
+              funzioniDiValidazione.valida_data("data");
+            }
         });
       });
       // Actions
@@ -91,11 +94,17 @@ var funzioniDiCaricamento = {
       // jquery applet per calendario
       $("#dataA").datepicker({
         dateFormat: "dd-mm-yy",
-        minDate: 0 /*, maxDate: +30 */
+        minDate: 0 /*, maxDate: +30 */,
+        onClose: function() {
+            funzioniDiValidazione.valida_data("dataA");
+          }
       });
       $("#dataP").datepicker({
         dateFormat: "dd-mm-yy",
-        minDate: 0 /*, maxDate: +30 */
+        minDate: 0 /*, maxDate: +30 */,
+        onClose: function() {
+            funzioniDiValidazione.valida_data("dataP");
+          }
       });
       //Actions
       var part = document.getElementById("partenza");

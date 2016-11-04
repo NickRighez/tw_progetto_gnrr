@@ -14,7 +14,7 @@
   <xsl:template match="/">
     <xsl:for-each select="ts:TravelShare/SetUtenti/Utente[Username='[% UTENTE %]']" >  <!--  FILTRO PERL -->
       <div class="contenitore">
-        <p>Sesso: <xsl:value-of select="Sesso"/> <span class="destra"> <xsl:value-of select="$eta" /> anni</span></p>
+        <p>Sesso: <xsl:value-of select="Sesso"/> <span class="destra"> <xsl:value-of select="$eta" /> anni</span></p><xsl:text>&#x0A;</xsl:text>
 
         <div class="descrizione">
         <p>Descrizione:
@@ -26,20 +26,20 @@
             <xsl:value-of select="DescrizionePers" />
           </xsl:otherwise>
           </xsl:choose> 
-        </p>
+        </p><xsl:text>&#x0A;</xsl:text>
       </div>
         <xsl:choose>
           <xsl:when test="count(Profilo/Patente)=0">
            
-              <p>L&#39;utente non ha impostato informazioni sulla patente.</p>
-              <p>L&#39;utente non ha impostato informazioni sull&#39; auto.</p>
-              <p>L&#39;utente non ha impostato informazioni sulle proprie preferenze.</p>
+              <p>L&#39;utente non ha impostato informazioni sulla patente.</p><xsl:text>&#x0A;</xsl:text>
+              <p>L&#39;utente non ha impostato informazioni sull&#39; auto.</p><xsl:text>&#x0A;</xsl:text>
+              <p>L&#39;utente non ha impostato informazioni sulle proprie preferenze.</p><xsl:text>&#x0A;</xsl:text>
             
           </xsl:when>
           <xsl:otherwise>
-            <p>Anno di rilascio della patente: <xsl:value-of select="Profilo/Patente"/></p>
-            <p>Automobile: <xsl:value-of select="Profilo/Auto"/></p>
-            <p>Preferenze:</p>
+            <p>Anno di rilascio della patente: <xsl:value-of select="Profilo/Patente"/></p><xsl:text>&#x0A;</xsl:text>
+            <p>Automobile: <xsl:value-of select="Profilo/Auto"/></p><xsl:text>&#x0A;</xsl:text>
+            <p>Preferenze:</p><xsl:text>&#x0A;</xsl:text>
             <div class="preferenzeGroup">
               <xsl:choose>
                 <xsl:when test="/ts:TravelShare/SetUtenti/Utente[Username='[% UTENTE %]']/Profilo/Preferenze/Chiacchiere=0">
@@ -85,25 +85,25 @@
       </div>
       <h2>Feedback</h2>
       <div class="contenitore">
-        <p>Passaggi offerti: <xsl:value-of select="Profilo/NumPassaggiOff"/> </p>
-        <p>Passaggi partecipati: <xsl:value-of select="Profilo/NumPassaggiPart"/> </p>
+        <p>Passaggi offerti: <xsl:value-of select="Profilo/NumPassaggiOff"/> </p><xsl:text>&#x0A;</xsl:text>
+        <p>Passaggi partecipati: <xsl:value-of select="Profilo/NumPassaggiPart"/> </p><xsl:text>&#x0A;</xsl:text>
 
-        <p>Punteggio medio: <xsl:value-of select="Profilo/Valutazione/PunteggioMedio"/> su <xsl:value-of select="Profilo/NumFeedbRicevuti"/> feedback ricevuti</p>
-        <p>Compagnia: <xsl:value-of select="Profilo/Valutazione/Compagnia"/> </p>
-        <p>Puntualità: <xsl:value-of select="Profilo/Valutazione/Puntualita"/> </p>
-        <p>Pulizia: <xsl:value-of select="Profilo/Valutazione/Pulizia"/> </p>
-        <p>Guida: <xsl:value-of select="Profilo/Valutazione/Guida"/> </p>
+        <p>Punteggio medio: <xsl:value-of select="Profilo/Valutazione/PunteggioMedio"/> su <xsl:value-of select="Profilo/NumFeedbRicevuti"/> feedback ricevuti</p><xsl:text>&#x0A;</xsl:text>
+        <p>Compagnia: <xsl:value-of select="Profilo/Valutazione/Compagnia"/> </p><xsl:text>&#x0A;</xsl:text>
+        <p>Puntualità: <xsl:value-of select="Profilo/Valutazione/Puntualita"/> </p><xsl:text>&#x0A;</xsl:text>
+        <p>Pulizia: <xsl:value-of select="Profilo/Valutazione/Pulizia"/> </p><xsl:text>&#x0A;</xsl:text>
+        <p>Guida: <xsl:value-of select="Profilo/Valutazione/Guida"/> </p><xsl:text>&#x0A;</xsl:text>
       </div>
     </xsl:for-each>
     <div id="commenti"> <!--serve il div?-->
       <h3>Commenti degli utenti</h3>
       <xsl:if test="count(ts:TravelShare/SetFeedback/Feedback[@IDDest='[% UTENTE %]'])=0">
-        <div class="contenitore"><p>L&#39;utente non ha ricevuto nessun commento.</p></div>
+        <div class="contenitore"><p>L&#39;utente non ha ricevuto nessun commento.</p><xsl:text>&#x0A;</xsl:text></div>
       </xsl:if>
       <xsl:for-each select="ts:TravelShare/SetFeedback/Feedback[@IDDest='[% UTENTE %]']" >
         <div class="commentoUtente">
-          <p class="intestazioneMsg"><span class="mittenteMsg"><xsl:value-of select="@IDMitt"/></span></p>
-          <p><xsl:value-of select="Commento" /></p>
+          <p class="intestazioneMsg"><span class="mittenteMsg"><xsl:value-of select="@IDMitt"/></span></p><xsl:text>&#x0A;</xsl:text>
+          <p><xsl:value-of select="Commento" /></p><xsl:text>&#x0A;</xsl:text>
         </div>
       </xsl:for-each>
     </div>
