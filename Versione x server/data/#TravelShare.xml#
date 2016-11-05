@@ -1,0 +1,404 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ts:TravelShare xmlns:ts="http://www.dominio.com" xmlns:xs="http://www.w3.org/2001/XMLSchema-instance" xs:schemaLocation="http://www.dominio.com XMLSchema.xsd">
+  <!--  ***************************************************************   SET UTENTI   ************************** -->
+  <SetUtenti>
+    <Utente>
+      <Username>uuuuuuu</Username> 
+      <Email>eeee@ffff.it</Email>
+      <Nome>uuuuu</Nome>
+      <Cognome>uuuuuu</Cognome>
+      <DescrizionePers>          </DescrizionePers>
+      <Sesso>maschio</Sesso>
+      <AnnoNascita>1990</AnnoNascita>
+      <Password>11111111</Password>
+      <Profilo>
+        <NumFeedbRicevuti>0</NumFeedbRicevuti>
+        <NumPassaggiOff>0</NumPassaggiOff>
+        <NumPassaggiPart>0</NumPassaggiPart>
+        <Valutazione>
+          <PunteggioMedio>0</PunteggioMedio>
+          <Compagnia>0</Compagnia>
+          <Puntualita>0</Puntualita>
+          <Pulizia>0</Pulizia>
+          <Guida>0</Guida>
+        </Valutazione>
+      </Profilo>
+      <Notifiche>
+    </Notifiche>
+    </Utente>
+    <Utente>
+      <Username>utente_uno</Username>
+      <Email>pepe@gmail.com</Email>
+      <Nome>giovanni</Nome>
+      <Cognome>samma</Cognome>
+      <DescrizionePers>  </DescrizionePers>
+      <Sesso>maschio</Sesso>
+      <AnnoNascita>1990</AnnoNascita>
+      <Password>11111111</Password>
+      <Profilo>
+        <NumFeedbRicevuti>1</NumFeedbRicevuti>
+        <NumPassaggiOff>2</NumPassaggiOff>
+        <NumPassaggiPart>0</NumPassaggiPart>
+        <Valutazione>
+          <PunteggioMedio>4</PunteggioMedio>
+          <Compagnia>3</Compagnia>
+          <Puntualita>4</Puntualita>
+          <Pulizia>5</Pulizia>
+          <Guida>4</Guida>
+        </Valutazione>
+        <Auto>ferrari</Auto>
+        <Patente>1990</Patente>
+        <Preferenze>
+          <Chiacchiere>0</Chiacchiere>
+          <Musica>1</Musica>
+          <Animali>0</Animali>
+          <Fumatore>0</Fumatore>
+        </Preferenze>
+      </Profilo>
+      <Notifiche>
+        
+      </Notifiche>
+    </Utente>
+    <Utente>
+      <Username>utente_due</Username>
+      <Email>utedue@gmail.com</Email>
+      <Nome>marco</Nome>
+      <Cognome>rossi</Cognome>
+      <Sesso>maschio</Sesso>
+      <AnnoNascita>1990</AnnoNascita>
+      <Password>11111111</Password>
+      <Profilo>
+        <NumFeedbRicevuti>1</NumFeedbRicevuti>
+        <NumPassaggiOff>0</NumPassaggiOff>
+        <NumPassaggiPart>1</NumPassaggiPart>
+        <Valutazione>
+          <PunteggioMedio>2.5</PunteggioMedio>
+          <Compagnia>3</Compagnia>
+          <Puntualita>2</Puntualita>
+          <Pulizia>0</Pulizia>
+          <Guida>0</Guida>
+        </Valutazione>
+      </Profilo>
+      <Notifiche>
+        
+      </Notifiche>
+    </Utente>
+    <Utente>
+      <Username>Ricky</Username>
+      <Email>riccardoardossi@hotmail.it</Email>
+      <Nome>Riccardo</Nome>
+      <Cognome>Ardossi</Cognome>
+      <DescrizionePers>    </DescrizionePers>
+      <Sesso>maschio</Sesso>
+      <AnnoNascita>1993</AnnoNascita>
+      <Password>tecweb93</Password>
+      <Profilo>
+        <NumFeedbRicevuti>0</NumFeedbRicevuti>
+        <NumPassaggiOff>1</NumPassaggiOff>
+        <NumPassaggiPart>1</NumPassaggiPart>
+        <Valutazione>
+          <PunteggioMedio>0</PunteggioMedio>
+          <Compagnia>0</Compagnia>
+          <Puntualita>0</Puntualita>
+          <Pulizia>0</Pulizia>
+          <Guida>0</Guida>
+        </Valutazione>
+        <Auto>Nissan GTR</Auto>
+        <Patente>2012</Patente>
+        <Preferenze>
+          <Chiacchiere>1</Chiacchiere>
+          <Musica>2</Musica>
+          <Animali>0</Animali>
+          <Fumatore>0</Fumatore>
+        </Preferenze>
+      </Profilo>
+      <Notifiche>
+        <RichiestaPrenotaz Mittente="Gells" Passaggio="v4" Partenza="1" Arrivo="4" />
+      </Notifiche>
+    </Utente>
+    <Utente>
+      <Username>nrigato</Username>
+      <Email>nrigato@miamail.com</Email>
+      <Nome>Nicolo'</Nome>
+      <Cognome>Rigato</Cognome>
+      <DescrizionePers>  Ciao. Mi piace viaggiare in compagnia.</DescrizionePers>
+      <Sesso>maschio</Sesso>
+      <AnnoNascita>1991</AnnoNascita>
+      <Password>123456789</Password>
+      <Profilo>
+        <NumFeedbRicevuti>0</NumFeedbRicevuti>
+        <NumPassaggiOff>1</NumPassaggiOff>
+        <NumPassaggiPart>0</NumPassaggiPart>
+        <Valutazione>
+          <PunteggioMedio>0</PunteggioMedio>
+          <Compagnia>0</Compagnia>
+          <Puntualita>0</Puntualita>
+          <Pulizia>0</Pulizia>
+          <Guida>0</Guida>
+        </Valutazione>
+        <Auto>Fiat Punto</Auto>
+        <Patente>2011</Patente>
+        <Preferenze>
+          <Chiacchiere>2</Chiacchiere>
+          <Musica>0</Musica>
+          <Animali>0</Animali>
+          <Fumatore>0</Fumatore>
+        </Preferenze>
+      </Profilo>
+      <Notifiche>
+        
+      </Notifiche>
+    </Utente>
+    <Utente>
+      <Username>bsanna</Username>
+      <Email>sannagiovanni9@gmail.com</Email>
+      <Nome>Giovanni</Nome>
+      <Cognome>Sanna</Cognome>
+      <Sesso>maschio</Sesso>
+      <AnnoNascita>1990</AnnoNascita>
+      <Password>123456789</Password>
+      <Profilo>
+        <NumFeedbRicevuti>0</NumFeedbRicevuti>
+        <NumPassaggiOff>0</NumPassaggiOff>
+        <NumPassaggiPart>0</NumPassaggiPart>
+        <Valutazione>
+          <PunteggioMedio>0</PunteggioMedio>
+          <Compagnia>0</Compagnia>
+          <Puntualita>0</Puntualita>
+          <Pulizia>0</Pulizia>
+          <Guida>0</Guida>
+        </Valutazione>
+      </Profilo>
+      <Notifiche>
+    </Notifiche>
+    </Utente>
+    <Utente>
+      <Username>Gells</Username>
+      <Email>gellisilivia@miamail.com</Email>
+      <Nome>Silvia</Nome>
+      <Cognome>Gelli</Cognome>
+      <Sesso>femmina</Sesso>
+      <AnnoNascita>1982</AnnoNascita>
+      <Password>123456789</Password>
+      <Profilo>
+        <NumFeedbRicevuti>0</NumFeedbRicevuti>
+        <NumPassaggiOff>0</NumPassaggiOff>
+        <NumPassaggiPart>0</NumPassaggiPart>
+        <Valutazione>
+          <PunteggioMedio>0</PunteggioMedio>
+          <Compagnia>0</Compagnia>
+          <Puntualita>0</Puntualita>
+          <Pulizia>0</Pulizia>
+          <Guida>0</Guida>
+        </Valutazione>
+      </Profilo>
+      <Notifiche>
+    </Notifiche>
+    </Utente>
+  </SetUtenti>
+  <!--  ***************************************************************   SET PASSAGGI   ************************** -->
+  <SetPassaggi>
+    <Passaggio Passato="si">
+      <IDViaggio>v1</IDViaggio>
+      <Conducente>utente_uno</Conducente>
+      <PrezzoTot>11.3</PrezzoTot>
+      <PostiTot>3</PostiTot>
+      <Itinerario>
+        <Partenza Numero="0">
+          <PostiDisp>2</PostiDisp>
+          <Data>2016-08-30</Data>
+          <Ora>12:00:00</Ora>
+          <Luogo>padova</Luogo>
+          <Prenotazioni>
+            <Utente>utente_due</Utente>
+          </Prenotazioni>
+        </Partenza>
+        <Tappa Numero="1">
+          <PostiDisp>2</PostiDisp>
+          <Data>2016-08-30</Data>
+          <Ora>12:24:00</Ora>
+          <Luogo>piove di sacco</Luogo>
+          <Prenotazioni>
+            <Utente>utente_due</Utente>
+          </Prenotazioni>
+        </Tappa>
+        <Tappa Numero="2">
+          <PostiDisp>2</PostiDisp>
+          <Data>2016-08-30</Data>
+          <Ora>12:48:00</Ora>
+          <Luogo>codevigo</Luogo>
+          <Prenotazioni>
+            <Utente>utente_due</Utente>
+          </Prenotazioni>
+        </Tappa>
+        <Tappa Numero="3">
+          <PostiDisp>2</PostiDisp>
+          <Data>2016-08-30</Data>
+          <Ora>13:12:00</Ora>
+          <Luogo>vicenza</Luogo>
+          <Prenotazioni>
+            <Utente>utente_due</Utente>
+          </Prenotazioni>
+        </Tappa>
+        <Arrivo Numero="4">
+          <PostiDisp>3</PostiDisp>
+          <Data>2016-08-30</Data>
+          <Ora>14:00:00</Ora>
+          <Luogo>rovigo</Luogo>
+          <Prenotazioni />
+        </Arrivo>
+      </Itinerario>
+      <Bacheca />
+    </Passaggio>
+    <Passaggio Passato="no">
+      <IDViaggio>v2</IDViaggio>
+      <Conducente>utente_uno</Conducente>
+      <PrezzoTot>11</PrezzoTot>
+      <PostiTot>3</PostiTot>
+      <Itinerario>
+        <Partenza Numero="0">
+          <PostiDisp>3</PostiDisp>
+          <Data>2017-09-30</Data>
+          <Ora>12:00:00</Ora>
+          <Luogo>rrrrr</Luogo>
+          <Prenotazioni />
+        </Partenza>
+        <Tappa Numero="1">
+          <PostiDisp>3</PostiDisp>
+          <Data>2017-09-30</Data>
+          <Ora>12:40:00</Ora>
+          <Luogo>yyyyy</Luogo>
+          <Prenotazioni />
+        </Tappa>
+        <Arrivo Numero="4">
+          <PostiDisp>3</PostiDisp>
+          <Data>2017-09-30</Data>
+          <Ora>14:00:00</Ora>
+          <Luogo>ttttt</Luogo>
+          <Prenotazioni />
+        </Arrivo>
+      </Itinerario>
+      <Bacheca>
+        <ConversazioneBacheca User1="nrigato" User2="utente_uno">
+          <Messaggio>
+            <Mittente>nrigato</Mittente>
+            <Data>2016-10-17</Data>
+            <Ora>13:46:52</Ora>
+            <Testo>ciao</Testo>
+          </Messaggio>
+          <Messaggio>
+            <Mittente>nrigato</Mittente>
+            <Data>2016-10-17</Data>
+            <Ora>13:47:34</Ora>
+            <Testo>ciaociao</Testo>
+          </Messaggio>
+          <Messaggio>
+            <Mittente>nrigato</Mittente>
+            <Data>2016-10-17</Data>
+            <Ora>13:52:15</Ora>
+            <Testo>ciaooooo</Testo>
+          </Messaggio>
+        </ConversazioneBacheca>
+      </Bacheca>
+    </Passaggio>
+    <Passaggio Passato="no">
+      <IDViaggio>v3</IDViaggio>
+      <Conducente>nrigato</Conducente>
+      <PrezzoTot>20</PrezzoTot>
+      <PostiTot>2</PostiTot>
+      <Dettagli>Vado a trovare i miei per Natale. Pacchi poco voluminosi perche' ci sono gia i miei</Dettagli>
+      <Itinerario>
+        <Partenza Numero="0">
+          <PostiDisp>1</PostiDisp>
+          <Data>2016-12-20</Data>
+          <Ora>08:00:00</Ora>
+          <Luogo>Padova</Luogo>
+          <Prenotazioni>
+            <Utente>Ricky</Utente>
+          </Prenotazioni>
+        </Partenza>
+        <Arrivo Numero="4">
+          <PostiDisp>1</PostiDisp>
+          <Data>2016-12-20</Data>
+          <Ora>12:00:00</Ora>
+          <Luogo>Milano</Luogo>
+          <Prenotazioni>
+            <Utente>Ricky</Utente>
+          </Prenotazioni>
+        </Arrivo>
+      </Itinerario>
+      <Bacheca />
+    </Passaggio>
+    <Passaggio Passato="si">
+      <IDViaggio>v4</IDViaggio>
+      <Conducente>Ricky</Conducente>
+      <PrezzoTot>10</PrezzoTot>
+      <PostiTot>1</PostiTot>
+      <Dettagli>Vado all'autodromo a provare l'auto nuova. Pochi bagagli perche' c'e' poco spazio disponibile.</Dettagli>
+      <Itinerario>
+        <Partenza Numero="0">
+          <PostiDisp>1</PostiDisp>
+          <Data>2016-09-19</Data>
+          <Ora>08:00:00</Ora>
+          <Luogo>Padova</Luogo>
+          <Prenotazioni />
+        </Partenza>
+        <Tappa Numero="1">
+          <PostiDisp>1</PostiDisp>
+          <Data>2016-09-19</Data>
+          <Ora>08:35:00</Ora>
+          <Luogo>Bologna</Luogo>
+          <Prenotazioni />
+        </Tappa>
+        <Arrivo Numero="4">
+          <PostiDisp>1</PostiDisp>
+          <Data>2016-09-19</Data>
+          <Ora>9:45:00</Ora>
+          <Luogo>Imola</Luogo>
+          <Prenotazioni />
+        </Arrivo>
+      </Itinerario>
+      <Bacheca />
+    </Passaggio>
+  </SetPassaggi>
+  <!--  ***************************************************************   SET MESSAGGI   ************************** -->
+  <SetMessaggi>
+    <Conversazione User1="utente_due" User2="utente_uno">
+      <Messaggio Letto="si">
+        <Mittente>utente_due</Mittente>
+        <Data>2016-09-05</Data>
+        <Ora>13:38:36</Ora>
+        <Testo>ciao</Testo>
+      </Messaggio>
+      <Messaggio Letto="si">
+        <Mittente>utente_due</Mittente>
+        <Data>2016-09-05</Data>
+        <Ora>13:39:53</Ora>
+        <Testo>ciao ciao</Testo>
+      </Messaggio>
+    </Conversazione>
+  </SetMessaggi>
+  <!--  ***************************************************************   SET FEEDBACK   ************************** -->
+  <SetFeedback>
+    <Feedback IDMitt="utente_due" IDDest="utente_uno">
+      <Passaggio>v1</Passaggio>
+      <Commento>bel viaggio</Commento>
+      <ValutazioneConduc>
+        <PunteggioMedio>4</PunteggioMedio>
+        <Compagnia>3</Compagnia>
+        <Puntualita>4</Puntualita>
+        <Pulizia>5</Pulizia>
+        <Guida>4</Guida>
+      </ValutazioneConduc>
+    </Feedback>
+    <Feedback IDMitt="utente_uno" IDDest="utente_due">
+      <Passaggio>v1</Passaggio>
+      <Commento>Commento facoltativo</Commento>
+      <ValutazionePasseg>
+        <PunteggioMedio>2.5</PunteggioMedio>
+        <Compagnia>3</Compagnia>
+        <Puntualita>2</Puntualita>
+      </ValutazionePasseg>
+    </Feedback>
+  </SetFeedback>
+</ts:TravelShare>

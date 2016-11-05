@@ -1,0 +1,86 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="it" lang="it">
+ <head>
+  <title>Iscriviti - Travel Share</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta name="title" content="..." />
+  <meta name="description" content="..." />
+  <meta name="keywords" content="iscrizione, registrazione, travel share, car pooling, passaggio, auto" />
+  <meta name="author" content="Giovanni Sanna, Nicolò Rigato, Riccardo Ardossi, Riccardo Saggese" />
+  <meta name="language" content="italian it" />
+
+  <meta name="viewport" content="width=device-width" />
+
+  <link href="../screen.css" rel="stylesheet" type="text/css" media="screen" />
+  <link href="../print.css" rel="stylesheet" type="text/css" media="print" />
+
+  <link rel="icon" href="Immagini/TS_icon.png" type="image/x-icon" />
+  <link rel="shortcut icon" href="Immagini/TS_icon.png" type="image/x-icon" />
+  <!--<script src="javascript/jquery-ui-1.12.0/jquery-ui.js"></script>
+
+  <link rel="stylesheet" href="javascript/jquery-ui-1.12.0/jquery-ui.css" /> -->
+  <script type="application/javascript" src="../javascript/travelshare.js" ></script>
+
+ </head>
+
+ <body>
+
+  <div id="header">
+   <a href="home.cgi" tabindex="1"><img src="Immagini/banner.png" id="banner" alt="Banner Travel Share - Link diretto alla Home" /></a>
+   <a id="bottoneMenu" href="#menu">Men&ugrave;</a>
+  </div>
+
+
+  <div id="contenuto">
+
+   <h1>Iscriviti</h1>
+
+   <form action="" method="post" onsubmit="return valida_submit_iscrizione()">
+    <fieldset><legend>Iscrizione al sito</legend>
+    <label for="nome">Nome:</label>
+    <input type="text" id="nome" name="nome" value="[%nome%]" tabindex="7" onblur="valida_nome('nome','Nome')"></input><br />
+	<p id="nome_err" class="errore">[%nome_err%]</p>
+    <label for="cognome">Cognome:</label>
+    <input type="text" id="cognome" name="cognome" value="[%cognome%]" tabindex="8" onblur="valida_nome('cognome','Cognome')"></input><br />
+	<p id="cognome_err" class="errore">[%cognome_err%]</p>
+	<label for="username"><span xml:lang="en" lang="en">Username:</span></label>
+    <input type="text" id="username" name="username" value="[%username%]" tabindex="9" onblur="valida_username()"></input><br />
+	<p id="username_err" class="errore">[%username_err%]</p>
+  <input type="radio" name="sesso" id="maschio" value="maschio" checked="checked" tabindex="6"></input><label  for="maschio">Maschio</label><!--<br />-->
+  <input type="radio" name="sesso" id="femmina" value="femmina"></input><label  for="femmina">Femmina</label><br />
+    <label for="email"><span xml:lang="en" lang="en">Email:</span></label>
+    <input type="text" id="email" name="email" value="[%email%]" tabindex="10" onblur="valida_email('email')"></input><br />
+	<p id="email_err" class="errore">[%email_err%]</p>
+    <label for="password"><span xml:lang="en" lang="en">Password:</span></label>
+    <input type="password" id="password" name="password" tabindex="11" onblur="valida_password('password')"></input><br />
+	<p id="password_err" class="errore">[%password_err%]</p>
+    <label for="conferma">Conferma <span xml:lang="en" lang="en">Password:</span></label>
+    <input type="password" id="conferma" name="conferma" tabindex="12" onblur="valida_password('conferma')"></input><br />
+	<p id="conferma_err" class="errore">[%conferma_err%]</p>
+    <label for="anno">Anno di nascita:</label>
+    <input type="text" id="anno" name="anno" value="[%anno%]" tabindex="13" onblur="valida_anno_nasc()"></input><br />
+	<p id="anno_err" class="errore">[%anno_err%]</p>
+    <input type="submit" value="Invia" tabindex="14"></input>
+      <p id="submitbutton_err" class="errore"></p>
+    </fieldset>
+   </form>
+
+  </div>
+
+
+  <div id="menu">
+  <ul id="menuLista">
+   <li><a href="offerta_passaggio.cgi" tabindex="2">Offri un passaggio <span class="frecceMenu">&raquo;</span></a></li>
+   <li><a href="home.cgi" tabindex="3">Cerca un passaggio <span class="frecceMenu">&raquo;</span></a></li>
+   <li><a href="login.cgi" tabindex="4">Accedi <span class="frecceMenu">&raquo;</span></a></li>
+   <li><a href="informazioni.cgi" tabindex="5">Informazioni su <span xml:lang="en" lang="en">Travel Share</span> <span class="frecceMenu">&raquo;</span></a></li>
+  </ul>
+  </div>
+
+  <div id="footer">
+   <a href="#header" tabindex="15">Torna su</a>
+  </div>
+
+  </body>
+</html>

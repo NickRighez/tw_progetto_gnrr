@@ -1,0 +1,119 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="it" lang="it">
+<head>
+  <title>Offri - Travel Share</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta name="title" content="Offri - Travel Share" />
+  <meta name="description" content="Pagina di offerta di un passaggio, disponibile se connessi al sito" />
+  <meta name="keywords" content="offri, travel share, car pooling, passaggio, auto" />
+  <meta name="author" content="Giovanni Sanna, Nicolo' Rigato, Riccardo Ardossi" />
+  <meta name="language" content="italian it" />
+
+  <meta name="viewport" content="width=device-width" />
+
+  <link href="../screen.css" rel="stylesheet" type="text/css" media="screen" />
+  <link href="../print.css" rel="stylesheet" type="text/css" media="print" />
+
+  
+  <script type="application/javascript"  src="../javascript/jquery-ui-1.12.0/external/jquery/jquery.js"></script>
+  <script type="application/javascript"  src="../javascript/jquery-ui-1.12.0/jquery-ui.js"></script>
+  <link rel="stylesheet" href="../javascript/jquery-ui-1.12.0/jquery-ui.css" />
+  <script type="application/javascript" src="../javascript/travelshare.js" ></script>
+
+  <link rel="icon" href="../Immagini/TS_icon.png" type="image/x-icon" />
+  <link rel="shortcut icon" href="../Immagini/TS_icon.png" type="image/x-icon" />
+
+ <script type="application/javascript"> <!--
+	window.onload = funzioniDiCaricamento.caricamento_offerta;
+//-->
+</script>
+</head>
+
+<body>
+
+  <div id="header">
+   <a href="home.cgi" tabindex="1"><img src="../Immagini/banner.png" id="banner" alt="Banner Travel Share - Link diretto alla Home" title="Banner Travel Share - Link diretto alla Home" /></a>
+   <a id="bottoneMenu" href="#menu">Men&ugrave;</a>
+ </div>
+
+ <div id="utente">
+   <p>Ciao [% NOME_UTENTE %]</p>
+   <p><a href="notifiche.cgi" tabindex="2">Notifiche ([% NUM_NOTIFICHE %])</a>  <a href="ricevitore_logout.cgi" tabindex="3">Logout</a></p>
+ </div>
+
+ <div id="contenuto">
+
+   <h1>Offri un passaggio!</h1>
+
+   <form action="ricevitore_passaggio.cgi" method="post">
+     <fieldset><legend>Partenza e tappe</legend>
+      <label for="partenza">Partenza</label>
+      <input type="text" id="partenza" name="partenza" tabindex="9" value="[%PARTENZA%]"></input><br />
+      <p id="partenza_err" class="errore">[%PARTENZA_ERR%]</p>
+      <label for="arrivo">Arrivo</label>
+      <input type="text" id="arrivo" name="arrivo" tabindex="10" value="[%ARRIVO%]"></input><br />
+      <p id="arrivo_err" class="errore">[%ARRIVO_ERR%]</p>
+
+      <label for="tappa1">Tappa (facoltativa)</label>
+      <input type="text" id="tappa1" name="tappa1" tabindex="11" value="[%TAPPA1%]"></input><br />
+      <p id="tappa1_err" class="errore">[%TAPPA1_ERR%]</p>
+      <label for="tappa2">Tappa (facoltativa)</label>
+      <input type="text" id="tappa2" name="tappa2" tabindex="12" value="[%TAPPA2%]"></input><br />
+      <p id="tappa2_err" class="errore">[%TAPPA2_ERR%]</p>
+      <label for="tappa3">Tappa (facoltativa)</label>
+      <input type="text" id="tappa3" name="tappa3" tabindex="13" value="[%TAPPA3%]"></input><br />
+      <p id="tappa3_err" class="errore">[%TAPPA3_ERR%]</p>
+    </fieldset>
+
+    <fieldset><legend>Data e ora</legend>
+      <label for="dataP">Data di partenza</label>
+      <input type="text" id="dataP" name="dataP" tabindex="14" value="[%DATAP%]"></input><br />
+      <p id="dataP_err" class="errore">[%DATAP_ERR%]</p>
+      <label for="oraP">Ora partenza</label>
+      <input type="text" id="oraP" name="oraP" tabindex="15" value="[%ORAP%]"></input><br />
+      <p id="oraP_err" class="errore">[%ORAP_ERR%]</p>
+      <label for="dataA">Data di arrivo</label>
+      <input type="text" id="dataA" name="dataA" tabindex="16" value="[%DATAA%]"></input><br />
+      <p id="dataA_err" class="errore">[%DATAA_ERR%]</p>
+      <label for="oraA">Ora arrivo</label>
+      <input type="text" id="oraA" name="oraA" tabindex="17" value="[%ORAA%]"></input><br />
+      <p id="oraA_err" class="errore">[%ORAA_ERR%]</p>
+    </fieldset>
+
+    <fieldset><legend>Informazioni aggiuntive sul viaggio</legend>
+      <label for="prezzo">Prezzo</label>
+      <input type="text" id="prezzo" name="prezzo" tabindex="18" value="[%PREZZO%]"></input><br />
+      <p id="prezzo_err" class="errore">[%PREZZO_ERR%]</p>
+      <label for="posti">Posti</label>
+      <input type="text" id="posti" name="posti" tabindex="19" value="[%POSTI%]"></input><br />
+      <p id="posti_err" class="errore">[%POSTI_ERR%]</p>
+
+      <label for="descrizioneViaggio">Note sul viaggio (facoltativa)</label>
+      <textarea id="descrizioneViaggio" name="descrizioneViaggio" tabindex="20" rows="0" cols="0">[%DESCRIZIONEVIAGGIO%]</textarea><br />
+
+    </fieldset>
+
+    <div><input type="submit" value="Invia" tabindex="21"></input>   </div>
+    <p id="submitbutton_err" class="errore"></p>
+  </form>
+
+</div>
+
+<div id="menu">
+  <ul id="menuLista">
+   <li><a href="home.cgi" tabindex="4">Cerca un passaggio <span class="frecceMenu">&raquo;</span></a></li>
+   <li><a href="profilo.cgi?utente=[%NOME_UTENTE%]" tabindex="5">Gestisci il profilo <span class="frecceMenu">&raquo;</span></a></li>
+   <li><a href="viaggi.cgi" tabindex="6">Viaggi<span class="frecceMenu">&raquo;</span></a></li>
+   <li><a href="conversazioni.cgi" tabindex="7">Messaggi <span class="frecceMenu">&raquo;</span></a></li>
+   <li><a href="informazioni.cgi" tabindex="8">Informazioni su <span xml:lang="en" lang="en">Travel Share</span> <span class="frecceMenu">&raquo;</span></a></li>
+ </ul>
+</div>
+
+<div id="footer">
+ <a href="ricevitore_logout.cgi" tabindex="22">Logout</a>
+ <a href="#header" tabindex="23">Torna su</a>
+</div>
+
+</body>
+</html>

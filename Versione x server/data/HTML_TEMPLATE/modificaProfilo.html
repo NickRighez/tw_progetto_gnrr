@@ -1,0 +1,158 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html class="no-js" xmlns="http://www.w3.org/1999/xhtml" xml:lang="it" lang="it">
+  <head>
+    <title>Gestisci il profilo - Travel Share</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="title" content="Gestisci il profilo - Travel Share" />
+    <meta name="description" content="Pagina di gestione del profilo per modificare i propri dati" />
+    <meta name="keywords" content="profilo, travel share, car pooling, passaggio, auto" />
+    <meta name="author" content="Giovanni Sanna, Nicolo' Rigato, Riccardo Ardossi" />
+    <meta name="language" content="italian it" />
+
+    <meta name="viewport" content="width=device-width" />
+
+    <link href="../screen.css" rel="stylesheet" type="text/css" media="screen" />
+    <link href="../print.css" rel="stylesheet" type="text/css" media="print" />
+
+    <link rel="icon" href="../Immagini/TS_icon.png" type="image/x-icon" />
+    <link rel="shortcut icon" href="../Immagini/TS_icon.png" type="image/x-icon" />
+
+
+    <script type="application/javascript" src="../javascript/modernizr/modernizr-custom.js"></script>
+    <script type="application/javascript"  src="../javascript/jquery-ui-1.12.0/external/jquery/jquery.js"></script>
+    <script type="application/javascript" src="../javascript/jquery-ui-1.12.0/jquery-ui.js"></script>
+    <link rel="stylesheet" href="../javascript/jquery-ui-1.12.0/jquery-ui.css" />
+    <script type="application/javascript" src="../javascript/travelshare.js" ></script>
+    <script type="application/javascript">
+      <!--
+          window.onload = funzioniDiCaricamento.caricamento_modifica_profilo;
+          //-->
+    </script>
+  </head>
+
+  <body>
+
+    <div id="header">
+      <a href="home.cgi" tabindex="1"><img src="../Immagini/banner.png" id="banner" alt="Banner Travel Share - Link diretto alla Home" title="Banner Travel Share - Link diretto alla Home" /></a>
+      <a id="bottoneMenu" href="#menu">Men&ugrave;</a>
+    </div>
+
+    <div id="utente">
+      <p>Ciao [% NOME_UTENTE %]</p>
+      <p><a href="notifiche.html" tabindex="2">Notifiche ([% NUM_NOTIFICHE %])</a>  <a href="ricevitore_logout.cgi" tabindex="3">Logout</a></p>
+    </div>
+
+    <div id="contenuto">
+      [% IF INFO_CONDUC_ERR %]
+      <div class="div_errore">
+          <p>[% INFO_CONDUC_ERR %]</p>
+      </div>
+      [% END %]
+      <h1>Modifica il profilo</h1>
+      
+
+      <form action="ricevitore_modifica.cgi" method="post" onsubmit="return valida_submit_modifica_profilo();">
+        <fieldset><legend>Modifica le informazioni del profilo</legend>
+
+          <p>Sesso:
+            <input type="radio" name="sesso" id="maschio" value="maschio" [% IF SESSO == 'maschio' %] checked="checked" [% END %]tabindex="14"></input><label  for="maschio">Maschio</label>
+            <input type="radio" name="sesso" id="femmina" value="femmina" [% IF SESSO == 'femmina' %] checked="checked" [% END %] ></input><label  for="femmina">Femmina</label>
+          </p><br />
+
+          <label for="nome">Nome:</label>
+          <input type="text" id="nome" name="nome" value="[%NOME%]" tabindex="9"></input><br />
+          <p id="nome_err" class="errore">[%NOME_ERR%]</p>
+          <label for="cognome">Cognome:</label>
+          <input type="text" id="cognome" name="cognome" value="[%COGNOME%]" tabindex="10"></input><br />
+          <p id="cognome_err" class="errore">[%COGNOME_ERR%]</p>
+          <label for="email"><span xml:lang="en" lang="en">Email:</span></label>
+          <input type="text" id="email" name="email" value="[%EMAIL%]" tabindex="11"></input><br />
+          <p id="email_err" class="errore">[%EMAIL_ERR%]</p>
+          <label for="vecchiaPassword">Vecchia <span xml:lang="en" lang="en">Password:</span></label>
+          <input type="password" id="vecchiaPassword" name="vecchiaPassword" tabindex="12"></input><br />
+          <p id="vecchiaPassword_err" class="errore">[%VECCHIAPASSWORD_ERR%]</p>
+
+          <label for="nuovaPassword">Nuova <span xml:lang="en" lang="en">Password:</span></label>
+          <input type="password" id="nuovaPassword" name="nuovaPassword" tabindex="13"></input><br />
+          <p id="nuovaPassword_err" class="errore">[%NUOVAPASSWORD_ERR%]</p>
+
+          <label for="anno">Anno di nascita:</label>
+          <input type="text" id="anno" name="anno" value="[%ANNO%]" tabindex="15"></input><br />
+          <p id="anno_err" class="errore">[%ANNO_ERR%]</p>
+
+          <label for="descrizioneForm">Descrizione:</label>
+          <textarea id="descrizioneForm" rows="0" cols="0" name="descrizioneForm" tabindex="16"> [%DESCRIZIONEFORM%] </textarea>
+
+          <!--   <fieldset><legend>Informazioni del guidatore</legend>  -->
+          <label for="annoPatente">Anno di rilascio della patente:</label>
+          <input type="text" id="annoPatente" name="annoPatente" value="[%ANNOPATENTE%]" tabindex="17"></input><br />
+          <p id="annoPatente_err" class="errore">[%ANNOPATENTE_ERR%]</p>
+
+          <label for="auto">Auto:</label>
+          <input type="text" id="auto" name="auto" value="[%AUTO%]" tabindex="18"></input><br />
+          <p id="auto_err" class="errore">[%AUTO_ERR%]</p>
+
+          <div id="preferenze">
+            <h2>Preferenze</h2>
+
+            <p>Chiacchiere:</p>
+            <div class="preferenzeGroup">
+              <input type="radio" name="chiacchiere" id="chiacchiere0" [% CHECKED_C0 %]  value="0" tabindex="19"></input>
+              <label for="chiacchiere0"><img id="chiaImg0" class="preferenzeImg marginRadioVisibile" src="../Immagini/BLA0.png" alt="Silenzioso" title="Silenzioso"></img></label>
+              <input type="radio" name="chiacchiere" id="chiacchiere1" [% CHECKED_C1 %]  value="1" ></input>
+              <label for="chiacchiere1"><img id="chiaImg1" class="preferenzeImg marginRadioVisibile" src="../Immagini/BLA1.png" alt="Poche chiacchiere" title="Poche chiacchiere"></img></label>
+              <input type="radio" name="chiacchiere" id="chiacchiere2" [% CHECKED_C2 %]  value="2" ></input>
+              <label for="chiacchiere2"><img id="chiaImg2" class="preferenzeImg marginRadioVisibile" src="../Immagini/BLA2.png" alt="Chiacchierone" title="Chiacchierone"></img></label>
+            </div>
+
+            <p>Musica:</p>
+            <div class="preferenzeGroup">
+              <input type="radio" name="musica" id="musica0" [% CHECKED_M0 %]  value="0" tabindex="20"></input>
+              <label for="musica0"><img id="musImg0" class="preferenzeImg marginRadioVisibile" src="../Immagini/musica0.png" alt="Non ascolto musica" title="Non ascolto musica"></img></label>
+              <input type="radio" name="musica" id="musica1" [% CHECKED_M1 %]  value="1" ></input>
+              <label for="musica1"><img id="musImg1" class="preferenzeImg marginRadioVisibile" src="../Immagini/musica1.png" alt="Ascolto musica" title="Ascolto musica"></img></label>
+              <input type="radio" name="musica" id="musica2" [% CHECKED_M2 %]  value="2" ></input>
+              <label for="musica2"><img id="musImg2" class="preferenzeImg marginRadioVisibile" src="../Immagini/musica2.png" alt="Ascolto spesso musica" title="Ascolto spesso musica"></img></label>
+            </div>
+
+            <p>Animali:</p>
+            <div class="preferenzeGroup">
+              <input type="radio" name="animali" id="animali0" [% CHECKED_A0 %]  value="0" tabindex="21"></input>
+              <label for="animali0"><img id="animImg0" class="preferenzeImg marginRadioVisibile" src="../Immagini/animali0.png" alt="No animali" title="No animali"></img></label>
+              <input type="radio" name="animali" id="animali1" [% CHECKED_A1 %]  value="1" ></input>
+              <label for="animali1"><img id="animImg1" class="preferenzeImg marginRadioVisibile" src="../Immagini/animali1.png" alt="Accetto animali" title="Accetto animali"></img></label>
+            </div>
+
+            <p>Fumatori:</p>
+            <div class="preferenzeGroup">
+              <input type="radio" name="fumatori" id="fumatori0" [% CHECKED_F0 %]  value="0" tabindex="22"></input>
+              <label for="fumatori0"><img id="fumImg0" class="preferenzeImg marginRadioVisibile" src="../Immagini/fumo0.png" alt="No fumatori" title="No fumatori"></img></label>
+              <input type="radio" name="fumatori" id="fumatori1" [% CHECKED_F1 %]  value="1" ></input>
+              <label for="fumatori1"><img id="fumImg1" class="preferenzeImg marginRadioVisibile" src="../Immagini/fumo1.png" alt="Accetto fumatori" title="Accetto fumatori"></img></label>
+            </div>
+
+          </div>
+
+          <input type="submit" value="Invia" tabindex="23"></input>
+        </fieldset>
+      </form>
+
+    </div>
+
+    <div id="menu">
+      <ul id="menuLista">
+        <li><a href="home.cgi" tabindex="4">Cerca un passaggio <span class="frecceMenu">&raquo;</span></a></li>
+        <li><a href="offerta_passaggio.cgi" tabindex="5">Offri un passaggio <span class="frecceMenu">&raquo;</span></a></li>
+        <li><a href="viaggi.cgi" tabindex="6">Viaggi<span class="frecceMenu">&raquo;</span></a></li>
+        <li><a href="conversazioni.cgi" tabindex="7">Messaggi <span class="frecceMenu">&raquo;</span></a></li>
+        <li><a href="informazioni.cgi" tabindex="8">Informazioni su <span xml:lang="en" lang="en">Travel Share</span> <span class="frecceMenu">&raquo;</span></a></li>
+      </ul>
+    </div>
+
+    <div id="footer">
+      <a href="ricevitore_logout.cgi" tabindex="24">Logout</a>
+      <a href="#header" tabindex="25">Torna su</a>
+    </div>
+
+  </body>
+</html>

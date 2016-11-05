@@ -1,0 +1,697 @@
+/** CSS RESET **/
+
+html, body, div, span, h1, h2, h3, h4, h5, h6, p, a, em, img, b, u, i, center,
+dl, dt, dd, ol, ul, li, fieldset, form, label, legend {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+
+/* bordi tondi e ombre da documentare */
+
+html{
+	margin : 0 auto;
+	max-width : 1024px;
+	border : 1px solid black;
+	border-top : 0px;
+	border-bottom : 0px;
+	background-color : grey;
+}
+
+body{
+	background-color :#b3b3b3;
+	font-size : 100%;
+	font-family: Verdana, Helvetica, sans-serif;
+	max-width : 100%;
+}	
+	
+h1{
+	margin-top : 65px;
+	font-size: 1.5em;
+	margin-bottom : 1%;
+	margin-left : 2%;
+	margin-right : 2%;
+}
+
+h2{
+	font-size : 1.25em;
+	margin : 2% 2% 2% 2%;
+}
+
+h3{
+	font-size : 1.1em;
+	margin : 2% 2% 2% 2%;
+}
+
+a:link{
+	color : #0088cc;
+}
+
+.linkSottoH{
+	display : block;
+	margin : 0% 0% 2% 4%;
+	font-size : 0.9em;
+}
+
+.destra{
+	float : right;
+}
+
+/***  HEADER  ***/
+
+#banner{
+	height : 100%;
+}
+
+#header{
+	background-color : white;
+	height : 40px;
+	border-bottom : 1px solid #666666;
+	box-shadow: 0px 1px 10px 0px #888888;
+	padding : 5px;
+}
+
+#bottoneMenu{
+	display : none;
+}
+
+/***  BARRA UTENTE  ***/
+
+#utente p{
+	display : inline; /* non va a capo ad ogni p */
+	padding-right : 5%;
+	white-space: nowrap; /*non c'è il supporto totale*/ /* non divide i link se il nome utente è lungo */
+}
+#utente a{
+	padding-left : 3%;
+	padding-right : 3%;
+}
+#utente{/* problema del relative: occupa spazio nella posizione originale; ignoriamo? */
+		position : relative; /* così rimane in una posizione decente e semi fissa dal 1024 in su */
+		top : -35px;
+		left : 420px;
+		text-align : center;
+		background-color : white;
+		padding : 0;
+		border : 0;
+		margin-bottom : 0;
+		width : 600px;
+}
+
+/***  CORPO  ***/
+
+#contenuto{
+	margin-bottom : 1%;
+	padding : 0% 5% 5% 5%;
+}
+
+.contenitore{
+	background-color : #cccccc;
+	border-radius : 4px;
+	border : 1px solid #666666;
+	padding : 5%;
+	margin-bottom : 1%;
+}
+
+.contenitore h2, .contenitore h3{
+	margin : 2% 0% 2% 0%;
+}
+
+/***  FOOTER  ***/
+
+#footer{
+	border-top : 1px solid #666666;
+	border-bottom : 1px solid black;
+	padding : 2%;
+	background-color : white;
+	text-align : center;
+}
+#footer a{
+	padding-left: 4%;
+	padding-right : 4%;
+}
+
+.descrizione_errore{ /** ?????????? **/
+	border : 1px solid #666666;
+	padding : 3% 5% 3% 5%;
+	background-color : white;
+	margin : 2% 3%;
+	border-radius : 15px;
+}
+
+/***  FORM  ***/
+
+input{
+	font-size : 100%;
+}
+
+input[type=text], input[type=password]{
+	height : 1cm;
+	width : 96%;
+	padding : 0;
+	padding-left : 2%;
+	padding-right : 2%;
+	margin-bottom : 3%;
+	margin-top : 1%;
+	border : 1px solid #666666;
+}
+
+input[type=radio]{
+	margin-top: 3%;
+	margin-bottom : 4%;
+	margin-left : 2%;
+}
+
+select{
+	width : 100%;
+	height : 1cm;
+	margin-top : 2%;
+	margin-bottom : 5%;
+}
+
+input[type=submit]{
+	width: 60%;
+	height : 1cm;
+	cursor: pointer;
+	margin-top : 2%;
+	margin-bottom : 1%;
+	margin-left : 20%;
+}
+#submitbutton_err{ /** ??????????????????? **/
+	text-align: center;
+}
+
+textarea{
+	width : 96%;
+	padding: 1% 2% 1% 2%;
+	height : 1cm;
+	margin-top : 2%;
+	margin-bottom : 2%;
+	border : 1px solid #666666;
+	font-size : 1em; 
+	font-family : Verdana, Helvetica, sans-serif;
+}
+
+fieldset {
+	background-color : #cccccc;
+	border-radius : 4px;
+	border : 1px solid #666666;
+	padding : 5% 7% 3% 7%;
+	margin-bottom : 1%;
+}
+
+fieldset>h2{
+	margin : 0% 0% 2% 0%;
+}
+
+.errore{
+	color : red;
+	margin-bottom : 5%;
+	font-size : 0.9em;
+}
+
+.div_errore{ /**** NEW *****/
+	border : 2px solid red;
+	padding : 2% 5%;
+	background-color : #ff6666;
+	margin-top: 6%;
+	margin-bottom : -50px;
+}
+
+legend { /* Serve per validare */
+    display: none;
+}
+
+/***  LISTA MENU'  ***/
+
+#menuLista a{
+	color : black;
+}
+
+#menu{
+	position : absolute;
+	top : 51px;
+	width : 1024px;
+}
+
+ul#menuLista{
+	list-style: none;
+	margin:0;
+	padding:0;
+	text-align:center;
+}
+#menuLista li {
+	display:inline;
+}
+#menuLista li a {
+	display:inline-block;
+	border : 1px solid #666666;
+	background-color : white;
+	padding:13px;
+	text-decoration: none;
+	margin-top : 1px;
+}
+
+#menuLista li a:hover{
+	background-color: #00ace6;
+}
+
+.frecceMenu{
+	display : none;
+}
+
+
+/***  Pagina MESSAGGI  ***/
+
+.blackText{
+	color: black;
+}
+
+.conversazione{
+	border : 1px solid #666666;
+	margin-bottom : 2px;
+	background-color : white;
+	border-radius : 10px;
+	padding : 0 0.5cm 0.5cm 0.5cm;
+}
+
+.linkMobile{
+	display : block; 
+	padding : 0.5cm 0;
+	text-decoration : none;
+	color : black;
+}
+
+.nuova{ 
+	background-color : #33ccff/*#3399ff*/;
+	border : 1px solid #3399ff;
+}
+.nuova a{
+	color : black;
+}
+
+.linkVaiConversazione{
+	text-align : right;
+	padding : 0.2cm 0;
+}
+
+/***  SINGOLA CONVERSAZIONE  ***/
+
+.ricevuti, .inviati{
+	border : 1px solid #666666;
+	padding : 3.5%;
+	margin-bottom : 2%;
+	background-color : white;
+}
+
+.ricevuti{
+	margin-right : 15%;
+	border-radius : 10px 10px 10px 10px; /*in altro sx, in alto dx, in basso dx, in basso sx*/
+}
+
+.inviati{
+	margin-left : 15%;
+	border-radius : 10px 10px 10px 10px;
+}
+
+.intestazioneMsg{
+	text-align : right;
+	margin-bottom : 3%;
+	font-size : 0.9em;
+}
+
+.mittenteMsg{
+	float : left;
+}
+
+/***  INSERIMENTO FEEDBACK  ***/
+
+.votiGroup{
+	width: 100%;
+	text-align: center;
+}
+.votiGroup label {
+	margin-right : 10%;
+	margin-left : 1%;
+}
+#preferenze h2{
+	margin : 0% 0% 2% 0%;
+}
+
+
+/***  PROFILO PUBBLICO  ***/
+
+.descrizione{ 
+	border : 1px solid #666666;
+	padding : 3% 5% 3% 5%;
+	background-color : white;
+	margin : 2% 3%;
+	border-radius : 15px;
+}
+
+.commentoUtente{
+	border : 1px solid #666666;
+	padding : 3%;
+	border-radius : 15px;
+	background-color : white;
+	margin-bottom : 1%;
+}
+
+/**  RISULTATI  **/
+
+.risultato{
+	border : 1px solid #666666;
+	border-radius : 15px;
+	background-color : white;
+	margin-bottom : 1%;
+	padding-bottom : 0.4cm;
+}
+
+.linkMobileRisultati{
+	display : block; 
+	padding : 0.5cm 0.5cm 0.4cm 0.5cm;
+	text-decoration : none;
+}
+
+.partenza{
+	color : #006600;
+}
+
+.arrivo{
+	color : #e60000;
+}
+
+.risultato p{
+	padding : 0.5% 0.5cm 0.5% 0.5cm;
+}
+
+/*** MODIFICA PROFILO ***/
+
+.radioNascosto{ /* Serve per JS; Diventa display none se il transform non è compatibile */
+	display : none; 
+}
+
+#preferenze input[type=radio]{
+	margin : 0;
+}
+.preferenzeImg{ /* per set di 2-3 immagini */
+	height : 50px;
+	border : 1px solid;
+}
+.marginRadioNascosto{
+	margin : 3% 5% 2% 5%; /* versione con radio nascosti */
+}
+.marginRadioVisibile{
+	margin : 3% 4% 2% 1%; /* versione con radio visibili */
+}
+
+input[type=radio]:checked + label>img { /* provvisorio */
+  	transform:scale(1.2,1.2);
+	border: 2px solid #0088cc;	
+}
+
+.preferenzeGroup{
+	width: 100%;
+	text-align: center;
+}
+.testoLabelNascosto{ /* serve per validare */
+	display : none;
+}
+
+/*** ELENCO VIAGGI ***/
+
+.viaggio{
+	border : 1px solid #666666;
+	border-radius : 15px;
+	background-color : white;
+	margin-bottom : 1%;
+}
+
+.data{
+	font-size : 0.9em;
+	float : right;
+	color: black;
+}
+
+.linkMobileViaggi{
+	display : block; 
+	padding : 0.5cm 0.4cm 0.5cm 0.4cm;
+	text-decoration : none;
+	color : black;
+}
+
+.viaggio p{
+	padding : 0.5% 0.4cm 0.5% 0.4cm;
+}
+
+.linkDesktop{
+	text-decoration : underline;
+}
+
+/*** SINGOLO VIAGGIO ***/
+
+.preferenze4Img{  /* usato su più pagine per set di 4 immagini */
+	border : 1px solid #666666;
+	height : 50px;
+	margin : 2% 7% 1% 7%;
+}
+
+/*** CONFERMA REGISTRAZIONE ***/
+
+.bottone{
+	display : block;
+	border : 1px solid #666666;
+	text-align : center;
+	padding : 1.5%;
+	text-decoration : none;
+	border-radius : 15px;
+	box-shadow: 0px 2px 5px 0px #888888;
+	background-color : #f2f2f2;
+}
+.si{
+	margin : 6% 20% 0% 20%;
+}
+.no{
+	margin : 4% 30% 1% 30%;
+}
+
+/*** NOTIFICHE ***/
+
+.notifica{
+	border : 1px solid #666666;
+	border-radius : 15px;
+	background-color : white;
+	padding : 2.5%;
+	margin-bottom : 1%;
+}
+
+.notifica fieldset{
+	background : white;
+	border: none;
+	padding : 0%;
+}
+.testoCentrato{
+	text-align: center;
+}
+
+.notifica input[type=submit]{
+	margin-top : 0%;
+	margin-bottom : 0%;
+	width : 40%;
+	margin-left : 30%;
+}
+
+.paddingSpan{
+	padding: 10%;
+}
+
+
+/*** MEDIA QUERY ***/
+
+@media screen and (min-width: 768px) { /* Media query necessaria per mantenere un layout funzionante anche su IE8 */
+
+	/* Pagina delle notifiche */
+	
+	.aCapoMobile{
+		display : none;
+	}
+	.destraDesktop{
+		float :right;
+	}
+}
+
+@media screen and (max-width: 1023px) {
+	html{
+		border : 0px;
+	}
+	h1 {
+		margin : 3% 2% 3% 2%;
+	}
+	#header{
+		padding : 1%;
+	}
+	#utente{
+		position : static;
+		border : 1px solid #666666;
+		border-top : 0px;
+		padding : 2%;
+		width : inherit;
+	}
+	#bottoneMenu{
+		display : block;
+		border : 1px solid #666666;
+		float : right;
+		padding : 1.2%;
+		margin : 0%;
+		text-align : center;
+		text-decoration : none;
+		border-radius : 12px;
+		box-shadow: 0px 2px 5px 0px #888888;
+		color : #0088cc; /* Stesso colore dei link, ma non cambia colore dopo averlo cliccato*/
+	}
+	#footer{
+		padding : 3%;
+		border : 0;
+	}
+	#contenuto{
+		padding : 0% 3% 5% 3%;
+	}
+	.contenitore{
+		padding : 3% 4%;
+	}
+	fieldset {
+		padding : 3% 4%;
+	}	
+	#menu{
+		position : static;
+		max-width : 100%;
+	}
+	#menu ul{
+		list-style : none;
+		margin : 0;
+		padding : 0;
+		text-align : left;
+	}
+	#menuLista li a{
+		display : block;
+		padding : 0.4cm 5%;
+	}
+	.frecceMenu{
+		display : initial;
+		float : right;
+	}
+	.bottone{
+		padding : 2%;
+	}
+	.si{
+		margin : 6% 10% 0% 10%;
+	}
+	.no{
+		margin : 4% 20% 1% 20%;
+	}
+	.linkVaiConversazione{
+		display : none;
+	}
+	.linkDesktop{
+		display: none;
+	}
+	.div_errore{ /**** NEW *****/
+		margin-top: 10px;
+		margin-bottom : 0;
+	}
+	
+
+}
+
+@media screen and (max-width: 767px) {
+	#utente{
+		padding : 2.5%;
+	}
+	.ultimoMessaggio {
+		display : none;
+	}
+	.contenitore{
+		padding : 4%;
+	}
+	fieldset {
+		padding : 4%;
+	}
+	#bottoneMenu{
+		border-radius : 10px;
+	}
+	.bottone{
+		padding : 2.5%;
+	}
+	.si{
+		margin : 6% 5% 0% 5%;
+	}
+	.no{
+		margin : 4% 15% 1% 15%;
+	}
+	.votiGroup label {
+		margin-right : 7.5%;
+	}
+	.descrizione{
+		margin : 2% 0%;
+	}	
+	.intestazioneMsg{
+		font-size : 0.8em;
+	}
+	.preferenze4Img{ 
+		margin : 3% 4% 2% 4%;
+	}	
+	.data{
+		font-size : 0.8em;
+	}
+	.paddingSpan{
+		padding: 5%;
+	}
+	.notifica{
+		padding : 3%;
+	}
+	.notifica fieldset{
+		padding : 2%;
+	}
+	.conversazione{
+		padding-bottom : 0;
+	}
+	#footer{
+		padding : 4%;
+	}
+	
+}
+
+@media screen and (max-width: 600px) {
+	#bottoneMenu{
+		padding : 1.5%;
+	}
+	.notifica input[type=submit]{
+		margin-top : 3%;
+	}
+	
+}
+
+@media screen and (max-width: 425px) {
+	#bottoneMenu{
+		margin : 1%;
+		padding : 1.9%;
+	}
+	.votiGroup label {
+		margin-right : 4%;
+	}
+	.preferenze4Img{ 
+		margin : 2%;
+	}
+	.notifica{
+		padding : 5%;
+	}
+	.notifica input[type=submit]{
+		margin-top : 5%;
+		width : 50%;
+		margin-left : 25%;
+	}
+	
+}

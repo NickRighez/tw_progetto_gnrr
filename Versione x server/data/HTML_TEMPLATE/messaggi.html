@@ -1,0 +1,70 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="it" lang="it">
+ <head>
+  <title>Messaggi - Travel Share</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta name="title" content="Messaggi - Travel Share" />
+  <meta name="description" content="Pagina delle conversazioni di un utente" />
+  <meta name="keywords" content="messaggi, travel share, car pooling, passaggio, auto" />
+  <meta name="author" content="Giovanni Sanna, Nicolo' Rigato, Riccardo Ardossi" />
+  <meta name="language" content="italian it" />
+
+  <meta name="viewport" content="width=device-width" />
+
+  <link href="../screen.css" rel="stylesheet" type="text/css" media="screen" />
+  <link href="../print.css" rel="stylesheet" type="text/css" media="print" />
+
+  <link rel="icon" href="../Immagini/TS_icon.png" type="image/x-icon" />
+  <link rel="shortcut icon" href="../Immagini/TS_icon.png" type="image/x-icon" />
+
+<script type="application/javascript" src="../javascript/jquery-ui-1.12.0/external/jquery/jquery.js"></script>
+  <script type="application/javascript" src="../javascript/jquery-ui-1.12.0/jquery-ui.js"></script>
+<link rel="stylesheet" href="../javascript/jquery-ui-1.12.0/jquery-ui.css" />
+  <script type="application/javascript" src="../javascript/travelshare.js" ></script>
+ <script type="application/javascript"> <!--
+	window.onload = funzioniDiCaricamento.caricamento_messaggi;
+//-->
+</script>
+
+
+ </head>
+
+ <body>
+
+  <div id="header">
+   <a href="home.cgi" tabindex="1"><img src="../Immagini/banner.png" id="banner" alt="Banner Travel Share - Link diretto alla Home" title="Banner Travel Share - Link diretto alla Home" /></a>
+   <a id="bottoneMenu" href="#menu">Men&ugrave;</a>
+  </div>
+
+  <div id="utente">
+   <p>Ciao [% NOME_UTENTE %]</p>
+   <p><a href="notifiche.cgi" tabindex="2">Notifiche ([% NUM_NOTIFICHE %])</a>  <a href="ricevitore_logout.cgi" tabindex="3">Logout</a></p>
+  </div>
+
+  <div id="contenuto">
+
+	<h1>Messaggi</h1>
+
+	 [% CONTENUTO %]
+
+
+  </div>
+
+  <div id="menu">
+  <ul id="menuLista">
+   <li><a href="home.cgi" tabindex="4">Cerca un passaggio <span class="frecceMenu">&raquo;</span></a></li>
+   <li><a href="offerta_passaggio.cgi" tabindex="5">Offri un passaggio <span class="frecceMenu">&raquo;</span></a></li>
+   <li><a href="profilo.cgi?utente=[%NOME_UTENTE%]" tabindex="6">Gestisci il profilo <span class="frecceMenu">&raquo;</span></a></li>
+   <li><a href="viaggi.cgi" tabindex="7">Viaggi<span class="frecceMenu">&raquo;</span></a></li>
+   <li><a href="informazioni.cgi" tabindex="8">Informazioni su <span xml:lang="en" lang="en">Travel Share</span> <span class="frecceMenu">&raquo;</span></a></li>
+  </ul>
+  </div>
+
+  <div id="footer">
+   <a href="ricevitore_logout.cgi">Logout</a>
+   <a href="#header">Torna su</a>
+  </div>
+
+  </body>
+</html>
