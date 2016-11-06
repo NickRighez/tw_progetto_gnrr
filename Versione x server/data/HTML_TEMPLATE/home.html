@@ -1,5 +1,4 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="it" lang="it">
   <head>
     <title>Home - Travel Share</title>
@@ -9,26 +8,21 @@
     <meta name="keywords" content="home, cerca, travel share, car pooling, passaggio, auto" />
     <meta name="author" content="Giovanni Sanna, Nicolo' Rigato, Riccardo Ardossi" />
     <meta name="language" content="italian it" />
-
     <meta name="viewport" content="width=device-width" />
-
     <link href="../screen.css" rel="stylesheet" type="text/css" media="screen" />
     <link href="../print.css" rel="stylesheet" type="text/css" media="print" />
-
     <link rel="icon" href="../Immagini/TS_icon.png" type="image/x-icon" />
     <link rel="shortcut icon" href="../Immagini/TS_icon.png" type="image/x-icon" />
-
     <script type="application/javascript" src="../javascript/jquery-ui-1.12.0/external/jquery/jquery.js"></script>
     <script type="application/javascript" src="../javascript/jquery-ui-1.12.0/jquery-ui.js"></script>
     <link rel="stylesheet" href="../javascript/jquery-ui-1.12.0/jquery-ui.css" />
     <script type="application/javascript" src="../javascript/travelshare.js" ></script>
-    <script type="application/javascript"> <!--
-                                               window.onload = funzioniDiCaricamento.caricamento_home;
-                                               //-->
+    <script type="application/javascript">
+      <!--
+          window.onload = funzioniDiCaricamento.caricamento_home;
+          //-->
     </script>
-
   </head>
-
   <body>
 
     <div id="header">
@@ -45,9 +39,9 @@
     <div id="contenuto">
 
       [% IF DESCRIZIONE_ERRORE %]
-        <div class="div_errore">
-          <p>[% DESCRIZIONE_ERRORE %]</p>
-        </div>
+      <div class="div_errore">
+        <p>[% DESCRIZIONE_ERRORE %]</p>
+      </div>
       [% END %]
 
 
@@ -56,7 +50,6 @@
       <form action="ricevitore_ricerca.cgi" method="post">
         <fieldset><legend>Ricerca di un passaggio</legend>
           <label for="partenza">Partenza</label><br />
-
           <input type="text" id="partenza" name="partenza" tabindex="[% INDEX %]" onblur="valida_nome('partenza','Luogo di partenza')" value="[%PARTENZA%]"></input><br />
           [% INDEX = INDEX+1 %]
           <p id="partenza_err" class="errore">[%PARTENZA_ERR%]</p>
@@ -70,11 +63,9 @@
           <p id="data_err" class="errore">[%DATA_ERR%]</p>
           <input type="submit" value="Cerca" tabindex="[% INDEX %]"></input>
           [% INDEX = INDEX+1 %]
-
           <p id="submitbutton_err" class="errore"></p>
         </fieldset>
       </form>
-
     </div>
 
     [% IF LOGGEDIN=='yes' %]
@@ -103,10 +94,7 @@
       <a href="ricevitore_logout.cgi" tabindex="[% INDEX %]">Logout</a>
       [% INDEX = INDEX+1 %]
       [% END %]
-
       <a href="#header" tabindex="[% INDEX %]">Torna su</a>
-
-
     </div>
 
   </body>

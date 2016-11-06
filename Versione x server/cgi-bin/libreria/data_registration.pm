@@ -4,7 +4,6 @@
 # Pacchetto di gestione del salvataggio dei dati
 ###################################################
 
-
 ########################################################
 # TUTTI I COINTROLLI SUGLI INPUT DEVONO ESSERE GIA STATI FATTI AL MOMENTO IN CUI SI CHIAMA LA FUNZIONE
 ##########################################################
@@ -29,8 +28,6 @@ use Fcntl qw( :flock );
 our $xml_file = '../data/TravelShare.xml';
 
 our $parser = XML::LibXML->new();
-
-# Nota sull'eliminazione. riferimenti a utenti cancellati??????<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 
 sub get_xml_doc {
     open( my $fileHandle, "<:encoding(UTF-8)", $xml_file )
@@ -221,7 +218,7 @@ sub inserisci_prenotazione {
     my %aux = serializzazione_apertura();
     my $doc = $aux{'doc'};
     my $fileHandle = $aux{'filehandle'};
-    for(my $i=$array_argom{'NumTappaPartenza'}; $i<=$array_argom{'NumTappaArrivo'}; $i++) {
+    for(my $i=$array_argom{'NumTappaPartenza'}; $i<$array_argom{'NumTappaArrivo'}; $i++) { # modificato
         my $xpath_tappa="//Passaggio[IDViaggio=\"$array_argom{'IDViaggio'}\"]/Itinerario/*[\@Numero=\"$i\"]";
         my @nodes = $doc->findnodes("//Passaggio[IDViaggio=\"$array_argom{'IDViaggio'}\"]/Itinerario/*[\@Numero=\"$i\"]");
         if(@nodes != 0) {
@@ -407,7 +404,7 @@ sub inserisci_notifica{
         $fragm = "<RichiestaPrenotaz Mittente=\"".$attributi{'Mittente'}."\" Passaggio=\"".$attributi{'Passaggio'}."\" Partenza=\"".$attributi{'Partenza'}."\" Arrivo=\"".$attributi{'Arrivo'}."\" /> \n";
     }
     if($tag eq 'EsitoPrenotaz') {
-        $fragm = "<EsitoPrenotaz Passaggio=\"".$attributi{'Passaggio'}."\" Esito=\"".$attributi{'Esito'}."\" /> \n";
+        $fragm = "<EsitoPrenotaz Passaggio=\"".$attributi{'Passaggio'}."\" Esito=\"".$attributi{'Esito'}."\" Partenza=\"".$attributi{'Partenza'}."\" Arrivo=\"".$attributi{'Arrivo'}."\" /> \n";
     }
 
     $fragm = $parser->parse_balanced_chunk($fragm);
@@ -425,8 +422,12 @@ sub inserisci_feedback {
         utf8::encode($el);
     }
     my $output = "<Feedback IDMitt=\"$array_argom{'IDMitt'}\" IDDest=\"$array_argom{'IDDest'}\">
-                              <Passaggio>$array_argom{'Passaggio'}</Passaggio>
-                              <Commento>$array_argom{'Commento'}</Commento> \n";
+                              <Passaggio>$array_argom{'Passaggio'}</Passaggio>";
+                              
+    if(defined($array_argom{'Commento'})) {
+        $output = $output." <Commento>$array_argom{'Commento'}</Commento> \n";
+    }
+                             
     my %aux=serializzazione_apertura();
     my $doc = $aux{'doc'};
     my $fileHandle = $aux{'filehandle'};
@@ -451,7 +452,7 @@ sub inserisci_feedback {
     serializzazione_chiusura($fileHandle,$doc);
     $output = $output."</Feedback> \n";
     my $fragm = $parser->parse_balanced_chunk($output);
-    return serializzazione_inserimento($fragm,"//SetFeedback/Feedback[\@IDMitt=\"$array_argom{'IDMitt'}\" and \@IDDest=\"$array_argom{'IDDest'}\"]","//SetFeedback");
+    return serializzazione_inserimento($fragm,"//SetFeedback/Feedback[\@IDMitt=\"$array_argom{'IDMitt'}\" and \@IDDest=\"$array_argom{'IDDest'}\" and Passaggio=\"$array_argom{'Passaggio'}\"]","//SetFeedback");
 }
 
 sub inserisci_info_auto {
@@ -531,7 +532,7 @@ sub elimina_notifica {
     my $doc = $aux{'doc'};
     my $fileHandle = $aux{'filehandle'};
     my $padre = $doc->findnodes("//Utente[Username=\"$user\"]/Notifiche")->get_node(1);
-    my @nodo_todel = $doc->findnodes("//Utente[Username=\"$user\"]/Notifiche/".$tag."[$attr]");
+    my @nodo_todel = $doc->findnodes("//Utente[Username=\"$user\"]/Notifiche/".$tag."[$attr]")->get_node(1);
     foreach my $nodo (@nodo_todel){
         $nodo->parentNode->removeChild($nodo) unless !defined $nodo;
     }
@@ -689,7 +690,8 @@ sub aggiorna_feedback_da_rilasciare {
                 my @prenotaz = $tappe[$w]->findnodes("Prenotazioni/Utente");
                 my $num_pr = @prenotaz;
                 for(my $x=0; $x<$num_pr; $x++) {
-                    push @partecipanti, $prenotaz[$x]->findnodes(".")->get_node(1)->textContent; # creo un array di utenti che devono rilasciare il feedback fra ognumo di loro
+                    # creo un array di utenti che devono rilasciare il feedback fra ognumo di loro
+                    push @partecipanti, $prenotaz[$x]->findnodes(".")->get_node(1)->textContent;
                 }
                 my $num_p = @partecipanti;
                 for(my $j=0; $j<$num_p; $j++) {

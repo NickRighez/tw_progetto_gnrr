@@ -1,142 +1,133 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="it" lang="it">
- <head>
-  <title>Inserisci feedback - Travel Share</title>
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-  <meta name="title" content="Inserisci feedback - Travel Share" /> 
-  <meta name="description" content="Pagina per l'inserimento dei feedback" />
-  <meta name="keywords" content="inserimento feedback, travel share, car pooling, passaggio, auto" />
-  <meta name="author" content="Giovanni Sanna, Nicolò Rigato, Riccardo Ardossi" />
-  <meta name="language" content="italian it" />
-  
-  <meta name="viewport" content="width=device-width" /> 
-  
-  <link href="../screen.css" rel="stylesheet" type="text/css" media="screen" />
-  <link href="../print.css" rel="stylesheet" type="text/css" media="print" />
-  
-  <link rel="icon" href="Immagini/TS_icon.png" type="image/x-icon" />
-  <link rel="shortcut icon" href="Immagini/TS_icon.png" type="image/x-icon" />
- </head>
- 
- <body>
-  
-  <div id="header">
-   <a href="home.cgi" tabindex="1"><img src="Immagini/banner.png" id="banner" alt="Banner Travel Share - Link diretto alla Home" /></a>
-   <a id="bottoneMenu" href="#menu">Men&ugrave;</a>
-  </div>
-  
-  <div id="utente">
-   <p>Ciao [% NOME_UTENTE %]</p>
-   <p><a href="notifiche.html" tabindex="2">Notifiche ( [% NUM_NOTIFICHE %] )</a>  <a href="logout.cgi" tabindex="3">Logout</a></p>
-  </div>
-  
-  <div id="contenuto">
-  
-  <h1>Inserisci i feedback dei tuoi compagni di viaggio</h1>
-  
-  <form action="ricevitore_feedback.cgi" method="POST">
-[% IF EMPTY_FEEDB == 'true' %]
-  <div class="contenitore"><p>Non ci sono feedback da rilasciare per il passaggio selezionato<p></div>  
-[% ELSE %]
-  [% FOREACH feedback IN FEEDBACK_LIST %]
-    [% IF feedback.index == 0 %]
-      <fieldset><legend>Valutazioni del conducente [% feedback.username %] </legend> 
-      <h2>[% feedback.nome %] [% feedback.cognome %] - Conducente</h2>
-      <input type="hidden" name="G" value="[% feedback.username %]"></input>
-      <input type="hidden" name="passaggio" value="[% feedback.passaggio %]"></input>
-      <p>Compagnia</p>  <!--"Traduttore" ID: ruolo.Valutazione.valoreNumerico; ruolo: g=guidatore, p1..4=passeggero1..4; -->
-      <div class="votiGroup">
-      <input type="radio" name="CompagniaG" id="gCompagnia1" value="1"></input><label  for="gCompagnia1">1</label>
-      <input type="radio" name="CompagniaG" id="gCompagnia2" value="2"></input><label  for="gCompagnia2">2</label>
-      <input type="radio" name="CompagniaG" id="gCompagnia3" value="3" tabindex="[% INDEX %]" checked="checked"></input><label  for="gCompagnia3">3</label>
-      [% INDEX = INDEX+1 %]
-      <input type="radio" name="CompagniaG" id="gCompagnia4" value="4"></input><label  for="gCompagnia4">4</label>
-      <input type="radio" name="CompagniaG" id="gCompagnia5" value="5"></input><label  for="gCompagnia5">5</label>
-      </div>
-      <p>Puntualit&agrave;</p>
-      <div class="votiGroup">
-      <input type="radio" name="PuntualitaG" id="gPuntualita1" value="1"></input><label  for="gPuntualita1">1</label>
-      <input type="radio" name="PuntualitaG" id="gPuntualita2" value="2"></input><label  for="gPuntualita2">2</label>
-      <input type="radio" name="PuntualitaG" id="gPuntualita3" value="3" tabindex="[% INDEX %]" checked="checked"></input><label  for="gPuntualita3">3</label>
-      [% INDEX = INDEX+1 %]
-      <input type="radio" name="PuntualitaG" id="gPuntualita4" value="4"></input><label  for="gPuntualita4">4</label>
-      <input type="radio" name="PuntualitaG" id="gPuntualita5" value="5"></input><label  for="gPuntualita5">5</label>
-      </div>
-      <p>Guida</p>
-      <div class="votiGroup">
-      <input type="radio" name="Guida" id="Guida1" value="1"></input><label  for="Guida1">1</label>
-      <input type="radio" name="Guida" id="Guida2" value="2"></input><label  for="Guida2">2</label>
-      <input type="radio" name="Guida" id="Guida3" value="3" tabindex="[% INDEX %]" checked="checked"></input><label  for="Guida3">3</label>
-      <input type="radio" name="Guida" id="Guida4" value="4"></input><label  for="Guida4">4</label>
-      <input type="radio" name="Guida" id="Guida5" value="5"></input><label  for="Guida5">5</label>
-      </div>
-      <p>Pulizia</p>
-      <div class="votiGroup">
-      <input type="radio" name="Pulizia" id="Pulizia1" value="1"></input><label  for="Pulizia1">1</label>
-      <input type="radio" name="Pulizia" id="Pulizia2" value="2"></input><label  for="Pulizia2">2</label>
-      <input type="radio" name="Pulizia" id="Pulizia3" value="3" tabindex="[% INDEX %]" checked="checked"></input><label  for="Pulizia3">3</label>
-      [% INDEX = INDEX+1 %]
-      <input type="radio" name="Pulizia" id="Pulizia4" value="4"></input><label  for="Pulizia4">4</label>
-      <input type="radio" name="Pulizia" id="Pulizia5" value="5"></input><label  for="Pulizia5">5</label>
-      </div>
-      
-      <textarea rows="0" cols="0" name="commentoG" tabindex="[% INDEX %]" title="Inserisci un commento facoltativo">Commento facoltativo</textarea>
-      [% INDEX = INDEX+1 %]
-      </fieldset>
-    [% ELSE %]
-      <fieldset><legend>Valutazioni del passeggero [% feedback.username %]</legend>
-      <h2>[% feedback.nome %] [% feedback.cognome %] - Passeggero ([% feedback.index %])</h2>
-      <input type="hidden" name="P[% feedback.index %]" value="[% feedback.username %]" ></input>
-      <input type="hidden" name="passaggio" value="[% feedback.passaggio %]"></input>
-      <p>Compagnia</p>
-      <div class="votiGroup">
-      <input type="radio" name="CompagniaP[% feedback.index %]" id="p[% feedback.index %]Compagnia1" value="1"></input><label  for="p[% feedback.index %]Compagnia1">1</label>
-      <input type="radio" name="CompagniaP[% feedback.index %]" id="p[% feedback.index %]Compagnia2" value="2"></input><label  for="p[% feedback.index %]Compagnia2">2</label>
-      <input type="radio" name="CompagniaP[% feedback.index %]" id="p[% feedback.index %]Compagnia3" value="3" tabindex="[% INDEX %]" checked="checked"></input><label  for="p[% feedback.index %]Compagnia3">3</label>
-      [% INDEX = INDEX+1 %]
-      <input type="radio" name="CompagniaP[% feedback.index %]" id="p[% feedback.index %]Compagnia4" value="4"></input><label  for="p[% feedback.index %]Compagnia4">4</label>
-      <input type="radio" name="CompagniaP[% feedback.index %]" id="p[% feedback.index %]Compagnia5" value="5"></input><label  for="p[% feedback.index %]Compagnia5">5</label>
-      </div>
-      <p>Puntualit&agrave;</p>
-      <div class="votiGroup">
-      <input type="radio" name="PuntualitaP[% feedback.index %]" id="p[% feedback.index %]Puntualita1" value="1"></input><label  for="p[% feedback.index %]Puntualita1">1</label>
-      <input type="radio" name="PuntualitaP[% feedback.index %]" id="p[% feedback.index %]Puntualita2" value="2"></input><label  for="p[% feedback.index %]Puntualita2">2</label>
-      <input type="radio" name="PuntualitaP[% feedback.index %]" id="p[% feedback.index %]Puntualita3" value="3" tabindex="[% INDEX %]" checked="checked"></input><label  for="p[% feedback.index %]Puntualita3">3</label>
-      [% INDEX = INDEX+1 %]
-      <input type="radio" name="PuntualitaP[% feedback.index %]" id="p[% feedback.index %]Puntualita4" value="4"></input><label  for="p[% feedback.index %]Puntualita4">4</label>
-      <input type="radio" name="PuntualitaP[% feedback.index %]" id="p[% feedback.index %]Puntualita5" value="5"></input><label  for="p[% feedback.index %]Puntualita5">5</label>
-      </div>
-      
-      <textarea rows="0" cols="0" name="commentoP[% feedback.index %]" tabindex="[% INDEX %]" title="Inserisci un commento facoltativo">Commento facoltativo</textarea>
-      [% INDEX = INDEX+1 %]
-      </fieldset>
-    [% END %]
-  [% END %]
-[% END %]
-  <div><input type="submit" value="Invia" tabindex="[% INDEX %]"></input></div>
-  [% INDEX = INDEX+1 %]
-</form>
-  
-</div>
- 
-  
- <div id="menu">
-  <ul id="menuLista">
-   <li><a href="home.cgi" tabindex="4">Cerca un passaggio <span class="frecceMenu">&raquo;</span></a></li>
-   <li><a href="offerta_passaggio.cgi" tabindex="5">Offri un passaggio <span class="frecceMenu">&raquo;</span></a></li>
-   <li><a href="profilo.cgi?utente=[%NOME_UTENTE%]" tabindex="6">Gestisci il profilo <span class="frecceMenu">&raquo;</span></a></li>
-   <li><a href="viaggi.cgi" tabindex="6">Viaggi<span class="frecceMenu">&raquo;</span></a></li>
-   <li><a href="conversazioni.cgi" tabindex="7">Messaggi <span class="frecceMenu">&raquo;</span></a></li>
-   <li><a href="informazioni.cgi" tabindex="8">Informazioni su <span xml:lang="en" lang="en">Travel Share</span> <span class="frecceMenu">&raquo;</span></a></li>
-  </ul>
-  </div>
+  <head>
+    <title>Inserisci feedback - Travel Share</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="title" content="Inserisci feedback - Travel Share" />
+    <meta name="description" content="Pagina per l'inserimento dei feedback" />
+    <meta name="keywords" content="inserimento feedback, travel share, car pooling, passaggio, auto" />
+    <meta name="author" content="Giovanni Sanna, Nicolò Rigato, Riccardo Ardossi" />
+    <meta name="language" content="italian it" />
+    <meta name="viewport" content="width=device-width" />
+    <link href="../screen.css" rel="stylesheet" type="text/css" media="screen" />
+    <link href="../print.css" rel="stylesheet" type="text/css" media="print" />
+    <link rel="icon" href="Immagini/TS_icon.png" type="image/x-icon" />
+    <link rel="shortcut icon" href="Immagini/TS_icon.png" type="image/x-icon" />
+  </head>
+  <body>
 
-  <div id="footer">
-   <a href="logout.cgi?operation=logout" tabindex="[% INDEX %]">Logout</a>
-   [% INDEX = INDEX+1 %]
-   <a href="#header" tabindex="[% INDEX %]">Torna su</a>
-  </div>
-  
+    <div id="header">
+      <a href="home.cgi" tabindex="1"><img src="Immagini/banner.png" id="banner" alt="Banner Travel Share - Link diretto alla Home" /></a>
+      <a id="bottoneMenu" href="#menu">Men&ugrave;</a>
+    </div>
+
+    <div id="utente">
+      <p>Ciao [% NOME_UTENTE %]</p>
+      <p><a href="notifiche.html" tabindex="2">Notifiche ( [% NUM_NOTIFICHE %] )</a>  <a href="logout.cgi" tabindex="3">Logout</a></p>
+    </div>
+
+    <div id="contenuto">
+      <h1>Inserisci i feedback dei tuoi compagni di viaggio</h1>
+      <form action="ricevitore_feedback.cgi" method="POST">
+        [% IF EMPTY_FEEDB == 'true' %]
+        <div class="contenitore"><p>Non ci sono feedback da rilasciare per il passaggio selezionato</p></div>
+        [% ELSE %]
+        [% FOREACH feedback IN FEEDBACK_LIST %]
+        [% IF feedback.index == 0 %]
+        <fieldset><legend>Valutazioni del conducente [% feedback.username %] </legend>
+          <h2>[% feedback.nome %] [% feedback.cognome %] - Conducente</h2>
+          <input type="hidden" name="G" value="[% feedback.username %]"></input>
+          <input type="hidden" name="passaggio" value="[% feedback.passaggio %]"></input>
+          <p>Compagnia</p>  <!--"Traduttore" ID: ruolo.Valutazione.valoreNumerico; ruolo: g=guidatore, p1..4=passeggero1..4; -->
+          <div class="votiGroup">
+            <input type="radio" name="CompagniaG" id="gCompagnia1" value="1"></input><label  for="gCompagnia1">1</label>
+            <input type="radio" name="CompagniaG" id="gCompagnia2" value="2"></input><label  for="gCompagnia2">2</label>
+            <input type="radio" name="CompagniaG" id="gCompagnia3" value="3" tabindex="[% INDEX %]" checked="checked"></input><label  for="gCompagnia3">3</label>
+            [% INDEX = INDEX+1 %]
+            <input type="radio" name="CompagniaG" id="gCompagnia4" value="4"></input><label  for="gCompagnia4">4</label>
+            <input type="radio" name="CompagniaG" id="gCompagnia5" value="5"></input><label  for="gCompagnia5">5</label>
+          </div>
+          <p>Puntualit&agrave;</p>
+          <div class="votiGroup">
+            <input type="radio" name="PuntualitaG" id="gPuntualita1" value="1"></input><label  for="gPuntualita1">1</label>
+            <input type="radio" name="PuntualitaG" id="gPuntualita2" value="2"></input><label  for="gPuntualita2">2</label>
+            <input type="radio" name="PuntualitaG" id="gPuntualita3" value="3" tabindex="[% INDEX %]" checked="checked"></input><label  for="gPuntualita3">3</label>
+            [% INDEX = INDEX+1 %]
+            <input type="radio" name="PuntualitaG" id="gPuntualita4" value="4"></input><label  for="gPuntualita4">4</label>
+            <input type="radio" name="PuntualitaG" id="gPuntualita5" value="5"></input><label  for="gPuntualita5">5</label>
+          </div>
+          <p>Guida</p>
+          <div class="votiGroup">
+            <input type="radio" name="Guida" id="Guida1" value="1"></input><label  for="Guida1">1</label>
+            <input type="radio" name="Guida" id="Guida2" value="2"></input><label  for="Guida2">2</label>
+            <input type="radio" name="Guida" id="Guida3" value="3" tabindex="[% INDEX %]" checked="checked"></input><label  for="Guida3">3</label>
+            <input type="radio" name="Guida" id="Guida4" value="4"></input><label  for="Guida4">4</label>
+            <input type="radio" name="Guida" id="Guida5" value="5"></input><label  for="Guida5">5</label>
+          </div>
+          <p>Pulizia</p>
+          <div class="votiGroup">
+            <input type="radio" name="Pulizia" id="Pulizia1" value="1"></input><label  for="Pulizia1">1</label>
+            <input type="radio" name="Pulizia" id="Pulizia2" value="2"></input><label  for="Pulizia2">2</label>
+            <input type="radio" name="Pulizia" id="Pulizia3" value="3" tabindex="[% INDEX %]" checked="checked"></input><label  for="Pulizia3">3</label>
+            [% INDEX = INDEX+1 %]
+            <input type="radio" name="Pulizia" id="Pulizia4" value="4"></input><label  for="Pulizia4">4</label>
+            <input type="radio" name="Pulizia" id="Pulizia5" value="5"></input><label  for="Pulizia5">5</label>
+          </div>
+
+          <textarea rows="0" cols="0" name="commentoG" tabindex="[% INDEX %]" title="Inserisci un commento facoltativo">Commento facoltativo</textarea>
+          [% INDEX = INDEX+1 %]
+        </fieldset>
+        [% ELSE %]
+        <fieldset><legend>Valutazioni del passeggero [% feedback.username %]</legend>
+          <h2>[% feedback.nome %] [% feedback.cognome %] - Passeggero ([% feedback.index %])</h2>
+          <input type="hidden" name="P[% feedback.index %]" value="[% feedback.username %]" ></input>
+          <input type="hidden" name="passaggio" value="[% feedback.passaggio %]"></input>
+          <p>Compagnia</p>
+          <div class="votiGroup">
+            <input type="radio" name="CompagniaP[% feedback.index %]" id="p[% feedback.index %]Compagnia1" value="1"></input><label  for="p[% feedback.index %]Compagnia1">1</label>
+            <input type="radio" name="CompagniaP[% feedback.index %]" id="p[% feedback.index %]Compagnia2" value="2"></input><label  for="p[% feedback.index %]Compagnia2">2</label>
+            <input type="radio" name="CompagniaP[% feedback.index %]" id="p[% feedback.index %]Compagnia3" value="3" tabindex="[% INDEX %]" checked="checked"></input><label  for="p[% feedback.index %]Compagnia3">3</label>
+            [% INDEX = INDEX+1 %]
+            <input type="radio" name="CompagniaP[% feedback.index %]" id="p[% feedback.index %]Compagnia4" value="4"></input><label  for="p[% feedback.index %]Compagnia4">4</label>
+            <input type="radio" name="CompagniaP[% feedback.index %]" id="p[% feedback.index %]Compagnia5" value="5"></input><label  for="p[% feedback.index %]Compagnia5">5</label>
+          </div>
+          <p>Puntualit&agrave;</p>
+          <div class="votiGroup">
+            <input type="radio" name="PuntualitaP[% feedback.index %]" id="p[% feedback.index %]Puntualita1" value="1"></input><label  for="p[% feedback.index %]Puntualita1">1</label>
+            <input type="radio" name="PuntualitaP[% feedback.index %]" id="p[% feedback.index %]Puntualita2" value="2"></input><label  for="p[% feedback.index %]Puntualita2">2</label>
+            <input type="radio" name="PuntualitaP[% feedback.index %]" id="p[% feedback.index %]Puntualita3" value="3" tabindex="[% INDEX %]" checked="checked"></input><label  for="p[% feedback.index %]Puntualita3">3</label>
+            [% INDEX = INDEX+1 %]
+            <input type="radio" name="PuntualitaP[% feedback.index %]" id="p[% feedback.index %]Puntualita4" value="4"></input><label  for="p[% feedback.index %]Puntualita4">4</label>
+            <input type="radio" name="PuntualitaP[% feedback.index %]" id="p[% feedback.index %]Puntualita5" value="5"></input><label  for="p[% feedback.index %]Puntualita5">5</label>
+          </div>
+
+          <textarea rows="0" cols="0" name="commentoP[% feedback.index %]" tabindex="[% INDEX %]" title="Inserisci un commento facoltativo">Commento facoltativo</textarea>
+          [% INDEX = INDEX+1 %]
+        </fieldset>
+        [% END %]
+        [% END %]
+        [% END %]
+        <div><input type="submit" value="Invia" tabindex="[% INDEX %]"></input></div>
+        [% INDEX = INDEX+1 %]
+      </form>
+    </div>
+
+    <div id="menu">
+      <ul id="menuLista">
+        <li><a href="home.cgi" tabindex="4">Cerca un passaggio <span class="frecceMenu">&raquo;</span></a></li>
+        <li><a href="offerta_passaggio.cgi" tabindex="5">Offri un passaggio <span class="frecceMenu">&raquo;</span></a></li>
+        <li><a href="profilo.cgi?utente=[%NOME_UTENTE%]" tabindex="6">Gestisci il profilo <span class="frecceMenu">&raquo;</span></a></li>
+        <li><a href="viaggi.cgi" tabindex="6">Viaggi<span class="frecceMenu">&raquo;</span></a></li>
+        <li><a href="conversazioni.cgi" tabindex="7">Messaggi <span class="frecceMenu">&raquo;</span></a></li>
+        <li><a href="informazioni.cgi" tabindex="8">Informazioni su <span xml:lang="en" lang="en">Travel Share</span> <span class="frecceMenu">&raquo;</span></a></li>
+      </ul>
+    </div>
+
+    <div id="footer">
+      <a href="logout.cgi?operation=logout" tabindex="[% INDEX %]">Logout</a>
+      [% INDEX = INDEX+1 %]
+      <a href="#header" tabindex="[% INDEX %]">Torna su</a>
+    </div>
+
   </body>
 </html>

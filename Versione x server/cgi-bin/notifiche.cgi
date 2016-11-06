@@ -25,7 +25,7 @@ if(!defined($session->param('username'))) {
     print $session->header(-location => "login.cgi");
 }
 else {
-    print "Content-type: text/html\n\n";
+
     my $username=$session->param('username');
     my ($messaggi, $feedback, $richieste, $esito) = research::query_notifiche_utente($username, data_registration::get_xml_doc());
     my @messaggi_list = @$messaggi;
@@ -40,11 +40,20 @@ else {
         RICHIESTE_LIST => \@richieste_list,
         ESITO_LIST => \@esito_list,
         NUM_NOTIFICHE => research::conta_notifiche($username, data_registration::get_xml_doc()),
-        INDEX => 9
+        INDEX => 10
         );
+
+    if(defined($session->param('nota'))) {
+        my $aux = $session->param('nota');
+        my %nota = %$aux;
+        $hash_keys{NOTA} = $nota{'nota'};
+        $session->clear(['nota']);
+    }
+    
     my $template_parser = Template->new;
     my $foglio = '';
     open my $fh, '<', $file;
     $template_parser->process($fh,\%hash_keys,\$foglio);
+    print $q->header();
     print $foglio;
 }

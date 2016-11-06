@@ -3,17 +3,28 @@
 - risultati_ricerca.cgi -> devono essere validati i parametri passati con la get.
 	formattare data di partenza 
 
-- formattare data e ora dappertutto
+
 
 -la pagina del viaggio deve avere il nome del conducente, non il nickname
 
+<<<<<<< HEAD
+=======
+-con js esce l'errore nella data dei form
+
+-"Passaggio non prenotabile, in quanto ne sei il conducente" va sostituito con l'elenco dei passeggeri
+
+-la maiuscola distingue due tappe diverse -> padova != Padova
+
+
+
+>>>>>>> lavoro_giovanni
 -non è indicato il riferimento al viaggio nella notifica di prenotazione e il richiedente non ha il link al profilo; il richiedente non andrebbe con il nickname
 
--il reindirizzamento dopo la prenotazione non va bene -> almeno un msg di conferma
+
 
 -da rifare tutte le modifiche perse con il merge
 
--sistemare i link nella pagina delle notifiche
+
 
 -i viaggi attivi rimangono attivi anche quando terminati (da controllare dato che l'ora del server e' diversa)
 
@@ -30,5 +41,13 @@
 -un commento vuoto viene inserito lo stesso nel profilo
 
 
+<<<<<<< HEAD
 - nella pagina del viaggio singolo c'è da formattare in css la lista dei passeggeri
 - verificare js.
+=======
+- nella pagina notifiche.html, nella form richiesta prenotazione non viene visualizzata la legend della fieldset
+
+- nella pagina notifiche.html, nella form richiesta prenotazione, il link all utente non è completamente cliccabile
+
+- singolo_passaggio.cgi -> bachecaviaggio.xsl non tiene conto dei tabindex nella form d inserimento messaggio
+>>>>>>> lavoro_giovanni

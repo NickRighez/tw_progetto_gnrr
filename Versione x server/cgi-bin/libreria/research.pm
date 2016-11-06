@@ -12,24 +12,16 @@ use Template;
 use Cwd;
 use libreria::date_time;
 
-
 use strict;
 use warnings;
 use diagnostics;
 use utf8;
-#per il MIO server
-#use lib '/usr/share/perl5';
-
 
 #############################################
 ## Ricerche tramite XSLT
 #############################################
 
-# our === package variable, my === current scope variable
 our $xml_file = '../data/TravelShare.xml';
-
-
-#parametri: nome file xml
 
 sub generic_xslt_query
 {
@@ -37,12 +29,9 @@ sub generic_xslt_query
     $style_file  = shift @_;
     $lista_filtri = shift @_;
     my %vars= %$lista_filtri;
-    #my $min_index = $vars{'INDEX'};
-    #delete $vars{'INDEX'};
     my $xml_parser = XML::LibXML->new( );
     my $xslt_parser = XML::LibXSLT->new( );
     my $template_parser = Template->new({RELATIVE => 1,});
-    #({ABSOLUTE => 1,});
     my $foglio_di_stile_con_parametri = '';
     $template_parser->process($style_file,\%vars,\$foglio_di_stile_con_parametri);#or die $template_parser->error();
     (length $foglio_di_stile_con_parametri) or die("ERRORE 1: foglio xslt vuoto\n".$style_file . '    '. getcwd);
@@ -52,34 +41,22 @@ sub generic_xslt_query
     my $file_oggetto_xml = $xml_parser->parse_file( $xml_file );
     my $html_output_1 = $style_oggetto_xsl->transform( $file_oggetto_xml);
     (length $html_output_1) or die("ERRORE 2: output HTML vuoto\n".$style_file  . '    '. getcwd);
-    #open my $f, '>prova_html_1.txt';
-     #   print $f $html_output_1;
-    #my $html_output = '';
-    #$template_parser->process(\$html_output_1,{INDEX => $min_index},\$html_output) or die $template_parser->error();
-    #(length $html_output) or die("ERRORE 1.1: foglio xslt vuoto\n" . '    '. getcwd);
-
     $html_output_1 =~ s/<\?xml\ version\=\"1\.0\"\?>//;
-   # return $html_output;
    return $html_output_1;
 }
 
-sub query_users
-{
+sub query_users {
     my $lista = shift @_;
-    if(! exists $lista->{"UTENTE"})
-    {
+    if(! exists $lista->{"UTENTE"}){
         die "Non esiste la chiave UTENTE nella query users\n";
     }
-    if(! exists $lista->{"ANNO_C"})
-    {
+    if(! exists $lista->{"ANNO_C"}){
         die "Non esiste la chiave ANNO_C nella query users\n";
     }
-
     return generic_xslt_query('../data/xslt_files/users.xsl',\%$lista);
 }
 
-sub query_bacheca_viaggio
-{
+sub query_bacheca_viaggio {
     my $lista = shift @_;
     if(! exists $lista->{"VIAGGIO"}) # passaggio che detiene la bacheca che si vuole visualizzare
     {
@@ -229,13 +206,15 @@ sub query_viaggi_attivi_utente {
         my $ora = $viaggi_att[$i]->findnodes("Itinerario/*[Prenotazioni/Utente='$utente']/Ora")->get_node(1)->textContent;
         my $arrivo;
         my $num_a;
-        for(my $j=4;$j>0;$j--) {
-            my @tappa = $viaggi_att[$i]->findnodes("Itinerario/*[Prenotazioni/Utente='$utente' and \@Numero='$j']");
-            my $num = @tappa;
-            if($num!=0) {
-                $arrivo=$tappa[0]->findnodes("Luogo")->get_node(1)->textContent;
-                $num_a=$tappa[0]->findnodes("\@Numero")->get_node(1)->textContent;
-                $j=0;
+        for(my $j=$num_p+1;$j<=4;$j++) {
+            #my @tappa = $viaggi_att[$i]->findnodes("Itinerario/*[Prenotazioni/Utente='$utente' and \@Numero='$j']");
+            #my $num = @tappa;
+
+            # se esiste una tappa con attributo Numero=$j e questa non ha prenotazioni dell utente, essa è la tappa d arrivo
+            if(!($viaggi_att[$i]->exists("Itinerario/*[Prenotazioni/Utente='$utente' and \@Numero='$j']")) && ($viaggi_att[$i]->exists("Itinerario/*[\@Numero='$j']")) ) {
+                $arrivo=$viaggi_att[$i]->findnodes("Itinerario/*[\@Numero='$j']/Luogo")->get_node(1)->textContent;
+                $num_a=$j;
+                $j=5;
             }
         }
         my $prezzo = utility::calcola_prezzo($num_p,$num_a,$idv,$doc); # funzione che calcola il prezzo
@@ -336,6 +315,7 @@ sub query_notifiche_utente {
         }
         if(!$presenza) {
             push @aux, $passaggio;
+
             push @feedback_list, { href => "viaggio_recensire.cgi?passaggio=$passaggio" };
         }
     }
@@ -347,8 +327,9 @@ sub query_notifiche_utente {
         my $passaggio = $notifiche_richiesta_prenot[$i]->findnodes("\@Passaggio");
         my $partenza = $notifiche_richiesta_prenot[$i]->findnodes("\@Partenza");
         my $arrivo = $notifiche_richiesta_prenot[$i]->findnodes("\@Arrivo");
-        push @richieste_list, { richiedente => $richiedente, passaggio => $passaggio, partenza => $partenza, arrivo => $arrivo };
-        # PER RICCARDO : MANCANO TABINDEX
+        my $luogo_p = $doc->findnodes("//SetPassaggi/Passaggio[IDViaggio=\"$passaggio\"]/Itinerario/*[\@Numero=\"$partenza\"]/Luogo")->get_node(1)->textContent;
+        my $luogo_a = $doc->findnodes("//SetPassaggi/Passaggio[IDViaggio=\"$passaggio\"]/Itinerario/*[\@Numero=\"$arrivo\"]/Luogo")->get_node(1)->textContent;
+        push @richieste_list, { richiedente => $richiedente, passaggio => $passaggio, partenza => $partenza, arrivo => $arrivo, luogo_p => $luogo_p, luogo_a => $luogo_a };
     }
 
     my @notifiche_esito_prenot = $doc->findnodes("//SetUtenti/Utente[Username='$ute']/Notifiche/EsitoPrenotaz");
@@ -356,7 +337,12 @@ sub query_notifiche_utente {
     for(my $i=0; $i<$size; $i++) {
         my $passaggio = $notifiche_esito_prenot[$i]->findnodes("\@Passaggio");
         my $esito = $notifiche_esito_prenot[$i]->findnodes("\@Esito");
-        push @esito_list, { href => "ricevitore_esito_visualizz.cgi?passaggio=$passaggio", esito => $esito };
+        my $NumPartenza = $notifiche_esito_prenot[$i]->findnodes("\@Partenza");
+        my $NumArrivo = $notifiche_esito_prenot[$i]->findnodes("\@Arrivo");
+        my $luogo_p = $doc->findnodes("//SetPassaggi/Passaggio[IDViaggio=\"$passaggio\"]/Itinerario/*[\@Numero=\"$NumPartenza\"]/Luogo")->get_node(1)->textContent;
+        my $luogo_a = $doc->findnodes("//SetPassaggi/Passaggio[IDViaggio=\"$passaggio\"]/Itinerario/*[\@Numero=\"$NumArrivo\"]/Luogo")->get_node(1)->textContent;
+        
+        push @esito_list, { href => "ricevitore_esito_visualizz.cgi?passaggio=$passaggio", passaggio => $passaggio, esito => $esito, partenza => $NumPartenza, arrivo => $NumArrivo, luogo_p => $luogo_p, luogo_a => $luogo_a };
     }
     return (\@messaggi_list, \@feedback_list, \@richieste_list, \@esito_list);
 }
@@ -491,7 +477,6 @@ for(my $i =$1;$i<=$numT;$i++){
     push @userList, $nome;
   }
 }
-
 return @userList;
 }
 

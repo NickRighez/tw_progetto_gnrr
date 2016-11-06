@@ -26,8 +26,6 @@ if(!defined($session->param('username'))) {
 else{
     print "Content-type: text/html\n\n";
     my $username=$session->param('username');
-    # prima di ricercare i viaggi attivi e i feedback da rilasciare, bisogna aggiornarli
-    data_registration::aggiorna_feedback_da_rilasciare();
 
     my $doc=data_registration::get_xml_doc();
 

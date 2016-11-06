@@ -20,6 +20,10 @@ my $session = $s[0];
 my $q=CGI->new;
 
 if(defined($session->param('loggedin'))) {
+    my %problems=(
+        DESCRIZIONE_ERRORE => "Tentativo di visualizzare una pagina per soli utenti non loggati."
+        );
+    $session->param('problems',\%problems);
     print $session->header(-location => "home.cgi");
 }
 else {

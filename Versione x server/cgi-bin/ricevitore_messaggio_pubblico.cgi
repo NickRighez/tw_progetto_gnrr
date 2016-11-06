@@ -17,23 +17,13 @@ my $q=new CGI;
 my @s = sessione::creaSessione();
 my $session = $s[0];
 
-if(!defined($session->param('username'))) {
-    my %problems=(
-        not_logged => "Utente non loggato, pagina inaccessibile"
-        );
-    $session->param('problems',\%problems);
-    print $session->header(-location => "login.cgi");
-}
-else {
+if($q->request_method eq 'POST') {
     my $mitt = $session->param('username');
+    # campi 'hidden':
     my $dest=$q->param('destinatario');
     my $pas = $q->param('passaggio');
     my $part = $q->param('partenza');
     my $arr = $q->param('arrivo');
-
-    if(!($q->request_method eq 'POST')) {
-        # rimandare alla home con errore
-    }
 
     my $doc=data_registration::get_xml_doc();
 
@@ -64,4 +54,11 @@ else {
     if(data_registration::inserisci_nuovo_messaggio_bacheca($pas,\%Messaggio)) {
         print $q->redirect("singolo_passaggio.cgi?passaggio=$pas&part=$part&arr=$arr");
     }
+}
+else{
+     my %problems=(
+          DESCRIZIONE_ERRORE => "Tentativo di inserire un messaggio in modalit&agrave; non permessa."
+     );
+     $session->param('problems',\%problems);
+    print $q->redirect("home.cgi");
 }

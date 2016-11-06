@@ -22,8 +22,14 @@ my %old_input;
 
 #  ******  TESTARE CHE IL METODO DELLA FORM SIA 'POST' *************  #
 # ******** (per la ricerca il metodo &egrave; get) ******** #
-
-if ($q->request_method eq 'POST') {
+if (!($q->request_method() eq 'POST')) {
+    my %problems=(
+      DESCRIZIONE_ERRORE => "Tentativo di inserire un nuovo utente con una modalit&agrave; non permessa."
+      );
+    $session->param('problems',\%problems);
+    print $session->header(-location => "home.cgi");
+}
+else {
 
     if($q->param('username') eq "") {
         $problems{USERNAME_ERR} = "Username mancante";

@@ -22,20 +22,16 @@ my $contenuto_bacheca = "";
 my $doc = data_registration::get_xml_doc();
 my %hash_keys;
 
-if(defined($session->param('problems'))) {
-    my $prob = $session->param('problems');
-    my %prob_hash = %$prob;
-    while( my( $key, $value ) = each %prob_hash ){
-        $hash_keys{$key}="$value";
-    }
-}
 my $pass = $q->param('passaggio');
 my $part =$q->param('part');
 my $arr = $q->param('arr');
-my @passaggi = $doc->findnodes("//SetPassaggi/Passaggio[IDViaggio='$pass']/Itinerario[*/\@Numero='$part' and */\@Numero='$arr']");
 
-my $num = @passaggi;
-if($num==0 or $part==$arr) {
+if(!($pass=~m/^v[0-9]+$/) || !($part=~m/^[0-4]$/) || !($arr=~m/^[0-4]$/)){
+    my %problems = ( DESCRIZIONE_ERRORE => "Si e' tentato di visualizzare un passaggio non valido.");
+    $session->param('problems',\%problems);
+    print $session->header(-location => "home.cgi");
+}
+elsif(!$doc->exists("//SetPassaggi/Passaggio[IDViaggio='$pass']/Itinerario[*/\@Numero='$part' and */\@Numero='$arr']") or $part==$arr) {
     my %problems = ( DESCRIZIONE_ERRORE => "Si e' tentato di visualizzare un passaggio non valido.");
     $session->param('problems',\%problems);
     print $session->header(-location => "home.cgi");
@@ -44,9 +40,9 @@ else {
     my %Pass=(
         VIAGGIO => $pass,
         NUM_PARTENZA => $part,
-        NUM_ARRIVO => $arr
+        NUM_ARRIVO => $arr,
+        PREZZO => utility::calcola_prezzo($part,$arr,$pass,$doc)
         );
-
 
     $hash_keys{PASSAGGIO} = $pass;
     $hash_keys{PARTENZA} = $doc->findnodes("//SetPassaggi/Passaggio[IDViaggio='$pass']/Itinerario/*[\@Numero='$part']/Luogo");
@@ -63,7 +59,20 @@ else {
         $hash_keys{RIC_PARTENZA} = $ricerca{'partenza'};
         $hash_keys{RIC_ARRIVO} = $ricerca{'arrivo'};
         $hash_keys{RIC_DATA} = $ricerca{'data'};
-        $session->clear(['ricerca_prec']);
+    }
+
+    if(defined($session->param('nota'))) {
+        my $aux = $session->param('nota');
+        my %nota = %$aux;
+        $hash_keys{NOTA} = $nota{'nota'};
+        $session->clear(['nota']);
+    }
+
+    if(defined($session->param('problems'))) {
+        my $aux = $session->param('problems');
+        my %prob = %$aux;
+        $hash_keys{DESCRIZIONE_ERRORE} = $prob{'DESCRIZIONE_ERRORE'};
+        $session->clear(['prob']);
     }
 
     if(defined($session->param('loggedin'))) {
@@ -71,7 +80,7 @@ else {
         $hash_keys{NUM_NOTIFICHE} = research::conta_notifiche($username, $doc);;
         $hash_keys{LOGGEDIN} = 'yes';
         $hash_keys{NOME_UTENTE} = $username;
-        $hash_keys{INDEX} = 9;
+        $hash_keys{INDEX} = 10;
         my $conducente = $doc->findnodes("//SetPassaggi/Passaggio[IDViaggio='$pass']/Conducente");
 
         if($conducente ne $username) {
@@ -98,8 +107,6 @@ else {
         else {
             $hash_keys{PRENOTAZIONE} = 'yes';
         }
-
-
 
         my %Bacheca = (
             VIAGGIO => $pass,
@@ -129,7 +136,6 @@ else {
     my $foglio = '';
     $template_parser->process($fh,\%hash_keys,\$foglio);
     print $q->header();
-
 
     print $foglio;
 }

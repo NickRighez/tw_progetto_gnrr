@@ -15,6 +15,7 @@ use libreria::sessione;
 my @s = sessione::creaSessione();
 my $session = $s[0];
 my $q=CGI->new;
+my $doc = data_registration::get_xml_doc();
 
 if(!defined($session->param('username'))) {
     my %problems=(
@@ -23,19 +24,20 @@ if(!defined($session->param('username'))) {
     $session->param('problems',\%problems);
     print $session->header(-location => "login.cgi");
 }
+elsif(!($q->param('utente')=~m/^[A-Za-z0-9_-]{5,18}$/) ||
+        !($doc->exists("//SetUtenti/Utente[Username=\"".$q->param('utente')."\"]"))){
+    my %problems=(
+      DESCRIZIONE_ERRORE => "Tentativo di visualizzare una conversazione con un utente inesistente."
+      );
+    $session->param('problems',\%problems);
+    print $session->header(-location => "home.cgi");
+}
 else {
     my $username = $session->param('username');
     my $utente = $q->param('utente');
-    my $doc = data_registration::get_xml_doc();
+    
     my $node = $doc->findnodes("//SetUtenti")->get_node(1);
-    if(!($doc->exists("//SetUtenti/Utente[Username=\"".$q->param('utente')."\"]"))) {
-        my %problems=(
-            DESCRIZIONE_ERRORE => "<div class=\"errore\"><p>Impossibile visualizzare la conversazione. Utente inesistente</p></div>"
-            );
-        $session->param('problems',\%problems);
-        print $session->header(-location => "home.cgi");
-    }
-    else {
+   
         print "Content-type: text/html\n\n";
         my $username=$session->param('username');
         my $contenuto;
@@ -63,6 +65,6 @@ else {
         my $foglio = '';
         $template_parser->process($fh,\%hash_keys,\$foglio);
         print $foglio;
-    }
+
     
 }

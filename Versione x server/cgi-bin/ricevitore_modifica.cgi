@@ -19,12 +19,12 @@ my $session = $s[0];
 
 my $doc = data_registration::get_xml_doc();
 
-if(!defined($session->param('username'))) {
-    my %problems=(
-        not_logged => "Utente non loggato, pagina inaccessibile"
-        );
+if($q->request_method() ne "POST") {
+     my %problems=(
+      DESCRIZIONE_ERRORE => "Tentativo di modifica del profilo con una modalit&agrave; non permessa."
+      );
     $session->param('problems',\%problems);
-    print $session->header(-location => "login.cgi");
+    print $session->header(-location => "home.cgi");
 }
 else {
     my %problems = ( empty => 'yes' );

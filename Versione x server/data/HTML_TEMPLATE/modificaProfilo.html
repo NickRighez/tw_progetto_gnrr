@@ -8,16 +8,11 @@
     <meta name="keywords" content="profilo, travel share, car pooling, passaggio, auto" />
     <meta name="author" content="Giovanni Sanna, Nicolo' Rigato, Riccardo Ardossi" />
     <meta name="language" content="italian it" />
-
     <meta name="viewport" content="width=device-width" />
-
     <link href="../screen.css" rel="stylesheet" type="text/css" media="screen" />
     <link href="../print.css" rel="stylesheet" type="text/css" media="print" />
-
     <link rel="icon" href="../Immagini/TS_icon.png" type="image/x-icon" />
     <link rel="shortcut icon" href="../Immagini/TS_icon.png" type="image/x-icon" />
-
-
     <script type="application/javascript" src="../javascript/modernizr/modernizr-custom.js"></script>
     <script type="application/javascript"  src="../javascript/jquery-ui-1.12.0/external/jquery/jquery.js"></script>
     <script type="application/javascript" src="../javascript/jquery-ui-1.12.0/jquery-ui.js"></script>
@@ -25,11 +20,10 @@
     <script type="application/javascript" src="../javascript/travelshare.js" ></script>
     <script type="application/javascript">
       <!--
-          window.onload = funzioniDiCaricamento.caricamento_modifica_profilo;
-          //-->
+      window.onload = funzioniDiCaricamento.caricamento_modifica_profilo;
+      //-->
     </script>
   </head>
-
   <body>
 
     <div id="header">
@@ -43,33 +37,41 @@
     </div>
 
     <div id="contenuto">
-      <h1>Modifica il profilo</h1>
-      <p id="info_conducente_err" class="errore">[% INFO_CONDUC_ERR %]</p>
+      [% IF INFO_CONDUC_ERR %]
+      <div class="div_errore">
+        <p>[% INFO_CONDUC_ERR %]</p>
+      </div>
+      [% END %]
 
+      <h1>Modifica il profilo</h1>
       <form action="ricevitore_modifica.cgi" method="post" onsubmit="return valida_submit_modifica_profilo();">
         <fieldset><legend>Modifica le informazioni del profilo</legend>
-
           <p>Sesso:
             <input type="radio" name="sesso" id="maschio" value="maschio" [% IF SESSO == 'maschio' %] checked="checked" [% END %]tabindex="14"></input><label  for="maschio">Maschio</label>
             <input type="radio" name="sesso" id="femmina" value="femmina" [% IF SESSO == 'femmina' %] checked="checked" [% END %] ></input><label  for="femmina">Femmina</label>
-          </p><br />
-
+          </p>
+          <br />
           <label for="nome">Nome:</label>
           <input type="text" id="nome" name="nome" value="[%NOME%]" tabindex="9"></input><br />
           <p id="nome_err" class="errore">[%NOME_ERR%]</p>
+
           <label for="cognome">Cognome:</label>
           <input type="text" id="cognome" name="cognome" value="[%COGNOME%]" tabindex="10"></input><br />
           <p id="cognome_err" class="errore">[%COGNOME_ERR%]</p>
+
           <label for="email"><span xml:lang="en" lang="en">Email:</span></label>
           <input type="text" id="email" name="email" value="[%EMAIL%]" tabindex="11"></input><br />
           <p id="email_err" class="errore">[%EMAIL_ERR%]</p>
+
           <label for="vecchiaPassword">Vecchia <span xml:lang="en" lang="en">Password:</span></label>
           <input type="password" id="vecchiaPassword" name="vecchiaPassword" tabindex="12"></input><br />
-          <p id="vecchiaPassword_err" class="errore">[%VECCHIAPASSWORD_ERR%]</p>
+          <p id="vecchiaPassword_err"
+             class="errore">[%VECCHIAPASSWORD_ERR%]</p>
 
           <label for="nuovaPassword">Nuova <span xml:lang="en" lang="en">Password:</span></label>
           <input type="password" id="nuovaPassword" name="nuovaPassword" tabindex="13"></input><br />
-          <p id="nuovaPassword_err" class="errore">[%NUOVAPASSWORD_ERR%]</p>
+          <p id="nuovaPassword_err"
+             class="errore">[%NUOVAPASSWORD_ERR%]</p>
 
           <label for="anno">Anno di nascita:</label>
           <input type="text" id="anno" name="anno" value="[%ANNO%]" tabindex="15"></input><br />
@@ -77,7 +79,6 @@
 
           <label for="descrizioneForm">Descrizione:</label>
           <textarea id="descrizioneForm" rows="0" cols="0" name="descrizioneForm" tabindex="16"> [%DESCRIZIONEFORM%] </textarea>
-
           <!--   <fieldset><legend>Informazioni del guidatore</legend>  -->
           <label for="annoPatente">Anno di rilascio della patente:</label>
           <input type="text" id="annoPatente" name="annoPatente" value="[%ANNOPATENTE%]" tabindex="17"></input><br />
@@ -125,13 +126,10 @@
               <input type="radio" name="fumatori" id="fumatori1" [% CHECKED_F1 %]  value="1" ></input>
               <label for="fumatori1"><img id="fumImg1" class="preferenzeImg marginRadioVisibile" src="../Immagini/fumo1.png" alt="Accetto fumatori" title="Accetto fumatori"></img></label>
             </div>
-
           </div>
-
           <input type="submit" value="Invia" tabindex="23"></input>
         </fieldset>
       </form>
-
     </div>
 
     <div id="menu">

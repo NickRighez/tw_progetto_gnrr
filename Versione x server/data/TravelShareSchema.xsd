@@ -100,18 +100,13 @@
       <xs:element name="NuovoMessaggio" type="TNuovoMessaggio" />
       <xs:element name="FeedDaRilasciare" type="TFeedDaRilasciare" />
       <xs:element name="RichiestaPrenotaz" type="TRichiestaPrenotaz" />
-      <xs:element name="AccettazionePrenotaz" type="TAccettazionePrenotaz" />
+      <xs:element name="EsitoPrenotaz" type="TEsitoPrenotaz" />
     </xs:choice>
   </xs:complexType>
 
   <xs:complexType name="TNuovoMessaggio" >
     <xs:attribute name="Mittente" type="xs:IDREF" />
     <xs:attribute name="Destinatario" type="xs:IDREF" />
-  </xs:complexType>
-
-  <xs:complexType name="TNuovoMessaggioBacheca" >
-    <xs:attribute name="Mittente" type="xs:IDREF" />
-    <xs:attribute name="Passaggio" type="xs:IDREF" />
   </xs:complexType>
 
   <xs:complexType name="TFeedDaRilasciare" >
@@ -124,8 +119,9 @@
     <xs:attribute name="Passaggio" type="xs:IDREF" />
   </xs:complexType>
 
-  <xs:complexType name="TAccettazionePrenotaz" >
+  <xs:complexType name="TEsitoPrenotaz" >
     <xs:attribute name="Passaggio" type="xs:IDREF" />
+    
   </xs:complexType>
 
   <xs:complexType name="TPreferenze">
@@ -263,7 +259,7 @@
   <xs:complexType name="TFeedback" >
     <xs:sequence>
       <xs:element name="Passaggio" type="xs:IDREF" />
-      <xs:element name="Commento" type="xs:string" />
+      <xs:element name="Commento" type="xs:string" minOccurs="0"/>
       <xs:choice>
         <xs:element name="ValutazionePasseg" type="TValutazione" />
         <xs:element name="ValutazioneConduc" type="TFullValutazione" />

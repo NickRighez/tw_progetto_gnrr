@@ -1,13 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-
 <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:ts="http://www.dominio.com" exclude-result-prefixes="ts" >
   <xsl:template match="/">
-
     <xsl:for-each select="ts:TravelShare/SetMessaggi/Conversazione[@User1='[% UTENTE %]' or @User2='[% UTENTE %]']"> <!-- FILTRI PERL '[% UTENTE %]' -->
       <xsl:choose>
         <xsl:when test="@User1='[% UTENTE %]'"> <!-- mostra 1 come mittente quando io sono 2 e viceversa -->
           <xsl:choose>
-            <xsl:when test="Messaggio[1]/@Letto='no'">
+            <xsl:when test="Messaggio[last()]/@Letto='no'">
               <div class="conversazione nuova">
                 <xsl:call-template name="conversazione_nuova">
                   <xsl:with-param name="utente" select="@User2" />
@@ -25,7 +23,7 @@
         </xsl:when>
         <xsl:otherwise>
           <xsl:choose>
-            <xsl:when test="Messaggio[1]/@Letto='no'">
+            <xsl:when test="Messaggio[last()]/@Letto='no'">
               <div class="conversazione nuova">
                 <xsl:call-template name="conversazione_nuova">
                   <xsl:with-param name="utente" select="@User1" />

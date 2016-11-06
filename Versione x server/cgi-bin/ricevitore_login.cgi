@@ -17,10 +17,8 @@ my $cgi = new CGI;
 my @s = sessione::creaSessione();
 my $session = $s[0];
 
-if(defined($session->param('loggedin'))) {
-    print $session->header(-location => "home.cgi");
-}
-elsif (defined($session->param('nuova_regis'))) {
+
+if(defined($session->param('nuova_regis'))) {
     my $aux = $session->param('nuova_regis');
     my %ute = %$aux;
     $session->param('username',$ute{'Username'});
@@ -29,7 +27,7 @@ elsif (defined($session->param('nuova_regis'))) {
     $session->clear(['nuova_regis']);
     print $session->header(-location => "confermaRegistrazione.cgi");
 }
-else {
+elsif($cgi->request_method() eq "POST") {
     my $doc = data_registration::get_xml_doc();;
     my $username=$cgi->param('username');
     my $psw=$cgi->param('password');
@@ -45,7 +43,6 @@ else {
             );
         $session->param('problems',\%problems);
         $session->param('old_input',\%old_input);
-        #print $cgi->redirect('http://localhost/cgi-bin/tw_progetto_gnrr/file_sito/PERL/accedi.cgi');
         print $session->header(-location => "login.cgi");
     }
     else {
@@ -55,7 +52,14 @@ else {
         $session->param('loggedin','yes');
         $session->expires("+2h"); # *** AGGIUNTA ***
         $session->flush();
+        data_registration::aggiorna_feedback_da_rilasciare();
         print $session->header(-location => "home.cgi");
-        #print $cgi->redirect('http://localhost/cgi-bin/tw_progetto_gnrr/file_sito/PERL/home.cgi');
     }
+}
+else {
+     my %problems=(
+          LOGIN_ERR => "Tentativo di effettuare il login in modalit&agrave; non permessa."
+     );
+     $session->param('problems',\%problems);
+    print $session->header(-location => "login.cgi");
 }

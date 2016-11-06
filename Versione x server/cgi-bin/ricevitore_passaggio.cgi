@@ -25,12 +25,12 @@ my %old_input;
 
 my %Passaggio;
 
-if(!defined($session->param('username'))) {
-    my %problems=(
-        LOGIN_ERR => "Utente non loggato, pagina inaccessibile"
-        );
+if($q->request_method() ne "POST") {
+     my %problems=(
+      DESCRIZIONE_ERRORE => "Tentativo di inserire un nuovo passaggio con una modalit&agrave; non permessa."
+      );
     $session->param('problems',\%problems);
-    print $session->header(-location => "login.cgi");
+    print $session->header(-location => "home.cgi");
 }
 else {
     my $username = $session->param('username');
@@ -237,7 +237,7 @@ else {
             Luogo => $q->param('arrivo'),
             Data => $dataA[2]."-".$dataA[1]."-".$dataA[0],
             Ora => $q->param('oraA').":00",
-            PostiDisp => $q->param('posti')
+            PostiDisp => 0
             );
 
         if($q->param('descrizioneViaggio') ne "") {

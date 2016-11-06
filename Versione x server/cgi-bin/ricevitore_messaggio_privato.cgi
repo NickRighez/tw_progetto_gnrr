@@ -16,16 +16,9 @@ use HTML::Entities;
 
 my @s = sessione::creaSessione();
 my $session = $s[0];
+my $q=CGI->new;
 
-if(!defined($session->param('username'))) {
-    my %problems=(
-        LOGIN_ERR => "Utente non loggato, pagina inaccessibile"
-        );
-    $session->param('problems',\%problems);
-    print $session->header(-location => "login.cgi");
-}
-else {
-    my $q=CGI->new;
+if($q->request_method() eq "POST") {
 
     my ($sec,$min,$hour,$mday,$mon,$year,$wday,$yday,$isdst) = localtime();
     $year=$year+1900;
@@ -52,7 +45,7 @@ else {
     my $doc = data_registration::get_xml_doc();
     if(!($doc->exists("//SetUtenti/Utente[Username='".$q->param('destinatario')."']"))) {
         my %problems=(
-            DESCRIZIONE_ERRORE => "<div class=\"errore\"><p>Impossibile inviare il messaggio. Utente destinatario inesistente</p></div>"
+            DESCRIZIONE_ERRORE => "Impossibile inviare il messaggio. Utente destinatario inesistente."
             );
         $session->param('problems',\%problems);
         print $session->header(-location => "home.cgi");
@@ -61,4 +54,11 @@ else {
         data_registration::inserisci_nuovo_messaggio_singolo(\%Messaggio);
         print $session->header(-location => "singola_conversaz.cgi?utente=".$q->param('destinatario'));
     }
+}
+else {
+     my %problems=(
+          DESCRIZIONE_ERRORE => "Tentativo di inserire un messaggio privato in modalit&agrave; non permessa."
+     );
+     $session->param('problems',\%problems);
+    print $session->header(-location => "home.cgi");
 }

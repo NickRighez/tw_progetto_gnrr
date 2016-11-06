@@ -1,5 +1,5 @@
 #! /usr/bin/perl -w
-print "Content-type: text/html\n\n\n";
+
 use strict;
 use warnings;
 use diagnostics;
@@ -14,7 +14,11 @@ my $cgi = new CGI;
 my @s = sessione::creaSessione();
 my $session = $s[0];
 
-if(defined($session->param('loggedin'))) {
+if(defined($session->param('loggedin'))) {   
+     my %problems=(
+      DESCRIZIONE_ERRORE => "Tentativo di visualizzare una pagina per soli utenti non loggati."
+      );
+    $session->param('problems',\%problems);
     print $session->header(-location => "home.cgi");
 }
 else {
@@ -45,7 +49,7 @@ else {
     my $template_parser = Template->new;
     my $foglio = '';
     $template_parser->process($fh,\%hash_keys,\$foglio) or die $!;
-    #print $q->header();
+    print $cgi->header();
     close $fh;
     print $foglio;
 

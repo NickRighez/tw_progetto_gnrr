@@ -74,7 +74,8 @@ sub calcola_prezzo {
     my $numTappeTot = @tappeTot;
     my @tappeCorrenti = $doc->findnodes("//SetPassaggi/Passaggio[IDViaggio='$id_p']/Itinerario/*[\@Numero>='$part' and \@Numero<='$arr']");
     my $numTappeCorrenti = @tappeCorrenti;
-    return ($prezzoTot/$numTappeTot)*$numTappeCorrenti;
+    my $prezzo = ($prezzoTot/$numTappeTot)*$numTappeCorrenti;
+    return sprintf("%.2f",$prezzo);
 }
 
 

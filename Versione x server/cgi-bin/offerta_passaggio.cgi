@@ -26,8 +26,8 @@ if(!defined($session->param('username'))) {
 }
 elsif (!($doc->exists("//SetUtenti/Utente[Username='".$session->param('username')."']/Profilo/Preferenze"))) {
     my %problems=(
-        INFO_CONDUC_ERR => "Per offrire un passaggio bisogna inserire le informazioni per Auto, Patente e Preferenze"
-        );
+        INFO_CONDUC_ERR => "Per offrire un passaggio bisogna inserire le informazioni per Auto, Patente e Preferenze."
+    );
     $session->param('problems',\%problems);
     print $session->header(-location => "modificaProfilo.cgi");
 }
@@ -52,12 +52,11 @@ else {
     }
 
     $hash_keys{NUM_NOTIFICHE} = research::conta_notifiche($session->param('username'), $doc);
-    print "Content-type: text/html\n\n\n";
     my $template_parser = Template->new;
     my $foglio = '';
     open my $fh, '<', $file;
     $template_parser->process($fh,\%hash_keys,\$foglio);
-    #print $q->header();
+    print $cgi->header();
     print $foglio;
 
 

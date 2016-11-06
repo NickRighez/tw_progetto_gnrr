@@ -1,110 +1,101 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="it" lang="it">
- <head>
-  <title>Notifiche - Travel Share</title>
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-  <meta name="title" content="Notifiche - Travel Share" /> 
-  <meta name="description" content="Elenco delle notiche di un utente" />
-  <meta name="keywords" content="notifiche, travel share, car pooling, passaggio, auto" />
-  <meta name="author" content="Giovanni Sanna, Nicolò Rigato, Riccardo Ardossi" />
-  <meta name="language" content="italian it" />
-  
-  <meta name="viewport" content="width=device-width" /> 
-  
-  <link href="../screen.css" rel="stylesheet" type="text/css" media="screen" />
-  <link href="../print.css" rel="stylesheet" type="text/css" media="print" />
-  
-  <link rel="icon" href="../Immagini/TS_icon.png" type="image/x-icon" />
-  <link rel="shortcut icon" href="../Immagini/TS_icon.png" type="image/x-icon" />
- </head>
- 
- <body>
-  
-  <div id="header">
-   <a href="homeLog.html" tabindex="1"><img src="../Immagini/banner.png" id="banner" alt="Banner Travel Share - Link diretto alla Home" /></a>
-   <a id="bottoneMenu" href="#menu">Men&ugrave;</a>
-  </div>
-  
-  <div id="utente">
-   <p>Ciao [% NOME_UTENTE %]</p>
-   <p><a href="notifiche.cgi" tabindex="2">Notifiche ( [% NUM_NOTIFICHE %] )</a>  <a href="ricevitore_logout.cgi" tabindex="3">Logout</a></p>
-  </div>
-  
-  <div id="contenuto">
-  
-  <h1>Notifiche</h1> 
-  [% IF NUM_NOTIFICHE == 0 %]
-    <div class="contenitore">Non ci sono notifiche</div>
-  [% ELSE %]
-    [% FOREACH messaggio IN MESSAGGI_LIST %]
+  <head>
+    <title>Notifiche - Travel Share</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="title" content="Notifiche - Travel Share" />
+    <meta name="description" content="Elenco delle notiche di un utente" />
+    <meta name="keywords" content="notifiche, travel share, car pooling, passaggio, auto" />
+    <meta name="author" content="Giovanni Sanna, Nicolò Rigato, Riccardo Ardossi" />
+    <meta name="language" content="italian it" />
+    <meta name="viewport" content="width=device-width" />
+    <link href="../screen.css" rel="stylesheet" type="text/css" media="screen" />
+    <link href="../print.css" rel="stylesheet" type="text/css" media="print" />
+    <link rel="icon" href="Immagini/TS_icon.png" type="image/x-icon" />
+    <link rel="shortcut icon" href="Immagini/TS_icon.png" type="image/x-icon" />
+  </head>
+  <body>
+    <div id="header">
+      <a href="homeLog.html" tabindex="1"><img src="Immagini/banner.png" id="banner" alt="Banner Travel Share - Link diretto alla Home" /></a>
+      <a id="bottoneMenu" href="#menu">Men&ugrave;</a>
+    </div>
+    <div id="utente">
+      <p>Ciao [% NOME_UTENTE %]</p>
+      <p><a href="notifiche.cgi" tabindex="2">Notifiche ( [% NUM_NOTIFICHE %] )</a>  <a href="ricevitore_logout.cgi" tabindex="3">Logout</a></p>
+    </div>
+    <div id="contenuto">
+      <h1>Notifiche</h1>
+      [% IF NOTA %]
+      <div class="contenitore">
+        <p>[% NOTA %]</p>
+      </div>
+      [% END %]
+
+      [% IF NUM_NOTIFICHE == 0 %]
+      <div class="contenitore">Non ci sono notifiche</div>
+      [% ELSE %]
+      [% FOREACH messaggio IN MESSAGGI_LIST %]
       <div class="notifica">
         <p>Hai un nuovo messaggio da [% messaggio.mittente %] <br class="aCapoMobile"/> <a href="[% messaggio.href %]" class="destraDesktop" tabindex="[% INDEX %]">Vai ai messaggi</a></p>
         [% INDEX = INDEX+1 %]
       </div>
-    [% END %]
-    [% FOREACH viaggio IN FEEDBACK_LIST %]
+      [% END %]
+      [% FOREACH viaggio IN FEEDBACK_LIST %]
       <div class="notifica">
-      <p>Hai un nuovo viaggio da recensire <br class="aCapoMobile"/> <a href="[% viaggio.href %]" class="destraDesktop" tabindex="[% INDEX %]">Inserisci i <span xml:lang="en" lang="en">feedback</span></a></p>
+        <p>Hai un nuovo viaggio da recensire <br class="aCapoMobile"/> <a href="[% viaggio.href %]" class="destraDesktop" tabindex="[% INDEX %]">Inserisci i <span xml:lang="en" lang="en">feedback</span></a></p>
+        [% INDEX = INDEX+1 %]
+      </div>
+      [% END %]
+      [% FOREACH richiesta IN RICHIESTE_LIST %]
+      <div class="notifica">
+        <p>Hai una nuova richiesta di prenotazione da <a href="profilo.cgi?utente=[% richiesta.richiedente %]" tabindex="[% INDEX %]">[% richiesta.richiedente %]</a> per il passaggio [% INDEX = INDEX+1 %] <a href="singolo_passaggio.cgi?passaggio=[% richiesta.passaggio %]&part=[% richiesta.partenza %]&arr=[% richiesta.arrivo %]" tabindex="[% INDEX %]" >[% richiesta.luogo_p %] - [% richiesta.luogo_a %]</a> :</p>
+        <form action="ricevitore_esito_prenotazione.cgi" method="post" >
+          <fieldset>
+            <legend>Richiesta prenotazione da [% richiesta.richiedente %] per il passaggio [% richiesta.luogo_p %] - [% richiesta.luogo_a %]</legend>
+            <div class="testoCentrato">
+              <input type="radio" name="esito" id="accetta" value="Accettata" checked="checked" tabindex="[% INDEX %]"></input>
+              <label for="accetta">Accetta</label>
+              <span class="paddingSpan"></span>
+              <input type="radio" name="esito" id="rifiuta" value="Rifiutata"></input>
+              <label for="rifiuta">Rifiuta</label>
+              [% INDEX = INDEX+1 %]
+            </div>
+            <input type="hidden" name="richiedente" value="[% richiesta.richiedente %]"></input>
+            <input type="hidden" name="passaggio" value="[% richiesta.passaggio %]"></input>
+            <input type="hidden" name="partenza" value="[% richiesta.partenza %]"></input>
+            <input type="hidden" name="arrivo" value="[% richiesta.arrivo %]"></input>
+            <input type="submit" value="Invia" tabindex="[% INDEX %]"></input>
+            [% INDEX = INDEX+1 %]
+          </fieldset>
+        </form>
+      </div>
+      [% END %]
+      [% FOREACH esito IN ESITO_LIST %]
+      <div class="notifica">
+        <p>La tua richiesta di prenotazione per il passaggio <a href="singolo_passaggio.cgi?passaggio=[% esito.passaggio %]&part=[% esito.partenza %]&arr=[% esito.arrivo %]" tabindex="[% INDEX %]" >[% esito.luogo_p %] - [% esito.luogo_a %]</a>[% INDEX = INDEX+1 %]  &egrave; stata [% esito.esito %] <br class="aCapoMobile"/> <a href="[% esito.href %]" class="destraDesktop" tabindex="[% INDEX %]">Elimina notifica</a></p>
+        [% INDEX = INDEX+1 %]
+      </div>
+      [% END %]
+      [% END %]
+    </div>
+
+    <div id="menu">
+      <ul id="menuLista">
+        <li><a href="home.cgi" tabindex="4">Cerca un passaggio <span class="frecceMenu">&raquo;</span></a></li>
+        <li><a href="offerta_passaggio.cgi" tabindex="5">Offri un passaggio <span class="frecceMenu">&raquo;</span></a></li>
+        <li><a href="profilo.cgi?utente=[%NOME_UTENTE%]" tabindex="6">Gestisci il profilo <span class="frecceMenu">&raquo;</span></a></li>
+        <li><a href="viaggi.cgi" tabindex="7">Viaggi<span class="frecceMenu">&raquo;</span></a></li>
+        <li><a href="conversazioni.cgi" tabindex="8">Messaggi <span class="frecceMenu">&raquo;</span></a></li>
+        <li><a href="informazioni.cgi" tabindex="9">Informazioni su <span xml:lang="en" lang="en">Travel Share</span> <span class="frecceMenu">&raquo;</span></a></li>
+      </ul>
+    </div>
+
+    <div id="footer">
+      <a href="logout.cgi" tabindex="[% INDEX %]">Logout</a>
       [% INDEX = INDEX+1 %]
-      </div>
-    [% END %]
-    [% FOREACH richiesta IN RICHIESTE_LIST %]
-      <div class="notifica">
-       <p>Hai una nuova richiesta di prenotazione da parte di [% richiesta.richiedente %]:</p>
+      <a href="#header" tabindex="[% INDEX %]">Torna su</a>
+      [% INDEX = INDEX+1 %]
+    </div>
 
-       <form action="ricevitore_esito_prenotazione.cgi" method="post" >
-        <fieldset>
-        <legend>Richiesta prenotazione da $richiedente per il passaggio $passaggio</legend>
-        <div class="testoCentrato">
-        <input type="radio" name="esito" id="accetta" value="Accettata" checked="checked" tabindex="[% INDEX %]"></input>
-        <label for="accetta">Accetta</label>
-        <span class="paddingSpan"></span>
-        <input type="radio" name="esito" id="rifiuta" value="Rifiutata"></input>
-        <label for="rifiuta">Rifiuta</label>
-        [% INDEX = INDEX+1 %]
-        </div>
-        <input type="hidden" name="richiedente" value="[% richiesta.richiedente %]"></input>
-        <input type="hidden" name="passaggio" value="[% richiesta.passaggio %]"></input>
-        <input type="hidden" name="partenza" value="[% richiesta.partenza %]"></input>
-        <input type="hidden" name="arrivo" value="[% richiesta.arrivo %]"></input>
-        <input type="submit" value="Invia" tabindex="[% INDEX %]"></input>
-        [% INDEX = INDEX+1 %]
-        </fieldset>
-       </form>
-      </div>
-    [% END %]
-    [% FOREACH esito IN ESITO_LIST %]
-       <div class="notifica">
-        <p>La tua richiesta di prenotazione &egrave; stata [% esito.esito %] <br class="aCapoMobile"/> <a href="[% esito.href %]" class="destraDesktop" tabindex="[% INDEX %]">Elimina notifica</a></p>
-        [% INDEX = INDEX+1 %]
-        </div>
-    [% END %]
-  [% END %]
-  
-  
- 
-  
-
-  </div>
-
-  <div id="menu">
-  <ul id="menuLista">
-   <li><a href="home.cgi" tabindex="4">Cerca un passaggio <span class="frecceMenu">&raquo;</span></a></li>
-   <li><a href="offerta_passaggio.cgi" tabindex="5">Offri un passaggio <span class="frecceMenu">&raquo;</span></a></li>  
-   <li><a href="profilo.cgi?utente=[%NOME_UTENTE%]" tabindex="6">Gestisci il profilo <span class="frecceMenu">&raquo;</span></a></li>
-   <li><a href="viaggi.cgi" tabindex="7">Viaggi<span class="frecceMenu">&raquo;</span></a></li>
-   <li><a href="conversazioni.cgi" tabindex="8">Messaggi <span class="frecceMenu">&raquo;</span></a></li>
-   <li><a href="informazioni.cgi" tabindex="9">Informazioni su <span xml:lang="en" lang="en">Travel Share</span> <span class="frecceMenu">&raquo;</span></a></li>
-  </ul>
-  </div>
-  
-  <div id="footer">
-   <a href="logout.cgi" tabindex="[% INDEX %]">Logout</a>
-   [% INDEX = INDEX+1 %]
-   <a href="#header" tabindex="[% INDEX %]">Torna su</a>
-   [% INDEX = INDEX+1 %]
-  </div>
-  
   </body>
 </html>
