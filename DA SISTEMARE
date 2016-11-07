@@ -9,12 +9,6 @@
 
 <<<<<<< HEAD
 =======
--con js esce l'errore nella data dei form
-
--"Passaggio non prenotabile, in quanto ne sei il conducente" va sostituito con l'elenco dei passeggeri
-
--la maiuscola distingue due tappe diverse -> padova != Padova
-
 
 
 >>>>>>> lavoro_giovanni
@@ -27,10 +21,6 @@
 
 
 -i viaggi attivi rimangono attivi anche quando terminati (da controllare dato che l'ora del server e' diversa)
-
--da eliminare "nuovo messaggio"
-
--msg nuovo blu nell'elenco conversazioni
 
 -da visualizzare l'ultimo msg nell.elenco msg, non il primo
 
