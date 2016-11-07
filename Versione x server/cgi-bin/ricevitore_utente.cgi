@@ -134,7 +134,8 @@ else {
         Cognome => $q->param('cognome'),
         Sesso =>$q->param('sesso'),
         AnnoNascita => $q->param('anno'),
-        Password => $q->param('password')
+        Password => $q->param('password'),
+	DescrizionePers => ''
         );
 
    
