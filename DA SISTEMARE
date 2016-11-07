@@ -51,3 +51,49 @@
 
 - singolo_passaggio.cgi -> bachecaviaggio.xsl non tiene conto dei tabindex nella form d inserimento messaggio
 >>>>>>> lavoro_giovanni
+
+
+
+
+Descrizione utente rimane "vuota" la prima volta che ti iscrivi
+
+Non arrivano le notifiche con il messaggio in bacheca
+
+Problema di accessibilita' -> la data non e' selezionabile senza mouse (picker jquery ctrl + frecce)
+
+Il link al viaggio nelle notifiche non funziona
+
+Problema con il prezzo
+
+come viene calcolato il tempo delle tappe?
+
+nella bacheca dei messaggi, andrebbe nascosto il form di inserimento messaggi se l'utente ha gia' iniziato una conversazione
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
