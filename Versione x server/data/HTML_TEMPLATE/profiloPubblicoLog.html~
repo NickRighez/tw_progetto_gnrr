@@ -31,11 +31,11 @@
    <a id="bottoneMenu" href="#menu">Men&ugrave;</a>
   </div>
 
- [% IF loggedin=='yes' %]
-  <div id="utente">
-   <p>Ciao [% nome_utente %]</p>
-   <p><a href="notifiche.html" tabindex="2">Notifiche (0)</a>  <a href="logout.cgi?operation=logout" tabindex="3">Logout</a></p>
-  </div>
+ [% IF loggedin=='yes' %]
+  <div id="utente">
+   <p>Ciao [% nome_utente %]</p>
+   <p><a href="notifiche.html" tabindex="2">Notifiche (0)</a>  <a href="logout.cgi?operation=logout" tabindex="3">Logout</a></p>
+  </div>
  [% END %]
   <div id="contenuto">
 
