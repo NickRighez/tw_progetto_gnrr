@@ -1,17 +1,3 @@
--home :: è necessario compilare tutti i campi dati (messaggio js in caso di errore nel submit). va bene visualizzato in questo modo?
-
-- risultati_ricerca.cgi -> devono essere validati i parametri passati con la get.
-	formattare data di partenza 
-
-
-
--la pagina del viaggio deve avere il nome del conducente, non il nickname
-
-<<<<<<< HEAD
-=======
-
-
->>>>>>> lavoro_giovanni
 -non è indicato il riferimento al viaggio nella notifica di prenotazione e il richiedente non ha il link al profilo; il richiedente non andrebbe con il nickname
 
 
@@ -22,48 +8,33 @@
 
 -i viaggi attivi rimangono attivi anche quando terminati (da controllare dato che l'ora del server e' diversa)
 
--da visualizzare l'ultimo msg nell.elenco msg, non il primo
-
 -tanti problemi con i msg, da controllare tutto
 
 -dopo l'inserimento del feedback non deve reindirizzare al profilo personale, ma tornare ai viaggi
 
 -un commento vuoto viene inserito lo stesso nel profilo
 
-
-<<<<<<< HEAD
-- nella pagina del viaggio singolo c'è da formattare in css la lista dei passeggeri
-- verificare js.
-=======
-- nella pagina notifiche.html, nella form richiesta prenotazione non viene visualizzata la legend della fieldset
-
 - nella pagina notifiche.html, nella form richiesta prenotazione, il link all utente non è completamente cliccabile
 
 - singolo_passaggio.cgi -> bachecaviaggio.xsl non tiene conto dei tabindex nella form d inserimento messaggio
->>>>>>> lavoro_giovanni
-
-
 
 
 Descrizione utente rimane "vuota" la prima volta che ti iscrivi
 
-Non arrivano le notifiche con il messaggio in bacheca
+Non arrivano le notifiche con il messaggio in bacheca [voluto]
 
-Problema di accessibilita' -> la data non e' selezionabile senza mouse (picker jquery ctrl + frecce) classe controlliDatepicker da nascondere nel mobile
 
-Il link al viaggio nelle notifiche non funziona
+Il link al viaggio nelle notifiche non funziona [non riesco a riprodurre l'errore]
 
+{
 Problema con il prezzo
 
 come viene calcolato il tempo delle tappe?
+}
 
-nella bacheca dei messaggi, andrebbe nascosto il form di inserimento messaggi se l'utente ha gia' iniziato una conversazione
-
-viaggi attivi non ha il div cliccabile
+nella bacheca dei messaggi, andrebbe nascosto il form di inserimento messaggi se l'utente ha gia' iniziato una conversazione. credo sia complicato xk c'è xslt di mezzo.
 
 
-manca lista passeggeri
-messaggio nelle conversazioni devi visualizzare l'ultimo!!
-
+CSS della lista passeggeri!!!!!!!!!!!!!!!!!!
 
 

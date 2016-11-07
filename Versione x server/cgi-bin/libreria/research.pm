@@ -449,29 +449,11 @@ sub query_feedback_da_rilasciare_viaggio
 sub utenti_prenotati {
 my $viaggio = shift @_;
 my $doc=data_registration::get_xml_doc();
-my $userNodesP = $doc->findnodes("//SetPassaggi/Passaggio[IDViaggio=\"$viaggio\"]/Itinerario/Partenza/Prenotazioni/Utente");
-my $userNodesA = $doc->findnodes("//SetPassaggi/Passaggio[IDViaggio=\"$viaggio\"]/Itinerario/Arrivo/Prenotazioni/Utente");
-my $userNodesT = $doc->findnodes("//SetPassaggi/Passaggio[IDViaggio=\"$viaggio\"]/Itinerario/Tappa/Prenotazioni/Utente");
+my $userNodes = $doc->findnodes("//SetPassaggi/Passaggio[IDViaggio=\"$viaggio\"]//Utente");
 my @userList = ();
-my $numA = $userNodesA->size();
-my $numP = $userNodesP->size();
-my $numT = $userNodesT->size();
-for(my $i =1;$i<=$numP;$i++){
-  my $nome = $userNodesP->get_node($i)->textContent;
-  my $m = grep { $nome } @userList;
-  if(!$m){
-    push @userList, $nome;
-  }
-}
-for(my $i =1;$i<=$numA;$i++){
-  my $nome = $userNodesA->get_node($i)->textContent;
-  my $m = grep { $nome } @userList;
-  if(!$m){
-    push @userList, $nome;
-  }
-}
-for(my $i =$1;$i<=$numT;$i++){
-  my $nome = $userNodesT->get_node($i)->textContent;
+my $num = $userNodes->size();
+for(my $i =1;$i<=$num;$i++){
+  my $nome = $userNodes->get_node($i)->textContent;
   my $m = grep { $nome } @userList;
   if(!$m){
     push @userList, $nome;
