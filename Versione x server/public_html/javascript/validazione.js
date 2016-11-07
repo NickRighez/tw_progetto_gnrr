@@ -182,7 +182,7 @@ var funzioniDiValidazione = {
 
   valida_email: function(id) {
     var input = document.getElementById(id).value;
-    var sol = /^([a-z0-9_\.-]+)@([a-z]+)\.([a-z]{2,6})$/.test(input);
+    var sol = /^([a-zA-Z0-9_\.-]+)@([a-z]+)\.([a-z]{2,6})$/.test(input);
     if (!sol) {
       document.getElementById(id + '_err').innerHTML = "Inserire un indirizzo email.";
       return false;

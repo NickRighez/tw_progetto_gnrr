@@ -49,7 +49,7 @@ Descrizione utente rimane "vuota" la prima volta che ti iscrivi
 
 Non arrivano le notifiche con il messaggio in bacheca
 
-Problema di accessibilita' -> la data non e' selezionabile senza mouse (picker jquery ctrl + frecce)
+Problema di accessibilita' -> la data non e' selezionabile senza mouse (picker jquery ctrl + frecce) classe controlliDatepicker da nascondere nel mobile
 
 Il link al viaggio nelle notifiche non funziona
 
@@ -60,4 +60,10 @@ come viene calcolato il tempo delle tappe?
 nella bacheca dei messaggi, andrebbe nascosto il form di inserimento messaggi se l'utente ha gia' iniziato una conversazione
 
 viaggi attivi non ha il div cliccabile
+
+
+manca lista passeggeri
+messaggio nelle conversazioni devi visualizzare l'ultimo!!
+
+
 

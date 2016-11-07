@@ -342,7 +342,7 @@ sub query_notifiche_utente {
         my $luogo_p = $doc->findnodes("//SetPassaggi/Passaggio[IDViaggio=\"$passaggio\"]/Itinerario/*[\@Numero=\"$NumPartenza\"]/Luogo")->get_node(1)->textContent;
         my $luogo_a = $doc->findnodes("//SetPassaggi/Passaggio[IDViaggio=\"$passaggio\"]/Itinerario/*[\@Numero=\"$NumArrivo\"]/Luogo")->get_node(1)->textContent;
         
-        push @esito_list, { href => "ricevitore_esito_visualizz.cgi?passaggio=$passaggio", passaggio => $passaggio, esito => $esito, partenza => $NumPartenza, arrivo => $NumArrivo, luogo_p => $luogo_p, luogo_a => $luogo_a };
+        push @esito_list, { href => "ricevitore_esito_visualizz.cgi?passaggio=$passaggio", passaggio => $passaggio, esito => lc $esito, partenza => $NumPartenza, arrivo => $NumArrivo, luogo_p => $luogo_p, luogo_a => $luogo_a };
     }
     return (\@messaggi_list, \@feedback_list, \@richieste_list, \@esito_list);
 }

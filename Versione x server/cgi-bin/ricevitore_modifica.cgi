@@ -60,7 +60,7 @@ else {
     }
 
     if($q->param('email') ne '') {
-        if(!($q->param('email')=~m/^([a-z0-9_\.-]+)@([a-z]+)\.([a-z]{2,6})$/)) {
+        if(!($q->param('email')=~m/^([a-zA-Z0-9_\.-]+)@([a-z]+)\.([a-z]{2,6})$/)) {
             $problems{EMAIL_ERR}="Indirizzo email non valido";
             $problems{empty}="no";
         }

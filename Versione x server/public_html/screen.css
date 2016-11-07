@@ -383,7 +383,8 @@ ul#menuLista{
 /*** MODIFICA PROFILO ***/
 
 .radioNascosto{ /* Serve per JS; Diventa display none se il transform non è compatibile */
-	display : none; 
+	/*display : none; */
+	opacity:0;
 }
 
 #preferenze input[type=radio]{
@@ -588,6 +589,9 @@ input[type=radio]:checked + label>img { /* provvisorio */
 		display : none;
 	}
 	.linkDesktop{
+		display: none;
+	}
+	.controlliDatepicker{
 		display: none;
 	}
 	.div_errore{ /**** NEW *****/

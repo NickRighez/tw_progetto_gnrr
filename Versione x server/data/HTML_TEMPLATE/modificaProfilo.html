@@ -47,29 +47,29 @@
       <form action="ricevitore_modifica.cgi" method="post" onsubmit="return valida_submit_modifica_profilo();">
         <fieldset><legend>Modifica le informazioni del profilo</legend>
           <p>Sesso:
-            <input type="radio" name="sesso" id="maschio" value="maschio" [% IF SESSO == 'maschio' %] checked="checked" [% END %]tabindex="14"></input><label  for="maschio">Maschio</label>
+            <input type="radio" name="sesso" id="maschio" value="maschio" [% IF SESSO == 'maschio' %] checked="checked" [% END %]tabindex="9"></input><label  for="maschio">Maschio</label>
             <input type="radio" name="sesso" id="femmina" value="femmina" [% IF SESSO == 'femmina' %] checked="checked" [% END %] ></input><label  for="femmina">Femmina</label>
           </p>
           <br />
           <label for="nome">Nome:</label>
-          <input type="text" id="nome" name="nome" value="[%NOME%]" tabindex="9"></input><br />
+          <input type="text" id="nome" name="nome" value="[%NOME%]" tabindex="10"></input><br />
           <p id="nome_err" class="errore">[%NOME_ERR%]</p>
 
           <label for="cognome">Cognome:</label>
-          <input type="text" id="cognome" name="cognome" value="[%COGNOME%]" tabindex="10"></input><br />
+          <input type="text" id="cognome" name="cognome" value="[%COGNOME%]" tabindex="11"></input><br />
           <p id="cognome_err" class="errore">[%COGNOME_ERR%]</p>
 
           <label for="email"><span xml:lang="en" lang="en">Email:</span></label>
-          <input type="text" id="email" name="email" value="[%EMAIL%]" tabindex="11"></input><br />
+          <input type="text" id="email" name="email" value="[%EMAIL%]" tabindex="12"></input><br />
           <p id="email_err" class="errore">[%EMAIL_ERR%]</p>
 
           <label for="vecchiaPassword">Vecchia <span xml:lang="en" lang="en">Password:</span></label>
-          <input type="password" id="vecchiaPassword" name="vecchiaPassword" tabindex="12"></input><br />
+          <input type="password" id="vecchiaPassword" name="vecchiaPassword" tabindex="13"></input><br />
           <p id="vecchiaPassword_err"
              class="errore">[%VECCHIAPASSWORD_ERR%]</p>
 
           <label for="nuovaPassword">Nuova <span xml:lang="en" lang="en">Password:</span></label>
-          <input type="password" id="nuovaPassword" name="nuovaPassword" tabindex="13"></input><br />
+          <input type="password" id="nuovaPassword" name="nuovaPassword" tabindex="14"></input><br />
           <p id="nuovaPassword_err"
              class="errore">[%NUOVAPASSWORD_ERR%]</p>
 
@@ -93,7 +93,7 @@
 
             <p>Chiacchiere:</p>
             <div class="preferenzeGroup">
-              <input type="radio" name="chiacchiere" id="chiacchiere0" [% CHECKED_C0 %]  value="0" tabindex="19"></input>
+              <input type="radio" name="chiacchiere" id="chiacchiere0" [% CHECKED_C0 %]  value="0"></input>
               <label for="chiacchiere0"><img id="chiaImg0" class="preferenzeImg marginRadioVisibile" src="../Immagini/BLA0.png" alt="Silenzioso" title="Silenzioso"></img></label>
               <input type="radio" name="chiacchiere" id="chiacchiere1" [% CHECKED_C1 %]  value="1" ></input>
               <label for="chiacchiere1"><img id="chiaImg1" class="preferenzeImg marginRadioVisibile" src="../Immagini/BLA1.png" alt="Poche chiacchiere" title="Poche chiacchiere"></img></label>
@@ -103,7 +103,7 @@
 
             <p>Musica:</p>
             <div class="preferenzeGroup">
-              <input type="radio" name="musica" id="musica0" [% CHECKED_M0 %]  value="0" tabindex="20"></input>
+              <input type="radio" name="musica" id="musica0" [% CHECKED_M0 %]  value="0"></input>
               <label for="musica0"><img id="musImg0" class="preferenzeImg marginRadioVisibile" src="../Immagini/musica0.png" alt="Non ascolto musica" title="Non ascolto musica"></img></label>
               <input type="radio" name="musica" id="musica1" [% CHECKED_M1 %]  value="1" ></input>
               <label for="musica1"><img id="musImg1" class="preferenzeImg marginRadioVisibile" src="../Immagini/musica1.png" alt="Ascolto musica" title="Ascolto musica"></img></label>
@@ -113,7 +113,7 @@
 
             <p>Animali:</p>
             <div class="preferenzeGroup">
-              <input type="radio" name="animali" id="animali0" [% CHECKED_A0 %]  value="0" tabindex="21"></input>
+              <input type="radio" name="animali" id="animali0" [% CHECKED_A0 %]  value="0"></input>
               <label for="animali0"><img id="animImg0" class="preferenzeImg marginRadioVisibile" src="../Immagini/animali0.png" alt="No animali" title="No animali"></img></label>
               <input type="radio" name="animali" id="animali1" [% CHECKED_A1 %]  value="1" ></input>
               <label for="animali1"><img id="animImg1" class="preferenzeImg marginRadioVisibile" src="../Immagini/animali1.png" alt="Accetto animali" title="Accetto animali"></img></label>
@@ -121,7 +121,7 @@
 
             <p>Fumatori:</p>
             <div class="preferenzeGroup">
-              <input type="radio" name="fumatori" id="fumatori0" [% CHECKED_F0 %]  value="0" tabindex="22"></input>
+              <input type="radio" name="fumatori" id="fumatori0" [% CHECKED_F0 %]  value="0"></input>
               <label for="fumatori0"><img id="fumImg0" class="preferenzeImg marginRadioVisibile" src="../Immagini/fumo0.png" alt="No fumatori" title="No fumatori"></img></label>
               <input type="radio" name="fumatori" id="fumatori1" [% CHECKED_F1 %]  value="1" ></input>
               <label for="fumatori1"><img id="fumImg1" class="preferenzeImg marginRadioVisibile" src="../Immagini/fumo1.png" alt="Accetto fumatori" title="Accetto fumatori"></img></label>

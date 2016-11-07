@@ -13,9 +13,18 @@ var funzioniDiCaricamento = {
           dateFormat: "dd-mm-yy",
           minDate: 0 /*, maxDate: +30 */ ,
           onClose: function() {
-              funzioniDiValidazione.valida_data("data");
-            }
+            funzioniDiValidazione.valida_data("data");
+          },
+          beforeShow: function() {
+            setTimeout(appendsomething, 10);
+          },
+          onChangeMonthYear: function() {
+            setTimeout(appendsomething, 10);
+          }
         });
+        var appendsomething = function() {
+          $("#ui-datepicker-div").append("<div class='controlliDatepicker'>Utilizzare <strong>CTRL</strong> e le <strong>freccette</strong> per muoversi. Invio per confermare.</div>");
+        };
       });
       // Actions
       var part = document.getElementById("partenza");
@@ -89,23 +98,46 @@ var funzioniDiCaricamento = {
     }
   },
 
+caricamento_viaggi: function() {
+  $(".viaggio").css("cursor", "pointer");
+  $(".viaggio").click(function() {
+    window.location = $(this).find("a").attr("href");
+    return false;
+  });
+},
+
   caricamento_offerta: function() {
     if (document.getElementById != "undefined") {
       // jquery applet per calendario
       $("#dataA").datepicker({
         dateFormat: "dd-mm-yy",
-        minDate: 0 /*, maxDate: +30 */,
+        minDate: 0 /*, maxDate: +30 */ ,
         onClose: function() {
-            funzioniDiValidazione.valida_data("dataA");
-          }
+          funzioniDiValidazione.valida_data("dataA");
+        },
+        beforeShow: function() {
+          setTimeout(appendsomething, 10);
+        },
+        onChangeMonthYear: function() {
+          setTimeout(appendsomething, 10);
+        }
       });
       $("#dataP").datepicker({
         dateFormat: "dd-mm-yy",
-        minDate: 0 /*, maxDate: +30 */,
+        minDate: 0 /*, maxDate: +30 */ ,
         onClose: function() {
-            funzioniDiValidazione.valida_data("dataP");
-          }
+          funzioniDiValidazione.valida_data("dataP");
+        },
+        beforeShow: function() {
+          setTimeout(appendsomething, 10);
+        },
+        onChangeMonthYear: function() {
+          setTimeout(appendsomething, 10);
+        }
       });
+      var appendsomething = function() {
+        $("#ui-datepicker-div").append("<div class='controlliDatepicker'>Utilizzare <strong>CTRL</strong> e le <strong>freccette</strong> per muoversi. Invio per confermare.</div>");
+      };
       //Actions
       var part = document.getElementById("partenza");
       part.onblur = function() {
@@ -359,7 +391,6 @@ var funzioniDiValidazione = {
   },
 
   valida_tappa: function(num) {
-    console.log('tappa' + num);
     var input = document.getElementById('tappa' + num).value;
     var sol = /^(\u0027|\u002C|\u002D|\u002F|[\u0030-\u0039]|[\u0041-\u005A]|[\u0061-\u007A]|[\u00C0-\u024F]|\s)*$/.test(input);
     if (!sol) {
@@ -464,7 +495,7 @@ var funzioniDiValidazione = {
 
   valida_email: function(id) {
     var input = document.getElementById(id).value;
-    var sol = /^([a-z0-9_\.-]+)@([a-z]+)\.([a-z]{2,6})$/.test(input);
+    var sol = /^([a-zA-Z0-9_\.-]+)@([a-z]+)\.([a-z]{2,6})$/.test(input);
     if (!sol) {
       document.getElementById(id + '_err').innerHTML = "Inserire un indirizzo email.";
       return false;
@@ -656,7 +687,6 @@ var funzioniDiValidazioneSubmit = {
     var part = new Date(dp[2], dp[1], dp[0], hp[0], hp[1], 0, 0);
     var arr = new Date(da[2], da[1], da[0], ha[0], ha[1], 0, 0);
     var diff = arr.getTime() - part.getTime();
-    console.log(diff);
     return diff > 0;
   },
 

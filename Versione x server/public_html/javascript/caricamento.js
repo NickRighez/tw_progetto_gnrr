@@ -13,9 +13,18 @@ var funzioniDiCaricamento = {
           dateFormat: "dd-mm-yy",
           minDate: 0 /*, maxDate: +30 */ ,
           onClose: function() {
-              funzioniDiValidazione.valida_data("data");
-            }
+            funzioniDiValidazione.valida_data("data");
+          },
+          beforeShow: function() {
+            setTimeout(appendsomething, 10);
+          },
+          onChangeMonthYear: function() {
+            setTimeout(appendsomething, 10);
+          }
         });
+        var appendsomething = function() {
+          $("#ui-datepicker-div").append("<div class='controlliDatepicker'>Utilizzare <strong>CTRL</strong> e le <strong>freccette</strong> per muoversi. Invio per confermare.</div>");
+        };
       });
       // Actions
       var part = document.getElementById("partenza");
@@ -89,23 +98,46 @@ var funzioniDiCaricamento = {
     }
   },
 
+caricamento_viaggi: function() {
+  $(".viaggio").css("cursor", "pointer");
+  $(".viaggio").click(function() {
+    window.location = $(this).find("a").attr("href");
+    return false;
+  });
+},
+
   caricamento_offerta: function() {
     if (document.getElementById != "undefined") {
       // jquery applet per calendario
       $("#dataA").datepicker({
         dateFormat: "dd-mm-yy",
-        minDate: 0 /*, maxDate: +30 */,
+        minDate: 0 /*, maxDate: +30 */ ,
         onClose: function() {
-            funzioniDiValidazione.valida_data("dataA");
-          }
+          funzioniDiValidazione.valida_data("dataA");
+        },
+        beforeShow: function() {
+          setTimeout(appendsomething, 10);
+        },
+        onChangeMonthYear: function() {
+          setTimeout(appendsomething, 10);
+        }
       });
       $("#dataP").datepicker({
         dateFormat: "dd-mm-yy",
-        minDate: 0 /*, maxDate: +30 */,
+        minDate: 0 /*, maxDate: +30 */ ,
         onClose: function() {
-            funzioniDiValidazione.valida_data("dataP");
-          }
+          funzioniDiValidazione.valida_data("dataP");
+        },
+        beforeShow: function() {
+          setTimeout(appendsomething, 10);
+        },
+        onChangeMonthYear: function() {
+          setTimeout(appendsomething, 10);
+        }
       });
+      var appendsomething = function() {
+        $("#ui-datepicker-div").append("<div class='controlliDatepicker'>Utilizzare <strong>CTRL</strong> e le <strong>freccette</strong> per muoversi. Invio per confermare.</div>");
+      };
       //Actions
       var part = document.getElementById("partenza");
       part.onblur = function() {
