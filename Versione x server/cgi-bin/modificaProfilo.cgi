@@ -65,19 +65,19 @@ else {
         if($ute->exists("Profilo/Preferenze"))  {
             my $chiac = $ute->findnodes("Profilo/Preferenze/Chiacchiere")->get_node(1)->textContent;
             my $key = "CHECKED_C".$chiac;
-            $hash_keys{$key} = "checked=\"checked\" tabindex=\"19\"";
+            $hash_keys{$key} = "checked=\"checked\"";
 
             my $musica = $ute->findnodes("Profilo/Preferenze/Musica")->get_node(1)->textContent;
             $key = "CHECKED_M".$musica;
-            $hash_keys{$key} = "checked=\"checked\" tabindex=\"20\"";
+            $hash_keys{$key} = "checked=\"checked\"";
 
             my $anim = $ute->findnodes("Profilo/Preferenze/Animali")->get_node(1)->textContent;
             $key = "CHECKED_A".$anim;
-            $hash_keys{$key} = "checked=\"checked\"  tabindex=\"21\"";
+            $hash_keys{$key} = "checked=\"checked\"";
 
             my $fumat = $ute->findnodes("Profilo/Preferenze/Fumatore")->get_node(1)->textContent;
             $key = "CHECKED_F".$fumat;
-            $hash_keys{$key} = "checked=\"checked\"  tabindex=\"22\"";
+            $hash_keys{$key} = "checked=\"checked\"";
         }
 
     }

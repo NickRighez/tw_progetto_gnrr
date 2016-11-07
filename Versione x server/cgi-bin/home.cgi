@@ -30,8 +30,10 @@ else {
     $hash_keys{INDEX} = 6;
 }
 
+
 if(defined($session->param('problems'))) {
     my $prob = $session->param('problems');
+    # DESCRIZIONE_ERRORE || PARTENZA_ERR || ARRIVO_ERR || DATA_ERR
     my %prob_hash = %$prob;
     while( my( $key, $value ) = each %prob_hash ){
         $hash_keys{$key}="$value";

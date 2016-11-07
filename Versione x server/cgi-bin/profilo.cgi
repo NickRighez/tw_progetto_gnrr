@@ -19,7 +19,7 @@ my $doc=data_registration::get_xml_doc();
 
 if(!defined($session->param('username'))) {
     my %problems=(
-        LOGIN_ERR => "Utente non loggato, pagina inaccessibile"
+        LOGIN_ERR => "Utente non loggato, pagina inaccessibile."
         );
     $session->param('problems',\%problems);
     print $session->header(-location => "login.cgi");
@@ -27,7 +27,7 @@ if(!defined($session->param('username'))) {
 elsif(!($q->param('utente')=~m/^[A-Za-z0-9_-]{5,18}$/) ||
         !($doc->exists("//SetUtenti/Utente[Username=\"".$q->param('utente')."\"]"))){  ####à   AGGIUNGERE MATCHING CON ESPRESSIONE REGOLARE!
     my %problems=(
-        DESCRIZIONE_ERRORE => "Tentativo di visualizzazione di un profilo inesistente"
+        DESCRIZIONE_ERRORE => "Tentativo di visualizzazione di un profilo inesistente."
         );
     $session->param('problems',\%problems);
     print $session->header(-location => "home.cgi");    

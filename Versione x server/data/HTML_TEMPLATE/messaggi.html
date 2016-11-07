@@ -34,7 +34,13 @@
     </div>
     <div id="contenuto">
       <h1>Messaggi</h1>
-      [% CONTENUTO %]
+      [% IF NUM_CONVERSAZIONI == 0 %]
+        <div class="contenitore">
+          <p>Non ci sono conversazioni con altri utenti</p>
+        </div>
+      [% ELSE %]
+        [% CONTENUTO %]
+      [% END %]
     </div>
 
     <div id="menu">

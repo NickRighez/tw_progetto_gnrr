@@ -43,17 +43,9 @@ if($q->request_method() eq "POST") {
         Testo => $mess
         );
     my $doc = data_registration::get_xml_doc();
-    if(!($doc->exists("//SetUtenti/Utente[Username='".$q->param('destinatario')."']"))) {
-        my %problems=(
-            DESCRIZIONE_ERRORE => "Impossibile inviare il messaggio. Utente destinatario inesistente."
-            );
-        $session->param('problems',\%problems);
-        print $session->header(-location => "home.cgi");
-    }
-    else {
-        data_registration::inserisci_nuovo_messaggio_singolo(\%Messaggio);
-        print $session->header(-location => "singola_conversaz.cgi?utente=".$q->param('destinatario'));
-    }
+    data_registration::inserisci_nuovo_messaggio_singolo(\%Messaggio);
+    print $session->header(-location => "singola_conversaz.cgi?utente=".$q->param('destinatario'));
+    
 }
 else {
      my %problems=(

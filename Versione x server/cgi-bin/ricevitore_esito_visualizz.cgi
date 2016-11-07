@@ -28,7 +28,7 @@ elsif (!($q->param('passaggio')=~m/^v[0-9]+$/) ||
         !($doc->exists("//SetUtenti/Utente[Username='".$session->param('username')."']/Notifiche/EsitoPrenotaz[\@Passaggio='".$q->param('passaggio')."']"))) {
     my %problems=(
         DESCRIZIONE_ERRORE => "Tentativo di eliminare una notifica con una modalit&agrave; non permessa."
-        );
+    );
     $session->param('problems',\%problems);
     print $session->header(-location => "home.cgi");
 }

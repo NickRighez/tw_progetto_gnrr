@@ -29,8 +29,11 @@ if(defined($session->param('loggedin'))) {
 else {
     print $q->header();
     my %hash_keys;
+
+    # 
     if(defined($session->param('problems'))) {
         my $prob = $session->param('problems');
+        
         my %prob_hash = %$prob;
         while( my( $key, $value ) = each %prob_hash ){
             $hash_keys{$key}="$value";

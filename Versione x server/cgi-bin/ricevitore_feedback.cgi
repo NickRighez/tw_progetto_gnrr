@@ -83,15 +83,7 @@ else {
                 $session->param('nota',\%nota);
             }
         }
-        else{
-            my %problems=(
-              DESCRIZIONE_ERRORE => "Tentativo di inserire un feedback con una modalit&agrave; non permessa."
-            );
-            $session->param('problems',\%problems);
-            print $session->header(-location => "home.cgi");
-        }
     }
-
     print $session->header(-location => "notifiche.cgi");
 
 }

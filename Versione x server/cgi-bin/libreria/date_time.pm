@@ -61,7 +61,7 @@ sub calcola_tappe {
     #numero di tappe
     my $n = shift @_;
     #########################################
-
+    $n = $n-1;
     my $epoch_in = timelocal(0, $minutein, $hourin, $din, $min -1, $yin);
     my $epoch_fi = timelocal(0, $minutefi, $hourfi, $dfi, $mfi -1, $yfi);
     my $aux = ($epoch_fi - $epoch_in)/($n * 60);

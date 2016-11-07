@@ -30,29 +30,27 @@ else {
     my $contenuto;
     my $doc=data_registration::get_xml_doc();
     my @conv=$doc->findnodes("//SetMessaggi/Conversazione[\@User1='$username' or \@User2='$username']");
-    if(@conv == 0) {
-        $contenuto = "<div class=\"contenitore\"><p>Non ci sono conversazioni con altri utenti </p></div>";
-    }
-    else {
-        my %Messaggi = ( UTENTE => $username);
-        $contenuto = research::query_messaggi(\%Messaggi);
+    my $num=@conv;
+    my %Messaggi = ( UTENTE => $username);
+    $contenuto = research::query_messaggi(\%Messaggi);
        # open my $f, '>prova_cont.txt';
         #print $f $contenuto;
-    }
+
 
     my %hash_keys = (
         NOME_UTENTE => $username,
         CONTENUTO => $contenuto,
         NUM_NOTIFICHE => research::conta_notifiche($username, $doc),
+        NUM_CONVERSAZIONI => $num
         );
 
-    if(defined($session->param('problems'))) {
-        my $prob = $session->param('problems');
-        my %prob_hash = %$prob;
-        while( my( $key, $value ) = each %prob_hash ){
-            $hash_keys{$key}="$value";
-        }
-    }
+    #if(defined($session->param('problems'))) {
+    #    my $prob = $session->param('problems');
+    #    my %prob_hash = %$prob;
+    #    while( my( $key, $value ) = each %prob_hash ){
+    #        $hash_keys{$key}="$value";
+    #    }
+    #}
 
     my $file = "../data/HTML_TEMPLATE/messaggi.html";
     my $template_parser = Template->new;

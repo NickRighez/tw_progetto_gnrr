@@ -52,13 +52,10 @@ else {
 
     $contenuto_passaggio = research::query_viaggio(\%Pass);
 
-    if(defined($session->param('ricerca_prec'))) {
-        my $aux = $session->param('ricerca_prec');
+    if(defined($session->param('ricerca'))) {
+        my $aux = $session->param('ricerca');
         my %ricerca = %$aux;
         $hash_keys{RICERCA_PREC} = "yes";
-        $hash_keys{RIC_PARTENZA} = $ricerca{'partenza'};
-        $hash_keys{RIC_ARRIVO} = $ricerca{'arrivo'};
-        $hash_keys{RIC_DATA} = $ricerca{'data'};
     }
 
     if(defined($session->param('nota'))) {
@@ -83,17 +80,17 @@ else {
         $hash_keys{INDEX} = 10;
         my $conducente = $doc->findnodes("//SetPassaggi/Passaggio[IDViaggio='$pass']/Conducente");
 
-        if($conducente ne $username) {
+        if($conducente ne $username && !$doc->exists("//SetPassaggi/Passaggio[IDViaggio='$pass']/Bacheca/ConversazioneBacheca[\@User1='$username']")) {
             $hash_keys{NUOVA_CONVERSAZIONE} = 'yes';
             $hash_keys{CONDUCENTE} = $conducente;
         }
 
-        if($doc->exists("//SetPassaggi/Passaggio[IDViaggio=\"$pass\" and \@Passato=\"si\"]")) {
-            $hash_keys{MOTIVAZIONE} = "Passaggio non prenotabile, in quanto gi&agrave; avvenuto";
-        }
-        elsif($conducente eq $username){
-		my @user_ref = research::utenti_prenotati($hash_keys{PASSAGGIO},$part,$arr);
+         if($conducente eq $username){
+            my @user_ref = research::utenti_prenotati($hash_keys{PASSAGGIO},$part,$arr);
             $hash_keys{LISTA_UTENTI} = \@user_ref;
+        }
+        elsif($doc->exists("//SetPassaggi/Passaggio[IDViaggio=\"$pass\" and \@Passato=\"si\"]")) {
+            $hash_keys{MOTIVAZIONE} = "Passaggio non prenotabile, in quanto gi&agrave; avvenuto";
         }
         elsif($doc->exists("//SetPassaggi/Passaggio[IDViaggio=\"$pass\"]/Itinerario/*[\@Numero>=$part and \@Numero<=$arr]/Prenotazioni[Utente=\"$username\"]")){
             $hash_keys{MOTIVAZIONE} = "Passaggio non prenotabile, hai gi&agrave; effettuato una prenotazione.";

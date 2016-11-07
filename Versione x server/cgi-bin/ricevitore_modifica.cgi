@@ -37,6 +37,7 @@ else {
         Sesso => $q->param('sesso')
         );
 	$old_input{SESSO}=$q->param('sesso');
+
     if($q->param('nome') ne '') {
         if(!($q->param('nome')=~m/^(\x{0027}|\x{002C}|\x{002D}|\x{002F}|[\x{0030}-\x{0039}]|[\x{0041}-\x{005A}]|[\x{0061}-\x{007A}]|[\x{00C0}-\x{024F}]|\s)+$/)) {
             $problems{NOME_ERR}="Nome utente non valido, inserire solo lettere, di cui, al più la prima lettera può essere mauiscola";
@@ -129,7 +130,7 @@ else {
 
     if($q->param('annoPatente') ne '' or $q->param('auto') ne '' or $q->param('chiacchiere') ne '' or $q->param('musica') ne '' or $q->param('animali') ne '' or $q->param('fumatori') ne '') {
         if($q->param('annoPatente') eq '' or $q->param('auto') eq '' or $q->param('chiacchiere') eq '' or $q->param('musica') eq '' or $q->param('animali') eq '' or $q->param('fumatori') eq '') {
-            $problems{INFO_CONDUC_ERR}="Le informazioni necessarie per offrire un passaggio devono essere tutte presenti, o nessuna";
+            $problems{INFO_CONDUC_ERR}="Le informazioni necessarie per offrire un passaggio devono essere tutte presenti, o nessuna.";
             $problems{empty}="no";
         }
         elsif(!($q->param('annoPatente')=~m/^[1-2][0-9][0-9][0-9]$/)) {

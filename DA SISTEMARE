@@ -5,9 +5,6 @@
 -da rifare tutte le modifiche perse con il merge
 
 
-
--i viaggi attivi rimangono attivi anche quando terminati (da controllare dato che l'ora del server e' diversa)
-
 -tanti problemi con i msg, da controllare tutto [serve ancora??? a me pare ok]
 
 - nella pagina notifiche.html, nella form richiesta prenotazione, il link all utente non è completamente cliccabile 
@@ -15,13 +12,6 @@
 - singolo_passaggio.cgi -> bachecaviaggio.xsl non tiene conto dei tabindex nella form d inserimento messaggio [x Gio]
 
 
-Non arrivano le notifiche con il messaggio in bacheca [voluto]
-
-
-Il link al viaggio nelle notifiche non funziona [non riesco a riprodurre l'errore]
-
-{
-Problema con il prezzo
 
 come viene calcolato il tempo delle tappe?
 }
@@ -31,4 +21,4 @@ nella bacheca dei messaggi, andrebbe nascosto il form di inserimento messaggi se
 
 CSS della lista passeggeri!!!!!!!!!!!!!!!!!!
 
-
+la funzione research::utenti_prenotati, non li ritorna tutti
