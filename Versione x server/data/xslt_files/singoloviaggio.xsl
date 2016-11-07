@@ -12,19 +12,19 @@
   <xsl:template match="/">
     <xsl:for-each select="ts:TravelShare/SetPassaggi/Passaggio[IDViaggio='[% VIAGGIO %]']" >
       <div class="contenitore">
-        <p>Partenza : <xsl:value-of select="Itinerario/*[@Numero=[% NUM_PARTENZA %]]/Luogo"/> </p><xsl:text>&#x0A;</xsl:text>
+        <p>Partenza: <xsl:value-of select="Itinerario/*[@Numero=[% NUM_PARTENZA %]]/Luogo"/> </p><xsl:text>&#x0A;</xsl:text>
         <xsl:for-each select="Itinerario/*">
           <xsl:if test="@Numero&gt;[% NUM_PARTENZA %] and @Numero&lt;[% NUM_ARRIVO %]">
             <p>Tappa: <xsl:value-of select="Luogo" /></p><xsl:text>&#x0A;</xsl:text>
           </xsl:if>
         </xsl:for-each>
         <p>Arrivo: <xsl:value-of select="Itinerario/*[@Numero=[% NUM_ARRIVO %]]/Luogo"/> </p>
-        <p>Data : <xsl:call-template name="formatdate"><xsl:with-param name="datestr" select="Itinerario/*[@Numero=[% NUM_PARTENZA %]]/Data"/> </xsl:call-template></p>
+        <p>Data: <xsl:call-template name="formatdate"><xsl:with-param name="datestr" select="Itinerario/*[@Numero=[% NUM_PARTENZA %]]/Data"/> </xsl:call-template></p>
         <p>Ora partenza: <xsl:call-template name="formathour"> <xsl:with-param name="hourstr"  select="Itinerario/*[@Numero=[% NUM_PARTENZA %]]/Ora"/> </xsl:call-template></p>
         <p>Ora arrivo: <xsl:call-template name="formathour"> <xsl:with-param name="hourstr"  select="Itinerario/*[@Numero=[% NUM_ARRIVO %]]/Ora"/></xsl:call-template> </p>
         <p>Prezzo: [% PREZZO %]   <xsl:text disable-output-escaping="yes">&amp;euro;</xsl:text> </p>
         <p>Posti: <xsl:value-of select="$minPostiDisp" /> </p>
-        <p>Descrizione del viaggio</p>
+        <p>Descrizione del viaggio:</p>
         <div class="descrizione">
           <xsl:choose>
             <xsl:when test="count(Dettagli)>0">
