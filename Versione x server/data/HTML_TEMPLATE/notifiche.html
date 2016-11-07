@@ -56,7 +56,8 @@
               <input type="radio" name="esito" id="accetta" value="Accettata" checked="checked" tabindex="[% INDEX %]"></input>
               <label for="accetta">Accetta</label>
               <span class="paddingSpan"></span>
-              <input type="radio" name="esito" id="rifiuta" value="Rifiutata"></input>
+    [% INDEX = INDEX+1 %]
+              <input type="radio" name="esito" id="rifiuta" value="Rifiutata" tabindex="[% INDEX %]"></input>
               <label for="rifiuta">Rifiuta</label>
               [% INDEX = INDEX+1 %]
             </div>
