@@ -56,7 +56,7 @@ else {
         my @email = $doc->findnodes("//SetUtenti/Utente[Email='".$q->param('email')."']");
         my $num = @email;
         if($num!=0) {
-            $problems{EMAIL_ERR}="indirizzo email gi&agrave; esistente";
+            $problems{EMAIL_ERR}="Indirizzo email gi&agrave; esistente";
             $problems{empty}="no";
         }
         else {
@@ -70,7 +70,7 @@ else {
         $problems{empty} = "no";
     }
     elsif(!($q->param('nome')=~m/^(\x{0027}|\x{002C}|\x{002D}|\x{002F}|[\x{0030}-\x{0039}]|[\x{0041}-\x{005A}]|[\x{0061}-\x{007A}]|[\x{00C0}-\x{024F}]|\s)+$/)) {
-        $problems{NOME_ERR}="nome utente non valido, inserire solo lettere, di cui, al pi&ugrave; la prima lettera pu&ograve; essere mauiscola";
+        $problems{NOME_ERR}="Nome utente non valido, inserire solo lettere, di cui, al pi&ugrave; la prima lettera pu&ograve; essere mauiscola";
         $problems{empty}="no";
     }
     else {
@@ -82,7 +82,7 @@ else {
         $problems{empty} = "no";
     }
     elsif(!($q->param('cognome')=~m/^(\x{0027}|\x{002C}|\x{002D}|\x{002F}|[\x{0030}-\x{0039}]|[\x{0041}-\x{005A}]|[\x{0061}-\x{007A}]|[\x{00C0}-\x{024F}]|\s)+$/)) {
-        $problems{COGNOME_ERR}="cognome utente non valido, inserire solo lettere, di cui, al pi&ugrave; la prima lettera pu&ograve; essere mauiscola";
+        $problems{COGNOME_ERR}="Cognome utente non valido, inserire solo lettere, di cui, al pi&ugrave; la prima lettera pu&ograve; essere mauiscola";
         $problems{empty}="no";
     }
     else {
