@@ -8,15 +8,11 @@
 
 -i viaggi attivi rimangono attivi anche quando terminati (da controllare dato che l'ora del server e' diversa)
 
--tanti problemi con i msg, da controllare tutto
+-tanti problemi con i msg, da controllare tutto [serve ancora??? a me pare ok]
 
--dopo l'inserimento del feedback non deve reindirizzare al profilo personale, ma tornare ai viaggi
+- nella pagina notifiche.html, nella form richiesta prenotazione, il link all utente non è completamente cliccabile 
 
--un commento vuoto viene inserito lo stesso nel profilo
-
-- nella pagina notifiche.html, nella form richiesta prenotazione, il link all utente non è completamente cliccabile
-
-- singolo_passaggio.cgi -> bachecaviaggio.xsl non tiene conto dei tabindex nella form d inserimento messaggio
+- singolo_passaggio.cgi -> bachecaviaggio.xsl non tiene conto dei tabindex nella form d inserimento messaggio [x Gio]
 
 
 Non arrivano le notifiche con il messaggio in bacheca [voluto]
