@@ -11,17 +11,17 @@
     <meta name="viewport" content="width=device-width" />
     <link href="../screen.css" rel="stylesheet" type="text/css" media="screen" />
     <link href="../print.css" rel="stylesheet" type="text/css" media="print" />
-    <link rel="icon" href="Immagini/TS_icon.png" type="image/x-icon" />
-    <link rel="shortcut icon" href="Immagini/TS_icon.png" type="image/x-icon" />
+    <link rel="icon" href="../Immagini/TS_icon.png" type="image/x-icon" />
+    <link rel="shortcut icon" href="../Immagini/TS_icon.png" type="image/x-icon" />
   </head>
   <body>
     <div id="header">
-      <a href="homeLog.html" tabindex="1"><img src="Immagini/banner.png" id="banner" alt="Banner Travel Share - Link diretto alla Home" /></a>
+      <a href="homeLog.html" tabindex="1"><img src="../Immagini/banner.png" id="banner" alt="Banner Travel Share - Link diretto alla Home" /></a>
       <a id="bottoneMenu" href="#menu">Men&ugrave;</a>
     </div>
     <div id="utente">
       <p>Ciao [% NOME_UTENTE %]</p>
-      <p><a href="notifiche.cgi" tabindex="2">Notifiche ( [% NUM_NOTIFICHE %] )</a>  <a href="ricevitore_logout.cgi" tabindex="3">Logout</a></p>
+      <p><a href="notifiche.cgi" tabindex="2">Notifiche ([% NUM_NOTIFICHE %])</a>  <a href="ricevitore_logout.cgi" tabindex="3">Logout</a></p>
     </div>
     <div id="contenuto">
       <h1>Notifiche</h1>
@@ -48,7 +48,7 @@
       [% END %]
       [% FOREACH richiesta IN RICHIESTE_LIST %]
       <div class="notifica">
-        <p>Hai una nuova richiesta di prenotazione da <a href="profilo.cgi?utente=[% richiesta.richiedente %]" tabindex="[% INDEX %]">[% richiesta.richiedente %]</a> per il passaggio [% INDEX = INDEX+1 %] <a href="singolo_passaggio.cgi?passaggio=[% richiesta.passaggio %]&part=[% richiesta.partenza %]&arr=[% richiesta.arrivo %]" tabindex="[% INDEX %]" >[% richiesta.luogo_p %] - [% richiesta.luogo_a %]</a> :</p>
+        <p>Hai una nuova richiesta di prenotazione da <a href="profilo.cgi?utente=[% richiesta.richiedente %]" tabindex="[% INDEX %]">[% richiesta.richiedente %]</a> per il passaggio [% INDEX = INDEX+1 %] <a href="singolo_passaggio.cgi?passaggio=[% richiesta.passaggio %]&part=[% richiesta.partenza %]&arr=[% richiesta.arrivo %]" tabindex="[% INDEX %]" >[% richiesta.luogo_p %] - [% richiesta.luogo_a %]</a>:</p>
         <form action="ricevitore_esito_prenotazione.cgi" method="post" >
           <fieldset>
             <legend>Richiesta prenotazione da [% richiesta.richiedente %] per il passaggio [% richiesta.luogo_p %] - [% richiesta.luogo_a %]</legend>
