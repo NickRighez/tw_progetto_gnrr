@@ -81,7 +81,7 @@ else {
 
     if($q->param('anno') ne '') {
         if(!($q->param('anno')=~m/^[1-2][0-9][0-9][0-9]$/)) {
-            $problems{ANNO_ERR}="Anno di nascita non valida, inserire l anno in formato 'aaaa'";
+            $problems{ANNO_ERR}="Anno di nascita non valida, inserire l&#39;anno in formato 'aaaa'";
             $problems{empty}="no";
         }
         else {
