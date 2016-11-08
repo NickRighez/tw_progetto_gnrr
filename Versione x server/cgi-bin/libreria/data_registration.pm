@@ -415,12 +415,11 @@ sub inserisci_notifica{
 
 sub inserisci_feedback {
     my $array_argom_ref = shift @_;
+    my %array_argom = %$array_argom_ref;
     # CHIAVI : IDMitt, IDDest, Passaggio, Commento, PunteggioMedio, Compagnia, Puntualita. Nel
     #             caso il destinatario sia il conducente del viaggio, anche le chiavi Pulizia e Guida
-    my %array_argom = %$array_argom_ref;
-    foreach my $el (%array_argom){
-        utf8::encode($el);
-    }
+    
+   
     my $output = "<Feedback IDMitt=\"$array_argom{'IDMitt'}\" IDDest=\"$array_argom{'IDDest'}\">
                               <Passaggio>$array_argom{'Passaggio'}</Passaggio>";
                               
@@ -429,7 +428,7 @@ sub inserisci_feedback {
     }
                              
     my $doc = get_xml_doc();
-    if(utility::verifica_presenza("//Passaggio[IDViaggio=\"$array_argom{'Passaggio'}\" and Conducente=\"$array_argom{'IDDest'}\"]",$doc)) {
+    if($doc->exists("//Passaggio[IDViaggio=\"$array_argom{'Passaggio'}\" and Conducente=\"$array_argom{'IDDest'}\"]")) {
 
         $output = $output."   <ValutazioneConduc>
                                 <PunteggioMedio>$array_argom{'PunteggioMedio'}</PunteggioMedio>
