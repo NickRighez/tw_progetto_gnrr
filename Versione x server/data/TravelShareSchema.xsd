@@ -117,12 +117,23 @@
   <xs:complexType name="TRichiestaPrenotaz" >
     <xs:attribute name="Mittente" type="xs:IDREF" />
     <xs:attribute name="Passaggio" type="xs:IDREF" />
+    <xs:attribute name="Partenza" type="xs:integer" />
+    <xs:attribute name="Arrivo" type="xs:integer" />
   </xs:complexType>
 
   <xs:complexType name="TEsitoPrenotaz" >
     <xs:attribute name="Passaggio" type="xs:IDREF" />
-    
+    <xs:attribute name="Esito" type="TEsito" />
+    <xs:attribute name="Partenza" type="xs:integer" />
+    <xs:attribute name="Arrivo" type="xs:integer" />
   </xs:complexType>
+
+  <xs:simpleType name="TEsito">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Accettata" />
+      <xs:enumeration value="Rifiutata" />
+    </xs:restriction>
+  </xs:simpleType>
 
   <xs:complexType name="TPreferenze">
     <xs:sequence>
