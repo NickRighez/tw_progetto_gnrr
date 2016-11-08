@@ -52,16 +52,18 @@
 
     <h1>[% PARTENZA %] - [% ARRIVO %]</h1> <!--ricercati-->
 
+     [% IF RICERCA_PREC == 'yes' %]
+    <a class="linkSottoH" href="risultati_ricerca.cgi?partenza=[% RIC_PARTENZA %]&arrivo=[% RIC_ARRIVO %]&data=[% RIC_DATA %]" tabindex="[% INDEX %]">Torna ai risultati</a>
+    [% INDEX = INDEX+1 %]
+    [% END %]
+
       [% IF NOTA %]
         <div class="contenitore">
           <p>[% NOTA %]</p>
         </div>
       [% END %]
 
-    [% IF RICERCA_PREC == 'yes' %]
-    <a class="linkSottoH" href="risultati_ricerca.cgi" tabindex="[% INDEX %]">Torna ai risultati</a>
-    [% INDEX = INDEX+1 %]
-    [% END %]
+   
 
 
 		[% CONTENUTO_PASSAGGIO %]
