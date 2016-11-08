@@ -56,7 +56,7 @@ else {
     $hash_keys{CONTENUTO} = research::query_users(\%Ute);
     print $q->header();
     my $template_parser = Template->new;
-    open my $fh, '<', $file;
+    open my $fh, '<:encoding(UTF-8)', $file;
     my $foglio = '';
     $template_parser->process($fh,\%hash_keys,\$foglio);
     print $foglio; 

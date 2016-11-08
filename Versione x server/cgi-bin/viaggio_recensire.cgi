@@ -45,7 +45,7 @@ else {
     #   per ognuno degli hash viene creata la corrispondente porzione di form atta all inserimento del feedback
 
     my $file = "../data/HTML_TEMPLATE/feedback.html";
-    open my $fh, '<', $file;
+    open my $fh, '<:encoding(UTF-8)', $file;
     my %hash_keys = (
         NOME_UTENTE => $username,
         FEEDBACK_LIST  => \@feedback_list,

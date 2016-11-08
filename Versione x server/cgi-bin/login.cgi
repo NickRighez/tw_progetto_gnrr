@@ -45,7 +45,7 @@ else {
 
 
     my $file = "../data/HTML_TEMPLATE/accedi.html";
-    open my $fh, '<', $file;
+    open my $fh, '<:encoding(UTF-8)', $file;
     my $template_parser = Template->new;
     my $foglio = '';
     $template_parser->process($fh,\%hash_keys,\$foglio) or die $!;

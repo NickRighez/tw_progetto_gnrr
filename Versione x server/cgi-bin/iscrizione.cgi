@@ -50,7 +50,7 @@ else {
 
     my $file = "../data/HTML_TEMPLATE/iscriviti.html";
     my $template_parser = Template->new;
-    open my $fh, '<', $file;
+    open my $fh, '<:encoding(UTF-8)', $file;
     my $foglio = '';
     $template_parser->process($fh,\%hash_keys,\$foglio) or die "Errore nella templatizzazione:  $!   ";
     print $foglio;

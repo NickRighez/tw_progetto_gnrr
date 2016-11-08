@@ -52,7 +52,7 @@ else {
     
     my $template_parser = Template->new;
     my $foglio = '';
-    open my $fh, '<', $file;
+    open my $fh, '<:encoding(UTF-8)', $file;
     $template_parser->process($fh,\%hash_keys,\$foglio);
     print $q->header();
     print $foglio;

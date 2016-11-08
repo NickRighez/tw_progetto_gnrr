@@ -54,7 +54,7 @@ else {
     $hash_keys{NUM_NOTIFICHE} = research::conta_notifiche($session->param('username'), $doc);
     my $template_parser = Template->new;
     my $foglio = '';
-    open my $fh, '<', $file;
+    open my $fh, '<:encoding(UTF-8)', $file;
     $template_parser->process($fh,\%hash_keys,\$foglio);
     print $cgi->header();
     print $foglio;
