@@ -1,6 +1,6 @@
 /** CSS RESET **/
 
-html, body, div, span, h1, h2, h3, h4, h5, h6, p, a, center,
+html, body, div, span, h1, h2, h3, h4, h5, h6, p, a,
 dl, dt, dd, ol, ul, li, fieldset, form, label, legend {
 	margin: 0;
 	padding: 0;
@@ -461,6 +461,15 @@ input[type=radio]:checked + label>img {
 	border : 1px solid #666666;
 	height : 50px;
 	margin : 2% 7% 1% 7%;
+}
+
+#utentiLista{
+	list-style : none;
+}
+
+#utentiLista li{
+	margin-left : 3%;
+	padding : 2%;
 }
 
 /*** CONFERMA REGISTRAZIONE ***/
