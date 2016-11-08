@@ -177,6 +177,7 @@ sub inserisci_nuovo_viaggio   {
           <PrezzoTot>$array_argom{'PrezzoTot'}</PrezzoTot>
           <PostiTot>$array_argom{'PostiDisp'}</PostiTot>\n";
     if(defined($array_argom{'Dettagli'})) {
+        utf8::encode($array_argom{'Dettagli'});
         $output=$output."<Dettagli>$array_argom{'Dettagli'}</Dettagli>\n";
     }
     $output=$output."<Itinerario> \n";
