@@ -509,18 +509,7 @@ sub inserisci_info_patente {
     return 1;
 }
 
-sub elimina_info_auto {
-    my $user = shift @_;
-    my $doc = shift @_;
-    if(utility::verifica_presenza("//Utente[Username=\"$user\"]/Profilo/Auto",$doc)) {
-        my $auto = $doc->findnodes("//Utente[Username=\"$user\"]/Profilo/Auto")->get_node(1);
-        my $patente = $doc->findnodes("//Utente[Username=\"$user\"]/Profilo/Patente")->get_node(1);
-        my $prof = $doc->findnodes("//Utente[Username=\"$user\"]/Profilo")->get_node(1);
-        $prof->removeChild($doc->findnodes("//Utente[Username=\"$user\"]/Profilo/Auto")->get_node(1));
-        $prof->removeChild($doc->findnodes("//Utente[Username=\"$user\"]/Profilo/Patente")->get_node(1));
-    }
-    return 1;
-}
+
 
 sub elimina_notifica {
     my $user = shift @_;
