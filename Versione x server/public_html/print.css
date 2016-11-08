@@ -352,6 +352,15 @@ input[type=radio]:checked + label>img {
 	margin : 2% 7% 1% 7%;
 }
 
+#utentiLista{
+	list-style : none;
+}
+
+#utentiLista li{
+	margin-left : 3%;
+	padding : 2%;
+}
+
 /*** CONFERMA REGISTRAZIONE ***/
 
 .bottone{
