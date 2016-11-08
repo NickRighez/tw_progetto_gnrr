@@ -85,16 +85,16 @@
       <xsl:value-of select="$utente" />
       <span class="data">
         <xsl:call-template name="formatdate">
-          <xsl:with-param name="datestr" select="Messaggio[1]/Data" />
+          <xsl:with-param name="datestr" select="Messaggio[last()]/Data" />
         </xsl:call-template>
         -
         <xsl:call-template name="formathour">
-          <xsl:with-param name="hourstr" select="Messaggio[1]/Ora" />
+          <xsl:with-param name="hourstr" select="Messaggio[last()]/Ora" />
         </xsl:call-template>
 
       </span>
     </a>
-    <p class="ultimoMessaggio"><xsl:value-of select="Messaggio[1]/Testo"/></p><xsl:text>&#x0A;</xsl:text>
+    <p class="ultimoMessaggio"><xsl:value-of select="Messaggio[last()]/Testo"/></p><xsl:text>&#x0A;</xsl:text>
     <p class="linkVaiConversazione blacktext">
       <a>
         <xsl:attribute name="href">singola_conversaz.cgi?utente=<xsl:value-of select="$utente" /></xsl:attribute>
