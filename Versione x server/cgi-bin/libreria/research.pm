@@ -136,7 +136,8 @@ sub query_ricerca
                                     my $conduc = $itiner[$i]->findnodes("../Conducente")->get_node(1)->textContent();
                                     my $auto = $doc->findnodes("//SetUtenti/Utente[Username='$conduc']/Profilo/Auto")->get_node(1)->textContent;
                                     my $punteggio = $doc->findnodes("//SetUtenti/Utente[Username='$conduc']/Profilo/Valutazione/PunteggioMedio")->get_node(1)->textContent;
-                                    my ($sec,$min,$hour,$mday,$mon,$year,$wday,$yday,$isdst) = localtime();
+                                    $punteggio = sprintf("%.1f",$punteggio);
+				    my ($sec,$min,$hour,$mday,$mon,$year,$wday,$yday,$isdst) = localtime();
                                     my $eta=$year + 1900 - ($doc->findnodes("//SetUtenti/Utente[Username='$conduc']/AnnoNascita")->get_node(1)->textContent() ) ;
                                     push @viaggi_list, {
                                                   href => "singolo_passaggio.cgi?passaggio=$idv&part=$j&&arr=$k", partenza => ucfirst $part, arrivo => ucfirst $arr,
