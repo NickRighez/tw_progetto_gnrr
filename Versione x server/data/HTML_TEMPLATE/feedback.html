@@ -11,19 +11,19 @@
     <meta name="viewport" content="width=device-width" />
     <link href="../screen.css" rel="stylesheet" type="text/css" media="screen" />
     <link href="../print.css" rel="stylesheet" type="text/css" media="print" />
-    <link rel="icon" href="Immagini/TS_icon.png" type="image/x-icon" />
-    <link rel="shortcut icon" href="Immagini/TS_icon.png" type="image/x-icon" />
+    <link rel="icon" href="../Immagini/TS_icon.png" type="image/x-icon" />
+    <link rel="shortcut icon" href="../Immagini/TS_icon.png" type="image/x-icon" />
   </head>
   <body>
 
     <div id="header">
-      <a href="home.cgi" tabindex="1"><img src="Immagini/banner.png" id="banner" alt="Banner Travel Share - Link diretto alla Home" /></a>
+      <a href="home.cgi" tabindex="1"><img src="../Immagini/banner.png" id="banner" alt="Banner Travel Share - Link diretto alla Home" /></a>
       <a id="bottoneMenu" href="#menu">Men&ugrave;</a>
     </div>
 
     <div id="utente">
       <p>Ciao [% NOME_UTENTE %]</p>
-      <p><a href="notifiche.html" tabindex="2">Notifiche ( [% NUM_NOTIFICHE %] )</a>  <a href="logout.cgi" tabindex="3">Logout</a></p>
+      <p><a href="notifiche.html" tabindex="2">Notifiche ([% NUM_NOTIFICHE %])</a>  <a href="logout.cgi" tabindex="3">Logout</a></p>
     </div>
 
     <div id="contenuto">
@@ -40,38 +40,55 @@
           <input type="hidden" name="passaggio" value="[% feedback.passaggio %]"></input>
           <p>Compagnia</p>  <!--"Traduttore" ID: ruolo.Valutazione.valoreNumerico; ruolo: g=guidatore, p1..4=passeggero1..4; -->
           <div class="votiGroup">
-            <input type="radio" name="CompagniaG" id="gCompagnia1" value="1"></input><label  for="gCompagnia1">1</label>
-            <input type="radio" name="CompagniaG" id="gCompagnia2" value="2"></input><label  for="gCompagnia2">2</label>
+            <input type="radio" name="CompagniaG" id="gCompagnia1" value="1" tabindex="[% INDEX %]" ></input><label  for="gCompagnia1">1</label>
+            [% INDEX = INDEX+1 %]
+            <input type="radio" name="CompagniaG" id="gCompagnia2" value="2" tabindex="[% INDEX %]" ></input><label  for="gCompagnia2">2</label>
+            [% INDEX = INDEX+1 %]
             <input type="radio" name="CompagniaG" id="gCompagnia3" value="3" tabindex="[% INDEX %]" checked="checked"></input><label  for="gCompagnia3">3</label>
             [% INDEX = INDEX+1 %]
-            <input type="radio" name="CompagniaG" id="gCompagnia4" value="4"></input><label  for="gCompagnia4">4</label>
-            <input type="radio" name="CompagniaG" id="gCompagnia5" value="5"></input><label  for="gCompagnia5">5</label>
+            <input type="radio" name="CompagniaG" id="gCompagnia4" value="4" tabindex="[% INDEX %]"></input><label  for="gCompagnia4">4</label>
+            [% INDEX = INDEX+1 %]
+            <input type="radio" name="CompagniaG" id="gCompagnia5" value="5" tabindex="[% INDEX %]"></input><label  for="gCompagnia5">5</label>
+            [% INDEX = INDEX+1 %]
           </div>
           <p>Puntualit&agrave;</p>
           <div class="votiGroup">
-            <input type="radio" name="PuntualitaG" id="gPuntualita1" value="1"></input><label  for="gPuntualita1">1</label>
-            <input type="radio" name="PuntualitaG" id="gPuntualita2" value="2"></input><label  for="gPuntualita2">2</label>
+            <input type="radio" name="PuntualitaG" id="gPuntualita1" value="1" tabindex="[% INDEX %]"></input><label  for="gPuntualita1">1</label>
+            [% INDEX = INDEX+1 %]
+            <input type="radio" name="PuntualitaG" id="gPuntualita2" value="2" tabindex="[% INDEX %]"></input><label  for="gPuntualita2">2</label>
+            [% INDEX = INDEX+1 %]
             <input type="radio" name="PuntualitaG" id="gPuntualita3" value="3" tabindex="[% INDEX %]" checked="checked"></input><label  for="gPuntualita3">3</label>
             [% INDEX = INDEX+1 %]
-            <input type="radio" name="PuntualitaG" id="gPuntualita4" value="4"></input><label  for="gPuntualita4">4</label>
-            <input type="radio" name="PuntualitaG" id="gPuntualita5" value="5"></input><label  for="gPuntualita5">5</label>
+            <input type="radio" name="PuntualitaG" id="gPuntualita4" value="4" tabindex="[% INDEX %]"></input><label  for="gPuntualita4">4</label>
+            [% INDEX = INDEX+1 %]
+            <input type="radio" name="PuntualitaG" id="gPuntualita5" value="5" tabindex="[% INDEX %]"></input><label  for="gPuntualita5">5</label>
+            [% INDEX = INDEX+1 %]
           </div>
           <p>Guida</p>
           <div class="votiGroup">
-            <input type="radio" name="Guida" id="Guida1" value="1"></input><label  for="Guida1">1</label>
-            <input type="radio" name="Guida" id="Guida2" value="2"></input><label  for="Guida2">2</label>
+            <input type="radio" name="Guida" id="Guida1" value="1" tabindex="[% INDEX %]"></input><label  for="Guida1">1</label>
+            [% INDEX = INDEX+1 %]
+            <input type="radio" name="Guida" id="Guida2" value="2" tabindex="[% INDEX %]"></input><label  for="Guida2">2</label>
+            [% INDEX = INDEX+1 %]
             <input type="radio" name="Guida" id="Guida3" value="3" tabindex="[% INDEX %]" checked="checked"></input><label  for="Guida3">3</label>
-            <input type="radio" name="Guida" id="Guida4" value="4"></input><label  for="Guida4">4</label>
-            <input type="radio" name="Guida" id="Guida5" value="5"></input><label  for="Guida5">5</label>
+            [% INDEX = INDEX+1 %]
+            <input type="radio" name="Guida" id="Guida4" value="4" tabindex="[% INDEX %]"></input><label  for="Guida4">4</label>
+            [% INDEX = INDEX+1 %]
+            <input type="radio" name="Guida" id="Guida5" value="5" tabindex="[% INDEX %]"></input><label  for="Guida5">5</label>
+            [% INDEX = INDEX+1 %]
           </div>
           <p>Pulizia</p>
           <div class="votiGroup">
-            <input type="radio" name="Pulizia" id="Pulizia1" value="1"></input><label  for="Pulizia1">1</label>
-            <input type="radio" name="Pulizia" id="Pulizia2" value="2"></input><label  for="Pulizia2">2</label>
+            <input type="radio" name="Pulizia" id="Pulizia1" value="1" tabindex="[% INDEX %]"></input><label  for="Pulizia1">1</label>
+            [% INDEX = INDEX+1 %]
+            <input type="radio" name="Pulizia" id="Pulizia2" value="2" tabindex="[% INDEX %]"></input><label  for="Pulizia2">2</label>
+            [% INDEX = INDEX+1 %]
             <input type="radio" name="Pulizia" id="Pulizia3" value="3" tabindex="[% INDEX %]" checked="checked"></input><label  for="Pulizia3">3</label>
             [% INDEX = INDEX+1 %]
-            <input type="radio" name="Pulizia" id="Pulizia4" value="4"></input><label  for="Pulizia4">4</label>
-            <input type="radio" name="Pulizia" id="Pulizia5" value="5"></input><label  for="Pulizia5">5</label>
+            <input type="radio" name="Pulizia" id="Pulizia4" value="4" tabindex="[% INDEX %]"></input><label  for="Pulizia4">4</label>
+            [% INDEX = INDEX+1 %]
+            <input type="radio" name="Pulizia" id="Pulizia5" value="5" tabindex="[% INDEX %]"></input><label  for="Pulizia5">5</label>
+            [% INDEX = INDEX+1 %]
           </div>
 
           <textarea rows="0" cols="0" name="commentoG" tabindex="[% INDEX %]" title="Inserisci un commento facoltativo">Commento facoltativo</textarea>
@@ -84,33 +101,42 @@
           <input type="hidden" name="passaggio" value="[% feedback.passaggio %]"></input>
           <p>Compagnia</p>
           <div class="votiGroup">
-            <input type="radio" name="CompagniaP[% feedback.index %]" id="p[% feedback.index %]Compagnia1" value="1"></input><label  for="p[% feedback.index %]Compagnia1">1</label>
-            <input type="radio" name="CompagniaP[% feedback.index %]" id="p[% feedback.index %]Compagnia2" value="2"></input><label  for="p[% feedback.index %]Compagnia2">2</label>
+            <input type="radio" name="CompagniaP[% feedback.index %]" id="p[% feedback.index %]Compagnia1" value="1" tabindex="[% INDEX %]"></input><label  for="p[% feedback.index %]Compagnia1">1</label>
+            [% INDEX = INDEX+1 %]
+            <input type="radio" name="CompagniaP[% feedback.index %]" id="p[% feedback.index %]Compagnia2" value="2" tabindex="[% INDEX %]"></input><label  for="p[% feedback.index %]Compagnia2">2</label>
+            [% INDEX = INDEX+1 %]
             <input type="radio" name="CompagniaP[% feedback.index %]" id="p[% feedback.index %]Compagnia3" value="3" tabindex="[% INDEX %]" checked="checked"></input><label  for="p[% feedback.index %]Compagnia3">3</label>
             [% INDEX = INDEX+1 %]
-            <input type="radio" name="CompagniaP[% feedback.index %]" id="p[% feedback.index %]Compagnia4" value="4"></input><label  for="p[% feedback.index %]Compagnia4">4</label>
-            <input type="radio" name="CompagniaP[% feedback.index %]" id="p[% feedback.index %]Compagnia5" value="5"></input><label  for="p[% feedback.index %]Compagnia5">5</label>
+            <input type="radio" name="CompagniaP[% feedback.index %]" id="p[% feedback.index %]Compagnia4" value="4" tabindex="[% INDEX %]"></input><label  for="p[% feedback.index %]Compagnia4">4</label>
+            [% INDEX = INDEX+1 %]
+            <input type="radio" name="CompagniaP[% feedback.index %]" id="p[% feedback.index %]Compagnia5" value="5" tabindex="[% INDEX %]"></input><label  for="p[% feedback.index %]Compagnia5">5</label>
+            [% INDEX = INDEX+1 %]
           </div>
           <p>Puntualit&agrave;</p>
           <div class="votiGroup">
-            <input type="radio" name="PuntualitaP[% feedback.index %]" id="p[% feedback.index %]Puntualita1" value="1"></input><label  for="p[% feedback.index %]Puntualita1">1</label>
-            <input type="radio" name="PuntualitaP[% feedback.index %]" id="p[% feedback.index %]Puntualita2" value="2"></input><label  for="p[% feedback.index %]Puntualita2">2</label>
+            <input type="radio" name="PuntualitaP[% feedback.index %]" id="p[% feedback.index %]Puntualita1" value="1" tabindex="[% INDEX %]"></input><label  for="p[% feedback.index %]Puntualita1">1</label>
+            [% INDEX = INDEX+1 %]
+            <input type="radio" name="PuntualitaP[% feedback.index %]" id="p[% feedback.index %]Puntualita2" value="2" tabindex="[% INDEX %]"></input><label  for="p[% feedback.index %]Puntualita2">2</label>
+            [% INDEX = INDEX+1 %]
             <input type="radio" name="PuntualitaP[% feedback.index %]" id="p[% feedback.index %]Puntualita3" value="3" tabindex="[% INDEX %]" checked="checked"></input><label  for="p[% feedback.index %]Puntualita3">3</label>
             [% INDEX = INDEX+1 %]
-            <input type="radio" name="PuntualitaP[% feedback.index %]" id="p[% feedback.index %]Puntualita4" value="4"></input><label  for="p[% feedback.index %]Puntualita4">4</label>
-            <input type="radio" name="PuntualitaP[% feedback.index %]" id="p[% feedback.index %]Puntualita5" value="5"></input><label  for="p[% feedback.index %]Puntualita5">5</label>
+            <input type="radio" name="PuntualitaP[% feedback.index %]" id="p[% feedback.index %]Puntualita4" value="4" tabindex="[% INDEX %]"></input><label  for="p[% feedback.index %]Puntualita4">4</label>
+            [% INDEX = INDEX+1 %]
+            <input type="radio" name="PuntualitaP[% feedback.index %]" id="p[% feedback.index %]Puntualita5" value="5" tabindex="[% INDEX %]"></input><label  for="p[% feedback.index %]Puntualita5">5</label>
+            [% INDEX = INDEX+1 %]
           </div>
 
           <textarea rows="0" cols="0" name="commentoP[% feedback.index %]" tabindex="[% INDEX %]" title="Inserisci un commento facoltativo">Commento facoltativo</textarea>
           [% INDEX = INDEX+1 %]
-       [% END %]
-  [% END %]
+        </fieldset>
+        [% END %]
+        [% END %]
 
-  <div><input type="submit" value="Invia" tabindex="[% INDEX %]"></input></div>
-  [% INDEX = INDEX+1 %]
-</form>
-[% END %]
-</div>
+        <div><input type="submit" value="Invia" tabindex="[% INDEX %]"></input></div>
+        [% INDEX = INDEX+1 %]
+      </form>
+      [% END %]
+    </div>
 
     <div id="menu">
       <ul id="menuLista">
