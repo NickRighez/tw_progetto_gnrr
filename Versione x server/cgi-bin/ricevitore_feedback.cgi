@@ -39,10 +39,12 @@ else {
             Pulizia => $q->param('Pulizia')
         );
         if($q->param('commentoG') ne "Commento facoltativo" && $q->param('commentoG') ne "") {
-            $Feedback{'Commento'} = encode_entities($q->param('commentoG'));
+            my $comm = encode_entities($q->param('commentoG'));
+            $Feedback{Commento} = $comm;
         }
         my $punt_medio=($q->param('CompagniaG') + $q->param('PuntualitaG') + $q->param('Guida') + $q->param('Pulizia'))/4;
         $Feedback{PunteggioMedio}=$punt_medio;
+
         if(data_registration::inserisci_feedback(\%Feedback)) {
             data_registration::incrementa("NumFeedbRicevuti", $q->param('G'));
             data_registration::elimina_notifica("$Feedback{'IDMitt'}","FeedDaRilasciare","\@Destinatario=\"$Feedback{'IDDest'}\" and \@Passaggio=\"$Feedback{'Passaggio'}\"");
@@ -65,11 +67,11 @@ else {
                 IDDest => $q->param('P'.$i),
                 Passaggio => $q->param('passaggio'),
                 Compagnia => $q->param('CompagniaP'.$i),
-                Puntualita => $q->param('PuntualitaP'.$i),
-                Commento => $q->param('commentoP'.$i)
+                Puntualita => $q->param('PuntualitaP'.$i)
             );
             if($q->param('commentoP'.$i) ne "Commento facoltativo" && $q->param('commentoP'.$i) ne "") {
-                $Feedback{'Commento'} = encode_entities($q->param('commentoG'));
+                my $comm = encode_entities($q->param('commentoP'.$i));
+                $Feedback{Commento} = $comm;
             }
             my $punt_medio=($q->param('CompagniaP'.$i) + $q->param('PuntualitaP'.$i))/2;
             $Feedback{PunteggioMedio}=$punt_medio;
