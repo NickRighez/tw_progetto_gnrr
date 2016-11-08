@@ -29,20 +29,20 @@ if($q->request_method() ne 'POST') {
 else {
     my $username = $session->param('username');
     if(defined($q->param('G'))) {
-        my %Feedback= (
-            IDMitt => $session->param('username'),
-            IDDest => $q->param('G'),
-            Passaggio => $q->param('passaggio'),
-            Compagnia => $q->param('CompagniaG'),
-            Puntualita => $q->param('PuntualitaG'),
-            Guida => $q->param('Guida'),
-            Pulizia => $q->param('Pulizia')
-        );
-        if($q->param('commentoG') ne "Commento facoltativo" && $q->param('commentoG') ne "") {
+        my %Feedback;
+        $Feedback{IDMitt} = $session->param('username');
+        $Feedback{IDDest} = $q->param('G');
+        $Feedback{Passaggio} = $q->param('passaggio');
+        $Feedback{Compagnia} = $q->param('_CompagniaG');
+        $Feedback{Puntualita} = $q->param('_PuntualitaG');
+        $Feedback{Guida} = $q->param('_Guida');
+        $Feedback{Pulizia} = $q->param('_Pulizia');
+        
+        if($q->param('_commentoG') ne "Commento facoltativo" && $q->param('_commentoG') ne "") {
             my $comm = encode_entities($q->param('commentoG'));
             $Feedback{Commento} = $comm;
         }
-        my $punt_medio=($q->param('CompagniaG') + $q->param('PuntualitaG') + $q->param('Guida') + $q->param('Pulizia'))/4;
+        my $punt_medio=($q->param('_CompagniaG') + $q->param('_PuntualitaG') + $q->param('_Guida') + $q->param('_Pulizia'))/4;
         $Feedback{PunteggioMedio}=$punt_medio;
 
         if(data_registration::inserisci_feedback(\%Feedback)) {
@@ -62,18 +62,18 @@ else {
     my $num_da_rilasc=@feed_da_rilas;
     for(my $i=1;$i<=$num_da_rilasc;$i++) {
         if(defined($q->param('P'.$i))) {
-            my %Feedback= (
-                IDMitt => $session->param('username'),
-                IDDest => $q->param('P'.$i),
-                Passaggio => $q->param('passaggio'),
-                Compagnia => $q->param('CompagniaP'.$i),
-                Puntualita => $q->param('PuntualitaP'.$i)
-            );
-            if($q->param('commentoP'.$i) ne "Commento facoltativo" && $q->param('commentoP'.$i) ne "") {
+             my %Feedback;
+            $Feedback{IDMitt} = $session->param('username');
+            $Feedback{IDDest} = $q->param('P'.$i);
+            $Feedback{Passaggio} = $q->param('passaggio');
+            $Feedback{Compagnia} = $q->param('_CompagniaP'.$i);
+            $Feedback{Puntualita} = $q->param('_PuntualitaP'.$i);
+    
+            if($q->param('_commentoP'.$i) ne "Commento facoltativo" && $q->param('_commentoP'.$i) ne "") {
                 my $comm = encode_entities($q->param('commentoP'.$i));
                 $Feedback{Commento} = $comm;
             }
-            my $punt_medio=($q->param('CompagniaP'.$i) + $q->param('PuntualitaP'.$i))/2;
+            my $punt_medio=($q->param('_CompagniaP'.$i) + $q->param('_PuntualitaP'.$i))/2;
             $Feedback{PunteggioMedio}=$punt_medio;
 
             if(data_registration::inserisci_feedback(\%Feedback)) {
