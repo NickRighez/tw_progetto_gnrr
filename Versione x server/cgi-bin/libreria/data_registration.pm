@@ -431,7 +431,6 @@ sub inserisci_feedback {
     my %aux=serializzazione_apertura();
     my $doc = $aux{'doc'};
     my $fileHandle = $aux{'filehandle'};
-    print "//Passaggio[IDViaggio=\"$array_argom{'Passaggio'}\" and Conducente=\"$array_argom{'IDDest'}\"]","ccc<br>";
     if(utility::verifica_presenza("//Passaggio[IDViaggio=\"$array_argom{'Passaggio'}\" and Conducente=\"$array_argom{'IDDest'}\"]",$doc)) {
 
         $output = $output."   <ValutazioneConduc>
