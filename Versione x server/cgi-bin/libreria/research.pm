@@ -446,6 +446,7 @@ sub query_feedback_da_rilasciare_viaggio
     return @feedback_list;
 }
 
+
 sub utenti_prenotati {
 my $viaggio = shift @_;
 my $doc=data_registration::get_xml_doc();
@@ -453,10 +454,11 @@ my $userNodes = $doc->findnodes("//SetPassaggi/Passaggio[IDViaggio=\"$viaggio\"]
 my @userList = ();
 my $num = $userNodes->size();
 for(my $i =1;$i<=$num;$i++){
-  my $nome = $userNodes->get_node($i)->textContent;
-  my $m = grep { $nome } @userList;
-  if(!$m){
-    push @userList, $nome;
+ 	my $nome = $userNodes->get_node($i)->textContent;
+	chomp $nome;
+ 	#my $m = grep { $nome eq $_ } @userList;
+  	if( !grep { $nome eq $_ } @userList){
+    	push @userList, $nome;
   }
 }
 return @userList;

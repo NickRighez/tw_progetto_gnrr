@@ -25,16 +25,16 @@
           <xsl:otherwise>
             <xsl:value-of select="DescrizionePers" />
           </xsl:otherwise>
-          </xsl:choose> 
+          </xsl:choose>
         </p><xsl:text>&#x0A;</xsl:text>
       </div>
         <xsl:choose>
           <xsl:when test="count(Profilo/Patente)=0">
-           
+
               <p>L&#39;utente non ha impostato informazioni sulla patente.</p><xsl:text>&#x0A;</xsl:text>
               <p>L&#39;utente non ha impostato informazioni sull&#39;auto.</p><xsl:text>&#x0A;</xsl:text>
               <p>L&#39;utente non ha impostato informazioni sulle proprie preferenze.</p><xsl:text>&#x0A;</xsl:text>
-            
+
           </xsl:when>
           <xsl:otherwise>
             <p>Anno di rilascio della patente: <xsl:value-of select="Profilo/Patente"/></p><xsl:text>&#x0A;</xsl:text>
@@ -87,11 +87,11 @@
       <div class="contenitore">
         <p>Passaggi offerti: <xsl:value-of select="Profilo/NumPassaggiOff"/> </p><xsl:text>&#x0A;</xsl:text>
         <p>Passaggi partecipati: <xsl:value-of select="Profilo/NumPassaggiPart"/> </p><xsl:text>&#x0A;</xsl:text>
-        <p>Punteggio medio: <xsl:value-of select="Profilo/Valutazione/PunteggioMedio"/> su <xsl:value-of select="Profilo/NumFeedbRicevuti"/> feedback ricevuti</p><xsl:text>&#x0A;</xsl:text>
-        <p>Compagnia: <xsl:value-of select="Profilo/Valutazione/Compagnia"/> </p><xsl:text>&#x0A;</xsl:text>
-        <p>Puntualità: <xsl:value-of select="Profilo/Valutazione/Puntualita"/> </p><xsl:text>&#x0A;</xsl:text>
-        <p>Pulizia: <xsl:value-of select="Profilo/Valutazione/Pulizia"/> </p><xsl:text>&#x0A;</xsl:text>
-        <p>Guida: <xsl:value-of select="Profilo/Valutazione/Guida"/> </p><xsl:text>&#x0A;</xsl:text>
+        <p>Punteggio medio: <xsl:value-of select="format-number(Profilo/Valutazione/PunteggioMedio,'0.0')"/> su <xsl:value-of select="Profilo/NumFeedbRicevuti"/> feedback ricevuti</p><xsl:text>&#x0A;</xsl:text>
+        <p>Compagnia: <xsl:value-of select="format-number(Profilo/Valutazione/Compagnia,'0.0')"/> </p><xsl:text>&#x0A;</xsl:text>
+        <p>Puntualità: <xsl:value-of select="format-number(Profilo/Valutazione/Puntualita,'0.0')"/> </p><xsl:text>&#x0A;</xsl:text>
+        <p>Pulizia: <xsl:value-of select="format-number(Profilo/Valutazione/Pulizia,'0.0')"/> </p><xsl:text>&#x0A;</xsl:text>
+        <p>Guida: <xsl:value-of select="format-number(Profilo/Valutazione/Guida,'0.0')"/> </p><xsl:text>&#x0A;</xsl:text>
       </div>
     </xsl:for-each>
     <div id="commenti"> <!--serve il div?-->

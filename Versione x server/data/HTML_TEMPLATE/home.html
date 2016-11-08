@@ -50,15 +50,15 @@
       <form action="ricevitore_ricerca.cgi" method="post">
         <fieldset><legend>Ricerca di un passaggio</legend>
           <label for="partenza">Partenza</label><br />
-          <input type="text" id="partenza" name="partenza" tabindex="[% INDEX %]" onblur="valida_nome('partenza','Luogo di partenza')" value="[%PARTENZA%]"></input><br />
+          <input type="text" id="partenza" name="partenza" tabindex="[% INDEX %]"value="[%PARTENZA%]"></input><br />
           [% INDEX = INDEX+1 %]
           <p id="partenza_err" class="errore">[%PARTENZA_ERR%]</p>
           <label for="arrivo">Arrivo</label><br />
-          <input type="text" id="arrivo" name="arrivo" tabindex="[% INDEX %]" onblur="valida_nome('arrivo','Luogo di arrivo')" value="[%ARRIVO%]"></input><br />
+          <input type="text" id="arrivo" name="arrivo" tabindex="[% INDEX %]" value="[%ARRIVO%]"></input><br />
           [% INDEX = INDEX+1 %]
           <p id="arrivo_err" class="errore">[%ARRIVO_ERR%]</p>
           <label for="data">Data</label><br />
-          <input type="text" id="data" name="data" tabindex="[% INDEX %]" onblur="valida_data('data')" value="[%DATA%]"></input><br />
+          <input type="text" id="data" name="data" tabindex="[% INDEX %]" value="[%DATA%]"></input><br />
           [% INDEX = INDEX+1 %]
           <p id="data_err" class="errore">[%DATA_ERR%]</p>
           <input type="submit" value="Cerca" tabindex="[% INDEX %]"></input>
