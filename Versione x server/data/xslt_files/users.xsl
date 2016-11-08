@@ -101,8 +101,8 @@
       </xsl:if>
       <xsl:for-each select="ts:TravelShare/SetFeedback/Feedback[@IDDest='[% UTENTE %]']/Commento" >
         <div class="commentoUtente">
-          <p class="intestazioneMsg"><span class="mittenteMsg"><xsl:value-of select="@IDMitt"/></span></p><xsl:text>&#x0A;</xsl:text>
-          <p><xsl:value-of select="Commento" /></p><xsl:text>&#x0A;</xsl:text>
+          <p class="intestazioneMsg"><span class="mittenteMsg"><xsl:value-of select="../@IDMitt"/></span></p><xsl:text>&#x0A;</xsl:text>
+          <p><xsl:value-of select="." /></p><xsl:text>&#x0A;</xsl:text>
         </div>
       </xsl:for-each>
     </div>
