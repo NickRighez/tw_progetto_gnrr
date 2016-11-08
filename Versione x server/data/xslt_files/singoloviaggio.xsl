@@ -56,7 +56,7 @@
     <p>Anno di nascita: <xsl:value-of select="/ts:TravelShare/SetUtenti/Utente[Username=$ute]/AnnoNascita" /></p><xsl:text>&#x0A;</xsl:text>
     <p>Auto: <xsl:value-of select="/ts:TravelShare/SetUtenti/Utente[Username=$ute]/Profilo/Auto"/></p><xsl:text>&#x0A;</xsl:text>
     <!--  <p>Anno di rilascio della patente: <xsl:value-of select="/ts:TravelShare/SetUtenti/Utente[Username=$ute]/Profilo/Patente"/></p><xsl:text>&#x0A;</xsl:text> -->
-    <p>Punteggio medio: <xsl:value-of select="/ts:TravelShare/SetUtenti/Utente[Username=$ute]/Profilo/Valutazione/PunteggioMedio"/></p><xsl:text>&#x0A;</xsl:text>
+    <p>Punteggio medio: <xsl:value-of select="format-number(/ts:TravelShare/SetUtenti/Utente[Username=$ute]/Profilo/Valutazione/PunteggioMedio,'0.0')"/></p><xsl:text>&#x0A;</xsl:text>
     <p>Preferenze:</p><xsl:text>&#x0A;</xsl:text>
     <div class="preferenzeGroup">
       <xsl:choose>

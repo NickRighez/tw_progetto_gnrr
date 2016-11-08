@@ -271,7 +271,7 @@ caricamento_viaggi: function() {
       }
 
       // Test con modernizr
-      if (Modernizr.csstransforms) {
+      if (Modernizr.csstransforms && Modernizr.opacity) {
         document.getElementById("chiacchiere0").className = "radioNascosto";
         document.getElementById("chiacchiere1").className = "radioNascosto";
         document.getElementById("chiacchiere2").className = "radioNascosto";
