@@ -2,7 +2,7 @@
 
 /** CSS RESET **/
 
-html, body, div, span, h1, h2, h3, h4, h5, h6, p, a, em, center,
+html, body, div, span, h1, h2, h3, h4, h5, h6, p, a, center,
 dl, dt, dd, ol, ul, li, fieldset, form, label, legend {
 	margin: 0;
 	padding: 0;
@@ -43,6 +43,10 @@ h3{
 
 a:link{
 	color : #0088cc;
+}
+
+p{
+	line-height : 130%;
 }
 
 .linkSottoH{
@@ -152,13 +156,18 @@ fieldset>h2{
 .div_errore{ /**** NEW *****/
 	border : 1px solid red;
 	padding : 2% 5%;
-	margin-top: 10px; /* da controllare */
+	margin-top: 10px; 
  	margin-bottom : 10px;
 	text-align: center;
 }
 
 legend { /* Serve per validare */
     display: none;
+}
+
+.controlliDatepicker{
+	text-align : center;
+	font-size : 0.9em;
 }
 
 /***  Pagina MESSAGGI  ***/
@@ -193,7 +202,7 @@ legend { /* Serve per validare */
 
 .ricevuti{
 	margin-right : 15%;
-	border-radius : 10px 10px 10px 10px; /*in altro sx, in alto dx, in basso dx, in basso sx*/
+	border-radius : 10px 10px 10px 10px;
 }
 
 .inviati{
@@ -273,7 +282,7 @@ legend { /* Serve per validare */
 
 /*** MODIFICA PROFILO ***/
 
-.radioNascosto{ /* Serve per JS; Diventa display none se il transform non è compatibile */
+.radioNascosto{ 
 	display : none; 
 }
 
@@ -285,13 +294,13 @@ legend { /* Serve per validare */
 	border : 1px solid;
 }
 .marginRadioNascosto{
-	margin : 3% 5% 2% 5%; /* versione con radio nascosti */
+	margin : 3% 5% 2% 5%; 
 }
 .marginRadioVisibile{
-	margin : 3% 4% 2% 1%; /* versione con radio visibili */
+	margin : 3% 4% 2% 1%; 
 }
 
-input[type=radio]:checked + label>img { /* provvisorio */
+input[type=radio]:checked + label>img {
   	transform:scale(1.2,1.2);
 	border: 1px solid #0088cc;	
 }
