@@ -419,7 +419,9 @@ sub inserisci_feedback {
     my %array_argom = %$array_argom_ref;
     # CHIAVI : IDMitt, IDDest, Passaggio, Commento, PunteggioMedio, Compagnia, Puntualita. Nel
     #             caso il destinatario sia il conducente del viaggio, anche le chiavi Pulizia e Guida
-    
+    foreach my $el (%array_argom){
+        utf8::encode($el);
+    }
    
     my $output = "<Feedback IDMitt=\"$array_argom{'IDMitt'}\" IDDest=\"$array_argom{'IDDest'}\">
                               <Passaggio>$array_argom{'Passaggio'}</Passaggio>";
