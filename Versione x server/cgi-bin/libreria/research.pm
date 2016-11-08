@@ -13,8 +13,6 @@ use Cwd;
 use libreria::date_time;
 
 use strict;
-use warnings;
-use diagnostics;
 use utf8;
 
 #############################################
@@ -31,7 +29,7 @@ sub generic_xslt_query
     my %vars= %$lista_filtri;
     my $xml_parser = XML::LibXML->new( );
     my $xslt_parser = XML::LibXSLT->new( );
-    my $template_parser = Template->new({RELATIVE => 1,});
+    my $template_parser = Template->new({RELATIVE => 1,ENCODING => 'utf8'});
     my $foglio_di_stile_con_parametri = '';
     $template_parser->process($style_file,\%vars,\$foglio_di_stile_con_parametri);#or die $template_parser->error();
     (length $foglio_di_stile_con_parametri) or die("ERRORE 1: foglio xslt vuoto\n".$style_file . '    '. getcwd);

@@ -6,7 +6,8 @@ use strict;
 use warnings;
 use diagnostics;
 #use Switch;
-use CGI;
+use CGI qw(-utf8);
+use utf8;
 
 
 use XML::LibXML;

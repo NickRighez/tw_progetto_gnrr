@@ -2,7 +2,7 @@
 use strict;
 use warnings;
 use diagnostics;
-use CGI;
+use CGI qw(-utf8);
 use CGI::Session;
 use CGI::Carp qw(fatalsToBrowser);
 use Template;
@@ -10,6 +10,8 @@ use libreria::sessione;
 use libreria::research;
 use libreria::data_registration;
 use libreria::date_time;
+binmode(STDOUT, ":utf8");
+use utf8;
 
 my $q = new CGI;
 my @s = sessione::creaSessione();
@@ -61,7 +63,7 @@ else {
     }
 
     my $file = "../data/HTML_TEMPLATE/risultati.html";
-    my $template_parser = Template->new;
+    my $template_parser = Template->new({ ENCODING => 'utf8' });
     open my $fh, '<:encoding(UTF-8)', $file;
     my $foglio = '';
     $template_parser->process($fh,\%hash_keys,\$foglio);

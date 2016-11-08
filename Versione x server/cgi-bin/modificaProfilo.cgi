@@ -2,15 +2,16 @@
 use strict;
 use warnings;
 use diagnostics;
-use CGI;
+use CGI qw(-utf8);
 use CGI::Session;
 use CGI::Carp qw(fatalsToBrowser);
 use Template;
-#use lib "../libreria";
 use libreria::sessione;
-#use lib "../libreria";
 use libreria::data_registration;
 use libreria::research;
+binmode(STDOUT, ":utf8");
+use utf8;
+
 
 my $cgi = new CGI;
 my @s = sessione::creaSessione();
@@ -82,11 +83,11 @@ else {
 
     }
     $hash_keys{NUM_NOTIFICHE} = research::conta_notifiche($username, $doc);
-    my $template_parser = Template->new;
+    my $template_parser = Template->new({ ENCODING => 'utf8' });
     my $foglio = '';
     open my $fh, '<:encoding(UTF-8)', $file;
     $template_parser->process($fh,\%hash_keys,\$foglio);
-    print $cgi->header();
+print "Content-Type: text/html\n\n\n";
     print $foglio;
 
 

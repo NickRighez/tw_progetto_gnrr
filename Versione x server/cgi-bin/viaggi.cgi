@@ -3,14 +3,15 @@
 use strict;
 use warnings;
 use diagnostics;
-use CGI;
+use CGI qw(-utf8);
 use CGI::Carp qw(fatalsToBrowser);
-#use lib "../libreria";
 use libreria::research;
 use libreria::data_registration;
 use CGI::Session;
-#use lib "../libreria";
 use libreria::sessione;
+binmode(STDOUT, ":utf8");
+use utf8;
+
 
 my @s = sessione::creaSessione();
 my $session = $s[0];
@@ -53,7 +54,7 @@ else{
         NUM_NOTIFICHE => research::conta_notifiche($session->param('username'), $doc),
         INDEX => 9
         );
-    my $template_parser = Template->new;
+    my $template_parser = Template->new({ ENCODING => 'utf8' });
     open my $fh, '<:encoding(UTF-8)', $file;
     my $foglio = '';
     $template_parser->process($fh,\%hash_keys,\$foglio);

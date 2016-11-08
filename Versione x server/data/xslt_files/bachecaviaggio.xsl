@@ -4,7 +4,7 @@
     <h2>Bacheca dei messaggi</h2>
     <xsl:if test="count(ts:TravelShare/SetPassaggi/Passaggio[IDViaggio='[% VIAGGIO %]']/Bacheca/ConversazioneBacheca)=0">
       <div class="contenitore">
-        <p>Non ci sono messaggi per questo viaggio</p>
+        <p>Non ci sono messaggi per questo viaggio.</p>
       </div>
     </xsl:if>
     <xsl:for-each select="ts:TravelShare/SetPassaggi/Passaggio[IDViaggio='[% VIAGGIO %]']/Bacheca/ConversazioneBacheca">

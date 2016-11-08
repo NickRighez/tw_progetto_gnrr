@@ -1,18 +1,18 @@
 #! /usr/bin/perl -w
 
+use utf8;
 use strict;
-use warnings;
-use diagnostics;
-use CGI;
-use CGI::Carp qw(fatalsToBrowser);
-#use lib "../libreria";
+use CGI qw(-utf8);
+#use CGI::Carp qw(fatalsToBrowser); # manda un header non utf8
 use libreria::research;
 use libreria::data_registration;
 use CGI::Session;
-#use lib "../libreria";
 use libreria::sessione;
+binmode(STDOUT, ":utf8");
 
-my @s = sessione::creaSessione();
+
+
+my @s = sessione::creaSessione(); 
 my $session = $s[0];
 my $q=CGI->new;
 my $doc=data_registration::get_xml_doc();
@@ -54,8 +54,10 @@ else {
     $hash_keys{NOME_UTENTE}=$session->param('username');
     $hash_keys{NOME_PROFILO} = $ute;
     $hash_keys{CONTENUTO} = research::query_users(\%Ute);
-    print $q->header();
-    my $template_parser = Template->new;
+
+print "Content-Type: text/html\n\n\n";
+
+    my $template_parser = Template->new({ ENCODING => 'utf8' });
     open my $fh, '<:encoding(UTF-8)', $file;
     my $foglio = '';
     $template_parser->process($fh,\%hash_keys,\$foglio);

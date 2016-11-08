@@ -3,7 +3,7 @@
 use strict;
 use warnings;
 use diagnostics;
-use CGI;
+use CGI qw(-utf8);
 use CGI::Session;
 use CGI::Carp qw(fatalsToBrowser);
 #use lib "../libreria";

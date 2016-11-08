@@ -3,13 +3,10 @@
 
 use strict;
 use warnings;
-use diagnostics;
-use CGI;
+use CGI qw(-utf8);
 use CGI::Session;
 use CGI::Carp qw(fatalsToBrowser);
-#use lib "../libreria";
 use libreria::data_registration;
-#use lib "../libreria";
 use libreria::sessione;
 use HTML::Entities;
 my $q=new CGI;

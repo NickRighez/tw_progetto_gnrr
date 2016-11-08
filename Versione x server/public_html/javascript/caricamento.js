@@ -52,6 +52,21 @@ var funzioniDiCaricamento = {
       console.log("Funzioni Dom necessarie non sono supportate.");
     }
   },
+  caricamento_textarea: function() {
+    if (document.getElementById != "undefined") {
+      var x = document.getElementsByTagName("textarea");
+      var elem = x[0];
+      elem.onfocus = function() {
+        var cont = document.getElementsByTagName("textarea")[0].value;
+        console.log(elem);
+        if (cont === "Inserisci un messaggio per il conducente.") {
+          elem.value = '';
+        }
+      };
+    } else {
+      console.log("Funzioni Dom necessarie non sono supportate.");
+    }
+  },
 
   caricamento_iscrizione: function() {
     if (document.getElementById != "undefined") {
@@ -98,13 +113,13 @@ var funzioniDiCaricamento = {
     }
   },
 
-caricamento_viaggi: function() {
-  $(".viaggio").css("cursor", "pointer");
-  $(".viaggio").click(function() {
-    window.location = $(this).find("a").attr("href");
-    return false;
-  });
-},
+  caricamento_viaggi: function() {
+    $(".viaggio").css("cursor", "pointer");
+    $(".viaggio").click(function() {
+      window.location = $(this).find("a").attr("href");
+      return false;
+    });
+  },
 
   caricamento_offerta: function() {
     if (document.getElementById != "undefined") {

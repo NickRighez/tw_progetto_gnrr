@@ -1,16 +1,18 @@
 #! /usr/bin/perl -w
-print "Content-type: text/html\n\n\n";
 use strict;
 use warnings;
 use diagnostics;
-use CGI;
+use CGI qw(-utf8);
 use CGI::Session;
 use CGI::Carp qw(fatalsToBrowser);
 use Template;
-#use lib "../libreria";
 use libreria::sessione;
 use libreria::data_registration;
 use libreria::research;
+binmode(STDOUT, ":utf8");
+use utf8;
+print "Content-Type: text/html\n\n\n";
+
 
 my $cgi = new CGI;
 my @s = sessione::creaSessione();
@@ -49,7 +51,7 @@ if(defined($session->param('old_input'))) {
 }
 
 my $file = "../data/HTML_TEMPLATE/home.html";
-my $template_parser = Template->new;
+my $template_parser = Template->new({ ENCODING => 'utf8' });
 open my $fh, '<:encoding(UTF-8)', $file;
 my $foglio = '';
 $template_parser->process($fh,\%hash_keys,\$foglio);

@@ -3,7 +3,7 @@
 use strict;
 use warnings;
 use diagnostics;
-use CGI ;
+use CGI qw(-utf8);
 use CGI::Session qw/-ip-match/;
 #use CGI::Cookie;
 use CGI::Carp qw(fatalsToBrowser);

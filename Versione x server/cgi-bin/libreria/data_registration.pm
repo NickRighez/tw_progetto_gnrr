@@ -510,7 +510,6 @@ sub inserisci_info_patente {
 }
 
 
-
 sub elimina_notifica {
     my $user = shift @_;
     my $tag = shift @_;  # tag = NuovoMessaggio, NuovoMessaggioBacheca, FeedDaRilasciare, RichiestaPrenotaz, AccettazionePrenotaz
