@@ -428,9 +428,7 @@ sub inserisci_feedback {
         $output = $output." <Commento>$array_argom{'Commento'}</Commento> \n";
     }
                              
-    my %aux=serializzazione_apertura();
-    my $doc = $aux{'doc'};
-    my $fileHandle = $aux{'filehandle'};
+    my $doc = get_xml_doc();
     if(utility::verifica_presenza("//Passaggio[IDViaggio=\"$array_argom{'Passaggio'}\" and Conducente=\"$array_argom{'IDDest'}\"]",$doc)) {
 
         $output = $output."   <ValutazioneConduc>
@@ -448,7 +446,6 @@ sub inserisci_feedback {
                                 <Puntualita>$array_argom{'Puntualita'}</Puntualita>
                               </ValutazionePasseg> \n";
     }
-    serializzazione_chiusura($fileHandle,$doc);
     $output = $output."</Feedback> \n";
     my $fragm = $parser->parse_balanced_chunk($output);
     return serializzazione_inserimento($fragm,"//SetFeedback/Feedback[\@IDMitt=\"$array_argom{'IDMitt'}\" and \@IDDest=\"$array_argom{'IDDest'}\" and Passaggio=\"$array_argom{'Passaggio'}\"]","//SetFeedback");
