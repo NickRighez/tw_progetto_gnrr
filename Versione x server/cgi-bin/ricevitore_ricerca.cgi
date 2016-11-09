@@ -31,7 +31,7 @@ else{
         $problems{PARTENZA_ERR} = 'Luogo di partenza mancante';
         $problems{empty} = 'no';
     }
-    elsif (!($q->param('partenza')=~m/^(\x{0027}|\x{002C}|\x{002D}|\x{002F}|[\x{0030}-\x{0039}]|[\x{0041}-\x{005A}]|[\x{0061}-\x{007A}]|[\x{00C0}-\x{024F}]|\s)+$/)) {
+    elsif (!($q->param('partenza')=~m/^(\x{0027}|\x{002C}|\x{002D}|\x{002F}|[\x{0041}-\x{005A}]|[\x{0061}-\x{007A}]|[\x{00C0}-\x{024F}]|\s)+$/)) {
         $problems{PARTENZA_ERR} = 'Luogo di partenza non valido';
         $problems{empty} = 'no';
     }
@@ -43,7 +43,7 @@ else{
         $problems{ARRIVO_ERR} = 'Luogo di partenza mancante';
         $problems{empty} = 'no';
     }
-    elsif (!($q->param('arrivo')=~m/^(\x{0027}|\x{002C}|\x{002D}|\x{002F}|[\x{0030}-\x{0039}]|[\x{0041}-\x{005A}]|[\x{0061}-\x{007A}]|[\x{00C0}-\x{024F}]|\s)+$/)) {
+    elsif (!($q->param('arrivo')=~m/^(\x{0027}|\x{002C}|\x{002D}|\x{002F}|[\x{0041}-\x{005A}]|[\x{0061}-\x{007A}]|[\x{00C0}-\x{024F}]|\s)+$/)) {
         $problems{ARRIVO_ERR} = 'Luogo di arrivo non valido';
         $problems{empty} = 'no';
     }

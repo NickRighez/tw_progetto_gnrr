@@ -17,8 +17,8 @@ my $q = new CGI;
 my @s = sessione::creaSessione();
 my $session = $s[0];
 
-if(!($q->param('partenza')=~m/^(\x{0027}|\x{002C}|\x{002D}|\x{002F}|[\x{0030}-\x{0039}]|[\x{0041}-\x{005A}]|[\x{0061}-\x{007A}]|[\x{00C0}-\x{024F}]|\s)+$/) ||
-        !($q->param('arrivo')=~m/^(\x{0027}|\x{002C}|\x{002D}|\x{002F}|[\x{0030}-\x{0039}]|[\x{0041}-\x{005A}]|[\x{0061}-\x{007A}]|[\x{00C0}-\x{024F}]|\s)+$/) ||
+if(!($q->param('partenza')=~m/^(\x{0027}|\x{002C}|\x{002D}|\x{002F}|[\x{0041}-\x{005A}]|[\x{0061}-\x{007A}]|[\x{00C0}-\x{024F}]|\s)+$/) ||
+        !($q->param('arrivo')=~m/^(\x{0027}|\x{002C}|\x{002D}|\x{002F}|[\x{0041}-\x{005A}]|[\x{0061}-\x{007A}]|[\x{00C0}-\x{024F}]|\s)+$/) ||
         !($q->param('data')=~m/^[0-9]{4}-[0-9]{1,2}-[0-9]{1,2}$/) ){
     my %problems=(
       DESCRIZIONE_ERRORE => "I valori inseriti per la ricerca non sono validi."
