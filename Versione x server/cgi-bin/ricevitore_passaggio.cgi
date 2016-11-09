@@ -242,8 +242,7 @@ else {
 
         if($q->param('descrizioneViaggio') ne "") {
             my $descr = $q->param('descrizioneViaggio');
-            $descr =encode_entities($descr,'>');
-            $descr = encode_entities($descr, '<');
+            $descr =encode_entities($descr,'<>&"\'');
             $Passaggio{Dettagli}=$descr;
         }
         $Passaggio{PrezzoTot} = $q->param('prezzo');

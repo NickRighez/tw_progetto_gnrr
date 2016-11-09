@@ -7,9 +7,7 @@ use diagnostics;
 use CGI qw(-utf8);
 use CGI::Session;
 use CGI::Carp qw(fatalsToBrowser);
-#use lib "../libreria";
 use libreria::data_registration;
-#use lib "libreria";
 use libreria::sessione;
 use HTML::Entities;
 
@@ -122,7 +120,7 @@ else {
 
     my $descr = $q->param('descrizioneForm');
     $descr =~ s/^\s*(.*?)\s*$/$1/;
-    $descr =encode_entities($descr,'<');
+    $descr =encode_entities($descr,'<>&"\'');
     $old_input{DESCRIZIONEFORM}=$descr;
     $Modifica{DescrizionePers}=$descr;
 

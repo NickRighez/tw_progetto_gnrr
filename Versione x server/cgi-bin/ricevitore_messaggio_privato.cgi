@@ -32,7 +32,7 @@ if($q->request_method() eq "POST") {
     my $o = $hour.":".$min.":".$sec;
 
     my $mess = $q->param('messaggio');
-    $mess =encode_entities($mess);
+    $mess =encode_entities($mess,'<>&"\'');
 
 
     my %Messaggio=(
