@@ -69,7 +69,8 @@
         <xsl:attribute name="href">singola_conversaz.cgi?utente=<xsl:value-of select="$utente" /></xsl:attribute>
         <xsl:attribute name="tabindex">[% stag;  ' INDEX '; etag; %]</xsl:attribute>
         [% stag; ' INDEX = INDEX+1 '; etag;  %]
-        Vai alla conversazione <xsl:text disable-output-escaping="yes">&amp;raquo;</xsl:text>
+        Vai alla conversazione <span class="dettagliLink"> con <xsl:value-of select="$utente" /> </span>
+        <xsl:text disable-output-escaping="yes">&amp;raquo;</xsl:text>
       </a>
     </p><xsl:text>&#x0A;</xsl:text>
   </xsl:template>
@@ -100,7 +101,8 @@
         <xsl:attribute name="href">singola_conversaz.cgi?utente=<xsl:value-of select="$utente" /></xsl:attribute>
         <xsl:attribute name="tabindex">[% stag;  ' INDEX '; etag; %]</xsl:attribute>
         [% stag; ' INDEX = INDEX+1 '; etag;  %]
-        Vai alla conversazione <xsl:text disable-output-escaping="yes">&amp;raquo; </xsl:text>
+        Vai alla conversazione <span class="dettagliLink"> con <xsl:value-of select="$utente" /> </span>
+        <xsl:text disable-output-escaping="yes">&amp;raquo; </xsl:text>
       </a>
     </p><xsl:text>&#x0A;</xsl:text>
   </xsl:template>
