@@ -138,7 +138,7 @@ sub query_ricerca
 				    my ($sec,$min,$hour,$mday,$mon,$year,$wday,$yday,$isdst) = localtime();
                                     my $eta=$year + 1900 - ($doc->findnodes("//SetUtenti/Utente[Username='$conduc']/AnnoNascita")->get_node(1)->textContent() ) ;
                                     push @viaggi_list, {
-                                                  href => "singolo_passaggio.cgi?passaggio=$idv&part=$j&&arr=$k", partenza => ucfirst $part, arrivo => ucfirst $arr,
+                                                  href => "singolo_passaggio.cgi?passaggio=$idv&part=$j&arr=$k", partenza => ucfirst $part, arrivo => ucfirst $arr,
                                                   ora => date_time::formatta_ora($ora), posti => $posti, prezzo => $prezzo, conducente => $conduc,
                                                   eta => $eta, punteggio => $punteggio, auto => $auto };
 
