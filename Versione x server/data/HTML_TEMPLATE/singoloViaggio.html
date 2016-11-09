@@ -89,7 +89,8 @@
         [% IF LISTA_UTENTI.size %]
           <ul id="utentiLista">
           [% FOREACH elem IN LISTA_UTENTI %]
-            <li><a href="profilo.cgi?utente=[% elem %]" tabindex="8">[% elem %]</a></li>
+            <li><a href="profilo.cgi?utente=[% elem %]" tabindex="[% INDEX %]">[% elem %]</a></li>
+		  [% INDEX = INDEX+1 %]
           [% END %]
           </ul>
         [% ELSE%]
