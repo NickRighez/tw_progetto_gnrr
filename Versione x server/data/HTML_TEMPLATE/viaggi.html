@@ -43,7 +43,11 @@
         <a href="[% viaggio.href %]" class="linkMobileViaggi" tabindex="[% INDEX %]"><span class="partenza">[% viaggio.partenza %]</span> &#8594; <span class="arrivo">[% viaggio.arrivo %]</span></a>
         [% INDEX = INDEX+1 %]
         <p>Data: [% viaggio.data %]</p>
-        <p>Ora: [% viaggio.ora %] <a href="[% viaggio.href %]" class="linkDesktop destra" tabindex="[% INDEX %]">Vai al viaggio &raquo;</a></p>
+        <p>Ora: [% viaggio.ora %] 
+          <a href="[% viaggio.href %]" class="linkDesktop destra" tabindex="[% INDEX %]">Vai al viaggio
+           <span class="dettagliLink"> tra [% viaggio.partenza %] e [% viaggio.arrivo %]</span>
+          &raquo;</a>
+        </p>
         [% INDEX = INDEX+1 %]
         <p>Posti liberi: [% viaggio.posti %]</p>
         <p>Prezzo: [% viaggio.prezzo %]€</p>

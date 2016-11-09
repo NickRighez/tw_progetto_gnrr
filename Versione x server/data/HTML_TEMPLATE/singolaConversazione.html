@@ -13,7 +13,7 @@
     <link href="../print.css" rel="stylesheet" type="text/css" media="print" />
     <link rel="icon" href="../Immagini/TS_icon.png" type="image/x-icon" />
     <link rel="shortcut icon" href="../Immagini/TS_icon.png" type="image/x-icon" />
- </head>
+  </head>
   <body>
     <div id="header">
       <a href="home.cgi" tabindex="1"><img src="../Immagini/banner.png" id="banner" alt="Banner Travel Share - Link diretto alla Home" title="Banner Travel Share - Link diretto alla Home" /></a>
@@ -27,9 +27,11 @@
     <div id="contenuto">
       [% CONTENUTO %]
       <form action="ricevitore_messaggio_privato.cgi" method="post">
-        <input type="hidden" name="destinatario" value="[% CONVERSATORE %]" />
-        <textarea rows="0" cols="0" name="messaggio" tabindex="11" title="Inserisci un messaggio"></textarea>
-        <div><input type="submit" value="Invia" tabindex="12" > </input> </div>
+        <div>
+          <input type="hidden" name="destinatario" value="[% CONVERSATORE %]" />
+          <textarea rows="0" cols="0" name="messaggio" tabindex="11" title="Inserisci un messaggio"></textarea>
+          <input type="submit" value="Invia" tabindex="12" > </input>
+        </div>
       </form>
     </div>
 
