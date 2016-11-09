@@ -39,7 +39,7 @@ else {
         $problems{PARTENZA_ERR} = "Luogo di partenza mancante";
         $problems{empty} = 'no';
     }
-    elsif (!($q->param('partenza')=~m/^(\x{0027}|\x{002C}|\x{002D}|\x{002F}|[\x{0030}-\x{0039}]|[\x{0041}-\x{005A}]|[\x{0061}-\x{007A}]|[\x{00C0}-\x{024F}]|\s)+$/)) {
+    elsif (!($q->param('partenza')=~m/^(\x{0027}|\x{002C}|\x{002D}|\x{002F}|[\x{0041}-\x{005A}]|[\x{0061}-\x{007A}]|[\x{00C0}-\x{024F}]|\s)+$/)) {
         $problems{PARTENZA_ERR} = "Luogo di partenza non valido, inserire lettere o i caratteri: ',' '-' '.'";
         $problems{empty} = 'no';
     }
@@ -52,7 +52,7 @@ else {
         $problems{ARRIVO_ERR} = "Luogo di arrivo mancante";
         $problems{empty} = 'no';
     }
-    elsif (!($q->param('arrivo')=~m/^(\x{0027}|\x{002C}|\x{002D}|\x{002F}|[\x{0030}-\x{0039}]|[\x{0041}-\x{005A}]|[\x{0061}-\x{007A}]|[\x{00C0}-\x{024F}]|\s)+$/)) {
+    elsif (!($q->param('arrivo')=~m/^(\x{0027}|\x{002C}|\x{002D}|\x{002F}|[\x{0041}-\x{005A}]|[\x{0061}-\x{007A}]|[\x{00C0}-\x{024F}]|\s)+$/)) {
         $problems{ARRIVO_ERR} = "Luogo di arrivo non valido, inserire lettere o i caratteri: ',' '-' '.'";
         $problems{empty} = 'no';
     }
@@ -60,7 +60,7 @@ else {
         $old_input{ARRIVO} = $q->param('arrivo');
     }
 
-    if($q->param('tappa1') ne "" and !($q->param('tappa1')=~m/^(\x{0027}|\x{002C}|\x{002D}|\x{002F}|[\x{0030}-\x{0039}]|[\x{0041}-\x{005A}]|[\x{0061}-\x{007A}]|[\x{00C0}-\x{024F}]|\s)+$/)) {
+    if($q->param('tappa1') ne "" and !($q->param('tappa1')=~m/^(\x{0027}|\x{002C}|\x{002D}|\x{002F}|[\x{0041}-\x{005A}]|[\x{0061}-\x{007A}]|[\x{00C0}-\x{024F}]|\s)+$/)) {
         $problems{TAPPA1_ERR} = "Luogo della tappa 1 non valido, inserire lettere o i caratteri: ',' '-' '.'";
         $problems{empty} = 'no';
     }
@@ -68,7 +68,7 @@ else {
         $old_input{TAPPA1} = $q->param('tappa1');
     }
 
-    if($q->param('tappa2') ne "" and !($q->param('tappa2')=~m/^(\x{0027}|\x{002C}|\x{002D}|\x{002F}|[\x{0030}-\x{0039}]|[\x{0041}-\x{005A}]|[\x{0061}-\x{007A}]|[\x{00C0}-\x{024F}]|\s)+$/)) {
+    if($q->param('tappa2') ne "" and !($q->param('tappa2')=~m/^(\x{0027}|\x{002C}|\x{002D}|\x{002F}|[\x{0041}-\x{005A}]|[\x{0061}-\x{007A}]|[\x{00C0}-\x{024F}]|\s)+$/)) {
         $problems{TAPPA2_ERR} = "Luogo della tappa 2 non valido, inserire lettere o i caratteri: ',' '-' '.'";
         $problems{empty} = 'no';
     }
@@ -76,7 +76,7 @@ else {
         $old_input{TAPPA2} = $q->param('tappa2');
     }
 
-    if($q->param('tappa3') ne "" and !($q->param('tappa3')=~m/^(\x{0027}|\x{002C}|\x{002D}|\x{002F}|[\x{0030}-\x{0039}]|[\x{0041}-\x{005A}]|[\x{0061}-\x{007A}]|[\x{00C0}-\x{024F}]|\s)+$/)) {
+    if($q->param('tappa3') ne "" and !($q->param('tappa3')=~m/^(\x{0027}|\x{002C}|\x{002D}|\x{002F}|[\x{0041}-\x{005A}]|[\x{0061}-\x{007A}]|[\x{00C0}-\x{024F}]|\s)+$/)) {
         $problems{TAPPA3_ERR} = "Luogo della tappa 3 non valido, inserire lettere o i caratteri: ',' '-' '.'";
         $problems{empty} = 'no';
     }
@@ -132,7 +132,7 @@ else {
         $problems{empty} = 'no';
     }
     elsif (!($q->param('oraP')=~m/^(([0-1][0-9])|([2][0-3])):[0-5][0-9]$/)) {
-        $problems{ORAP_ERR} = "Ora di partenza non valida. Inserire un ora in formato hh:mm";
+        $problems{ORAP_ERR} = "Ora di partenza non valida. Inserire un orario in formato hh:mm";
         $problems{empty} = 'no';
     }
     else {
@@ -160,15 +160,15 @@ else {
                 $problems{empty} = 'no';
             }
             elsif (!($q->param('oraP')=~m/^(([0-1][0-9])|([2][0-3])):[0-5][0-9]$/)) {
-                $problems{ORAA_ERR} = "Ora di arrivo non valida. Inserire un ora in formato hh:mm";
+                $problems{ORAA_ERR} = "Ora di arrivo non valida. Inserire un orario in formato hh:mm";
                 $problems{empty} = 'no';
             }
             
 
             if(!defined($problems{'DATAA_ERR'}) and !defined($problems{'ORAA_ERR'}) ) { # le date sono corrette. Ora si controlla che l arrivo sia successivo alla partenza
                 if(!(date_time::confronto_dataora($dataP[0], $dataP[1]-1, $dataP[2], $oraP[0], $oraP[1], $dataA[0], $dataA[1]-1, $dataA[2], $oraA[0], $oraA[1]))) {
-                    $problems{DATAA_ERR} = "la data/ora di partenza dev essere successiva alla data/ora d arrivo";
-                    $problems{ORAA_ERR} = "la data/ora di partenza dev essere successiva alla data/ora d arrivo";
+                    $problems{DATAA_ERR} = "La data/ora di partenza dev\'essere successiva alla data/ora d\'arrivo";
+                    $problems{ORAA_ERR} = "La data/ora di partenza dev\'essere successiva alla data/ora d\'arrivo";
                     $problems{empty} = 'no';
                 }
                 else {
@@ -178,8 +178,8 @@ else {
             }
         }
         else { # ramo in cui la data di partenza &egrave; corretta, ma non &egrave; futura
-            $problems{DATAP_ERR} = "la data/ora di partenza dev essere almeno di un ora nel futuro";
-            $problems{ORAP_ERR} = "la data/ora di partenza dev essere almeno di un ora nel futuro";
+            $problems{DATAP_ERR} = "La data/ora di partenza dev\'essere almeno di un\'ora nel futuro";
+            $problems{ORAP_ERR} = "La data/ora di partenza dev\'essere almeno di un\'ora nel futuro";
             $problems{empty} = 'no';
         }
     }
@@ -201,7 +201,7 @@ else {
     }
 
     if($q->param('posti') eq "") {
-        $problems{POSTI_ERR} = "Posti disponibili mancante";
+        $problems{POSTI_ERR} = "Numero di posti disponibili mancante";
         $problems{empty} = 'no';
     }
     elsif (!($q->param('posti')=~m/^[0-9]{1,2}$/)) {
