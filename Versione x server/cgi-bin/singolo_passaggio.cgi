@@ -61,7 +61,7 @@ else {
         my $aux = $session->param('problems');
         my %prob = %$aux;
         $hash_keys{DESCRIZIONE_ERRORE} = $prob{'DESCRIZIONE_ERRORE'};
-        $session->clear(['prob']);
+        $session->clear(['problems']);
     }
 
     if(defined($session->param('loggedin'))) {
