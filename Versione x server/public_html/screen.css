@@ -49,6 +49,10 @@ a:link{
 	color : #0088cc;
 }
 
+.dettagliLink{
+	display : none;
+}
+
 p{
 	line-height : 130%;
 }
