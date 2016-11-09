@@ -71,6 +71,7 @@ else {
     
             if($q->param('_commentoP'.$i) ne "Commento facoltativo" && $q->param('_commentoP'.$i) ne "") {
                 my $comm = encode_entities($q->param('_commentoP'.$i),'<>&"\'');
+
                 $Feedback{Commento} = $comm;
             }
             my $punt_medio=($q->param('_CompagniaP'.$i) + $q->param('_PuntualitaP'.$i))/2;
