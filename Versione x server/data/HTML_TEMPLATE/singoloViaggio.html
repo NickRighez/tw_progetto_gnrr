@@ -92,7 +92,7 @@
     [% CONTENUTO_BACHECA %]
     [% IF NUOVA_CONVERSAZIONE == 'yes' %]
       <div class="contenitore" id="NuovaConversazione"> 
-            <form action="ricevitore_messaggio_pubblico.cgi" method="POST" >
+            <form action="ricevitore_messaggio_pubblico.cgi" method="post" >
               <p>Inizia una nuova conversazione con il proprietario del viaggio!</p><br /> 
               <input type="hidden" name="destinatario" value="[% CONDUCENTE %]"></input>
               <input type="hidden" name="passaggio" value="[% PASSAGGIO %]"></input>
