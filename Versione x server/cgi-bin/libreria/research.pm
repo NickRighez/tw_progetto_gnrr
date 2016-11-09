@@ -138,7 +138,7 @@ sub query_ricerca
 				    my ($sec,$min,$hour,$mday,$mon,$year,$wday,$yday,$isdst) = localtime();
                                     my $eta=$year + 1900 - ($doc->findnodes("//SetUtenti/Utente[Username='$conduc']/AnnoNascita")->get_node(1)->textContent() ) ;
                                     push @viaggi_list, {
-                                                  href => "singolo_passaggio.cgi?passaggio=$idv&part=$j&arr=$k", partenza => ucfirst $part, arrivo => ucfirst $arr,
+                                                  href => "singolo_passaggio.cgi?passaggio=$idv&amp;part=$j&amp;arr=$k", partenza => ucfirst $part, arrivo => ucfirst $arr,
                                                   ora => date_time::formatta_ora($ora), posti => $posti, prezzo => $prezzo, conducente => $conduc,
                                                   eta => $eta, punteggio => $punteggio, auto => $auto };
 
@@ -184,7 +184,7 @@ sub query_viaggi_attivi_utente {
         my $prezzo = utility::calcola_prezzo('0','4',$idv,$doc); # funzione che calcola il prezzo
         my $posti = utility::calcola_posti_disponibili('0','4',$idv,$doc);
 
-        push @viaggi_list, {href => "singolo_passaggio.cgi?passaggio=$idv&part=0&arr=4",
+        push @viaggi_list, {href => "singolo_passaggio.cgi?passaggio=$idv&amp;part=0&amp;arr=4",
             partenza => ucfirst $partenza,
             arrivo => ucfirst $arrivo,
             prezzo => $prezzo,
@@ -221,7 +221,7 @@ sub query_viaggi_attivi_utente {
 
 
         push @viaggi_list, {
-            href => "singolo_passaggio.cgi?passaggio=$idv&part=$num_p&arr=$num_a",
+            href => "singolo_passaggio.cgi?passaggio=$idv&amp;part=$num_p&amp;arr=$num_a",
             partenza => ucfirst $partenza,
             arrivo => ucfirst $arrivo,
             prezzo => $prezzo,
