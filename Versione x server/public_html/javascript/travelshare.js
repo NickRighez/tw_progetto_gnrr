@@ -52,21 +52,6 @@ var funzioniDiCaricamento = {
       console.log("Funzioni Dom necessarie non sono supportate.");
     }
   },
-  caricamento_textarea: function() {
-    if (document.getElementById != "undefined") {
-      var x = document.getElementsByTagName("textarea");
-      var elem = x[0];
-      elem.onfocus = function() {
-        var cont = document.getElementsByTagName("textarea")[0].value;
-        console.log(elem);
-        if (cont === "Inserisci un messaggio per il conducente.") {
-          elem.value = '';
-        }
-      };
-    } else {
-      console.log("Funzioni Dom necessarie non sono supportate.");
-    }
-  },
 
   caricamento_iscrizione: function() {
     if (document.getElementById != "undefined") {
