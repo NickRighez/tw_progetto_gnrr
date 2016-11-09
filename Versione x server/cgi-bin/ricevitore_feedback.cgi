@@ -39,7 +39,7 @@ else {
         $Feedback{Pulizia} = $q->param('_Pulizia');
         
         if($q->param('_commentoG') ne "Commento facoltativo" && $q->param('_commentoG') ne "") {
-            my $comm = encode_entities($q->param('_commentoG'),'<');
+            my $comm = encode_entities($q->param('_commentoG'));
             $Feedback{Commento} = $comm;
         }
         my $punt_medio=($q->param('_CompagniaG') + $q->param('_PuntualitaG') + $q->param('_Guida') + $q->param('_Pulizia'))/4;
@@ -70,7 +70,7 @@ else {
             $Feedback{Puntualita} = $q->param('_PuntualitaP'.$i);
     
             if($q->param('_commentoP'.$i) ne "Commento facoltativo" && $q->param('_commentoP'.$i) ne "") {
-                my $comm = encode_entities($q->param('_commentoP'.$i),'<');
+                my $comm = encode_entities($q->param('_commentoP'.$i));
                 $Feedback{Commento} = $comm;
             }
             my $punt_medio=($q->param('_CompagniaP'.$i) + $q->param('_PuntualitaP'.$i))/2;
