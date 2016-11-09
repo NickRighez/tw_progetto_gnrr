@@ -116,7 +116,7 @@ else {
     }
     else {
         $hash_keys{LOGGEDIN} = 'no';
-
+        $hash_keys{INDEX} = 10;
         my %Bacheca = (
             VIAGGIO => $pass,
             NUM_PARTENZA =>$part,
