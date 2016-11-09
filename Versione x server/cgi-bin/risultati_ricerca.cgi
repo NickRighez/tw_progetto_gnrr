@@ -67,7 +67,7 @@ else {
     open my $fh, '<:encoding(UTF-8)', $file;
     my $foglio = '';
     $template_parser->process($fh,\%hash_keys,\$foglio);
-    print $q->header();
+	print "Content-Type: text/html\n\n\n";
     print $foglio;
 }
 
