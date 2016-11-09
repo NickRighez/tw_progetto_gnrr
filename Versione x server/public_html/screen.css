@@ -311,12 +311,12 @@ ul#menuLista{
 }
 
 .ricevuti{
-	margin-right : 15%;
+	margin-right : 20%;
 	border-radius : 10px 10px 10px 10px;
 }
 
 .inviati{
-	margin-left : 15%;
+	margin-left : 20%;
 	border-radius : 10px 10px 10px 10px;
 }
 
@@ -555,6 +555,7 @@ input[type=radio]:checked + label>img {
 	}
 	#bottoneMenu{
 		display : block;
+		background-color: white;
 		border : 1px solid #666666;
 		float : right;
 		padding : 1.2%;
