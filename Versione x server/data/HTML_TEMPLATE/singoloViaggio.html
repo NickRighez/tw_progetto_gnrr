@@ -17,11 +17,6 @@
 
   <link rel="icon" href="../Immagini/TS_icon.png" type="image/x-icon" />
   <link rel="shortcut icon" href="../Immagini/TS_icon.png" type="image/x-icon" />
- <!--
- <script type="application/javascript"  src="../javascript/jquery-ui-1.12.0/external/jquery/jquery.js"></script>
-  <script type="application/javascript" src="../javascript/jquery-ui-1.12.0/jquery-ui.js"></script>
-<link rel="stylesheet" href="../javascript/jquery-ui-1.12.0/jquery-ui.css" />
-  <script type="application/javascript" src="../javascript/travelshare.js" ></script> -->
 
  </head>
 
@@ -52,12 +47,7 @@
 
     <h1>[% PARTENZA %] - [% ARRIVO %]</h1> <!--ricercati-->
 
-     [% IF RICERCA_PREC == 'yes' %]
-    <a class="linkSottoH" href="risultati_ricerca.cgi?partenza=[% RIC_PARTENZA %]&arrivo=[% RIC_ARRIVO %]&data=[% RIC_DATA %]" tabindex="[% INDEX %]">Torna ai risultati</a>
-    [% INDEX = INDEX+1 %]
-    [% END %]
-
-      [% IF NOTA %]
+         [% IF NOTA %]
         <div class="contenitore">
           <p>[% NOTA %]</p>
         </div>

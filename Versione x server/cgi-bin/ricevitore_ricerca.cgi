@@ -77,7 +77,6 @@ else{
             arrivo => $q->param('arrivo'),
             data => $data
             );
-        $session->param('ricerca', \%Ricerca);
         
         print $session->header(-location => "risultati_ricerca.cgi?partenza=".$q->param('partenza')."&amp;arrivo=".$q->param('arrivo')."&amp;data=$data");
     }

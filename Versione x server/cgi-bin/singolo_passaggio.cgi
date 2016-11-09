@@ -50,16 +50,6 @@ else {
 
     $contenuto_passaggio = research::query_viaggio(\%Pass);
 
-    if(defined($session->param('ricerca'))) {
-        my $aux = $session->param('ricerca');
-        my %ricerca = %$aux;
-        $hash_keys{RICERCA_PREC} = "yes";
-        $hash_keys{RIC_PARTENZA} = $ricerca{'partenza'};
-        $hash_keys{RIC_ARRIVO} = $ricerca{'arrivo'};
-        $hash_keys{RIC_DATA} = $ricerca{'data'};
-        $session->clear(['ricerca']);
-    }
-
     if(defined($session->param('nota'))) {
         my $aux = $session->param('nota');
         my %nota = %$aux;
