@@ -26,7 +26,7 @@ my %old_input;
 
 #  ******  TESTARE CHE IL METODO DELLA FORM SIA 'POST' *************  #
 # ******** (per la ricerca il metodo &egrave; get) ******** #
-if (!(decode_utf8 $q->request_method() eq 'POST')) {
+if (!($q->request_method() eq 'POST')) {
     my %problems=(
       DESCRIZIONE_ERRORE => "Tentativo di inserire un nuovo utente con una modalit&agrave; non permessa."
       );
@@ -34,12 +34,12 @@ if (!(decode_utf8 $q->request_method() eq 'POST')) {
     print $session->header(-location => "home.cgi");
 }
 else {
-    my $username = decode_utf8 $q->param('username');
+    my $username = $q->param('username');
     if($username eq "") {
         $problems{USERNAME_ERR} = "Username mancante";
         $problems{empty} = "no";
     }
-    elsif(!($username=~m/^[A-Za-z0-9_-]{5,18}$/) {
+    elsif(!($username=~m/^[A-Za-z0-9_-]{5,18}$/)) {
         $problems{USERNAME_ERR} = "Username non valido, caratteri ammessi: lettere (non accentate), numeri, '_', '-'. Lunghezza: minimo 5 caratteri, massimo 18 caratteri.";
         $problems{empty} = "no";
     }
@@ -47,7 +47,7 @@ else {
         $old_input{USERNAME} = $username;
     }
 
- my $email = decode_utf8 $q->param('email');
+ my $email = $q->param('email');
     if($email eq "") {
         $problems{EMAIL_ERR} = "E-mail mancante";
         $problems{empty} = "no";
@@ -69,7 +69,7 @@ else {
         }
     }
 
- my $nome = decode_utf8 $q->param('nome');
+ my $nome = decode_utf8($q->param('nome'));
     if($nome eq "") {
         $problems{NOME_ERR} = "Nome utente mancante";
         $problems{empty} = "no";
@@ -79,10 +79,10 @@ else {
         $problems{empty}="no";
     }
     else {
-        $old_input{NOME}=$nome;
+        $old_input{NOME}=decode_utf8($nome);
     }
 
- my $cognome = decode_utf8 $q->param('cognome');
+ my $cognome = decode_utf8($q->param('cognome'));
     if($cognome eq "") {
         $problems{COGNOME_ERR} = "Cognome utente mancante";
         $problems{empty} = "no";
@@ -92,10 +92,10 @@ else {
         $problems{empty}="no";
     }
     else {
-        $old_input{COGNOME}=$cognome;
+        $old_input{COGNOME}=decode_utf8($cognome);
     }
 
- my $anno = decode_utf8 $q->param('anno');
+ my $anno = $q->param('anno');
     if($anno eq "") {
         $problems{ANNO_ERR}="Anno di nascita mancante";
         $problems{empty}="no";
@@ -116,7 +116,7 @@ else {
         }
     }
 
- my $password = decode_utf8 $q->param('password');
+ my $password = $q->param('password');
     if($password eq "") {
         $problems{PASSWORD_ERR} = "Password mancante";
         $problems{empty}="no";
@@ -129,7 +129,7 @@ else {
         $problems{PASSWORD_ERR} = "Password non valida, sono permesse lettere maiuscole o minuscole, e i caratteri underscore, hyphen o punto";
         $problems{empty}="no";
     }
-    elsif($password ne decode_utf8 $q->param('conferma')) {
+    elsif($password ne $q->param('conferma')) {
         $problems{CONFERMA_ERR} = "Password non coincidenti";
         $problems{empty}="no";
     }
@@ -140,7 +140,7 @@ else {
         Email => $email,
         Nome => $nome,
         Cognome => $cognome,
-        Sesso => $sesso,
+        Sesso => $q->param('sesso'),
         AnnoNascita => $anno,
         Password => $password,
 	DescrizionePers => ''

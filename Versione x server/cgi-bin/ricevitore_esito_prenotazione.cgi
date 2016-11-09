@@ -33,10 +33,10 @@ if (!($q->request_method() eq 'POST')) {
 }
 else {
     my $username = $session->param('username');
-    my $pass =  decode_utf8 $q->param('passaggio');
-    my $part =  decode_utf8 $q->param('partenza');
-    my $arr =  decode_utf8 $q->param('arrivo');
-    my $esito =  decode_utf8 $q->param('esito');
+    my $pass = $q->param('passaggio');
+    my $part = $q->param('partenza');
+    my $arr = $q->param('arrivo');
+    my $esito = $q->param('esito');
 
     if($esito eq "Rifiutata"){
         my %nota = ( nota => "Prenotazione rifiutata con successo.");
@@ -60,29 +60,29 @@ else {
 
     if($esito eq 'Accettata') {
         my %Prenotazione=(
-            Username =>  decode_utf8 $q->param('richiedente'),
-            IDViaggio =>  decode_utf8 $q->param('passaggio'),
-            NumTappaPartenza =>  decode_utf8 $q->param('partenza'),
-            NumTappaArrivo =>  decode_utf8 $q->param('arrivo')
+            Username => $q->param('richiedente'),
+            IDViaggio => $q->param('passaggio'),
+            NumTappaPartenza => $q->param('partenza'),
+            NumTappaArrivo => $q->param('arrivo')
             );
-        data_registration::incrementa("NumPassaggiPart",  decode_utf8 $q->param('richiedente'));
+        data_registration::incrementa("NumPassaggiPart", $q->param('richiedente'));
         data_registration::inserisci_prenotazione(\%Prenotazione);
 
         my %nota = ( nota => "Prenotazione registrata con successo.");
         $session->param('nota',\%nota);        
     }
 
-    my $richiedente =  decode_utf8 $q->param('richiedente');
+    my $richiedente = $q->param('richiedente');
     my %Notifica = (
-        Passaggio =>  decode_utf8 $q->param('passaggio'),
+        Passaggio => $q->param('passaggio'),
         Esito => $esito,
-        Partenza =>  decode_utf8 $q->param('partenza'),
-        Arrivo =>  decode_utf8 $q->param('arrivo')
+        Partenza => $q->param('partenza'),
+        Arrivo => $q->param('arrivo')
         );
     data_registration::inserisci_notifica("EsitoPrenotaz",\%Notifica,$richiedente);
 
-    if($doc->exists("//SetUtenti/Utente[Username='$username']/Notifiche/RichiestaPrenotaz[\@Mittente='". decode_utf8 $q->param('richiedente')."' and \@Passaggio='". decode_utf8 $q->param('passaggio')."' and \@Partenza='". decode_utf8 $q->param('partenza')."' and \@Arrivo='". decode_utf8 $q->param('arrivo')."']")) {
-        data_registration::elimina_notifica($username,"RichiestaPrenotaz","\@Mittente='". decode_utf8 $q->param('richiedente')."' and \@Passaggio='". decode_utf8 $q->param('passaggio')."' and \@Partenza='". decode_utf8 $q->param('partenza')."' and \@Arrivo='". decode_utf8 $q->param('arrivo')."'");
+    if($doc->exists("//SetUtenti/Utente[Username='$username']/Notifiche/RichiestaPrenotaz[\@Mittente='".$q->param('richiedente')."' and \@Passaggio='".$q->param('passaggio')."' and \@Partenza='".$q->param('partenza')."' and \@Arrivo='".$q->param('arrivo')."']")) {
+        data_registration::elimina_notifica($username,"RichiestaPrenotaz","\@Mittente='".$q->param('richiedente')."' and \@Passaggio='".$q->param('passaggio')."' and \@Partenza='".$q->param('partenza')."' and \@Arrivo='".$q->param('arrivo')."'");
     }
     print $session->header(-location => "notifiche.cgi");
 }

@@ -20,7 +20,7 @@ my @s = sessione::creaSessione();
 my $session = $s[0];
 my $doc = data_registration::get_xml_doc();
 
-if (!(decode_utf8 $q->request_method() eq "POST") ) {
+if (!($q->request_method() eq "POST") ) {
     my %problems=(
           DESCRIZIONE_ERRORE => "Tentativo di inoltrare una richiesta di prenotazione con una modalit&agrave; non permessa."
      );
@@ -30,9 +30,9 @@ if (!(decode_utf8 $q->request_method() eq "POST") ) {
 else {
   my $doc = data_registration::get_xml_doc();
   my $richiedente = $session->param('username');
-  my $pass = decode_utf8 $q->param('passaggio');
-  my $part = decode_utf8 $q->param('partenza');
-  my $arr = decode_utf8 $q->param('arrivo');
+  my $pass = $q->param('passaggio');
+  my $part = $q->param('partenza');
+  my $arr = $q->param('arrivo');
 
   my $conducente = $doc->findnodes("//SetPassaggi/Passaggio[IDViaggio=\"$pass\"]/Conducente")->get_node(1)->textContent;
 

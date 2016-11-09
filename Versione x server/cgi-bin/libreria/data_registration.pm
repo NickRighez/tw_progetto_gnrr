@@ -170,7 +170,10 @@ sub inserisci_nuovo_viaggio   {
     serializzazione_chiusura($fileHandle,$doc);
     #################################################################
     my %array_argom = %$array_argom_ref; #  hash di riferimenti a hash CHIAVI : Partenza, Arrivo, Tappa1, Tappa2, Tappa3
-    # ESTRAZIONE USERNAME CONDUCENTE DA SESSIONE ###################################
+    foreach my $el (%array_argom){
+        utf8::decode($el);
+    }
+    # ESTRAZIONE URNAME CONDUCENTE DA SESSIONE ###################################
     my $output="<Passaggio Passato=\"no\">
           <IDViaggio>$idv</IDViaggio>
           <Conducente>$array_argom{'Conducente'}</Conducente>
@@ -303,9 +306,9 @@ sub inserisci_nuovo_messaggio_bacheca {
     my $idv = shift @_; # id del viaggio
     my $array_argom_ref = shift @_; # DEVE CONTENERE CHIAVI : Mittente, Destinatario, Data, Ora, Testo  ( il messaggio da inserire )
     my %array_argom = %$array_argom_ref;
-    foreach my $el (%array_argom){
-        utf8::encode($el);
-    }
+    #foreach my $el (%array_argom){
+    #   utf8::encode($el);
+    #}
     my %aux = serializzazione_apertura();
     my $doc = $aux{'doc'};
     my $fileHandle = $aux{'filehandle'};
@@ -419,9 +422,9 @@ sub inserisci_feedback {
     my %array_argom = %$array_argom_ref;
     # CHIAVI : IDMitt, IDDest, Passaggio, Commento, PunteggioMedio, Compagnia, Puntualita. Nel
     #             caso il destinatario sia il conducente del viaggio, anche le chiavi Pulizia e Guida
-    foreach my $el (%array_argom){
-        utf8::encode($el);
-    }
+    #foreach my $el (%array_argom){
+    #    utf8::decode($el);
+    #}
    
     my $output = "<Feedback IDMitt=\"$array_argom{'IDMitt'}\" IDDest=\"$array_argom{'IDDest'}\">
                               <Passaggio>$array_argom{'Passaggio'}</Passaggio>";
@@ -556,9 +559,9 @@ sub inserisci_preferenze {
 sub inserisci_modifica_profilo {
     my $array_argom_ref = shift @_; # CHIAVI : Username(del profilo da modificare), Nome, Cognome, Sesso, Email, AnnoNascita, Descrizione, Patente, Auto, Chiacchere, Animali, Musica, Fumatore
     my %array_argom = %$array_argom_ref;
-    foreach my $el (%array_argom){
-        utf8::encode($el);
-    }
+    #foreach my $el (%array_argom){
+    #    utf8::decode($el);
+    #}
     my %aux = serializzazione_apertura();
     my $doc = $aux{'doc'};
     my $fileHandle = $aux{'filehandle'};

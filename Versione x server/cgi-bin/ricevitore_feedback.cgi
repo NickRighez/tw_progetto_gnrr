@@ -33,27 +33,27 @@ if($q->request_method() ne 'POST') {
 }
 else {
     my $username = $session->param('username');
-    if(defined( decode_utf8 $q->param('G'))) {
+    if(defined( $q->param('G'))) {
         my %Feedback;
         $Feedback{IDMitt} = $session->param('username');
-        $Feedback{IDDest} =  decode_utf8 $q->param('G');
-        $Feedback{Passaggio} =  decode_utf8 $q->param('passaggio');
-        $Feedback{Compagnia} =  decode_utf8 $q->param('_CompagniaG');
-        $Feedback{Puntualita} =  decode_utf8 $q->param('_PuntualitaG');
-        $Feedback{Guida} =  decode_utf8 $q->param('_Guida');
-        $Feedback{Pulizia} =  decode_utf8 $q->param('_Pulizia');
+        $Feedback{IDDest} = $q->param('G');
+        $Feedback{Passaggio} = $q->param('passaggio');
+        $Feedback{Compagnia} = $q->param('_CompagniaG');
+        $Feedback{Puntualita} = $q->param('_PuntualitaG');
+        $Feedback{Guida} =  $q->param('_Guida');
+        $Feedback{Pulizia} = $q->param('_Pulizia');
         
-        if( decode_utf8 $q->param('_commentoG') ne "Commento facoltativo" &&  decode_utf8 $q->param('_commentoG') ne "") {
-            my $comm = encode_entities( decode_utf8 $q->param('_commentoG'),'<>&"\'');
+        if( decode_utf8($q->param('_commentoG')) ne "Commento facoltativo" &&  decode_utf8($q->param('_commentoG')) ne "") {
+            my $comm = encode_entities( decode_utf8($q->param('_commentoG')),'<>&"\'');
             $Feedback{Commento} = $comm;
         }
-        my $punt_medio=( decode_utf8 $q->param('_CompagniaG') +  decode_utf8 $q->param('_PuntualitaG') +  decode_utf8 $q->param('_Guida') +  decode_utf8 $q->param('_Pulizia'))/4;
+        my $punt_medio=( $q->param('_CompagniaG') + $q->param('_PuntualitaG') + $q->param('_Guida') + $q->param('_Pulizia'))/4;
         $Feedback{PunteggioMedio}=$punt_medio;
 
         if(data_registration::inserisci_feedback(\%Feedback)) {
-            data_registration::incrementa("NumFeedbRicevuti",  decode_utf8 $q->param('G'));
+            data_registration::incrementa("NumFeedbRicevuti", $q->param('G'));
             data_registration::elimina_notifica("$Feedback{'IDMitt'}","FeedDaRilasciare","\@Destinatario=\"$Feedback{'IDDest'}\" and \@Passaggio=\"$Feedback{'Passaggio'}\"");
-            data_registration::aggiorna_valutazione_utente(\%Feedback,  decode_utf8 $q->param('G'));
+            data_registration::aggiorna_valutazione_utente(\%Feedback, $q->param('G'));
 
             my %nota = ( nota => "Passaggio recensito con successo!" );
             $session->param('nota',\%nota);
@@ -62,29 +62,29 @@ else {
 
     my $doc = data_registration::get_xml_doc();
     my $username=$session->param('username');
-    my $p= decode_utf8 $q->param('passaggio');
+    my $p= $q->param('passaggio');
     my @feed_da_rilas=$doc->findnodes("//SetUtenti/Utente[Username=\"$username\"]/Notifiche/FeedDaRilasciare[\@Passaggio=\"$p\"]");
     my $num_da_rilasc=@feed_da_rilas;
     for(my $i=1;$i<=$num_da_rilasc;$i++) {
-        if(defined( decode_utf8 $q->param('P'.$i))) {
+        if(defined( $q->param('P'.$i))) {
              my %Feedback;
             $Feedback{IDMitt} = $session->param('username');
-            $Feedback{IDDest} =  decode_utf8 $q->param('P'.$i);
-            $Feedback{Passaggio} =  decode_utf8 $q->param('passaggio');
-            $Feedback{Compagnia} =  decode_utf8 $q->param('_CompagniaP'.$i);
-            $Feedback{Puntualita} =  decode_utf8 $q->param('_PuntualitaP'.$i);
+            $Feedback{IDDest} =  $q->param('P'.$i);
+            $Feedback{Passaggio} = $q->param('passaggio');
+            $Feedback{Compagnia} = $q->param('_CompagniaP'.$i);
+            $Feedback{Puntualita} = $q->param('_PuntualitaP'.$i);
     
-            if( decode_utf8 $q->param('_commentoP'.$i) ne "Commento facoltativo" &&  decode_utf8 $q->param('_commentoP'.$i) ne "") {
-                my $comm = encode_entities( decode_utf8 $q->param('_commentoP'.$i),'<>&"\'');
+            if( decode_utf8($q->param('_commentoP'.$i)) ne "Commento facoltativo" &&  decode_utf8($q->param('_commentoP'.$i)) ne "") {
+                my $comm = encode_entities( decode_utf8($q->param('_commentoP'.$i)),'<>&"\'');
 
                 $Feedback{Commento} = $comm;
             }
-            my $punt_medio=( decode_utf8 $q->param('_CompagniaP'.$i) +  decode_utf8 $q->param('_PuntualitaP'.$i))/2;
+            my $punt_medio=( $q->param('_CompagniaP'.$i) +  $q->param('_PuntualitaP'.$i))/2;
             $Feedback{PunteggioMedio}=$punt_medio;
 
             if(data_registration::inserisci_feedback(\%Feedback)) {
-                data_registration::incrementa("NumFeedbRicevuti",  decode_utf8 $q->param('P'.$i));
-                data_registration::aggiorna_valutazione_utente(\%Feedback,  decode_utf8 $q->param('P'.$i));
+                data_registration::incrementa("NumFeedbRicevuti",  $q->param('P'.$i));
+                data_registration::aggiorna_valutazione_utente(\%Feedback, $q->param('P'.$i));
                 data_registration::elimina_notifica("$Feedback{'IDMitt'}","FeedDaRilasciare","\@Destinatario=\"$Feedback{'IDDest'}\" and \@Passaggio=\"$Feedback{'Passaggio'}\"",$doc);
             
                 my %nota = ( nota => "Passaggio recensito con successo!" );

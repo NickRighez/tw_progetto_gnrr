@@ -48,11 +48,10 @@ elsif($cgi->request_method() eq "POST") {
         print $session->header(-location => "login.cgi");
     }
     else {
-        #my $sid = $cgi->cookie("CGISESSID") || undef;
 
         $session->param('username',$username);
         $session->param('loggedin','yes');
-        $session->expires("+2h"); # *** AGGIUNTA ***
+        $session->expires("+2h"); 
         $session->flush();
         data_registration::aggiorna_feedback_da_rilasciare();
         print $session->header(-location => "home.cgi");

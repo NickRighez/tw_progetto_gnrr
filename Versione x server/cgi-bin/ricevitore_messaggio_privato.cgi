@@ -33,20 +33,20 @@ if($q->request_method() eq "POST") {
     my $d = $year."-".$mon."-".$mday;
     my $o = $hour.":".$min.":".$sec;
 
-    my $mess =  decode_utf8 $q->param('messaggio');
+    my $mess =  decode_utf8($q->param('messaggio'));
     $mess =encode_entities($mess,'<>&"\'');
 
 
     my %Messaggio=(
         Mittente => $session->param('username'),
-        Destinatario =>  decode_utf8 $q->param('destinatario'),
+        Destinatario => $q->param('destinatario'),
         Data => $d,
         Ora => $o,
         Testo => $mess
         );
     my $doc = data_registration::get_xml_doc();
     data_registration::inserisci_nuovo_messaggio_singolo(\%Messaggio);
-    print $session->header(-location => "singola_conversaz.cgi?utente=". decode_utf8 $q->param('destinatario'));
+    print $session->header(-location => "singola_conversaz.cgi?utente=".$q->param('destinatario'));
     
 }
 else {

@@ -29,8 +29,8 @@ if(!defined($session->param('username'))) {
     $session->param('problems',\%problems);
     print $session->header(-location => "login.cgi");
 }
-elsif (!( decode_utf8 $q->param('passaggio')=~m/^v[0-9]+$/) || 
-        !($doc->exists("//SetUtenti/Utente[Username='".$session->param('username')."']/Notifiche/EsitoPrenotaz[\@Passaggio='". decode_utf8 $q->param('passaggio')."']"))) {
+elsif (!($q->param('passaggio')=~m/^v[0-9]+$/) || 
+        !($doc->exists("//SetUtenti/Utente[Username='".$session->param('username')."']/Notifiche/EsitoPrenotaz[\@Passaggio='".$q->param('passaggio')."']"))) {
     my %problems=(
         DESCRIZIONE_ERRORE => "Tentativo di eliminare una notifica con una modalit&agrave; non permessa."
     );
@@ -40,8 +40,7 @@ elsif (!( decode_utf8 $q->param('passaggio')=~m/^v[0-9]+$/) ||
 else {
     my $username = $session->param('username');
 
-    #  decode_utf8 $q->param('passaggio') passato con GET (appeso alla stringa URL)
-    my $passaggio =  decode_utf8 $q->param('passaggio');    
+    my $passaggio = $q->param('passaggio');    
 
     data_registration::elimina_notifica($username,"EsitoPrenotaz","\@Passaggio='$passaggio'");
     my %nota = ( nota => "Notifica di esito prenotazione eliminato con successo.");

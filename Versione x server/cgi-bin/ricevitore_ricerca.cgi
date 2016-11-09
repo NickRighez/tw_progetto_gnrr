@@ -20,8 +20,7 @@ my $q = new CGI;
 my @s = sessione::creaSessione();
 my $session = $s[0];
 
-##die $q->request_method();
-if(decode_utf8 $q->request_method() ne "POST") {
+if($q->request_method() ne "POST") {
      my %problems=(
       DESCRIZIONE_ERRORE => "Tentativo di ricerca passaggio con una modalit&agrave; non permessa."
       );
@@ -32,7 +31,7 @@ else{
     my %problems = (empty => 'yes');
     my %old_input;
 
-    my $partenza = decode_utf8 $q->param('partenza');
+    my $partenza = decode_utf8($q->param('partenza'));
 
     if($partenza eq '') {
         $problems{PARTENZA_ERR} = 'Luogo di partenza mancante';
@@ -43,10 +42,10 @@ else{
         $problems{empty} = 'no';
     }
     else {
-        $old_input{PARTENZA} = $partenza;
+        $old_input{PARTENZA} = decode_utf8($partenza);
     }
 
-my $arrivo = decode_utf8 $q->param('arrivo');
+my $arrivo = decode_utf8($q->param('arrivo'));
     if($arrivo eq '') {
         $problems{ARRIVO_ERR} = 'Luogo di partenza mancante';
         $problems{empty} = 'no';
@@ -56,10 +55,10 @@ my $arrivo = decode_utf8 $q->param('arrivo');
         $problems{empty} = 'no';
     }
     else {
-        $old_input{ARRIVO} = $arrivo;
+        $old_input{ARRIVO} = decode_utf8($arrivo);
     }
 
-my $dataInput = decode_utf8 $q->param('data');
+my $dataInput = $q->param('data');
     if($dataInput eq '') {
         $problems{DATA_ERR} = 'Data di partenza mancante';
         $problems{empty} = 'no';

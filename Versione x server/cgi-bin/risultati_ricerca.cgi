@@ -40,7 +40,6 @@ else {
     if($num_viaggi == 0){
         $empty = "true";
     }
-   # my %hash_keys;
 
     my %hash_keys = (
         VIAGGI_LIST => \@viaggi_list,
