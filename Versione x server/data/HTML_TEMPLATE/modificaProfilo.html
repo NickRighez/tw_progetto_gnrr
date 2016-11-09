@@ -44,7 +44,7 @@
       [% END %]
 
       <h1>Modifica il profilo</h1>
-      <form action="ricevitore_modifica.cgi" method="post" onsubmit="return valida_submit_modifica_profilo();">
+      <form action="ricevitore_modifica.cgi" method="post">
         <fieldset><legend>Modifica le informazioni del profilo</legend>
           <p>Sesso:
             <input type="radio" name="sesso" id="maschio" value="maschio" [% IF SESSO == 'maschio' %] checked="checked" [% END %] tabindex="9"></input><label  for="maschio">Maschio</label>
