@@ -20,7 +20,22 @@ my $q=new CGI;
 my @s = sessione::creaSessione();
 my $session = $s[0];
 
-if($q->request_method eq 'POST') {
+if($q->request_method ne 'POST') {
+    my %problems=(
+          DESCRIZIONE_ERRORE => "Tentativo di inserire un messaggio in modalit&agrave; non permessa."
+     );
+     $session->param('problems',\%problems);
+    print $q->redirect("home.cgi");
+}
+elsif (decode_utf8($q->param('messaggio')) eq ""){
+    my %problems=(
+          DESCRIZIONE_ERRORE => "Tentativo di inserire un messaggio vuoto."
+     );
+     $session->param('problems',\%problems);
+    print $q->redirect("singolo_passaggio.cgi?passaggio=".$q->param('passaggio')."&part=".$q->param('partenza')."&arr=".$q->param('arrivo'));
+}
+else{
+
     my $mitt = $session->param('username');
     # campi 'hidden':
     my $dest=$q->param('destinatario');
@@ -57,11 +72,4 @@ if($q->request_method eq 'POST') {
     if(data_registration::inserisci_nuovo_messaggio_bacheca($pas,\%Messaggio)) {
         print $q->redirect("singolo_passaggio.cgi?passaggio=$pas&part=$part&arr=$arr");
     }
-}
-else{
-     my %problems=(
-          DESCRIZIONE_ERRORE => "Tentativo di inserire un messaggio in modalit&agrave; non permessa."
-     );
-     $session->param('problems',\%problems);
-    print $q->redirect("home.cgi");
 }

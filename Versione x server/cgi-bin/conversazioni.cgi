@@ -40,8 +40,7 @@ else {
         NOME_UTENTE => $username,
         CONTENUTO => $contenuto,
         NUM_NOTIFICHE => research::conta_notifiche($username, $doc),
-        NUM_CONVERSAZIONI => $num,
-        INDEX => ($num*2)+9
+        NUM_CONVERSAZIONI => $num
         );
 
 

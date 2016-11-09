@@ -25,6 +25,11 @@
       <p><a href="notifiche.cgi" tabindex="2">Notifiche ([% NUM_NOTIFICHE %])</a>  <a href="ricevitore_logout.cgi" tabindex="3">Logout</a></p>
     </div>
     <div id="contenuto">
+      [% IF DESCRIZIONE_ERRORE %]
+        <div class="div_errore">
+          <p>[% DESCRIZIONE_ERRORE %]</p>
+        </div>
+      [% END %]
       [% CONTENUTO %]
       <form action="ricevitore_messaggio_privato.cgi" method="post">
         <div>

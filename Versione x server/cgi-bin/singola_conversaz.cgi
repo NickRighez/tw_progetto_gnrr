@@ -40,9 +40,8 @@ else {
     
     my $node = $doc->findnodes("//SetUtenti")->get_node(1);
    
-        #print "Content-Type: text/html; charset=UTF-8\n\n";
-	#print $q->header(-charset => 'UTF-8');
-binmode(STDOUT, ":utf8");
+       
+    binmode(STDOUT, ":utf8");
 	print "Content-Type: text/html; charset=UTF-8\n\n\n";
 
 	
@@ -67,6 +66,14 @@ binmode(STDOUT, ":utf8");
             CONVERSATORE => $q->param('utente'),
             NUM_NOTIFICHE => research::conta_notifiche($session->param('username'), $doc)
             );
+
+        if(defined($session->param('problems'))) {
+        my $aux = $session->param('problems');
+        my %prob = %$aux;
+        $hash_keys{DESCRIZIONE_ERRORE} = $prob{'DESCRIZIONE_ERRORE'};
+        $session->clear(['problems']);
+    }
+        
         my $template_parser = Template->new({ ENCODING => 'utf8' });
 
         open my $fh, '<:encoding(UTF-8)', $file;
