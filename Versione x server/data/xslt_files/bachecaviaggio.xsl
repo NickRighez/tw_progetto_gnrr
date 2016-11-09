@@ -126,7 +126,7 @@
               <xsl:attribute name="value">[% NUM_ARRIVO %]</xsl:attribute>
             </input>
             <xsl:text>&#xa;</xsl:text>
-            <textarea rows="0" cols="0" name="messaggio" title="Inserisci un messaggio per il conducente"></textarea>
+            <textarea rows="0" cols="0" name="messaggio" title="Inserisci un messaggio per il conducente"> <xsl:text> </xsl:text> </textarea>
             <xsl:text>&#xa;</xsl:text>
             <div>
               <xsl:text>&#xa;</xsl:text>
