@@ -10,8 +10,10 @@ use libreria::sessione;
 use libreria::research;
 use libreria::data_registration;
 use libreria::date_time;
-binmode(STDOUT, ":utf8");
 use utf8;
+binmode STDOUT, ":utf8";
+binmode STDERR, ":utf8";
+binmode STDIN,  ":utf8";
 
 my $q = new CGI;
 my @s = sessione::creaSessione();
@@ -67,7 +69,7 @@ else {
     open my $fh, '<:encoding(UTF-8)', $file;
     my $foglio = '';
     $template_parser->process($fh,\%hash_keys,\$foglio);
-	print "Content-Type: text/html\n\n\n";
+	print "Content-Type: text/html; charset=UTF-8\n\n\n";
     print $foglio;
 }
 

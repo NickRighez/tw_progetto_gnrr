@@ -5,10 +5,12 @@ use warnings;
 use diagnostics;
 use CGI qw(-utf8);
 use CGI::Session qw/-ip-match/;
-#use CGI::Cookie;
 use CGI::Carp qw(fatalsToBrowser);
-#use lib "../libreria";
 use libreria::sessione;
+use utf8;
+binmode STDOUT, ":utf8";
+binmode STDERR, ":utf8";
+binmode STDIN,  ":utf8";
 
 my $q = new CGI;
 sessione::distruzione();

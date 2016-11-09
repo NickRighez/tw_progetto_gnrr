@@ -1,18 +1,19 @@
 #! /usr/bin/perl -w
-#print "Content-type: text/html\n\n";
+#print "Content-Type: text/html; charset=UTF-8\n\n";
 
 use strict;
 use warnings;
 use diagnostics;
 use CGI qw(-utf8);
 use CGI::Carp qw(fatalsToBrowser);
-#use lib "../libreria";
 use libreria::data_registration;
-#use lib "libreria";
 use libreria::sessione;
 use CGI::Session;
 use HTML::Entities;
-
+use utf8;
+binmode STDOUT, ":utf8";
+binmode STDERR, ":utf8";
+binmode STDIN,  ":utf8";
 
 my @s = sessione::creaSessione();
 my $session = $s[0];

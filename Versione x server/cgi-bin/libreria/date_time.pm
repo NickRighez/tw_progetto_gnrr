@@ -5,6 +5,9 @@ use strict;
 use warnings;
 use Time::Local;
 use utf8;
+binmode STDOUT, ":utf8";
+binmode STDERR, ":utf8";
+binmode STDIN,  ":utf8";
 
 sub valida_data {
     my $day = shift @_;

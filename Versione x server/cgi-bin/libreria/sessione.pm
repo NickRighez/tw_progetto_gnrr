@@ -11,6 +11,9 @@ use CGI::Session;
 use CGI qw(-utf8);
 use libreria::research;
 use utf8;
+binmode STDOUT, ":utf8";
+binmode STDERR, ":utf8";
+binmode STDIN,  ":utf8";
 
 sub distruzione {
     my $session = CGI::Session->load() or die $!;

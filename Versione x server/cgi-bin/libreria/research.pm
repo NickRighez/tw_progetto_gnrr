@@ -14,6 +14,9 @@ use libreria::date_time;
 
 use strict;
 use utf8;
+binmode STDOUT, ":utf8";
+binmode STDERR, ":utf8";
+binmode STDIN,  ":utf8";
 
 #############################################
 ## Ricerche tramite XSLT

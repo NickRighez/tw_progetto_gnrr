@@ -5,14 +5,14 @@ use warnings;
 use diagnostics;
 use CGI qw(-utf8);
 use CGI::Carp qw(fatalsToBrowser);
-#use lib "../libreria";
 use libreria::research;
 use libreria::data_registration;
 use CGI::Session;
-#use lib "../libreria";
 use libreria::sessione;
-binmode(STDOUT, ":utf8");
 use utf8;
+binmode STDOUT, ":utf8";
+binmode STDERR, ":utf8";
+binmode STDIN,  ":utf8";
 
 my @s = sessione::creaSessione();
 my $session = $s[0];
@@ -40,10 +40,10 @@ else {
     
     my $node = $doc->findnodes("//SetUtenti")->get_node(1);
    
-        #print "Content-type: text/html\n\n";
+        #print "Content-Type: text/html; charset=UTF-8\n\n";
 	#print $q->header(-charset => 'UTF-8');
 binmode(STDOUT, ":utf8");
-	print "Content-Type: text/html\n\n\n";
+	print "Content-Type: text/html; charset=UTF-8\n\n\n";
 
 	
         my $username=$session->param('username');

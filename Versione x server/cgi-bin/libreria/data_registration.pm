@@ -13,15 +13,15 @@ package data_registration;
 use strict;
 use warnings;
 use diagnostics;
-#use lib "libreria";
-#use utility;
 use libreria::utility;
-#use Switch;
 use XML::LibXML;
 use XML::Tidy;
 use Template;
 use libreria::date_time;
 use utf8;
+binmode STDOUT, ":utf8";
+binmode STDERR, ":utf8";
+binmode STDIN,  ":utf8";
 
 use Fcntl qw( :flock );
 

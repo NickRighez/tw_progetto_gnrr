@@ -1,5 +1,5 @@
 #! /usr/bin/perl -w
-#print "Content-type: text/html\n\n";
+#print "Content-Type: text/html; charset=UTF-8\n\n";
 
 use strict;
 use warnings;
@@ -14,6 +14,10 @@ use libreria::date_time;
 use XML::LibXML;
 use Scalar::Util;
 use HTML::Entities;
+use utf8;
+binmode STDOUT, ":utf8";
+binmode STDERR, ":utf8";
+binmode STDIN,  ":utf8";
 
 my $parser =  XML::LibXML->new();
 my $q=new CGI;

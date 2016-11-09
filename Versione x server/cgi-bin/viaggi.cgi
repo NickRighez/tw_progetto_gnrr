@@ -9,8 +9,10 @@ use libreria::research;
 use libreria::data_registration;
 use CGI::Session;
 use libreria::sessione;
-binmode(STDOUT, ":utf8");
 use utf8;
+binmode STDOUT, ":utf8";
+binmode STDERR, ":utf8";
+binmode STDIN,  ":utf8";
 
 
 my @s = sessione::creaSessione();
@@ -25,7 +27,7 @@ if(!defined($session->param('username'))) {
     print $session->header(-location => "login.cgi");
 }
 else{
-    print "Content-type: text/html\n\n";
+    print "Content-Type: text/html; charset=UTF-8\n\n";
     my $username=$session->param('username');
 
     my $doc=data_registration::get_xml_doc();

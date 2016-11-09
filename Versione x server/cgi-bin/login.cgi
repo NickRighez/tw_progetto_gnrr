@@ -8,7 +8,9 @@ use CGI::Session;
 use CGI::Carp qw(fatalsToBrowser);
 use Template;
 use libreria::sessione;
-binmode(STDOUT, ":utf8");
+binmode STDOUT, ":utf8";
+binmode STDERR, ":utf8";
+binmode STDIN,  ":utf8";
 use utf8;
 
 
@@ -51,7 +53,7 @@ else {
     my $template_parser = Template->new({ ENCODING => 'utf8' });
     my $foglio = '';
     $template_parser->process($fh,\%hash_keys,\$foglio) or die $!;
-    print "Content-Type: text/html\n\n\n";
+    print "Content-Type: text/html; charset=UTF-8\n\n\n";
     close $fh;
     print $foglio;
 

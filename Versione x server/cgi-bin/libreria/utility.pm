@@ -8,7 +8,9 @@ use diagnostics;
 #use Switch;
 use CGI qw(-utf8);
 use utf8;
-
+binmode STDOUT, ":utf8";
+binmode STDERR, ":utf8";
+binmode STDIN,  ":utf8";
 
 use XML::LibXML;
 

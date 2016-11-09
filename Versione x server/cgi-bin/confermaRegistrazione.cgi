@@ -8,7 +8,9 @@ use CGI::Carp qw(fatalsToBrowser);
 use Template;
 use libreria::sessione;
 use libreria::data_registration;
-binmode(STDOUT, ":utf8");
+binmode STDOUT, ":utf8";
+binmode STDERR, ":utf8";
+binmode STDIN,  ":utf8";
 use utf8;
 
 
@@ -25,7 +27,7 @@ if(!defined($session->param('username'))) {
     print $session->header(-location => "login.cgi");
 }
 else {
-print "Content-type: text/html\n\n\n";
+print "Content-Type: text/html; charset=UTF-8\n\n\n";
     my $username = $session->param('username');
     my $file = "../data/HTML_TEMPLATE/confermaRegistrazione.html";
     my %hash_keys = (

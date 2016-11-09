@@ -10,7 +10,9 @@ use libreria::data_registration;
 use CGI::Session;
 use libreria::sessione;
 use HTML::Entities;
-binmode(STDOUT, ":utf8");
+binmode STDOUT, ":utf8";
+binmode STDERR, ":utf8";
+binmode STDIN,  ":utf8";
 use utf8;
 
 use Cwd;
@@ -27,7 +29,7 @@ if(defined($session->param('loggedin'))) {
     print $session->header(-location => "home.cgi");
 }
 else {
-     print "Content-Type: text/html\n\n\n";
+     print "Content-Type: text/html; charset=UTF-8\n\n\n";
     my %hash_keys;
 
     # 

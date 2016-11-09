@@ -8,7 +8,9 @@ use libreria::research;
 use libreria::data_registration;
 use CGI::Session;
 use libreria::sessione;
-binmode(STDOUT, ":utf8");
+binmode STDOUT, ":utf8";
+binmode STDERR, ":utf8";
+binmode STDIN,  ":utf8";
 
 
 
@@ -55,7 +57,7 @@ else {
     $hash_keys{NOME_PROFILO} = $ute;
     $hash_keys{CONTENUTO} = research::query_users(\%Ute);
 
-print "Content-Type: text/html\n\n\n";
+print "Content-Type: text/html; charset=UTF-8\n\n\n";
 
     my $template_parser = Template->new({ ENCODING => 'utf8' });
     open my $fh, '<:encoding(UTF-8)', $file;

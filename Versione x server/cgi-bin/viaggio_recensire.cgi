@@ -9,8 +9,10 @@ use libreria::research;
 use libreria::data_registration;
 use CGI::Session;
 use libreria::sessione;
-binmode(STDOUT, ":utf8");
 use utf8;
+binmode STDOUT, ":utf8";
+binmode STDERR, ":utf8";
+binmode STDIN,  ":utf8";
 
 
 
@@ -31,7 +33,7 @@ elsif (!($q->param('passaggio')=~m/^v[0-9]+$/) || !$doc->exists("//SetPassaggi/P
     print $session->header(-location => "home.cgi");
 }
 else {
-    print "Content-type: text/html\n\n";
+    print "Content-Type: text/html; charset=UTF-8\n\n";
     my $username=$session->param('username');
     # 'passaggio' valore appeso alla stringa URL.
     my $passaggio = $q->param('passaggio');

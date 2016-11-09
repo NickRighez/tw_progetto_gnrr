@@ -1,5 +1,5 @@
 #! /usr/bin/perl -w
-#print "Content-type: text/html\n\n";
+#print "Content-Type: text/html; charset=UTF-8\n\n";
 
 use strict;
 use warnings;
@@ -10,6 +10,10 @@ use CGI::Carp qw(fatalsToBrowser);
 use libreria::data_registration;
 use libreria::sessione;
 use HTML::Entities;
+use utf8;
+binmode STDOUT, ":utf8";
+binmode STDERR, ":utf8";
+binmode STDIN,  ":utf8";
 
 my $q=new CGI;;
 my @s = sessione::creaSessione();

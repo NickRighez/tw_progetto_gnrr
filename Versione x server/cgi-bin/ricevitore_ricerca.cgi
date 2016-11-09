@@ -5,12 +5,14 @@ use warnings;
 use diagnostics;
 use CGI qw(-utf8);
 use CGI::Session;
-#use CGI::Cookie;
 use CGI::Carp qw(fatalsToBrowser);
-#use lib "../libreria";
 use libreria::data_registration;
-#use lib "libreria";
 use libreria::sessione;
+
+use utf8;
+binmode STDOUT, ":utf8";
+binmode STDERR, ":utf8";
+binmode STDIN,  ":utf8";
 
 my $q = new CGI;
 my @s = sessione::creaSessione();
@@ -77,7 +79,7 @@ else{
             );
         $session->param('ricerca', \%Ricerca);
         
-        print $session->header(-location => "risultati_ricerca.cgi?partenza=".$q->param('partenza')."&arrivo=".$q->param('arrivo')."&data=$data");
+        print $session->header(-location => "risultati_ricerca.cgi?partenza=".$q->param('partenza')."&amp;arrivo=".$q->param('arrivo')."&amp;data=$data");
     }
     else {
         $session->param('problems',\%problems);
