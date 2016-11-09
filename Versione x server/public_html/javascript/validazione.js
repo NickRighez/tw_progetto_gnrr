@@ -32,7 +32,7 @@ var funzioniDiValidazione = {
 
   valida_nome: function(id, parola) {
     var input = document.getElementById(id).value;
-    var sol = /^(\u0027|\u002C|\u002D|\u002F|[\u0030-\u0039]|[\u0041-\u005A]|[\u0061-\u007A]|[\u00C0-\u024F]|\s)+$/.test(input);
+    var sol = /^(\u0027|\u002C|\u002D|\u002F|[\u0030-\u0039]|[\u0041-\u005A]|[\u0061-\u007A]|[\u00C0-\u00FF]|\s)+$/.test(input);
     if (!sol) {
       document.getElementById(id + '_err').innerHTML = parola + " non valido, inserire solo lettere, trattini, apostrofi, punti e spazi.";
       return false;
@@ -64,7 +64,7 @@ var funzioniDiValidazione = {
 
   valida_area_testo: function(id, obbl) {
     var input = document.getElementById(id).innerHTML;
-    var sol = /^(\u0027|\u002C|\u002D|\u002F|[\u0030-\u0039]|[\u0041-\u005A]|[\u0061-\u007A]|[\u00C0-\u024F]|\s)+$/.test(input);
+    var sol = /^(\u0027|\u002C|\u002D|\u002F|[\u0030-\u0039]|[\u0041-\u005A]|[\u0061-\u007A]|[\u00C0-\u00FF]|\s)+$/.test(input);
     if (!sol) {
       document.getElementById(id + '_err').innerHTML = "Testo non valido, inserire solo lettere, trattini, apostrofi, punti e spazi.";
       return false;
