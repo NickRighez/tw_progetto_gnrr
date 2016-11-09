@@ -11,6 +11,7 @@ use libreria::data_registration;
 use libreria::sessione;
 use HTML::Entities;
 use utf8;
+use Encode qw(decode_utf8);
 binmode STDOUT, ":utf8";
 binmode STDERR, ":utf8";
 binmode STDIN,  ":utf8";
@@ -36,93 +37,93 @@ else {
 
     my %Modifica=(
         Username => $session->param('username'), # username dell utente che modifica il profilo
-        Sesso => $q->param('sesso')
+        Sesso =>  decode_utf8 $q->param('sesso')
         );
-	$old_input{SESSO}=$q->param('sesso');
+	$old_input{SESSO}= decode_utf8 $q->param('sesso');
 
-    if($q->param('nome') ne '') {
-        if(!($q->param('nome')=~m/^(\x{0027}|\x{002C}|\x{002D}|\x{002F}|[\x{0030}-\x{0039}]|[\x{0041}-\x{005A}]|[\x{0061}-\x{007A}]|[\x{00C0}-\x{024F}]|\s)+$/)) {
+    if( decode_utf8 $q->param('nome') ne '') {
+        if(!( decode_utf8 $q->param('nome')=~m/^(\x{0027}|\x{002C}|\x{002D}|\x{002F}|[\x{0030}-\x{0039}]|[\x{0041}-\x{005A}]|[\x{0061}-\x{007A}]|[\x{00C0}-\x{024F}]|\s)+$/)) {
             $problems{NOME_ERR}="Nome utente non valido, inserire solo lettere, di cui, al più la prima lettera può essere mauiscola";
             $problems{empty}="no";
         }
         else {
-            $old_input{NOME}=$q->param('nome');
+            $old_input{NOME}= decode_utf8 $q->param('nome');
         }
-        $Modifica{Nome}=$q->param('nome');
+        $Modifica{Nome}= decode_utf8 $q->param('nome');
     }
 
-    if($q->param('cognome') ne '') {
-        if(!($q->param('cognome')=~m/^(\x{0027}|\x{002C}|\x{002D}|\x{002F}|[\x{0030}-\x{0039}]|[\x{0041}-\x{005A}]|[\x{0061}-\x{007A}]|[\x{00C0}-\x{024F}]|\s)+$/)) {
+    if( decode_utf8 $q->param('cognome') ne '') {
+        if(!( decode_utf8 $q->param('cognome')=~m/^(\x{0027}|\x{002C}|\x{002D}|\x{002F}|[\x{0030}-\x{0039}]|[\x{0041}-\x{005A}]|[\x{0061}-\x{007A}]|[\x{00C0}-\x{024F}]|\s)+$/)) {
             $problems{COGNOME_ERR}="Cognome utente non valido, inserire solo lettere, di cui, al più la prima lettera può essere mauiscola";
             $problems{empty}="no";
         }
         else {
-            $old_input{COGNOME}=$q->param('cognome');
+            $old_input{COGNOME}= decode_utf8 $q->param('cognome');
         }
-        $Modifica{Cognome}=$q->param('cognome');
+        $Modifica{Cognome}= decode_utf8 $q->param('cognome');
     }
 
-    if($q->param('email') ne '') {
-        if(!($q->param('email')=~m/^([a-zA-Z0-9_\.-]+)@([a-z]+)\.([a-z]{2,6})$/)) {
+    if( decode_utf8 $q->param('email') ne '') {
+        if(!( decode_utf8 $q->param('email')=~m/^([a-zA-Z0-9_\.-]+)@([a-z]+)\.([a-z]{2,6})$/)) {
             $problems{EMAIL_ERR}="Indirizzo email non valido";
             $problems{empty}="no";
         }
         else {
-            my @email = $doc->findnodes("//SetUtenti/Utente[Email='".$q->param('email')."']");
+            my @email = $doc->findnodes("//SetUtenti/Utente[Email='". decode_utf8 $q->param('email')."']");
             my $num = @email;
-            if($num!=0 and $q->param('email') ne $email[0]->findnodes("Email")->get_node(1)->textContent) {
+            if($num!=0 and  decode_utf8 $q->param('email') ne $email[0]->findnodes("Email")->get_node(1)->textContent) {
                 $problems{EMAIL_ERR}="Indirizzo email già esistente";
                 $problems{empty}="no";
             }
             else {
-                $old_input{EMAIL}=$q->param('email');
+                $old_input{EMAIL}= decode_utf8 $q->param('email');
             }
         }
 
-        $Modifica{Email}=$q->param('email');
+        $Modifica{Email}= decode_utf8 $q->param('email');
     }
 
-    if($q->param('anno') ne '') {
-        if(!($q->param('anno')=~m/^[1-2][0-9][0-9][0-9]$/)) {
+    if( decode_utf8 $q->param('anno') ne '') {
+        if(!( decode_utf8 $q->param('anno')=~m/^[1-2][0-9][0-9][0-9]$/)) {
             $problems{ANNO_ERR}="Anno di nascita non valida, inserire l'anno in formato 'aaaa'";
             $problems{empty}="no";
         }
         else {
             my ($sec,$min,$hour,$mday,$mon,$year,$wday,$yday,$isdst) = localtime();
             $year=$year+1900-18;
-            if(($q->param('anno'))>$year) {
+            if(( decode_utf8 $q->param('anno'))>$year) {
                 $problems{ANNO_ERR}="Possono registrarsi solo utenti maggiorenni";
                 $problems{empty}="no";
             }
             else {
-                $old_input{ANNO}=$q->param('anno');
+                $old_input{ANNO}= decode_utf8 $q->param('anno');
             }
         }
 
-        $Modifica{AnnoNascita}=$q->param('anno');
+        $Modifica{AnnoNascita}= decode_utf8 $q->param('anno');
     }
 
-    if($q->param('password') ne '') {
-        if (length($q->param('password'))<8 or length($q->param('password')>16)){
+    if( decode_utf8 $q->param('password') ne '') {
+        if (length( decode_utf8 $q->param('password'))<8 or length( decode_utf8 $q->param('password')>16)){
             $problems{PASSWORD_ERR} = "La password dev essere compresa fra 8 e 16 caratteri";
             $problems{empty}="no";
         }
-        elsif(!($q->param('password')=~m/^[A-Za-z0-9_\.-]{8,16}$/)) {
+        elsif(!( decode_utf8 $q->param('password')=~m/^[A-Za-z0-9_\.-]{8,16}$/)) {
             $problems{PASSWORD_ERR} = "Password non valida, sono permesse lettere maiuscole o minuscole, e i caratteri underscore, hyphen o punto";
             $problems{empty}="no";
         }
-        elsif($q->param('password') ne $q->param('conferma')) {
+        elsif( decode_utf8 $q->param('password') ne  decode_utf8 $q->param('conferma')) {
             $problems{CONFERMA_ERR} = "Password non coincidenti";
             $problems{empty}="no";
         }
         else {
-            $old_input{PASSWORD}=$q->param('password');
+            $old_input{PASSWORD}= decode_utf8 $q->param('password');
         }
 
-        $Modifica{Password}=$q->param('password');
+        $Modifica{Password}= decode_utf8 $q->param('password');
     }
 
-    my $descr = $q->param('descrizioneForm');
+    my $descr =  decode_utf8 $q->param('descrizioneForm');
     $descr =~ s/^\s*(.*?)\s*$/$1/;
     $descr =encode_entities($descr,'<>&"\'');
     $old_input{DESCRIZIONEFORM}=$descr;
@@ -130,38 +131,38 @@ else {
 
 
 
-    if($q->param('annoPatente') ne '' or $q->param('auto') ne '' or $q->param('chiacchiere') ne '' or $q->param('musica') ne '' or $q->param('animali') ne '' or $q->param('fumatori') ne '') {
-        if($q->param('annoPatente') eq '' or $q->param('auto') eq '' or $q->param('chiacchiere') eq '' or $q->param('musica') eq '' or $q->param('animali') eq '' or $q->param('fumatori') eq '') {
+    if( decode_utf8 $q->param('annoPatente') ne '' or  decode_utf8 $q->param('auto') ne '' or  decode_utf8 $q->param('chiacchiere') ne '' or  decode_utf8 $q->param('musica') ne '' or  decode_utf8 $q->param('animali') ne '' or  decode_utf8 $q->param('fumatori') ne '') {
+        if( decode_utf8 $q->param('annoPatente') eq '' or  decode_utf8 $q->param('auto') eq '' or  decode_utf8 $q->param('chiacchiere') eq '' or  decode_utf8 $q->param('musica') eq '' or  decode_utf8 $q->param('animali') eq '' or  decode_utf8 $q->param('fumatori') eq '') {
             $problems{INFO_CONDUC_ERR}="Le informazioni necessarie per offrire un passaggio devono essere tutte presenti, o nessuna.";
             $problems{empty}="no";
         }
-        elsif(!($q->param('annoPatente')=~m/^[1-2][0-9][0-9][0-9]$/)) {
+        elsif(!( decode_utf8 $q->param('annoPatente')=~m/^[1-2][0-9][0-9][0-9]$/)) {
             $problems{ANNOPATENTE_ERR}="Anno di rilascio della patente non valido, inserire l anno in formato 'aaaa'";
             $problems{empty}="no";
         }
         else {
-            $old_input{ANNOPATENTE}=$q->param('annoPatente');
+            $old_input{ANNOPATENTE}= decode_utf8 $q->param('annoPatente');
         }
 
-        if(!($q->param('auto')=~m/^[A-Za-z0-9,\s-]+$/)) {
+        if(!( decode_utf8 $q->param('auto')=~m/^[A-Za-z0-9,\s-]+$/)) {
             $problems{AUTO_ERR}="Auto non valida, inserire solo lettere, numeri, spazi o virgola.";
             $problems{empty}="no";
         }
         else {
-            $old_input{AUTO}=$q->param('auto');
+            $old_input{AUTO}= decode_utf8 $q->param('auto');
         }
-        $Modifica{Patente}=$q->param('annoPatente');
-        $Modifica{Auto}=$q->param('auto');
-        $Modifica{Chiacchiere}=$q->param('chiacchiere');
-        $Modifica{Musica}=$q->param('musica');
-        $Modifica{Animali}=$q->param('animali');
-        $Modifica{Fumatore}=$q->param('fumatori');
+        $Modifica{Patente}= decode_utf8 $q->param('annoPatente');
+        $Modifica{Auto}= decode_utf8 $q->param('auto');
+        $Modifica{Chiacchiere}= decode_utf8 $q->param('chiacchiere');
+        $Modifica{Musica}= decode_utf8 $q->param('musica');
+        $Modifica{Animali}= decode_utf8 $q->param('animali');
+        $Modifica{Fumatore}= decode_utf8 $q->param('fumatori');
     }
 
-    my $chiacc = "CHECKED_C".$q->param('chiacchiere');
-    my $mus = "CHECKED_M".$q->param('musica');
-    my $anim = "CHECKED_A".$q->param('animali');
-    my $fum = "CHECKED_F".$q->param('fumatori');
+    my $chiacc = "CHECKED_C". decode_utf8 $q->param('chiacchiere');
+    my $mus = "CHECKED_M". decode_utf8 $q->param('musica');
+    my $anim = "CHECKED_A". decode_utf8 $q->param('animali');
+    my $fum = "CHECKED_F". decode_utf8 $q->param('fumatori');
 
     $old_input{$chiacc} = "checked='checked'";
     $old_input{$mus} = "checked='checked'";

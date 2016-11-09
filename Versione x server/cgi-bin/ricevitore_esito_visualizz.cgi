@@ -14,6 +14,7 @@ use utf8;
 binmode STDOUT, ":utf8";
 binmode STDERR, ":utf8";
 binmode STDIN,  ":utf8";
+use Encode qw(decode_utf8);
 
 my $q=new CGI;
 
@@ -28,8 +29,8 @@ if(!defined($session->param('username'))) {
     $session->param('problems',\%problems);
     print $session->header(-location => "login.cgi");
 }
-elsif (!($q->param('passaggio')=~m/^v[0-9]+$/) || 
-        !($doc->exists("//SetUtenti/Utente[Username='".$session->param('username')."']/Notifiche/EsitoPrenotaz[\@Passaggio='".$q->param('passaggio')."']"))) {
+elsif (!( decode_utf8 $q->param('passaggio')=~m/^v[0-9]+$/) || 
+        !($doc->exists("//SetUtenti/Utente[Username='".$session->param('username')."']/Notifiche/EsitoPrenotaz[\@Passaggio='". decode_utf8 $q->param('passaggio')."']"))) {
     my %problems=(
         DESCRIZIONE_ERRORE => "Tentativo di eliminare una notifica con una modalit&agrave; non permessa."
     );
@@ -39,8 +40,8 @@ elsif (!($q->param('passaggio')=~m/^v[0-9]+$/) ||
 else {
     my $username = $session->param('username');
 
-    # $q->param('passaggio') passato con GET (appeso alla stringa URL)
-    my $passaggio = $q->param('passaggio');    
+    #  decode_utf8 $q->param('passaggio') passato con GET (appeso alla stringa URL)
+    my $passaggio =  decode_utf8 $q->param('passaggio');    
 
     data_registration::elimina_notifica($username,"EsitoPrenotaz","\@Passaggio='$passaggio'");
     my %nota = ( nota => "Notifica di esito prenotazione eliminato con successo.");

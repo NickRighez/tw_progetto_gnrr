@@ -13,6 +13,7 @@ use utf8;
 binmode STDOUT, ":utf8";
 binmode STDERR, ":utf8";
 binmode STDIN,  ":utf8";
+use Encode qw(decode_utf8);
 
 my $cgi = new CGI;
 my @s = sessione::creaSessione();

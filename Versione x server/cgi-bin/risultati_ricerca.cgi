@@ -19,20 +19,21 @@ my $q = new CGI;
 my @s = sessione::creaSessione();
 my $session = $s[0];
 
-if($q->request_method() ne "POST") {
+if(!defined($session->param('ricerca'))) {
      my %problems=(
-      DESCRIZIONE_ERRORE => "Tentativo di inserire un nuovo passaggio con una modalit&agrave; non permessa."
+      DESCRIZIONE_ERRORE => "Tentativo di visualizzare i risultati di una ricerca con una modalit&agrave; non permessa."
       );
     $session->param('problems',\%problems);
     print $session->header(-location => "home.cgi");
 }
 else {
-    ############################################################################ valori appesi alla stringa URL
-    my $partenza=$q->param('partenza');
-    my $arrivo=$q->param('arrivo');
-    my $data=$q->param('data');
+    my $ricerca_ref = $session->param('ricerca');
+    my %ricerca = %$ricerca_ref;
+    my $partenza=$ricerca{'partenza'};
+    my $arrivo=$ricerca{'arrivo'};
+    my $data=$ricerca{'data'};
     my $doc = data_registration::get_xml_doc();
-
+    $session->clear(['ricerca']);
     my @viaggi_list = research::query_ricerca($partenza, $arrivo, $data, $doc);
     my $empty = "false";
     my $num_viaggi = @viaggi_list;
@@ -70,4 +71,3 @@ else {
 	print "Content-Type: text/html; charset=UTF-8\n\n\n";
     print $foglio;
 }
-

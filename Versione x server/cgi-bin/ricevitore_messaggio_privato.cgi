@@ -11,6 +11,7 @@ use libreria::sessione;
 use CGI::Session;
 use HTML::Entities;
 use utf8;
+use Encode qw(decode_utf8);
 binmode STDOUT, ":utf8";
 binmode STDERR, ":utf8";
 binmode STDIN,  ":utf8";
@@ -32,20 +33,20 @@ if($q->request_method() eq "POST") {
     my $d = $year."-".$mon."-".$mday;
     my $o = $hour.":".$min.":".$sec;
 
-    my $mess = $q->param('messaggio');
+    my $mess =  decode_utf8 $q->param('messaggio');
     $mess =encode_entities($mess,'<>&"\'');
 
 
     my %Messaggio=(
         Mittente => $session->param('username'),
-        Destinatario => $q->param('destinatario'),
+        Destinatario =>  decode_utf8 $q->param('destinatario'),
         Data => $d,
         Ora => $o,
         Testo => $mess
         );
     my $doc = data_registration::get_xml_doc();
     data_registration::inserisci_nuovo_messaggio_singolo(\%Messaggio);
-    print $session->header(-location => "singola_conversaz.cgi?utente=".$q->param('destinatario'));
+    print $session->header(-location => "singola_conversaz.cgi?utente=". decode_utf8 $q->param('destinatario'));
     
 }
 else {

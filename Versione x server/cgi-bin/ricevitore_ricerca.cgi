@@ -14,11 +14,14 @@ binmode STDOUT, ":utf8";
 binmode STDERR, ":utf8";
 binmode STDIN,  ":utf8";
 
+use Encode qw(decode_utf8);
+
 my $q = new CGI;
 my @s = sessione::creaSessione();
 my $session = $s[0];
 
-if($q->request_method() ne "POST") {
+##die $q->request_method();
+if(decode_utf8 $q->request_method() ne "POST") {
      my %problems=(
       DESCRIZIONE_ERRORE => "Tentativo di ricerca passaggio con una modalit&agrave; non permessa."
       );
@@ -29,56 +32,60 @@ else{
     my %problems = (empty => 'yes');
     my %old_input;
 
-    if($q->param('partenza') eq '') {
+    my $partenza = decode_utf8 $q->param('partenza');
+
+    if($partenza eq '') {
         $problems{PARTENZA_ERR} = 'Luogo di partenza mancante';
         $problems{empty} = 'no';
     }
-    elsif (!($q->param('partenza')=~m/^(\x{0027}|\x{002C}|\x{002D}|\x{002F}|[\x{0041}-\x{005A}]|[\x{0061}-\x{007A}]|[\x{00C0}-\x{024F}]|\s)+$/)) {
+    elsif (! $partenza =~ m/^(\x{0027}|\x{002C}|\x{002D}|\x{002F}|[\x{0041}-\x{005A}]|[\x{0061}-\x{007A}]|è|é|à|ù|ò|ì|\s)+$/) {
         $problems{PARTENZA_ERR} = 'Luogo di partenza non valido';
         $problems{empty} = 'no';
     }
     else {
-        $old_input{PARTENZA} = $q->param('partenza');
+        $old_input{PARTENZA} = $partenza;
     }
 
-    if($q->param('arrivo') eq '') {
+my $arrivo = decode_utf8 $q->param('arrivo');
+    if($arrivo eq '') {
         $problems{ARRIVO_ERR} = 'Luogo di partenza mancante';
         $problems{empty} = 'no';
     }
-    elsif (!($q->param('arrivo')=~m/^(\x{0027}|\x{002C}|\x{002D}|\x{002F}|[\x{0041}-\x{005A}]|[\x{0061}-\x{007A}]|[\x{00C0}-\x{024F}]|\s)+$/)) {
+    elsif (!$arrivo=~m/^(\x{0027}|\x{002C}|\x{002D}|\x{002F}|[\x{0041}-\x{005A}]|[\x{0061}-\x{007A}]|[àèéìòù]|\s)+$/) {
         $problems{ARRIVO_ERR} = 'Luogo di arrivo non valido';
         $problems{empty} = 'no';
     }
     else {
-        $old_input{ARRIVO} = $q->param('arrivo');
+        $old_input{ARRIVO} = $arrivo;
     }
 
-    if($q->param('data') eq '') {
+my $dataInput = decode_utf8 $q->param('data');
+    if($dataInput eq '') {
         $problems{DATA_ERR} = 'Data di partenza mancante';
         $problems{empty} = 'no';
     }
-    elsif (!($q->param('data')=~m/^[0-9]{1,2}-[0-9]{1,2}-[0-9]{4}$/)) {
+    elsif (!$dataInput=~m/^[0-9]{1,2}-[0-9]{1,2}-[0-9]{4}$/) {
         $problems{DATA_ERR} = "Data di partenza non valida. Inserire una data in formato gg-mm-aaaa oppure g-m-aaaa";
         $problems{empty} = 'no';
     }
     else {
-        $old_input{DATA} = $q->param('data');
+        $old_input{DATA} = $dataInput;
     }
 
 
     if($problems{'empty'} eq 'yes') {
-        my @data_arr = split /-/, $q->param('data');
+        my @data_arr = split /-/, $dataInput;
         if (length($data_arr[1])  == 1) {$data_arr[1] = "0".$data_arr[1];}
         if (length($data_arr[0]) == 1) {$data_arr[0] = "0".$data_arr[0];}
         my $data = $data_arr[2]."-".$data_arr[1]."-".$data_arr[0];
 
         my %Ricerca = (
-            partenza =>  $q->param('partenza'),
-            arrivo => $q->param('arrivo'),
+            partenza =>  $partenza,
+            arrivo => $arrivo,
             data => $data
             );
-        
-        print $session->header(-location => "risultati_ricerca.cgi?partenza=".$q->param('partenza')."&amp;arrivo=".$q->param('arrivo')."&amp;data=$data");
+            $session->param('ricerca',\%Ricerca);
+        print $session->header(-location => "risultati_ricerca.cgi");
     }
     else {
         $session->param('problems',\%problems);
@@ -86,4 +93,3 @@ else{
         print $session->header(-location => "home.cgi");
     }
 }
-

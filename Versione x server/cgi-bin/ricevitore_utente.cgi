@@ -14,6 +14,7 @@ use utf8;
 binmode STDOUT, ":utf8";
 binmode STDERR, ":utf8";
 binmode STDIN,  ":utf8";
+use Encode qw(decode_utf8);
 
 my $q=new CGI;;
 my @s = sessione::creaSessione();
@@ -25,7 +26,7 @@ my %old_input;
 
 #  ******  TESTARE CHE IL METODO DELLA FORM SIA 'POST' *************  #
 # ******** (per la ricerca il metodo &egrave; get) ******** #
-if (!($q->request_method() eq 'POST')) {
+if (!(decode_utf8 $q->request_method() eq 'POST')) {
     my %problems=(
       DESCRIZIONE_ERRORE => "Tentativo di inserire un nuovo utente con una modalit&agrave; non permessa."
       );
@@ -33,111 +34,115 @@ if (!($q->request_method() eq 'POST')) {
     print $session->header(-location => "home.cgi");
 }
 else {
-
-    if($q->param('username') eq "") {
+    my $username = decode_utf8 $q->param('username');
+    if($username eq "") {
         $problems{USERNAME_ERR} = "Username mancante";
         $problems{empty} = "no";
     }
-    elsif(!($q->param('username')=~m/^[A-Za-z0-9_-]{5,18}$/)) {
+    elsif(!($username=~m/^[A-Za-z0-9_-]{5,18}$/) {
         $problems{USERNAME_ERR} = "Username non valido, caratteri ammessi: lettere (non accentate), numeri, '_', '-'. Lunghezza: minimo 5 caratteri, massimo 18 caratteri.";
         $problems{empty} = "no";
     }
     else {
-        $old_input{USERNAME} = $q->param('username');
+        $old_input{USERNAME} = $username;
     }
 
-    if($q->param('email') eq "") {
+ my $email = decode_utf8 $q->param('email');
+    if($email eq "") {
         $problems{EMAIL_ERR} = "E-mail mancante";
         $problems{empty} = "no";
     }
-    elsif(!($q->param('email')=~m/^([a-zA-Z0-9_\.-]+)@([a-z]+)\.([a-z]{2,6})$/)) {
+    elsif(!$email=~m/^([a-zA-Z0-9_\.-]+)@([a-z]+)\.([a-z]{2,6})$/) {
         $problems{EMAIL_ERR}="Indirizzo email non valido";
         $problems{empty}="no";
     }
     else {
         my $doc = data_registration::get_xml_doc();
-        my @email = $doc->findnodes("//SetUtenti/Utente[Email='".$q->param('email')."']");
+        my @email = $doc->findnodes("//SetUtenti/Utente[Email='".$email."']");
         my $num = @email;
         if($num!=0) {
             $problems{EMAIL_ERR}="Indirizzo email gi&agrave; esistente";
             $problems{empty}="no";
         }
         else {
-            $old_input{EMAIL}=$q->param('email');
+            $old_input{EMAIL}=$email;
         }
     }
 
-
-    if($q->param('nome') eq "") {
+ my $nome = decode_utf8 $q->param('nome');
+    if($nome eq "") {
         $problems{NOME_ERR} = "Nome utente mancante";
         $problems{empty} = "no";
     }
-    elsif(!($q->param('nome')=~m/^(\x{0027}|\x{002C}|\x{002D}|\x{002F}|[\x{0030}-\x{0039}]|[\x{0041}-\x{005A}]|[\x{0061}-\x{007A}]|[\x{00C0}-\x{024F}]|\s)+$/)) {
+    elsif(!$nome=~m/^(\x{0027}|\x{002C}|\x{002D}|\x{002F}|[\x{0030}-\x{0039}]|[\x{0041}-\x{005A}]|[\x{0061}-\x{007A}]|[\x{00C0}-\x{024F}]|\s)+$/) {
         $problems{NOME_ERR}="Nome utente non valido, inserire solo lettere, di cui, al pi&ugrave; la prima lettera pu&ograve; essere mauiscola";
         $problems{empty}="no";
     }
     else {
-        $old_input{NOME}=$q->param('nome');
+        $old_input{NOME}=$nome;
     }
 
-    if($q->param('cognome') eq "") {
+ my $cognome = decode_utf8 $q->param('cognome');
+    if($cognome eq "") {
         $problems{COGNOME_ERR} = "Cognome utente mancante";
         $problems{empty} = "no";
     }
-    elsif(!($q->param('cognome')=~m/^(\x{0027}|\x{002C}|\x{002D}|\x{002F}|[\x{0030}-\x{0039}]|[\x{0041}-\x{005A}]|[\x{0061}-\x{007A}]|[\x{00C0}-\x{024F}]|\s)+$/)) {
+    elsif(!$cognome =~m/^(\x{0027}|\x{002C}|\x{002D}|\x{002F}|[\x{0030}-\x{0039}]|[\x{0041}-\x{005A}]|[\x{0061}-\x{007A}]|[\x{00C0}-\x{024F}]|\s)+$/) {
         $problems{COGNOME_ERR}="Cognome utente non valido, inserire solo lettere, di cui, al pi&ugrave; la prima lettera pu&ograve; essere mauiscola";
         $problems{empty}="no";
     }
     else {
-        $old_input{COGNOME}=$q->param('cognome');
+        $old_input{COGNOME}=$cognome;
     }
 
-    if($q->param('anno') eq "") {
+ my $anno = decode_utf8 $q->param('anno');
+    if($anno eq "") {
         $problems{ANNO_ERR}="Anno di nascita mancante";
         $problems{empty}="no";
     }
-    elsif(!($q->param('anno')=~m/^[1-2][0-9][0-9][0-9]$/)) {
+    elsif(!$anno =~ m/^[1-2][0-9][0-9][0-9]$/) {
         $problems{ANNO_ERR}="Anno di nascita non valida, inserire l anno in formato 'aaaa'";
         $problems{empty}="no";
     }
     else {
         my ($sec,$min,$hour,$mday,$mon,$year,$wday,$yday,$isdst) = localtime();
         $year=$year+1900-18;
-        if(($q->param('anno'))>$year) {
+        if($anno>$year) {
             $problems{ANNO_ERR}="Possono registrarsi solo utenti maggiorenni";
             $problems{empty}="no";
         }
         else {
-            $old_input{ANNO}=$q->param('anno');
+            $old_input{ANNO}=$anno;
         }
     }
 
-    if($q->param('password') eq "") {
+ my $password = decode_utf8 $q->param('password');
+    if($password eq "") {
         $problems{PASSWORD_ERR} = "Password mancante";
         $problems{empty}="no";
     }
-    elsif (length($q->param('password'))<8 or length($q->param('password'))>16){
+    elsif (length($password)<8 or length($password)>16){
         $problems{PASSWORD_ERR} = "La password dev essere compresa fra 8 e 16 caratteri";
         $problems{empty}="no";
     }
-    elsif(!($q->param('password')=~m/^[A-Za-z0-9_\.-]{8,16}$/)) {
+    elsif(!($password =~m/^[A-Za-z0-9_\.-]{8,16}$/)) {
         $problems{PASSWORD_ERR} = "Password non valida, sono permesse lettere maiuscole o minuscole, e i caratteri underscore, hyphen o punto";
         $problems{empty}="no";
     }
-    elsif($q->param('password') ne $q->param('conferma')) {
+    elsif($password ne decode_utf8 $q->param('conferma')) {
         $problems{CONFERMA_ERR} = "Password non coincidenti";
         $problems{empty}="no";
     }
 
     #$nome= encode("utf-8",decode("iso-8859-2",$nome));
     my %ute = (
-        Username => $q->param('username'),
-        Email => $q->param('email'),
-        Nome => $q->param('nome'),
-        Cognome => $q->param('cognome'),
-        Sesso =>$q->param('sesso'),
-        AnnoNascita => $q->param('anno'),
-        Password => $q->param('password'),
+        Username => $username,
+        Email => $email,
+        Nome => $nome,
+        Cognome => $cognome,
+        Sesso => $sesso,
+        AnnoNascita => $anno,
+        Password => $password,
 	DescrizionePers => ''
         );
 

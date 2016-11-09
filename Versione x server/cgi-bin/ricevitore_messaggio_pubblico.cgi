@@ -10,6 +10,7 @@ use libreria::data_registration;
 use libreria::sessione;
 use HTML::Entities;
 use utf8;
+use Encode qw(decode_utf8);
 binmode STDOUT, ":utf8";
 binmode STDERR, ":utf8";
 binmode STDIN,  ":utf8";
@@ -22,10 +23,10 @@ my $session = $s[0];
 if($q->request_method eq 'POST') {
     my $mitt = $session->param('username');
     # campi 'hidden':
-    my $dest=$q->param('destinatario');
-    my $pas = $q->param('passaggio');
-    my $part = $q->param('partenza');
-    my $arr = $q->param('arrivo');
+    my $dest= decode_utf8 $q->param('destinatario');
+    my $pas =  decode_utf8 $q->param('passaggio');
+    my $part =  decode_utf8 $q->param('partenza');
+    my $arr =  decode_utf8 $q->param('arrivo');
 
     my $doc=data_registration::get_xml_doc();
 
@@ -42,7 +43,7 @@ if($q->request_method eq 'POST') {
     my $d = $year."-".$mon."-".$mday;
     my $o = $hour.":".$min.":".$sec;
 
-    my $mess = $q->param('messaggio');
+    my $mess =  decode_utf8 $q->param('messaggio');
     $mess =encode_entities($mess,'<>&"\'');
 
     my %Messaggio=(
